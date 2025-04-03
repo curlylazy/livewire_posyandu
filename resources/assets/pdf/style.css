@@ -1,0 +1,38 @@
+
+
+/* table tr td,
+table tr th {
+    font-family: 'roboto';
+    font-size: 12pt;
+} */
+
+table tbody tr td {
+    font-family: 'roboto';
+    font-size: 15pt;
+}
+
+.td
+{
+    font-family: 'roboto';
+    font-size: 15pt;
+}
+
+#watermark {
+    position: fixed;
+
+    /**
+        Set a position in the page for your image
+        This should center it vertically
+    **/
+    bottom:   10cm;
+    left:     3cm;
+
+    /** Change image dimensions**/
+    width:    8cm;
+    height:   8cm;
+
+    /** Your watermark should be behind every content**/
+    z-index:  -1000;
+}
+
+.page_break { page-break-before: always; }
