@@ -23,64 +23,60 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('tbl_activity', function (Blueprint $table) {
-            $table->uuid('kodeactivity')->primary();
-            $table->string('namaactivity', 225);
-            $table->text('keterangansingkat')->nullable();
-            $table->longText('keterangan')->nullable();
-            $table->string('gambaractivity', 150);
-            $table->integer('nourut')->default(0);
-            $table->string('seoactivity', 225);
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('tbl_package', function (Blueprint $table) {
-            $table->uuid('kodepackage')->primary();
-            $table->string('namapackage', 225);
-            $table->longText('keterangan');
-            $table->json('activityinclude')->nullable();
-            $table->integer('harga');
-            $table->string('gambarpackage', 150)->nullable();
-            $table->string('seopackage', 225);
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
-        Schema::create('tbl_galeri_activity', function (Blueprint $table) {
-            $table->uuid('kodegaleriactivity')->primary();
-            $table->uuid('kodeactivity');
-            $table->string('gambargaleriactivity', 150);
-            $table->timestamps();
-        });
-
-        Schema::create('tbl_galeri', function (Blueprint $table) {
-            $table->uuid('kodegaleri')->primary();
-            $table->string('namagaleri', 225);
-            $table->string('gambargaleri', 225);
-            $table->timestamps();
-        });
-
-        Schema::create('tbl_testimony', function (Blueprint $table) {
-            $table->uuid('kodetestimony')->primary();
+        Schema::create('tbl_pasien', function (Blueprint $table) {
+            $table->uuid('kodepasien')->primary();
+            $table->string('kategori', 25)->comment('nifas, hamil, lansia');
+            $table->string('nik', 225)->unique();
             $table->string('nama', 225);
-            $table->string('avatar', 225)->nullable();
-            $table->text('keterangantestimony');
+            $table->date('tgl_lahir', 225)->nullable();
+            $table->string('alamat', 225)->nullable();
+            $table->string('nohp', 225)->nullable();
+
+            // *** data ibu hamil
+            $table->integer('hamil_ke')->nullable()->default(0);
+            $table->integer('minggu_ke')->nullable()->default(0);
+            $table->string('nama_suami', 225)->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
 
-        Schema::create('tbl_blog', function (Blueprint $table) {
-            $table->uuid('kodeblog')->primary();
-            $table->uuid('kodeuser');
-            $table->string('namablog', 225);
-            $table->text('keterangansingkat');
-            $table->longText('keterangan');
-            $table->string('gambarblog', 150);
-            $table->string('seoblog', 225);
+        // *** pemeriksaan
+        Schema::create('tbl_pemeriksaan', function (Blueprint $table) {
+            $table->uuid('kodepemeriksaan')->primary();
+            $table->uuid('kodepasien');
+            $table->string('kategoriperiksa', 25)->comment('nifas, hamil, lansia');
+
+            // *** BUMIL
+            $table->integer('is_kelas_bumil')->nullable()->default(0);
+            $table->integer('is_rujuk')->nullable()->default(0);
+            $table->text('edukasi')->nullable();
+
+            // *** Hasil Penimbangan/Pengukuran/Pemeriksaan
+            $table->integer('bb')->nullable()->default(0);
+            $table->integer('lila')->nullable()->default(0);
+            $table->integer('tekanan_darah')->nullable()->default(0);
+            $table->integer('is_sesuai_kurva')->nullable()->default(0);
+
+            // *** Skrining TBC
+            $table->integer('is_batuk')->nullable()->default(0);
+            $table->integer('is_demam')->nullable()->default(0);
+            $table->integer('is_bb_tidak_naik_turun')->nullable()->default(0);
+            $table->integer('is_kontak_pasien_tbc')->nullable()->default(0);
+
+            // *** Pemberian TTD & MT Bumil KEK
+            $table->integer('is_beri_tablet')->nullable()->default(0);
+            $table->integer('jml_tablet')->nullable()->default(0);
+            $table->integer('is_beri_mt')->nullable()->default(0);
+            $table->text('mt_bumil')->nullable()->default(0);
+            $table->integer('konsumsi_mt_bumil')->nullable()->comment("1 = setiap hari, 0 = tidak setiap hari");
+
+            // *** NIFAS
+
+
             $table->timestamps();
             $table->softDeletes();
         });
+
 
     }
 
