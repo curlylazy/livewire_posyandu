@@ -16,6 +16,8 @@ use App\Livewire\Admin\Galeri\GaleriAE;
 use App\Livewire\Admin\Galeri\GaleriList;
 use App\Livewire\Admin\Package\PackageAE;
 use App\Livewire\Admin\package\PackageList;
+use App\Livewire\Admin\Pasien\PasienAE;
+use App\Livewire\Admin\Pasien\PasienList;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -59,19 +61,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/user/add', UserAE::class)->name('admin_user_add');
     Route::get('/user/edit/{id}', UserAE::class)->name('admin_user_edit');
 
-    Route::get('/activity', ActivityList::class)->name('admin_activity_list');
-    Route::get('/activity/add', ActivityAE::class)->name('admin_activity_add');
-    Route::get('/activity/edit/{id}', ActivityAE::class)->name('admin_activity_edit');
-
-    Route::get('/blog', BlogList::class)->name('admin_blog_list');
-    Route::get('/blog/add', BlogAE::class)->name('admin_blog_add');
-    Route::get('/blog/edit/{id}', BlogAE::class)->name('admin_blog_edit');
-
-    Route::get('/galeri', GaleriList::class)->name('admin_galeri_list');
-    Route::get('/galeri/add', GaleriAE::class)->name('admin_galeri_add');
-    Route::get('/galeri/edit/{id}', GaleriAE::class)->name('admin_galeri_edit');
-
-    Route::get('/package', PackageList::class)->name('admin_package_list');
-    Route::get('/package/add', PackageAE::class)->name('admin_package_add');
-    Route::get('/package/edit/{id}', PackageAE::class)->name('admin_package_edit');
+    Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
+    Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');
+    Route::get('/pasien/edit/{id}', PasienAE::class)->name('admin_pasien_edit');
 });

@@ -41,7 +41,7 @@
             <div class="sidebar-brand">
                 <div class="d-flex align-items-center">
                     <img src="{{ asset('logo.png') }}" style="width: 35px; margin-right: 10px;" />
-                    <div class="fs-5">{{ config('app.webname') }}</div>
+                    <div class="fs-5">Posyandu</div>
                 </div>
                 {{-- <svg class="sidebar-brand-full" width="88" height="32" alt="CoreUI Logo">
                     <use xlink:href="{{ asset('asset_admin/assets/brand/coreui.svg#full') }}"></use>
@@ -87,7 +87,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/pemeriksaan/nifas") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">stethoscope</span>
                     Periksa Nifas
                 </a>

@@ -50,14 +50,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-2">
-                        <div class="form-floating">
-                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="">
-                            <label for="form.tgl_lahir">Tanggal Lahir</label>
-                        </div>
-                    </div>
-
-                    <div class="col-md-12">
+                    <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <select type="text" class="form-control" id="kategoripasien" wire:model='form.kategoripasien'>
                                 @foreach (Option::kategoriPasien() as $data)
@@ -65,6 +58,12 @@
                                 @endforeach
                             </select>
                             <label for="kategoripasien">Kategori Pasien</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="form-floating">
+                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="">
+                            <label for="form.tgl_lahir">Tanggal Lahir</label>
                         </div>
                     </div>
 
@@ -90,34 +89,32 @@
                     </div>
 
                     {{-- *** tampil jika pasien adalah ibu hamil --}}
-                    <div x-show="$wire.form->kategoripasien == 'bumil'">
-                        <div class="col-md-4">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="hamil_ke" wire:model='form.hamil_ke' x-mask:dynamic="$money($input)">
-                                <label for="hamil_ke">Hamil Ke ?</label>
-                            </div>
+                    <div class="col-md-4" x-show="$wire.form->kategoripasien == 'bumil'">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="hamil_ke" wire:model='form.hamil_ke' x-mask:dynamic="$money($input)">
+                            <label for="hamil_ke">Hamil Ke ?</label>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="bulan_ke" wire:model='form.bulan_ke'>
-                                <label for="bulan_ke">Bulan Ke ?</label>
-                            </div>
+                    </div>
+                    <div class="col-md-4" x-show="$wire.form->kategoripasien == 'bumil'">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="bulan_ke" wire:model='form.bulan_ke'>
+                            <label for="bulan_ke">Bulan Ke ?</label>
                         </div>
                     </div>
 
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="bb" wire:model='form.bb' x-mask:dynamic="$money($input)">
                             <label for="bb">Berat Badan</label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="lila" wire:model='form.lila' x-mask:dynamic="$money($input)">
                             <label for="lila">Lingkar Lengan</label>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="tekanan_darah" wire:model='form.tekanan_darah' x-mask:dynamic="$money($input)">
                             <label for="tekanan_darah">Tekanan Darah</label>
