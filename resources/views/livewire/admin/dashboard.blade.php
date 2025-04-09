@@ -13,42 +13,47 @@
 
     <div class="row g-2 mb-3">
         <x-partials.dashboard.quickmenu>
-            <x-slot:title>Galeri</x-slot>
-            <x-slot:icon>image</x-slot>
-            <x-slot:url>{{ url("admin/galeri") }}</x-slot>
+            <x-slot:title>Pasien</x-slot>
+            <x-slot:icon>pregnancy</x-slot>
+            <x-slot:url>{{ url("admin/pasien") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
-            <x-slot:title>Activity</x-slot>
-            <x-slot:icon>sports_kabaddi</x-slot>
-            <x-slot:url>{{ url("admin/activity") }}</x-slot>
+            <x-slot:title>Bayi</x-slot>
+            <x-slot:icon>breastfeeding</x-slot>
+            <x-slot:url>{{ url("admin/bayi") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
-            <x-slot:title>Blog</x-slot>
-            <x-slot:icon>news</x-slot>
-            <x-slot:url>{{ url("admin/blog") }}</x-slot>
+            <x-slot:title>Pemeriksaan Ibu Hamil</x-slot>
+            <x-slot:icon>stethoscope</x-slot>
+            <x-slot:url>{{ url("admin/pemeriksaan/bumil") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
-            <x-slot:title>Package</x-slot>
-            <x-slot:icon>style</x-slot>
-            <x-slot:url>{{ url("admin/package") }}</x-slot>
+            <x-slot:title>Pemeriksaan Nifas</x-slot>
+            <x-slot:icon>stethoscope</x-slot>
+            <x-slot:url>{{ url("admin/pemeriksaan/nifas") }}</x-slot>
         </x-partials.dashboard.quickmenu>
     </div>
 
     <div class="row g-1 g-lg-3">
         <x-partials.dashboard.infomenu>
-            <x-slot:title>Galeri</x-slot>
+            <x-slot:title>Pasien</x-slot>
+            <x-slot:icon>pregnancy</x-slot>
+            <x-slot:info>{{ $jmlPasien }} Total Pasien</x-slot>
+        </x-partials.dashboard.infomenu>
+        <x-partials.dashboard.infomenu>
+            <x-slot:title>Bayi</x-slot>
+            <x-slot:icon>breastfeeding</x-slot>
+            <x-slot:info>{{ $jmlBayi }} Total Bayi</x-slot>
+        </x-partials.dashboard.infomenu>
+        <x-partials.dashboard.infomenu>
+            <x-slot:title>Pemiksaan Tahun Ini</x-slot>
             <x-slot:icon>image</x-slot>
-            <x-slot:info>{{ $jmlGaleri }} Total Galeri</x-slot>
+            <x-slot:info>{{ $jmlPeriksaTahunIni }} {{ date('Y') }}</x-slot>
         </x-partials.dashboard.infomenu>
         <x-partials.dashboard.infomenu>
-            <x-slot:title>Activity</x-slot>
-            <x-slot:icon>sports_kabaddi</x-slot>
-            <x-slot:info>{{ $jmlKegiatan }} Total Activity</x-slot>
-        </x-partials.dashboard.infomenu>
-        <x-partials.dashboard.infomenu>
-            <x-slot:title>Blog</x-slot>
-            <x-slot:icon>news</x-slot>
-            <x-slot:info>{{ $jmlBlog }} Total Blog</x-slot>
+            <x-slot:title>Pemiksaan Bulan Ini</x-slot>
+            <x-slot:icon>image</x-slot>
+            <x-slot:info>{{ $jmlPeriksaBulanIni }} {{ Carbon\Carbon::now()->translatedFormat('F') }}</x-slot>
         </x-partials.dashboard.infomenu>
     </div>
 

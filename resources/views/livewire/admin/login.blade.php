@@ -27,16 +27,16 @@
     <x-partials.loader />
 
     <div class="d-lg-flex half">
-        <div class="bg order-1 order-md-2 d-none d-xl-block" style="background-image: url('{{ asset('static/login_4.jpg') }}');"></div>
+        <div class="bg order-1 order-md-2 d-none d-xl-block" style="background-image: url('{{ asset('static/login_5.png') }}');"></div>
         <div class="contents order-2 order-md-1">
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 col-12">
                         <div class="d-flex">
-                            <img class="me-4" src="{{ asset('logo.png') }}" style="width: 70px; height: 70px; margin-right: 20px;"/>
+                            <img class="me-4" src="{{ asset('logo.png') }}" style="width: 100px; height: 100px; margin-right: 20px; object-fit: contain;"/>
                             <div class="d-flex flex-column">
                                 <h3>Login to <strong>{{ config('app.webname') }}</strong></h3>
-                                <p class="mb-4">Untuk akses sistem ini, Anda harus memasukkan nama pengguna dan sandi.</p>
+                                <p class="mb-4">{{ config('app.tagline') }}</p>
                             </div>
                         </div>
                         <form wire:submit="login">
@@ -57,7 +57,7 @@
                                 </label>
                             </div>
 
-                            <input type="submit" value="Log In" class="btn btn-block btn-primary">
+                            <input type="submit" value="Log In" class="btn btn-block btn-primary" style="background-color: #d22b69; border-color: #d22b69;">
 
                         </form>
                     </div>

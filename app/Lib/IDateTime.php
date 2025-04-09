@@ -29,4 +29,18 @@ class IDateTime
         return $res;
     }
 
+    public static function dateDiffInYear($date)
+    {
+        $dbDate = \Carbon\Carbon::parse($date);
+        $diffYears = \Carbon\Carbon::now()->diffInYears($dbDate);
+        return $diffYears;
+    }
+
+    public static function dateDiff($date)
+    {
+        $dbDate = \Carbon\Carbon::parse($date);
+        $diffYears = \Carbon\Carbon::now()->diff($dbDate);
+        return $diffYears->format('%y Tahun, %m Bulan');
+    }
+
 }

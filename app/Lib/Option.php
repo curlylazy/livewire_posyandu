@@ -86,6 +86,15 @@ class Option
 		return $res;
 	}
 
+	public static function kategoriPasien()
+	{
+		$res = collect();
+        $res->push(['value' => 'nifas', 'name' => 'Nifas']);
+        $res->push(['value' => 'bumil', 'name' => 'Bumil']);
+        $res->push(['value' => 'lansia', 'name' => 'Lansia']);
+		return $res;
+	}
+
 	public static function getOptionName($name, $value)
 	{
         $res = "";

@@ -25,7 +25,7 @@ return new class extends Migration
 
         Schema::create('tbl_pasien', function (Blueprint $table) {
             $table->uuid('kodepasien')->primary();
-            $table->string('kategoripasien', 25)->comment('nifas, hamil, lansia');
+            $table->string('kategoripasien', 25)->comment('nifas/hamil, lansia');
             $table->string('nik', 225)->unique();
             $table->string('namapasien', 225);
             $table->date('tgl_lahir', 225)->nullable();
@@ -60,7 +60,7 @@ return new class extends Migration
         });
 
         // *** pemeriksaan
-        Schema::create('tbl_pemeriksaan_bumil', function (Blueprint $table) {
+        Schema::create('tbl_pemeriksaan', function (Blueprint $table) {
             $table->uuid('kodepemeriksaan')->primary();
             $table->uuid('kodepasien');
             $table->uuid('kodebayi')->nullable();
@@ -90,7 +90,7 @@ return new class extends Migration
             $table->integer('jml_tablet')->nullable()->default(0);
             $table->integer('konsumsi_tablet')->nullable()->default(0)->comment("1 = setiap hari, 0 = tidak setiap hari");
             $table->integer('is_beri_mt')->nullable()->default(0);
-            $table->text('mt_bumil')->nullable()->default(0);
+            $table->text('mt_bumil')->nullable();
             $table->integer('konsumsi_mt_bumil')->nullable()->comment("1 = setiap hari, 0 = tidak setiap hari");
 
             // *** NIFAS

@@ -67,27 +67,29 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/activity") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">sports_kabaddi</span>
-                    Activity
+                <a class="nav-link" href="{{ url("admin/pasien") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">pregnancy</span>
+                    Pasien
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/package") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">style</span>
-                    Package
+                <a class="nav-link" href="{{ url("admin/bayi") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">breastfeeding</span>
+                    Bayi
+                </a>
+            </li>
+
+            <li class="nav-title">Pemeriksaan</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">stethoscope</span>
+                    Periksa Ibu Hamil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/blog") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">newspaper</span>
-                    Blog
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/galeri") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">perm_contact_calendar</span>
-                    Galeri
+                <a class="nav-link" href="{{ url("admin/") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">stethoscope</span>
+                    Periksa Nifas
                 </a>
             </li>
 

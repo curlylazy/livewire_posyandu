@@ -124,14 +124,14 @@ return [
     'x' => '',
     'youtube' => 'https://www.youtube.com/@RuralBaliAdventure',
     'email' => 'ruralbaliadventure@gmail.com',
-    'webname' => 'Rural Bali Adventure',
-    'tagline' => 'Explore the Heart of Bali, One Journey at a Time!',
+    'webname' => 'Posyandu Ramah Ibu dan Anak',
+    'tagline' => 'Melayani dengan Hati, Menjaga Generasi Negeri',
     'kodepos' => '80572',
     'title' => 'Rural Bali Adventure',
     'alamat2' => 'Bali, Kab.Gianyar, Kec.Gianyar 80572',
     'alamat' => 'Br.Begawan, Payangan',
     'webcreator' => 'Bali Coding | balicoding.com',
-    'webdesc' => 'Rural Bali Adventure offers an authentic and immersive experience into the heart of Bali’s countryside. We take you beyond the usual tourist trails to discover hidden villages, lush rice fields, and rich cultural traditions',
+    'webdesc' => 'Posyandu - "Sehat Bersama, Tumbuh Bahagia". Tempat terbaik untuk pemantauan tumbuh kembang anak, imunisasi, dan edukasi kesehatan keluarga. Dikelola oleh kader lokal, Posyandu hadir untuk mendukung generasi sehat dari desa',
     'angkatan' => 2025,
     /*
     |--------------------------------------------------------------------------

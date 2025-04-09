@@ -25,6 +25,8 @@ class BayiForm extends Form
     public $tgl_bersalin = "";
     public $tempatbersalin = "";
 
+    public $namapasien = "";
+
     public function rules()
     {
         return [
@@ -39,6 +41,13 @@ class BayiForm extends Form
             'tgl_bersalin' => 'nullable',
             'tempatbersalin' => 'nullable',
         ];
+    }
+
+    public function setPasien($data)
+    {
+        $data = json_decode($data);
+        $this->kodepasien = $data->kodepasien;
+        $this->namapasien = $data->namapasien;
     }
 
     public function setPost($id)
@@ -69,7 +78,7 @@ class BayiForm extends Form
 
     private function exceptData()
     {
-        $arr = [];
+        $arr = ['namapasien'];
         return $arr;
     }
 
