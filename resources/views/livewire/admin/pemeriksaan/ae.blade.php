@@ -15,8 +15,9 @@
         </script>
     @endscript
 
+    <livewire:partial.modal-add-pasien :kategori_periksa="$kategori_periksa"/>
     <livewire:partial.modal-pasien />
-    <livewire:partial.modal-bayi :kodepasien="$form->kodepasien"/>
+    <livewire:partial.modal-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
 
     <x-partials.loader />
     <x-partials.flashmsg />
@@ -38,6 +39,14 @@
             <form wire:submit="save">
 
                 <div class="row g-2">
+
+                    <div class="col-12" x-show="!$wire.isEdit">
+                        <div class="d-flex gap-2">
+                            <button type="button" class="btn btn-primary" wire:click='$dispatch("open-modal", { namamodal: "modalPasienAdd" })'><i class="fas fa-plus"></i> Tambah Pasien</button>
+                            <button type="button" x-show="$wire.kategori_periksa == 'nifas'" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Bayi</button>
+                        </div>
+                    </div>
+
                     <div class="col-12 col-md-12">
                         <div class="input-group">
                             <div class="form-floating">
@@ -45,7 +54,7 @@
                                 <label for="form.namapasien">{{ ($kategori_periksa == "bumil") ? "Nama Pasien" : "Nama Ibu" }}</label>
                             </div>
                             <button x-show='$wire.form.kodepasien != ""' class="btn btn-outline-secondary" type="button" data-coreui-target="#modalPasien" data-coreui-toggle="modal"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" data-coreui-target="#modalPasien" data-coreui-toggle="modal"><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='pilihPasien'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
@@ -55,8 +64,8 @@
                                 <input type="text" class="form-control pe-none" id="form.namabayi" wire:model='form.namabayi' placeholder="" readonly>
                                 <label for="form.namabayi">Nama Bayi</label>
                             </div>
-                            <button x-show='$wire.form.kodebayi != ""' class="btn btn-outline-secondary" type="button" data-coreui-target="#modalBayi" data-coreui-toggle="modal"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" data-coreui-target="#modalBayi" data-coreui-toggle="modal"><i class="fas fa-search"></i></button>
+                            <button x-show='$wire.form.kodebayi != ""' class="btn btn-outline-secondary" type="button"><i class="fas fa-info"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='pilihBayi'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
@@ -87,13 +96,13 @@
                 <div class="row mt-1 g-2" x-show="$wire.kategori_periksa == 'bumil'">
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="form.periksa_hamil_ke" wire:model='form.periksa_hamil_ke' placeholder="">
+                            <input type="text" class="form-control" id="form.periksa_hamil_ke" wire:model='form.periksa_hamil_ke' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_hamil_ke">Hamil Ke</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="form.periksa_minggu_ke" wire:model='form.periksa_minggu_ke' placeholder="">
+                            <input type="text" class="form-control" id="form.periksa_minggu_ke" wire:model='form.periksa_minggu_ke' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_minggu_ke">Minggu Ke</label>
                         </div>
                     </div>
@@ -108,7 +117,7 @@
 
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="form.periksa_bb" wire:model='form.periksa_bb' placeholder="">
+                            <input type="text" class="form-control" id="form.periksa_bb" wire:model='form.periksa_bb' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_bb">Berat Badan</label>
                         </div>
                     </div>
@@ -158,11 +167,11 @@
                             <h6 class="fw-normal">Apakah pasien mengalami batuk terus menerus ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_batuk" id="is_batuk_ya" autocomplete="off" wire:model="form.is_batuk">
+                                    <input type="radio" class="btn-check" name="is_batuk" value="1" id="is_batuk_ya" autocomplete="off" wire:model="form.is_batuk">
                                     <label class="btn" for="is_batuk_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_batuk" id="is_batuk_tidak" autocomplete="off" wire:model="form.is_batuk">
+                                    <input type="radio" class="btn-check" name="is_batuk" value="0" id="is_batuk_tidak" autocomplete="off" wire:model="form.is_batuk">
                                     <label class="btn" for="is_batuk_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -173,11 +182,11 @@
                             <h6 class="fw-normal">Apakah pasien mengalami demam lebih dari 2 minggu ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_demam" id="is_demam_ya" autocomplete="off" wire:model="form.is_demam">
+                                    <input type="radio" class="btn-check" name="is_demam" value="1" id="is_demam_ya" autocomplete="off" wire:model="form.is_demam">
                                     <label class="btn" for="is_demam_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_demam" id="is_demam_tidak" autocomplete="off" wire:model="form.is_demam">
+                                    <input type="radio" class="btn-check" name="is_demam" value="0" id="is_demam_tidak" autocomplete="off" wire:model="form.is_demam">
                                     <label class="btn" for="is_demam_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -188,11 +197,11 @@
                             <h6 class="fw-normal">Apakah BB pasien tidak naik atau turun dalam 2 bulan berturut-turut ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_bb_tidak_naik_turun" id="is_bb_tidak_naik_turun_ya" autocomplete="off" wire:model="form.is_bb_tidak_naik_turun">
+                                    <input type="radio" class="btn-check" name="is_bb_tidak_naik_turun" value="1" id="is_bb_tidak_naik_turun_ya" autocomplete="off" wire:model="form.is_bb_tidak_naik_turun">
                                     <label class="btn" for="is_bb_tidak_naik_turun_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_bb_tidak_naik_turun" id="is_bb_tidak_naik_turun_tidak" autocomplete="off" wire:model="form.is_bb_tidak_naik_turun">
+                                    <input type="radio" class="btn-check" name="is_bb_tidak_naik_turun" value="0" id="is_bb_tidak_naik_turun_tidak" autocomplete="off" wire:model="form.is_bb_tidak_naik_turun">
                                     <label class="btn" for="is_bb_tidak_naik_turun_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -203,11 +212,11 @@
                             <h6 class="fw-normal">Apakah pasien ada kontak erat dengan pasien TBC ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_kontak_pasien_tbc" id="is_kontak_pasien_tbc_ya" autocomplete="off" wire:model="form.is_kontak_pasien_tbc">
+                                    <input type="radio" class="btn-check" name="is_kontak_pasien_tbc" value="1" id="is_kontak_pasien_tbc_ya" autocomplete="off" wire:model="form.is_kontak_pasien_tbc">
                                     <label class="btn" for="is_kontak_pasien_tbc_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_kontak_pasien_tbc" id="is_kontak_pasien_tbc_tidak" autocomplete="off" wire:model="form.is_kontak_pasien_tbc">
+                                    <input type="radio" class="btn-check" name="is_kontak_pasien_tbc" value="0" id="is_kontak_pasien_tbc_tidak" autocomplete="off" wire:model="form.is_kontak_pasien_tbc">
                                     <label class="btn" for="is_kontak_pasien_tbc_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -318,7 +327,7 @@
                             <label for="form.is_beri_vit_a">Apakah Memberikan Vitamin A ?</label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6" x-bind:class="$wire.form.jml_tablet_vit_a == 0 ? 'pe-none' : ''">
+                    <div class="col-12 col-md-6" x-bind:class="$wire.form.is_beri_vit_a == 0 ? 'pe-none' : ''">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.jml_tablet_vit_a" wire:model='form.jml_tablet_vit_a' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.jml_tablet_vit_a">Jumlah Komposisi dan Jumlah Porsi</label>

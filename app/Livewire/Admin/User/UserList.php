@@ -32,13 +32,6 @@ class UserList extends Component
         return $data;
     }
 
-    public function selectData($data)
-    {
-        $this->selectedKode = $data['kodeuser'];
-        $this->selectedNama = $data['namauser'];
-        $this->dispatch("selected-modal-open");
-    }
-
     public function hapus($id)
     {
         $data = UserModel::find($id);

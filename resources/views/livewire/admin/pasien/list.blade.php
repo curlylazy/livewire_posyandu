@@ -2,11 +2,6 @@
 
     @script
         <script>
-
-            $wire.on('selected-modal-open', (e) => {
-                $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
-            });
-
             $wire.on('confirm-delete', (e) => {
                 Swal.fire({
                     title: 'Hapus Data',

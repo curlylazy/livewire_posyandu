@@ -32,16 +32,15 @@ class PasienForm extends Form
     {
         return [
             'kategoripasien' => 'required',
-            'nik' => 'required',
+            'nik' => 'required|size:16',
             'namapasien' => 'required',
             'tgl_lahir' => 'nullable',
             'alamat' => 'nullable',
             'nohp' => 'nullable',
             'hamil_ke' => 'nullable|integer',
             'minggu_ke' => 'required|integer',
-            'bb' => 'required|integer',
-            'lila' => 'required|integer',
-            'tekanan_darah' => 'required|integer',
+            'bb' => 'required|numeric',
+            'lila' => 'required|numeric',
             'nama_suami' => 'required',
         ];
     }

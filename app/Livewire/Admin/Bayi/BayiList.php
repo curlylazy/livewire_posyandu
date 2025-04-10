@@ -38,7 +38,7 @@ class BayiList extends Component
     {
         $this->selectedKode = $data['kodebayi'];
         $this->selectedNama = $data['namabayi'];
-        $this->dispatch("selected-modal-open");
+        $this->dispatch('open-modal', namamodal: "modalPilihData");
     }
 
     public function hapus($id)

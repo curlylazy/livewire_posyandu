@@ -4,6 +4,7 @@ namespace App\Livewire\Partial;
 
 use App\Models\BayiModel;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -13,12 +14,9 @@ class ModalBayi extends Component
     use WithPagination, WithoutUrlPagination;
 
     public $katakunci = "";
-    public $kodepasien = "";
 
-    public function mount()
-    {
-
-    }
+    #[Reactive]
+    public $kodepasien = "", $namapasien = "";
 
     #[Computed()]
     public function dataBayi()
@@ -51,10 +49,14 @@ class ModalBayi extends Component
                                 <div class="mb-2">
                                     <input class="form-control" wire:model='katakunci' placeholder="masukkan katakunci pencarian.." wire:keydown.enter='$commit'/>
                                 </div>
+                                <div class='d-flex justify-content-between mb-2' x-show="$wire.namapasien != ''">
+                                    <div>Nama Ibu :</div>
+                                    <div>{{ $namapasien }}</div>
+                                </div>
                                 <ul class="list-group">
                                     @foreach($this->dataBayi as $data)
                                         <li class="list-group-item" role="button" wire:click="selectRow('{{ $data->toJson() }}')">
-                                            <small>{{ $data->namapasien }}</small>
+                                            <small>Ibu : {{ $data->namapasien }}</small>
                                             <h6>{{ $data->namabayi }}</h6>
                                         </li>
                                     @endforeach

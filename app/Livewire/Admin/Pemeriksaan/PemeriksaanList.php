@@ -33,7 +33,7 @@ class PemeriksaanList extends Component
     public function readData()
     {
         $data = PemeriksaanModel::search($this->katakunci)
-                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_bayi.*', 'tbl_pasien.tgl_lahir as tgl_lahir_pasien', 'tbl_bayi.tgl_lahir as tgl_lahir_bayi')
+                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_bayi.*')
                 ->joinTable()
                 ->searchByKategoriPeriksa($this->kategori_periksa)
                 ->latest('tbl_pemeriksaan.tgl_periksa')
@@ -46,7 +46,7 @@ class PemeriksaanList extends Component
     {
         $this->selectedKode = $data['kodepemeriksaan'];
         $this->selectedNama = $data['namapasien'];
-        $this->dispatch("selected-modal-open");
+        $this->dispatch('open-modal', namamodal: "modalPilihData");
     }
 
     public function hapus($id)

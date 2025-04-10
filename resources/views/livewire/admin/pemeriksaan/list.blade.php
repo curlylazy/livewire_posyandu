@@ -2,11 +2,6 @@
 
     @script
         <script>
-
-            $wire.on('selected-modal-open', (e) => {
-                $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
-            });
-
             $wire.on('confirm-delete', (e) => {
                 Swal.fire({
                     title: 'Hapus Data',
@@ -43,28 +38,57 @@
             <x-partials.viewlarge>
                 <div class="table-responsive">
                     <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Nama Ibu</th>
-                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Nama Bayi</th>
-                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Tanggal Lahir</th>
-                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Umur Bayi</th>
-                                <th scope="col">Tanggal Periksa</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dataRow as $row)
-                                <tr role="button" wire:click='selectData({{ $row }})'>
-                                    <td>{{ $row->nik }}</td>
-                                    <td>{{ $row->namapasien }}</td>
-                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ $row->namabayi }}</td>
-                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
-                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
-                                    <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+
+                        @if($kategori_periksa == 'nifas')
+                            <thead>
+                                <tr>
+                                    <th scope="col">NIK</th>
+                                    <th scope="col">Nama Ibu</th>
+                                    <th scope="col">Nama Bayi</th>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Umur Bayi</th>
+                                    <th scope="col">Tanggal Periksa</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
+                            </thead>
+                            <tbody>
+                                @foreach ($dataRow as $row)
+                                    <tr role="button" wire:click='selectData({{ $row }})'>
+                                        <td>{{ $row->nik }}</td>
+                                        <td>{{ $row->namapasien }}</td>
+                                        <td>{{ $row->namabayi }}</td>
+                                        <td>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
+                                        <td>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
+                                        <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @else
+                            <thead>
+                                <tr>
+                                    <th scope="col">NIK</th>
+                                    <th scope="col">Nama Ibu</th>
+                                    <th scope="col">BB</th>
+                                    <th scope="col">LILA</th>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Umur</th>
+                                    <th scope="col">Tanggal Periksa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($dataRow as $row)
+                                    <tr role="button" wire:click='selectData({{ $row }})'>
+                                    {{-- <tr role="button" x-on:click='$wire.dispatch("select-data")'> --}}
+                                        <td>{{ $row->nik }}</td>
+                                        <td>{{ $row->namapasien }}</td>
+                                        <td>{{ Number::format($row->periksa_bb) }} kg</td>
+                                        <td>{{ Number::format($row->periksa_lila) }} cm</td>
+                                        <td>{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</td>
+                                        <td>{{ IDateTime::dateDiff($row->tgl_lahir_pasien) }} Tahun</td>
+                                        <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        @endif
                     </table>
                 </div>
             </x-partials.viewlarge>
@@ -94,7 +118,7 @@
                 <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
                 <x-slot:selectedNama>{{ $selectedNama }}</x-slot>
                 <div class="d-grid gap-2">
-                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/edit/$selectedKode") }}" role="button"><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/edit/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button"><i class="fas fa-edit"></i> Edit</a>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete", { kode: "{{ $selectedKode }}", nama: "{{ $selectedNama }}" })'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>

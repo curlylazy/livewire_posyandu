@@ -76,7 +76,7 @@ class PemeriksaanForm extends Form
         if(empty($id))
             return;
 
-        $data = PasienModel::find($id);
+        $data = PemeriksaanModel::joinTable()->find($id);
         $this->kodepemeriksaan = $data->kodepemeriksaan;
         $this->kodepasien = $data->kodepasien;
         $this->kodebayi = $data->kodebayi;
@@ -116,17 +116,19 @@ class PemeriksaanForm extends Form
         $this->is_menyusui = $data->is_menyusui;
         $this->is_kb = $data->is_kb;
 
-        $this->namapasien = $data->namapasien;
-        $this->namabayi = $data->namabayi;
+        $this->setPasien(json_encode($data));
+        $this->setBayi(json_encode($data));
     }
 
     public function setPasien($data)
     {
         $data = json_decode($data);
+        $this->resetBayi();
         $this->kodepasien = $data->kodepasien;
         $this->namapasien = $data->namapasien;
         $this->periksa_hamil_ke = $data->hamil_ke;
         $this->periksa_minggu_ke = $data->minggu_ke;
+        $this->periksa_bb = $data->bb;
         $this->periksa_tekanan_darah = $data->tekanan_darah;
         $this->periksa_lila = $data->lila;
     }
@@ -138,6 +140,14 @@ class PemeriksaanForm extends Form
         $this->namabayi = $data->namabayi;
         $this->periksa_bb_bayi = $data->bb;
         $this->periksa_tinggi_badan = $data->tinggibadan;
+    }
+
+    public function resetBayi()
+    {
+        $this->kodebayi = "";
+        $this->namabayi = "";
+        $this->periksa_bb_bayi = 0;
+        $this->periksa_tinggi_badan = 0;
     }
 
     public function prepare()
@@ -175,7 +185,7 @@ class PemeriksaanForm extends Form
 
         $this->updatePasienDanBayi();
 
-        PemeriksaanModel::find($this->kodepasien)->update($this->except($this->exceptData()));
+        PemeriksaanModel::find($this->kodepemeriksaan)->update($this->except($this->exceptData()));
     }
 
     // *** extra

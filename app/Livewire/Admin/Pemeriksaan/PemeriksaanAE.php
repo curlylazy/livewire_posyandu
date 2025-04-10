@@ -58,7 +58,7 @@ class PemeriksaanAE extends Component
         try {
             ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
 
-            $this->redirect("/admin/$this->pageName", navigate: true);
+            $this->redirect("/admin/$this->pageName?kategori_periksa=".$this->kategori_periksa, navigate: true);
 
         } catch (\Exception $e) {
             $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
@@ -91,6 +91,31 @@ class PemeriksaanAE extends Component
     {
         $this->form->setBayi($data);
         $this->dispatch('close-modal', namamodal : 'modalBayi');
+    }
+
+    public function pilihBayi()
+    {
+        if(empty($this->form->kodepasien)) {
+            $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian pilih anaknya', icon: 'warning');
+            return;
+        }
+
+        if($this->isEdit) {
+            $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama bayi lagi ya!', icon: 'warning');
+            return;
+        }
+
+        $this->dispatch('open-modal', namamodal : 'modalBayi');
+    }
+
+    public function pilihPasien()
+    {
+        if($this->isEdit) {
+            $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama pasien lagi ya!', icon: 'warning');
+            return;
+        }
+
+        $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
     public function render()

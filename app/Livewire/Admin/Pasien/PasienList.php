@@ -37,7 +37,7 @@ class PasienList extends Component
     {
         $this->selectedKode = $data['kodepasien'];
         $this->selectedNama = $data['namapasien'];
-        $this->dispatch("selected-modal-open");
+        $this->dispatch('open-modal', namamodal: "modalPilihData");
     }
 
     public function hapus($id)
