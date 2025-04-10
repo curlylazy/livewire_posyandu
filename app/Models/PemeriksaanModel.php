@@ -37,6 +37,13 @@ class PemeriksaanModel extends Model
         });
     }
 
+    public function scopeSearchByKategoriPeriksa(Builder $query, $kategori): void
+    {
+        if(!empty($kategori)) {
+            $query->where('tbl_pemeriksaan.kategori_periksa', '=', $kategori);
+        }
+    }
+
     public function scopeSearchByDate(Builder $query, $tglDari, $tglSampai): void
     {
         if(!empty($tglDari) && !empty($tglDari)) {

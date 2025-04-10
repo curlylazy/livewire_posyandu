@@ -24,6 +24,7 @@ class BayiForm extends Form
     public $tgl_lahir = "";
     public $tgl_bersalin = "";
     public $tempatbersalin = "";
+    public $jk = "L";
 
     public $namapasien = "";
 
@@ -40,6 +41,7 @@ class BayiForm extends Form
             'tgl_lahir' => 'nullable',
             'tgl_bersalin' => 'nullable',
             'tempatbersalin' => 'nullable',
+            'jk' => 'nullable',
         ];
     }
 
@@ -55,7 +57,7 @@ class BayiForm extends Form
         if(empty($id))
             return;
 
-        $data = BayiModel::find($id);
+        $data = BayiModel::joinTable()->find($id);
         $this->kodebayi = $data['kodebayi'];
         $this->kodepasien = $data['kodepasien'];
         $this->namabayi = $data['namabayi'];
@@ -65,7 +67,10 @@ class BayiForm extends Form
         $this->carabersalin = $data['carabersalin'];
         $this->tgl_lahir = $data['tgl_lahir'];
         $this->tgl_bersalin = $data['tgl_bersalin'];
+        $this->jk = $data['jk'];
         $this->tempatbersalin = $data['tempatbersalin'];
+
+        $this->namapasien = $data['namapasien'];
     }
 
     public function prepare()

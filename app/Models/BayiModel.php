@@ -29,7 +29,14 @@ class BayiModel extends Model
         $query->where(function ($query) use ($katakunci) {
             $query
                 ->where('tbl_pasien.namapasien', 'like', "%$katakunci%")
-                ->orWhere('tbl_pasien.namabayi', 'like', "%$katakunci%");
+                ->orWhere('tbl_bayi.namabayi', 'like', "%$katakunci%");
         });
+    }
+
+    public function scopeSearchByPasien(Builder $query, $kode): void
+    {
+        if(!empty($kode)) {
+            $query->where('tbl_bayi.kodepasien', $kode);
+        }
     }
 }

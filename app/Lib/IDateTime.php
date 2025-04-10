@@ -29,14 +29,36 @@ class IDateTime
         return $res;
     }
 
-    public static function dateDiffInYear($date)
+    public static function dateDiff($date, $in = "year")
     {
-        $dbDate = \Carbon\Carbon::parse($date);
-        $diffYears = \Carbon\Carbon::now()->diffInYears($dbDate);
-        return $diffYears;
+        // $dbDate = \Carbon\Carbon::parse($date);
+        // $diffYears = \Carbon\Carbon::now()->diffInYears($dbDate);
+        // return $diffYears;
+
+        $date1 = \Carbon\Carbon::parse($date);
+        $date2 = \Carbon\Carbon::now();
+        $diff = $date1->diff($date2);
+
+        if($in == "year"){
+            return $diff->y;
+        }
+
+        if($in == "month"){
+            return $diff->m;
+        }
+
+        if($in == "days"){
+            return $diff->d;
+        }
+
+        else
+        {
+            return $diff;
+        }
+
     }
 
-    public static function dateDiff($date)
+    public static function dateDiffFormat($date)
     {
         $dbDate = \Carbon\Carbon::parse($date);
         $diffYears = \Carbon\Carbon::now()->diff($dbDate);

@@ -95,6 +95,17 @@ class Option
 		return $res;
 	}
 
+	public static function caraBersalin()
+	{
+		$res = collect();
+        $res->push(['value' => 1, 'name' => 'Persalinan Normal']);
+        $res->push(['value' => 2, 'name' => 'Persalinan Caesar']);
+        $res->push(['value' => 3, 'name' => 'Persalinan dengan Bantuan Alat']);
+        $res->push(['value' => 4, 'name' => 'Persalinan di Air']);
+        $res->push(['value' => 5, 'name' => 'Persalinan Lotus']);
+		return $res;
+	}
+
 	public static function getOptionName($name, $value)
 	{
         $res = "";

@@ -35,7 +35,7 @@
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
             <div class="mb-3">
                 <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
+                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add?kategori_periksa=$kategori_periksa") }}"><i class="fas fa-plus"></i> Tambah</a>
                 <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
             </div>
 
@@ -46,10 +46,11 @@
                         <thead>
                             <tr>
                                 <th scope="col">NIK</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Tanggal Lahir</th>
-                                <th scope="col">Umur</th>
+                                <th scope="col">Nama Ibu</th>
+                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Nama Bayi</th>
+                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Tanggal Lahir</th>
+                                <th scope="col" x-show='$wire.kategori_periksa == "nifas"'>Umur Bayi</th>
+                                <th scope="col">Tanggal Periksa</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -57,9 +58,10 @@
                                 <tr role="button" wire:click='selectData({{ $row }})'>
                                     <td>{{ $row->nik }}</td>
                                     <td>{{ $row->namapasien }}</td>
-                                    <td>{{ Str::title($row->kategoripasien) }}</td>
-                                    <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
-                                    <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
+                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ $row->namabayi }}</td>
+                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
+                                    <td x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
+                                    <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -76,9 +78,10 @@
                                 <div class="card-body px-2 py-2">
                                     <div class="h5 mb-1">{{ $row->namapasien }}</div>
                                     <div>{{ $row->nik }}</div>
-                                    <div>{{ Str::title($row->kategoripasien) }}</div>
-                                    <div>{{ IDateTime::formatDate($row->tgl_lahir) }}</div>
-                                    <div>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</div>
+                                    <div x-show='$wire.kategori_periksa == "nifas"'>{{ $row->namabayi }}</div>
+                                    <div x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</div>
+                                    <div x-show='$wire.kategori_periksa == "nifas"'>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</div>
+                                    <div>{{ IDateTime::formatDate($row->tgl_periksa) }}</div>
                                 </div>
                             </div>
                         </div>

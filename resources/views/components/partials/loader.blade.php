@@ -137,7 +137,7 @@
 </div>
  --}}
 
-<div class="logo-loader" wire:loading.flex>
+<div>
 
     @assets
         <style>
@@ -161,7 +161,7 @@
 
             .logo {
                 width: 150px;
-                animation: blink 2s infinite;
+                animation: blink 1s infinite;
             }
 
             @keyframes blink {
@@ -190,10 +190,12 @@
         </style>
     @endassets
 
-    <div class="loader-container">
-        <div class="d-flex flex-column">
-            <img src="{{ asset('logo.png') }}" alt="Logo" class="logo" />
-            <div class="text-center" style="font-size: 15pt; font-weight: bold; color: rgb(121, 121, 121);">LOADING</div>
+    <div class="logo-loader" wire:loading.flex>
+        <div class="loader-container">
+            <div class="d-flex flex-column">
+                <img src="{{ asset('logo.svg') }}" alt="Logo" class="logo" />
+                <div class="text-center" style="font-size: 15pt; font-weight: bold; color: rgb(121, 121, 121);">LOADING</div>
+            </div>
         </div>
     </div>
 </div>

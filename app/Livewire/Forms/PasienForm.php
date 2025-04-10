@@ -31,7 +31,6 @@ class PasienForm extends Form
     public function rules()
     {
         return [
-            'kodepasien' => 'required',
             'kategoripasien' => 'required',
             'nik' => 'required',
             'namapasien' => 'required',

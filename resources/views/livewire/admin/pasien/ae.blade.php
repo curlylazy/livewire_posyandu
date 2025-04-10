@@ -53,6 +53,7 @@
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <select type="text" class="form-control" id="kategoripasien" wire:model='form.kategoripasien'>
+                                <option value="">Pilih Kategori Pasien</option>
                                 @foreach (Option::kategoriPasien() as $data)
                                     <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
                                 @endforeach
@@ -69,8 +70,8 @@
 
                     <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="namasuami" wire:model='form.namasuami'>
-                            <label for="namasuami">Nama Suami</label>
+                            <input type="text" class="form-control" id="nama_suami" wire:model='form.nama_suami'>
+                            <label for="nama_suami">Nama Suami</label>
                         </div>
                     </div>
 

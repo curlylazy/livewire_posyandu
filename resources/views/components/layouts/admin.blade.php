@@ -81,15 +81,29 @@
 
             <li class="nav-title">Pemeriksaan</li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/pemeriksaan?kategori_periksa=bumil") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">stethoscope</span>
                     Periksa Ibu Hamil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/nifas") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/pemeriksaan?kategori_periksa=nifas") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">stethoscope</span>
                     Periksa Nifas
+                </a>
+            </li>
+
+            <li class="nav-title">Laporan</li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">lab_profile</span>
+                    Lap Periksa Bumil
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">lab_profile</span>
+                    Lap Periksa Nifas
                 </a>
             </li>
 

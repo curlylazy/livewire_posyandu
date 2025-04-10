@@ -3,6 +3,8 @@
 use App\Http\Controllers\PdfController;
 use App\Livewire\Admin\Activity\ActivityAE;
 use App\Livewire\Admin\Activity\ActivityList;
+use App\Livewire\Admin\Bayi\BayiAE;
+use App\Livewire\Admin\Bayi\BayiList;
 use Illuminate\Support\Facades\Route;
 
 // *** CONTROLLER PDF
@@ -18,6 +20,8 @@ use App\Livewire\Admin\Package\PackageAE;
 use App\Livewire\Admin\package\PackageList;
 use App\Livewire\Admin\Pasien\PasienAE;
 use App\Livewire\Admin\Pasien\PasienList;
+use App\Livewire\Admin\Pemeriksaan\PemeriksaanAE;
+use App\Livewire\Admin\Pemeriksaan\PemeriksaanList;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -57,11 +61,23 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/', Dashboard::class)->name('admin_dashboard');
 
+    // *** User
     Route::get('/user', UserList::class)->name('admin_user_list');
     Route::get('/user/add', UserAE::class)->name('admin_user_add');
     Route::get('/user/edit/{id}', UserAE::class)->name('admin_user_edit');
 
+    // *** Pasien
     Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
     Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');
     Route::get('/pasien/edit/{id}', PasienAE::class)->name('admin_pasien_edit');
+
+    // *** Bayi
+    Route::get('/bayi', BayiList::class)->name('admin_bayi_list');
+    Route::get('/bayi/add', BayiAE::class)->name('admin_bayi_add');
+    Route::get('/bayi/edit/{id}', BayiAE::class)->name('admin_bayi_edit');
+
+    // *** Pemeriksaan
+    Route::get('/pemeriksaan', PemeriksaanList::class)->name('admin_pemeriksaan_list');
+    Route::get('/pemeriksaan/add', PemeriksaanAE::class)->name('admin_pemeriksaan_add');
+    Route::get('/pemeriksaan/edit/{id}', PemeriksaanAE::class)->name('admin_pemeriksaan_edit');
 });

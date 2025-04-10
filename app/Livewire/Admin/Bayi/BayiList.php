@@ -27,7 +27,8 @@ class BayiList extends Component
     public function readData()
     {
         $data = BayiModel::search($this->katakunci)
-                ->latest('created_at')
+                ->joinTable()
+                ->latest('tbl_bayi.created_at')
                 ->paginate(20);
 
         return $data;

@@ -35,8 +35,8 @@ return new class extends Migration
             // *** data ibu hamil
             $table->integer('hamil_ke')->nullable()->default(0);
             $table->integer('minggu_ke')->nullable()->default(0);
-            $table->integer('bb')->nullable()->default(0);
-            $table->integer('lila')->nullable()->comment('lingkar lengan atas')->default(0);
+            $table->decimal('bb')->nullable()->default(0);
+            $table->decimal('lila')->nullable()->comment('lingkar lengan atas')->default(0);
             $table->string('tekanan_darah', 50)->nullable();
             $table->string('nama_suami', 225)->nullable();
             $table->timestamps();
@@ -48,8 +48,8 @@ return new class extends Migration
             $table->uuid('kodepasien');
             $table->string('namabayi', 225);
             $table->integer('anakke')->default(1);
-            $table->integer('tinggibadan')->default(1);
-            $table->integer('beratbadan')->default(1);
+            $table->decimal('tinggibadan')->default(1);
+            $table->decimal('beratbadan')->default(1);
             $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
             $table->date('tgl_lahir');
             $table->date('tgl_bersalin')->nullable();
@@ -68,15 +68,14 @@ return new class extends Migration
             $table->date('tgl_periksa');
 
             // *** BUMIL
-            $table->integer('is_kelas_bumil')->nullable()->default(0);
-            $table->integer('is_rujuk')->nullable()->default(0)->comment('Rujuk Pustu/Puskesmas/Rumah Sakit');
-            $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');
+            $table->integer('periksa_hamil_ke')->nullable()->default(0);
+            $table->integer('periksa_minggu_ke')->nullable()->default(0);
 
             // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
-            $table->integer('bb')->nullable()->default(0);
+            $table->integer('periksa_bb')->nullable()->default(0);
             $table->integer('is_sesuai_kurva_bb')->nullable()->default(0);
-            $table->integer('lila')->nullable()->default(0);
-            $table->string('tekanan_darah', 50)->nullable();
+            $table->integer('periksa_lila')->nullable()->default(0);
+            $table->string('periksa_tekanan_darah', 50)->nullable();
             $table->integer('is_sesuai_kurva_tekanan_darah')->nullable()->default(0);
 
             // ** Skrining TBC
@@ -93,9 +92,16 @@ return new class extends Migration
             $table->text('mt_bumil')->nullable();
             $table->integer('konsumsi_mt_bumil')->nullable()->comment("1 = setiap hari, 0 = tidak setiap hari");
 
+            // *** Kelas Ibu Hamil
+            $table->integer('is_kelas_bumil')->nullable()->default(0);
+            $table->integer('is_rujuk')->nullable()->default(0)->comment('Rujuk Pustu/Puskesmas/Rumah Sakit');
+            $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');
+
             // *** NIFAS
 
             // ** Pemberian Vit A, Menyusui dan KB
+            $table->integer('periksa_bb_bayi')->nullable()->default(0);
+            $table->integer('periksa_tinggi_badan')->nullable()->default(0);
             $table->integer('is_beri_vit_a')->nullable()->default(0);
             $table->integer('jml_tablet_vit_a')->nullable()->default(0);
             $table->integer('is_konsumsi_vit_a')->nullable()->default(0);
