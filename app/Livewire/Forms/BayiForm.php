@@ -31,7 +31,6 @@ class BayiForm extends Form
     public function rules()
     {
         return [
-            'kodebayi' => 'required',
             'kodepasien' => 'required',
             'namabayi' => 'required',
             'anakke' => 'required',

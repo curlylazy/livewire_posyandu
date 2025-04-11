@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PemeriksaanModel;
 use App\Models\PesanDTModel;
 use App\Models\PesanHDModel;
 use Illuminate\Http\Request;
@@ -12,33 +13,37 @@ use Barryvdh\DomPDF\Facade\Pdf as DomPdf;
 
 class PdfController extends Controller
 {
-    // *** Spatie
-    public function cetak($id)
-    {
-        $kode = Crypt::decrypt($id);
-        $dataPesanHd = PesanHDModel::joinTable()->searchByNoInvoice($kode)->first();
-        $dataPesanDt = PesanDTModel::joinTable()->searchKodePesan($dataPesanHd->kodepesanhd)->get();
-
-        return Pdf::view('pdf.po', [
-                'dataPesanHd' => $dataPesanHd,
-                'dataPesanDt' => $dataPesanDt,
-            ])
-            // ->landscape()
-            ->format(Format::A4)
-            ->name('invoice-2023-04-10.pdf');
-    }
-
     // *** dompdf
-    public function cetak_po($id)
+    public function cetak_pemeriksaan(Request $request)
     {
-        $kode = Crypt::decrypt($id);
-        $dataPesanHd = PesanHDModel::joinTable()->searchByNoInvoice($kode)->first();
-        $dataPesanDt = PesanDTModel::joinTable()->searchKodePesan($dataPesanHd->kodepesanhd)->get();
+        $katakunci = $request->query('katakunci');
+        $bulan = $request->query('bulan');
+        $tahun = $request->query('tahun');
+        $kategori_periksa = $request->query('kategori_periksa');
 
-        return DomPdf::loadView('pdf.purchase_order', [
-                'dataPesanHd' => $dataPesanHd,
-                'dataPesanDt' => $dataPesanDt,
-            ])->stream();
+        if($kategori_periksa == "bumil"){
+            $pageTitle = "Laporan Pemeriksaan Ibu Hamil";
+        }
+
+        if($kategori_periksa == "nifas"){
+            $pageTitle = "Laporan Pemeriksaan Nifas";
+        }
+
+        $pagename = "pemeriksaan";
+        $dataRows = PemeriksaanModel::joinTable()
+                ->search($katakunci)
+                ->searchByMonthYear($bulan, $tahun)
+                ->searchByKategoriPeriksa($kategori_periksa)
+                ->get();
+
+
+        return DomPdf::loadView("pdf.$pagename", [
+            'pageTitle' => $pageTitle,
+            'dataRows' => $dataRows,
+            'kategori_periksa' => $kategori_periksa,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ])->setPaper('a4', 'landscape')->stream();
     }
 
 }

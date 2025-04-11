@@ -93,7 +93,7 @@ class PemeriksaanAE extends Component
         $this->dispatch('close-modal', namamodal : 'modalBayi');
     }
 
-    public function pilihBayi()
+    public function onClickPilihBayi()
     {
         if(empty($this->form->kodepasien)) {
             $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian pilih anaknya', icon: 'warning');
@@ -108,7 +108,7 @@ class PemeriksaanAE extends Component
         $this->dispatch('open-modal', namamodal : 'modalBayi');
     }
 
-    public function pilihPasien()
+    public function onClickPilihPasien()
     {
         if($this->isEdit) {
             $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama pasien lagi ya!', icon: 'warning');
@@ -116,6 +116,16 @@ class PemeriksaanAE extends Component
         }
 
         $this->dispatch('open-modal', namamodal : 'modalPasien');
+    }
+
+    public function onClickBayiAdd()
+    {
+        if(empty($this->form->kodepasien)) {
+            $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian bisa menambahkan data bayi', icon: 'warning');
+            return;
+        }
+
+        $this->dispatch('open-modal', namamodal : 'modalBayiAdd');
     }
 
     public function render()

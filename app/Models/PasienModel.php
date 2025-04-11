@@ -36,4 +36,11 @@ class PasienModel extends Model
             $query->where('tbl_pasien.kategoripasien', '=', $kategoripasien);
         }
     }
+
+    public function scopeSearchByNik(Builder $query, $nik): void
+    {
+        if(!empty($nik)) {
+            $query->where('tbl_pasien.nik', '=', $nik);
+        }
+    }
 }

@@ -16,6 +16,7 @@ use App\Livewire\Admin\Blog\BlogAE;
 use App\Livewire\Admin\Blog\BlogList;
 use App\Livewire\Admin\Galeri\GaleriAE;
 use App\Livewire\Admin\Galeri\GaleriList;
+use App\Livewire\Admin\Laporan\LapPemeriksaan;
 use App\Livewire\Admin\Package\PackageAE;
 use App\Livewire\Admin\package\PackageList;
 use App\Livewire\Admin\Pasien\PasienAE;
@@ -43,7 +44,7 @@ Route::get('/send-mail',function() {
 });
 
 // *** pdf
-Route::get('cetak/{id}', [PdfController::class, 'cetak_po'])->name('cetakpdf');
+Route::get('cetak/pemeriksaan', [PdfController::class, 'cetak_pemeriksaan'])->name('cetak_pemeriksaan');
 
 // *** front
 Route::get('/', FrontDashboard::class)->name('dashboard');
@@ -80,4 +81,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/pemeriksaan', PemeriksaanList::class)->name('admin_pemeriksaan_list');
     Route::get('/pemeriksaan/add', PemeriksaanAE::class)->name('admin_pemeriksaan_add');
     Route::get('/pemeriksaan/edit/{id}', PemeriksaanAE::class)->name('admin_pemeriksaan_edit');
+
+    // *** Laporan
+    Route::get('/laporan/pemeriksaan', LapPemeriksaan::class)->name('admin_laporan_pemeriksaan');
 });

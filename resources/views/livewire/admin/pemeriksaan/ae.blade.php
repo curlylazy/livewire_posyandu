@@ -12,10 +12,24 @@
                 flatpickr(".date", { dateFormat: "Y-m-d", disableMobile: "true" });
             });
 
+            $wire.on('confirm-save', (e) => {
+                Swal.fire({
+                    title: 'Simpan Data',
+                    text: `Lanjutkan simpan data pemeriksaan ?`,
+                    icon: "question",
+                    showCancelButton: true,
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $wire.save();
+                    }
+                });
+            });
+
         </script>
     @endscript
 
     <livewire:partial.modal-add-pasien :kategori_periksa="$kategori_periksa"/>
+    <livewire:partial.modal-add-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
     <livewire:partial.modal-pasien />
     <livewire:partial.modal-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
 
@@ -36,16 +50,18 @@
         <div class="card-body">
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
 
-            <form wire:submit="save">
+            <form>
 
                 <div class="row g-2">
 
-                    <div class="col-12" x-show="!$wire.isEdit">
-                        <div class="d-flex gap-2">
-                            <button type="button" class="btn btn-primary" wire:click='$dispatch("open-modal", { namamodal: "modalPasienAdd" })'><i class="fas fa-plus"></i> Tambah Pasien</button>
-                            <button type="button" x-show="$wire.kategori_periksa == 'nifas'" class="btn btn-primary"><i class="fas fa-plus"></i> Tambah Bayi</button>
+                    @if(!$isEdit)
+                        <div class="col-12">
+                            <div class="d-flex gap-2">
+                                <button type="button" class="btn btn-primary" wire:click='$dispatch("open-modal", { namamodal: "modalPasienAdd" })'><i class="fas fa-female"></i> Tambah Pasien</button>
+                                <button type="button" x-show="$wire.kategori_periksa == 'nifas'" class="btn btn-primary" wire:click='onClickBayiAdd'><i class="fas fa-baby"></i> Tambah Bayi</button>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 
                     <div class="col-12 col-md-12">
                         <div class="input-group">
@@ -54,7 +70,7 @@
                                 <label for="form.namapasien">{{ ($kategori_periksa == "bumil") ? "Nama Pasien" : "Nama Ibu" }}</label>
                             </div>
                             <button x-show='$wire.form.kodepasien != ""' class="btn btn-outline-secondary" type="button" data-coreui-target="#modalPasien" data-coreui-toggle="modal"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" wire:click='pilihPasien'><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickPilihPasien'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
@@ -65,7 +81,7 @@
                                 <label for="form.namabayi">Nama Bayi</label>
                             </div>
                             <button x-show='$wire.form.kodebayi != ""' class="btn btn-outline-secondary" type="button"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" wire:click='pilihBayi'><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickPilihBayi'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
@@ -339,11 +355,11 @@
                             <h6 class="fw-normal">Apakah perlu konsumsi Vitamin A ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_konsumsi_vit_a" id="is_konsumsi_vit_a_ya" autocomplete="off" wire:model="form.is_konsumsi_vit_a">
+                                    <input type="radio" class="btn-check" name="is_konsumsi_vit_a" value="1" id="is_konsumsi_vit_a_ya" autocomplete="off" wire:model="form.is_konsumsi_vit_a">
                                     <label class="btn" for="is_konsumsi_vit_a_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_konsumsi_vit_a" id="is_konsumsi_vit_a_tidak" autocomplete="off" wire:model="form.is_konsumsi_vit_a">
+                                    <input type="radio" class="btn-check" name="is_konsumsi_vit_a" value="0" id="is_konsumsi_vit_a_tidak" autocomplete="off" wire:model="form.is_konsumsi_vit_a">
                                     <label class="btn" for="is_konsumsi_vit_a_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -354,11 +370,11 @@
                             <h6 class="fw-normal">Apakah ibu menyusui ?</h6>
                             <div class="d-flex gap-2">
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_menyusui" id="is_menyusui_ya" autocomplete="off" wire:model="form.is_menyusui">
+                                    <input type="radio" class="btn-check" name="is_menyusui" value="1" id="is_menyusui_ya" autocomplete="off" wire:model="form.is_menyusui">
                                     <label class="btn" for="is_menyusui_ya">Iya</label>
                                 </div>
                                 <div>
-                                    <input type="radio" class="btn-check" name="is_menyusui" id="is_menyusui_tidak" autocomplete="off" wire:model="form.is_menyusui">
+                                    <input type="radio" class="btn-check" name="is_menyusui" value="0" id="is_menyusui_tidak" autocomplete="off" wire:model="form.is_menyusui">
                                     <label class="btn" for="is_menyusui_tidak">Tidak</label>
                                 </div>
                             </div>
@@ -369,7 +385,7 @@
 
                 <div class="d-flex mt-3 gap-2">
                     <a href="{{ url("admin/$pageName?kategori_periksa=$kategori_periksa") }}" class="btn btn-secondary" type="button" wire:navigate><i class="fas fa-arrow-left"></i></a>
-                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Simpan</button>
+                    <button type="button" class="btn btn-primary" wire:click='$dispatch("confirm-save")'><i class="fas fa-save"></i> Simpan</button>
                 </div>
 
             </form>

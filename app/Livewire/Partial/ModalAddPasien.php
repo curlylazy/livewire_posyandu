@@ -7,6 +7,7 @@ use App\Models\PasienModel;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
+use Faker\Factory as Faker;
 
 class ModalAddPasien extends Component
 {
@@ -25,13 +26,28 @@ class ModalAddPasien extends Component
         {
             $this->form->kategoripasien = "nifas";
         }
+
+        $faker = Faker::create('id_ID');
+        $this->form->nik = $faker->nik();
+        $this->form->namapasien = $faker->name(gender: "female");
+        $this->form->nama_suami = $faker->name(gender: "male");
+        $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
+        $this->form->alamat = $faker->address();
     }
 
     public function save()
     {
+        // *** cek apakah nik sudah terpakai
+        $isExistsNik = PasienModel::searchByNik($this->form->nik)->exists();
+        if($isExistsNik) {
+            $this->dispatch('notif', message : 'NIK yang diinputkan ternyata sudah ada nih di database, coba cek kembali ya NIK yang kamu gunakan', icon: 'warning');
+            return;
+        }
+
         $kodepasien = $this->form->store();
         $data = PasienModel::find($kodepasien);
         $this->dispatch('on-selectpasien', data: json_encode($data));
+        $this->dispatch('close-modal', namamodal : 'modalPasienAdd');
     }
 
     public function render()
@@ -76,6 +92,19 @@ class ModalAddPasien extends Component
                                         <div class="form-floating">
                                             <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="">
                                             <label for="form.tgl_lahir">Tanggal Lahir</label>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="hamil_ke" wire:model='form.hamil_ke'>
+                                            <label for="hamil_ke">Hamil Ke</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-6">
+                                        <div class="form-floating">
+                                            <input type="text" class="form-control" id="minggu_ke" wire:model='form.minggu_ke'>
+                                            <label for="minggu_ke">Minggu Ke</label>
                                         </div>
                                     </div>
 

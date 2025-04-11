@@ -95,13 +95,13 @@
 
             <li class="nav-title">Laporan</li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/laporan/pemeriksaan?kategori_periksa=bumil") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">lab_profile</span>
                     Lap Periksa Bumil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumil") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/laporan/pemeriksaan?kategori_periksa=nifas") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">lab_profile</span>
                     Lap Periksa Nifas
                 </a>
@@ -138,7 +138,7 @@
                 </ul>
                 <ul class="header-nav mx-auto">
                     <li class="nav-item d-lg-none">
-                        <span class="fw-bold">{{ $pageTitle ?? "KSPAN" }}</span>
+                        <span class="fw-bold">{{ $pageTitle ?? "POSYANDU" }}</span>
                     </li>
                     {{-- <li class="nav-item"><a class="nav-link" href="#">
                         <svg class="icon icon-lg">

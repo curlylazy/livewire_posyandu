@@ -20,7 +20,6 @@ class IDateTime
             $text .= $interval->d . " hari ";
 
         return $text;
-
     }
 
     public static function formatDate($date, $isoFormat = "DD MMMM Y")

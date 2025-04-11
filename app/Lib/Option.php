@@ -3,6 +3,7 @@
 namespace App\Lib;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Carbon;
 
 class Option
 {
@@ -106,12 +107,42 @@ class Option
 		return $res;
 	}
 
+    public static function bulan()
+    {
+        $res = collect();
+        for ($i = 1; $i <= 12; $i++) {
+            $res->push(['value' => Carbon::create()->month($i)->format('m'), 'name' => Carbon::create()->month($i)->format('F')]);
+        }
+        return $res;
+    }
+
+    public static function tahun()
+    {
+        $res = collect();
+        for ($i = 2020; $i <= date('Y'); $i++) {
+            $res->push(['value' => $i, 'name' => $i]);
+        }
+        return $res;
+    }
+
 	public static function getOptionName($name, $value)
 	{
         $res = "";
         if($name == self::$optNameKategori)
         {
             $res = self::kategoriDokumen()->firstWhere('value', $value)['name'];
+        }
+
+		return $res;
+	}
+
+	public static function getSesuaiAtauTidak($value)
+	{
+        $res = "";
+        if($value == 0) {
+            $res = "Tidak";
+        } else {
+            $res = "Sesuai";
         }
 
 		return $res;

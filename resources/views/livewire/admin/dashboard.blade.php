@@ -46,14 +46,14 @@
             <x-slot:info>{{ $jmlBayi }} Total Bayi</x-slot>
         </x-partials.dashboard.infomenu>
         <x-partials.dashboard.infomenu>
-            <x-slot:title>Pemiksaan Tahun Ini</x-slot>
-            <x-slot:icon>image</x-slot>
-            <x-slot:info>{{ $jmlPeriksaTahunIni }} {{ date('Y') }}</x-slot>
+            <x-slot:title>Pemiksaan Tahun {{ date('Y') }}</x-slot>
+            <x-slot:icon>stethoscope</x-slot>
+            <x-slot:info>{{ $jmlPeriksaTahunIni }} Pemeriksaan</x-slot>
         </x-partials.dashboard.infomenu>
         <x-partials.dashboard.infomenu>
-            <x-slot:title>Pemiksaan Bulan Ini</x-slot>
-            <x-slot:icon>image</x-slot>
-            <x-slot:info>{{ $jmlPeriksaBulanIni }} {{ Carbon\Carbon::now()->translatedFormat('F') }}</x-slot>
+            <x-slot:title>Pemiksaan Bulan {{ Carbon\Carbon::now()->translatedFormat('F') }}</x-slot>
+            <x-slot:icon>stethoscope</x-slot>
+            <x-slot:info>{{ $jmlPeriksaBulanIni }} Pemeriksaan</x-slot>
         </x-partials.dashboard.infomenu>
     </div>
 

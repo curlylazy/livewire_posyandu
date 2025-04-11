@@ -138,7 +138,7 @@ class PemeriksaanForm extends Form
         $data = json_decode($data);
         $this->kodebayi = $data->kodebayi;
         $this->namabayi = $data->namabayi;
-        $this->periksa_bb_bayi = $data->bb;
+        $this->periksa_bb_bayi = $data->beratbadan;
         $this->periksa_tinggi_badan = $data->tinggibadan;
     }
 
