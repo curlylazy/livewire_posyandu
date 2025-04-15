@@ -34,102 +34,104 @@
                 <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
             </div>
 
-            {{-- *** Large Device --}}
-            <x-partials.viewlarge>
-                <div class="table-responsive">
-                    <table class="table table-striped">
+            <x-partials.containerdata :dataRows="$dataRow">
+                {{-- *** Large Device --}}
+                <x-partials.viewlarge>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            @if($kategori_periksa == 'nifas')
+                                <thead>
+                                    <tr>
+                                        <th scope="col">NIK</th>
+                                        <th scope="col">Nama Ibu</th>
+                                        <th scope="col">Nama Bayi</th>
+                                        <th scope="col">Tanggal Lahir</th>
+                                        <th scope="col">Umur Bayi</th>
+                                        <th scope="col">Tanggal Periksa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataRow as $row)
+                                        <tr role="button" wire:click='selectData({{ $row }})'>
+                                            <td>{{ $row->nik }}</td>
+                                            <td>{{ $row->namapasien }}</td>
+                                            <td>{{ $row->namabayi }}</td>
+                                            <td>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
+                                            <td>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
+                                            <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            @else
+                                <thead>
+                                    <tr>
+                                        <th scope="col">NIK</th>
+                                        <th scope="col">Nama Ibu</th>
+                                        <th scope="col">BB</th>
+                                        <th scope="col">LILA</th>
+                                        <th scope="col">Tanggal Lahir</th>
+                                        <th scope="col">Umur</th>
+                                        <th scope="col">Tanggal Periksa</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($dataRow as $row)
+                                        <tr role="button" wire:click='selectData({{ $row }})'>
+                                            <td>{{ $row->nik }}</td>
+                                            <td>{{ $row->namapasien }}</td>
+                                            <td>{{ Number::format($row->periksa_bb) }} kg</td>
+                                            <td>{{ Number::format($row->periksa_lila) }} cm</td>
+                                            <td>{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</td>
+                                            <td>{{ IDateTime::dateDiff($row->tgl_lahir_pasien) }} Tahun</td>
+                                            <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            @endif
+                        </table>
+                    </div>
+                </x-partials.viewlarge>
+
+                {{-- *** Mobile --}}
+                <x-partials.viewsmall>
+                    <div class="row g-2">
+
                         @if($kategori_periksa == 'nifas')
-                            <thead>
-                                <tr>
-                                    <th scope="col">NIK</th>
-                                    <th scope="col">Nama Ibu</th>
-                                    <th scope="col">Nama Bayi</th>
-                                    <th scope="col">Tanggal Lahir</th>
-                                    <th scope="col">Umur Bayi</th>
-                                    <th scope="col">Tanggal Periksa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($dataRow as $row)
-                                    <tr role="button" wire:click='selectData({{ $row }})'>
-                                        <td>{{ $row->nik }}</td>
-                                        <td>{{ $row->namapasien }}</td>
-                                        <td>{{ $row->namabayi }}</td>
-                                        <td>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
-                                        <td>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
-                                        <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @foreach ($dataRow as $row)
+                                <div class="col-12 col-md-4">
+                                    <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                                        <div class="card-body px-2 py-2">
+                                            <div class="h5 mb-1">{{ $row->namabayi }}</div>
+                                            <div>Ibu {{ $row->namapasien }}</div>
+                                            <div>{{ $row->namabayi }}</div>
+                                            <div>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</div>
+                                            <div>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</div>
+                                            <div>{{ IDateTime::formatDate($row->tgl_periksa) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         @else
-                            <thead>
-                                <tr>
-                                    <th scope="col">NIK</th>
-                                    <th scope="col">Nama Ibu</th>
-                                    <th scope="col">BB</th>
-                                    <th scope="col">LILA</th>
-                                    <th scope="col">Tanggal Lahir</th>
-                                    <th scope="col">Umur</th>
-                                    <th scope="col">Tanggal Periksa</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($dataRow as $row)
-                                    <tr role="button" wire:click='selectData({{ $row }})'>
-                                        <td>{{ $row->nik }}</td>
-                                        <td>{{ $row->namapasien }}</td>
-                                        <td>{{ Number::format($row->periksa_bb) }} kg</td>
-                                        <td>{{ Number::format($row->periksa_lila) }} cm</td>
-                                        <td>{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</td>
-                                        <td>{{ IDateTime::dateDiff($row->tgl_lahir_pasien) }} Tahun</td>
-                                        <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+                            @foreach ($dataRow as $row)
+                                <div class="col-12 col-md-4">
+                                    <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                                        <div class="card-body px-2 py-2">
+                                            <div class="h5 mb-1">{{ $row->namapasien }}</div>
+                                            <div>{{ $row->nik }}</div>
+                                            <div>BB : {{ Number::format($row->periksa_bb) }} kg</div>
+                                            <div>LILA : {{ Number::format($row->periksa_lila) }} cm</div>
+                                            <div>Tgl Lahir :{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</div>
+                                            <div>Umur : {{ IDateTime::dateDiff($row->tgl_lahir_pasien) }} Tahun</div>
+                                            <div>Periksa : {{ IDateTime::formatDate($row->tgl_periksa) }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         @endif
-                    </table>
-                </div>
-            </x-partials.viewlarge>
 
-            {{-- *** Mobile --}}
-            <x-partials.viewsmall>
-                <div class="row g-2">
-
-                    @if($kategori_periksa == 'nifas')
-                        @foreach ($dataRow as $row)
-                            <div class="col-12 col-md-4">
-                                <div class="card" role="button" wire:click='selectData({{ $row }})'>
-                                    <div class="card-body px-2 py-2">
-                                        <div class="h5 mb-1">{{ $row->namabayi }}</div>
-                                        <div>Ibu {{ $row->namapasien }}</div>
-                                        <div>{{ $row->namabayi }}</div>
-                                        <div>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</div>
-                                        <div>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</div>
-                                        <div>{{ IDateTime::formatDate($row->tgl_periksa) }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @else
-                        @foreach ($dataRow as $row)
-                            <div class="col-12 col-md-4">
-                                <div class="card" role="button" wire:click='selectData({{ $row }})'>
-                                    <div class="card-body px-2 py-2">
-                                        <div class="h5 mb-1">{{ $row->namapasien }}</div>
-                                        <div>{{ $row->nik }}</div>
-                                        <div>BB : {{ Number::format($row->periksa_bb) }} kg</div>
-                                        <div>LILA : {{ Number::format($row->periksa_lila) }} cm</div>
-                                        <div>Tgl Lahir :{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</div>
-                                        <div>Umur : {{ IDateTime::dateDiff($row->tgl_lahir_pasien) }} Tahun</div>
-                                        <div>Periksa : {{ IDateTime::formatDate($row->tgl_periksa) }}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
-                    @endif
-
-                </div>
-            </x-partials.viewsmall>
+                    </div>
+                </x-partials.viewsmall>
+            </x-partials.containerdata>
 
             {{-- *** Modal Selected --}}
             <x-partials.modalselected>

@@ -1,13 +1,24 @@
+@php
+    $pageTitle = "font-weight: bold; font-size: 15pt; width: 100px";
+    $pageSubTitle = "font-weight: bold; font-size: 12pt; width: 100px";
+    $heading = "font-weight: bold; font-size: 15pt; text-align: center; background-color: #FFB6C1";
+    $rowSize200 = "font-weight: bold; width: 200px;";
+    $rowSize250 = "font-weight: bold; width: 250px;";
+    $rowSize300 = "font-weight: bold; width: 300px;";
+    $rowSize350 = "font-weight: bold; width: 350px;";
+    $rowSize400 = "font-weight: bold; width: 400px;";
+@endphp
+
 <table>
     <thead>
         <tr>
-            <th style="font-weight: bold; font-size: 15pt; width: 100px;">{{ $page_title }}</th>
+            <th style="{!! $pageTitle !!}" colspan="2">{{ $page_title }}</th>
         </tr>
         <tr>
-            <th style="font-weight: bold; font-size: 12pt; width: 100px;">Tahun : {{ $tahun }}</th>
+            <th style="{!! $pageSubTitle !!}" colspan="2">Tahun : {{ $tahun }}</th>
         </tr>
         <tr>
-            <th style="font-weight: bold; font-size: 12pt; width: 100px;">Bulan : {{ $bulan }}</th>
+            <th style="{!! $pageSubTitle !!}" colspan="2">Bulan : {{ $bulan }}</th>
         </tr>
         <tr>
 
@@ -19,31 +30,36 @@
     @else
         <thead>
             <tr>
-                <th style="font-weight: bold; font-size: 12pt; text-align: center" colspan="9">DATA</th>
-                <th style="font-weight: bold; font-size: 12pt; text-align: center" colspan="5">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
+                <th style="{!! $heading !!}" colspan="9">DATA</th>
+                <th style="{!! $heading !!}" colspan="5">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
+                <th style="{!! $heading !!}" colspan="4">Skrining TBC</th>
             </tr>
         </thead>
         <thead>
             <tr>
                 {{-- DATA --}}
-                <th style="font-weight: bold;">No</th>
-                <th style="font-weight: bold; width: 200px;">NIK</th>
-                <th style="font-weight: bold; width: 250px;">Nama Ibu</th>
-                <th style="font-weight: bold; width: 150px;">Tanggal Lahir</th>
-                <th style="font-weight: bold; width: 150px;">Umur</th>
-                <th style="font-weight: bold; width: 250px;">Alamat</th>
-                <th style="font-weight: bold; width: 200px;">No Hp</th>
-                <th style="font-weight: bold; width: 150px;">Hamil Ke</th>
-                <th style="font-weight: bold; width: 150px;">Minggu Ke</th>
+                <th style="font-weight: bold; height: 100px;">No</th>
+                <th style="{!! $rowSize200 !!}">NIK</th>
+                <th style="{!! $rowSize250 !!}">Nama Ibu</th>
+                <th style="{!! $rowSize200 !!}">Tanggal Lahir</th>
+                <th style="{!! $rowSize200 !!}">Umur</th>
+                <th style="{!! $rowSize250 !!}">Alamat</th>
+                <th style="{!! $rowSize200 !!}">No Hp</th>
+                <th style="{!! $rowSize200 !!}">Hamil Ke</th>
+                <th style="{!! $rowSize200 !!}">Minggu Ke</th>
 
                 {{-- *** Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
-                <th style="font-weight: bold; width: 150px;">Berat Badan (Kg)</th>
-                <th style="font-weight: bold; width: 200px;">Sesuai Kurva Buku KIA</th>
-                <th style="font-weight: bold; width: 150px;">LILA (cm)</th>
-                <th style="font-weight: bold; width: 150px;">Tekanan Darah</th>
-                <th style="font-weight: bold; width: 200px;">Sesuai Kurva Buku KIA</th>
+                <th style="{!! $rowSize200 !!}">Berat Badan (Kg)</th>
+                <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
+                <th style="{!! $rowSize200 !!}">LILA (cm)</th>
+                <th style="{!! $rowSize200 !!}">Tekanan Darah</th>
+                <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
 
                 {{-- *** Skrining TBC --}}
+                <th style="{!! $rowSize250 !!}">Batuk Terus Menerus</th>
+                <th style="{!! $rowSize300 !!}">Demam Lebih ≥2 minggu</th>
+                <th style="{!! $rowSize350 !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
+                <th style="{!! $rowSize350 !!}">Kontak Erat Dengan Pasien TBC</th>
             </tr>
         </thead>
         <tbody>

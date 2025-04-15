@@ -6,9 +6,13 @@ use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\WithTitle;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatting
+class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatting, WithEvents
 {
     protected $data;
     protected $bulan;
@@ -43,6 +47,28 @@ class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatti
     {
         return [
             'B' => NumberFormat::FORMAT_NUMBER,
+        ];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                $event->sheet->getDelegate()->getStyle('A6:S6')
+                        ->getAlignment()
+                        ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+                        ->setVertical(Alignment::VERTICAL_CENTER);
+            },
+
+            AfterSheet::class => function(AfterSheet $event) {
+                $drawing = new Drawing();
+                $drawing->setName('Watermark');
+                $drawing->setDescription('Watermark Laporan');
+                $drawing->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
+                $drawing->setHeight(500); // Tinggi gambar dalam pixel
+                $drawing->setCoordinates('F20'); // Letak gambar (sel awal)
+                $drawing->setWorksheet($event->sheet->getDelegate());
+            },
         ];
     }
 }

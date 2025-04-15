@@ -34,33 +34,35 @@
                 <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
             </div>
 
-            {{-- *** Large Device --}}
-            <x-partials.viewlarge>
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th scope="col">NIK</th>
-                                <th scope="col">Nama</th>
-                                <th scope="col">Kategori</th>
-                                <th scope="col">Tanggal Lahir</th>
-                                <th scope="col">Umur</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($dataRow as $row)
-                                <tr role="button" wire:click='selectData({{ $row }})'>
-                                    <td>{{ $row->nik }}</td>
-                                    <td>{{ $row->namapasien }}</td>
-                                    <td>{{ Str::title($row->kategoripasien) }}</td>
-                                    <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
-                                    <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
+            <x-partials.containerdata :dataRows="$dataRow">
+                {{-- *** Large Device --}}
+                <x-partials.viewlarge>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th scope="col">NIK</th>
+                                    <th scope="col">Nama</th>
+                                    <th scope="col">Kategori</th>
+                                    <th scope="col">Tanggal Lahir</th>
+                                    <th scope="col">Umur</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </x-partials.viewlarge>
+                            </thead>
+                            <tbody>
+                                @foreach ($dataRow as $row)
+                                    <tr role="button" wire:click='selectData({{ $row }})'>
+                                        <td>{{ $row->nik }}</td>
+                                        <td>{{ $row->namapasien }}</td>
+                                        <td>{{ Str::title($row->kategoripasien) }}</td>
+                                        <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
+                                        <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </x-partials.viewlarge>
+            </x-partials.containerdata>
 
             {{-- *** Mobile --}}
             <x-partials.viewsmall>
