@@ -298,12 +298,12 @@
                 </div>
 
                 {{-- Kelas Ibu Hamil --}}
-                <div class="row mt-1 g-2" x-show="$wire.kategori_periksa == 'bumil'">
+                <div class="row mt-1 g-2">
                     <div class="col-12">
                         <hr />
-                        <h6>Kelas Ibu Hamil</h6>
+                        <h6>{{ $kategori_periksa == 'bumil' ? 'Kelas Ibu Hamil' : 'Edukasi' }}</h6>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12 col-md-6" x-show="$wire.kategori_periksa == 'bumil'">
                         <div class="form-floating">
                             <select type="text" class="form-control" id="form.is_kelas_bumil" wire:model='form.is_kelas_bumil'>
                                 <option value="0">Tidak</option>
@@ -312,7 +312,7 @@
                             <label for="form.is_kelas_bumil">Apakah Mengikuti Kelas Ibu Hamil ?</label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                    <div class="col-12" x-bind:class="$wire.kategori_periksa == 'bumil' ? 'col-md-6' : 'col-md-12'">
                         <div class="form-floating">
                             <select type="text" class="form-control" id="form.is_rujuk" wire:model='form.is_rujuk'>
                                 <option value="0">Tidak</option>
@@ -321,7 +321,7 @@
                             <label for="form.is_rujuk">Rujuk Pustu / Puskesmas / Rumah Sakit ?</label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-12" x-bind:class="$wire.form.is_kelas_bumil == 0 ? 'd-none' : ''">
+                    <div class="col-12 col-md-12" x-bind:class="$wire.form.is_kelas_bumil == 0 && $wire.kategori_periksa == 'bumil' ? 'd-none' : ''">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.edukasi" wire:model='form.edukasi' placeholder="">
                             <label for="form.edukasi">Edukasi yang Diberikan</label>

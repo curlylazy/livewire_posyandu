@@ -22,7 +22,9 @@ use App\Livewire\Admin\package\PackageList;
 use App\Livewire\Admin\Pasien\PasienAE;
 use App\Livewire\Admin\Pasien\PasienList;
 use App\Livewire\Admin\Pemeriksaan\PemeriksaanAE;
+use App\Livewire\Admin\Pemeriksaan\PemeriksaanDetail;
 use App\Livewire\Admin\Pemeriksaan\PemeriksaanList;
+use App\Livewire\Admin\Pemeriksaan\PemeriksaanRiwayat;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -79,6 +81,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // *** Pemeriksaan
     Route::get('/pemeriksaan', PemeriksaanList::class)->name('admin_pemeriksaan_list');
+    Route::get('/pemeriksaan/riwayat', PemeriksaanRiwayat::class)->name('admin_pemeriksaan_riwayat');
+    Route::get('/pemeriksaan/detail/{id}', PemeriksaanDetail::class)->name('admin_pemeriksaan_detail');
     Route::get('/pemeriksaan/add', PemeriksaanAE::class)->name('admin_pemeriksaan_add');
     Route::get('/pemeriksaan/edit/{id}', PemeriksaanAE::class)->name('admin_pemeriksaan_edit');
 

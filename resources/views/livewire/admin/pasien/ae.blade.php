@@ -121,6 +121,22 @@
                             <label for="tekanan_darah">Tekanan Darah</label>
                         </div>
                     </div>
+
+                    <div class="col-12 col-md-6">
+                        <div class="border rounded-3 p-2">
+                            <h6 class="fw-normal">Status Aktif Pasien</h6>
+                            <div class="d-flex gap-2">
+                                <div>
+                                    <input type="radio" class="btn-check" name="status" value="1" id="status_ya" autocomplete="off" wire:model="form.status">
+                                    <label class="btn" for="status_ya">Aktif</label>
+                                </div>
+                                <div>
+                                    <input type="radio" class="btn-check" name="status" value="0" id="status_tidak" autocomplete="off" wire:model="form.status">
+                                    <label class="btn" for="status_tidak">Tidak Aktif</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-flex mt-3 gap-2">

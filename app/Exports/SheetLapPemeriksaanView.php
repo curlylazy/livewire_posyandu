@@ -53,22 +53,61 @@ class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatti
     public function registerEvents(): array
     {
         return [
-            AfterSheet::class => function(AfterSheet $event) {
-                $event->sheet->getDelegate()->getStyle('A6:S6')
-                        ->getAlignment()
-                        ->setHorizontal(Alignment::HORIZONTAL_CENTER)
-                        ->setVertical(Alignment::VERTICAL_CENTER);
-            },
+            AfterSheet::class => function (AfterSheet $event) {
+                $sheet = $event->sheet->getDelegate();
+                $range = 'A6:' . $sheet->getHighestColumn() . $sheet->getHighestRow();
+                $sheet->getStyle($range)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER)->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
-            AfterSheet::class => function(AfterSheet $event) {
+                $range = 'A5:' . $sheet->getHighestColumn() . $sheet->getHighestRow();
+                $sheet->getStyle($range)->getAlignment()->setVertical(Alignment::VERTICAL_CENTER);
+
                 $drawing = new Drawing();
                 $drawing->setName('Watermark');
                 $drawing->setDescription('Watermark Laporan');
                 $drawing->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
-                $drawing->setHeight(500); // Tinggi gambar dalam pixel
+                $drawing->setHeight(700); // Tinggi gambar dalam pixel
                 $drawing->setCoordinates('F20'); // Letak gambar (sel awal)
+                $drawing->setWorksheet($event->sheet->getDelegate());
+
+                $drawing = new Drawing();
+                $drawing->setName('Watermark');
+                $drawing->setDescription('Watermark Laporan');
+                $drawing->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
+                $drawing->setHeight(700); // Tinggi gambar dalam pixel
+                $drawing->setCoordinates('O20'); // Letak gambar (sel awal)
+                $drawing->setWorksheet($event->sheet->getDelegate());
+
+                $drawing = new Drawing();
+                $drawing->setName('Watermark');
+                $drawing->setDescription('Watermark Laporan');
+                $drawing->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
+                $drawing->setHeight(700); // Tinggi gambar dalam pixel
+                $drawing->setCoordinates('X20'); // Letak gambar (sel awal)
                 $drawing->setWorksheet($event->sheet->getDelegate());
             },
         ];
     }
+
+
+    // public function registerEvents(): array
+    // {
+    //     return [
+    //         AfterSheet::class => function(AfterSheet $event) {
+    //             $event->sheet->getDelegate()->getStyle('A6:AA6')
+    //                     ->getAlignment()
+    //                     ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+    //                     ->setVertical(Alignment::VERTICAL_CENTER);
+    //         },
+
+    //         AfterSheet::class => function(AfterSheet $event) {
+    //             $drawing = new Drawing();
+    //             $drawing->setName('Watermark');
+    //             $drawing->setDescription('Watermark Laporan');
+    //             $drawing->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
+    //             $drawing->setHeight(700); // Tinggi gambar dalam pixel
+    //             $drawing->setCoordinates('F20'); // Letak gambar (sel awal)
+    //             $drawing->setWorksheet($event->sheet->getDelegate());
+    //         },
+    //     ];
+    // }
 }

@@ -23,6 +23,7 @@ class ModalPasien extends Component
     public function dataPasien()
     {
         $data = PasienModel::search($this->katakunci)
+                ->searchByStatus(1)
                 ->paginate(10, pageName: 'pasien-page');
 
         return $data;

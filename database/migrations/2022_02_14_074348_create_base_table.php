@@ -39,6 +39,7 @@ return new class extends Migration
             $table->decimal('lila')->nullable()->comment('lingkar lengan atas')->default(0);
             $table->string('tekanan_darah', 50)->nullable();
             $table->string('nama_suami', 225)->nullable();
+            $table->integer('status')->default(1)->comment("0 = tidak aktif, 1 = aktif");
             $table->timestamps();
             $table->softDeletes();
         });

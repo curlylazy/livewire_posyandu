@@ -8,6 +8,7 @@ use Illuminate\Support\Carbon;
 class Option
 {
     public static $optNameKategori = "kategori";
+    public static $optNameCaraBersalin = "carabersalin";
 
 	public static function statusPesan()
 	{
@@ -132,6 +133,10 @@ class Option
         {
             $res = self::kategoriDokumen()->firstWhere('value', $value)['name'];
         }
+        elseif($name == self::$optNameCaraBersalin)
+        {
+            $res = self::caraBersalin()->firstWhere('value', $value)['name'];
+        }
 
 		return $res;
 	}
@@ -143,6 +148,30 @@ class Option
             $res = "Tidak";
         } else {
             $res = "Sesuai";
+        }
+
+		return $res;
+	}
+
+	public static function getYaAtauTidak($value)
+	{
+        $res = "";
+        if($value == 0) {
+            $res = "Tidak";
+        } else {
+            $res = "Ya";
+        }
+
+		return $res;
+	}
+
+	public static function getKonsumsiHarian($value)
+	{
+        $res = "";
+        if($value == 0) {
+            $res = "Tidak Setiap Hari";
+        } else {
+            $res = "Setiap Hari";
         }
 
 		return $res;

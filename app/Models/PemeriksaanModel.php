@@ -67,4 +67,14 @@ class PemeriksaanModel extends Model
                 ->whereYear('tbl_pemeriksaan.tgl_periksa', $year);
         }
     }
+
+    public function scopeSearchByKodePasien(Builder $query, $kodepasien): void
+    {
+        $query->where('tbl_pemeriksaan.kodepasien', $kodepasien);
+    }
+
+    public function scopeSearchByNIK(Builder $query, $nik): void
+    {
+        $query->where('tbl_pasien.nik', $nik);
+    }
 }

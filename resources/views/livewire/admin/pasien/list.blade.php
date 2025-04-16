@@ -46,6 +46,7 @@
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Umur</th>
+                                    <th scope="col">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -56,6 +57,7 @@
                                         <td>{{ Str::title($row->kategoripasien) }}</td>
                                         <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
                                         <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
+                                        <td class="{{ $status == 1 ? 'text-success' : 'text-danger' }} fw-bold">{{ $status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

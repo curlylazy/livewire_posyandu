@@ -27,6 +27,7 @@ class PasienForm extends Form
     public $lila = 0;
     public $tekanan_darah = 0;
     public $nama_suami = "";
+    public $status = 1;
 
     public function rules()
     {
@@ -64,6 +65,7 @@ class PasienForm extends Form
         $this->lila = $data->lila;
         $this->tekanan_darah = $data->tekanan_darah;
         $this->nama_suami = $data->nama_suami;
+        $this->status = $data->status;
     }
 
     public function prepare()

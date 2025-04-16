@@ -93,18 +93,25 @@ class LapPemeriksaan extends Component
 
     public function onClickExportExcel()
     {
-        $array = [
-            'kategori_periksa' => $this->kategori_periksa,
-            'katakunci' => $this->katakunci,
-            'bulan' => $this->bulan,
-            'tahun' => $this->tahun,
-        ];
+        try
+        {
+            $array = [
+                'kategori_periksa' => $this->kategori_periksa,
+                'katakunci' => $this->katakunci,
+                'bulan' => $this->bulan,
+                'tahun' => $this->tahun,
+            ];
 
-        return Excel::download(
-            new LapPemeriksaanMultiSheetExport(json_encode($array)),
-            'laporan_multi_sheet.xlsx',
-        );
+            $namafile = "Laporan Pemeriksaan $this->pageTitle Tahun $this->tahun.xlsx";
+            return Excel::download(
+                new LapPemeriksaanMultiSheetExport(json_encode($array)),
+                $namafile,
+            );
 
+        } catch (\Exception $e) {
+            $this->dispatch('notif', message: "gagal cetak laporan excel : ".$e->getMessage(), icon: "error");
+            return;
+        }
     }
 
     public function render()

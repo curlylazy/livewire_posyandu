@@ -35,6 +35,7 @@ class PasienSeeder extends Seeder
                 'lila' => $faker->randomFloat(20, 30, 35),
                 'tekanan_darah' => '',
                 'nama_suami' => $faker->name(gender: 'male'),
+                'status' => 1,
             ]);
         }
 
@@ -54,6 +55,7 @@ class PasienSeeder extends Seeder
                 'lila' => $faker->randomFloat(20, 30, 35),
                 'tekanan_darah' => '',
                 'nama_suami' => $faker->name(gender: 'male'),
+                'status' => 1,
             ]);
         }
     }
