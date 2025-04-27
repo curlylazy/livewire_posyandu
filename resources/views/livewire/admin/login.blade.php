@@ -39,7 +39,7 @@
                                 <p class="mb-4">{{ config('app.tagline') }}</p>
                             </div>
                         </div>
-                        <form wire:submit="login">
+                        <form>
                             <div class="form-group first">
                                 <label for="username">Username</label>
                                 <input type="text" class="form-control" id="username" wire:model='username' placeholder="Username Anda">
@@ -57,7 +57,7 @@
                                 </label>
                             </div>
 
-                            <input type="submit" value="Log In" class="btn btn-block btn-primary" style="background-color: #d22b69; border-color: #d22b69;">
+                            <button type="button" class="btn btn-block btn-primary" style="background-color: #d22b69; border-color: #d22b69;" wire:click='login'>Log In</button>
 
                         </form>
                     </div>
