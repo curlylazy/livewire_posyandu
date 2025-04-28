@@ -17,7 +17,7 @@ class PasienList extends Component
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "";
+    public $katakunci = "", $status = 1;
 
     public function mount()
     {
@@ -28,6 +28,7 @@ class PasienList extends Component
     {
         $data = PasienModel::search($this->katakunci)
                 ->latest('created_at')
+                ->searchByStatus($this->status)
                 ->paginate(20);
 
         return $data;

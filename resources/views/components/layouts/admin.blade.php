@@ -11,10 +11,11 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <meta name="description" content="Sistem Konveksi - Aplikasi Online Manajemen Konveksi">
+        <meta name="description" content="{{ config('app.webname') }} - {{ config('app.tagline') }}">
         <meta name="author" content="Balicoding.com">
         <meta name="keyword" content="">
         <title>{{ $title ?? 'Admin '.config('app.webname') }}</title>
+
 
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -31,7 +32,7 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
-        {{-- @vite('resources/js/app.js') --}}
+        @vite('resources/js/app.js')
 
     </head>
     <body>

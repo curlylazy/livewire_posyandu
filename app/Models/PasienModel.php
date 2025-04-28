@@ -46,7 +46,7 @@ class PasienModel extends Model
 
     public function scopeSearchByStatus(Builder $query, $status): void
     {
-        if(!empty($status)) {
+        if($status != "") {
             $query->where('tbl_pasien.status', '=', $status);
         }
     }

@@ -29,9 +29,30 @@
         <div class="card-body">
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
             <div class="mb-3">
-                <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
-                <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
+                <div class="d-flex flex-column gap-2">
+                    <div class="d-flex gap-1">
+                        <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
+                        <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
+                    </div>
+                    <div class="row g-2">
+                        <div class="col-12 col-md-8">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="katakunci" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
+                                <label for="katakunci">Katakunci</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select class="form-select" id="status" wire:model='status' wire:change='$commit'>
+                                    <option value="">Semua Pasien</option>
+                                    <option value="1">Aktif</option>
+                                    <option value="0">Tidak Aktif</option>
+                                </select>
+                                <label for="status">Status Pasien</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <x-partials.containerdata :dataRows="$dataRow">
@@ -46,7 +67,7 @@
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Umur</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col" x-show="$wire.status == ''">Status</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -57,7 +78,7 @@
                                         <td>{{ Str::title($row->kategoripasien) }}</td>
                                         <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
                                         <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
-                                        <td class="{{ $status == 1 ? 'text-success' : 'text-danger' }} fw-bold">{{ $status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
+                                        <td x-show="$wire.status == ''" class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }} fw-bold">{{ $row->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

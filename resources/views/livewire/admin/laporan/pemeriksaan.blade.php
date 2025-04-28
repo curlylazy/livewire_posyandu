@@ -93,7 +93,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($dataRow as $row)
-                                    <tr role="button" wire:click='selectData({{ $row }})'>
+                                    <tr role="button">
                                         <td>{{ $row->nik }}</td>
                                         <td>{{ $row->namapasien }}</td>
                                         <td>{{ $row->namabayi }}</td>
@@ -117,7 +117,7 @@
                             </thead>
                             <tbody>
                                 @foreach ($dataRow as $row)
-                                    <tr role="button" wire:click='selectData({{ $row }})'>
+                                    <tr role="button">
                                         <td>{{ $row->nik }}</td>
                                         <td>{{ $row->namapasien }}</td>
                                         <td>{{ Number::format($row->periksa_bb) }} kg</td>

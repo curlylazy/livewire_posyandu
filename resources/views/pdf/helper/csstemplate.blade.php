@@ -35,12 +35,12 @@
             Set a position in the page for your image
             This should center it vertically
         **/
-        bottom:   15cm;
-        left:     3cm;
+        bottom:   2cm;
+        left:     7cm;
 
         /** Change image dimensions**/
         width:    8cm;
-        height:   8cm;
+        /* height:   8cm; */
 
         /** Your watermark should be behind every content**/
         z-index:  -1000;

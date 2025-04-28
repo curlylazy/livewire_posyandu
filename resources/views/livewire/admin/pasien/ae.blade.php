@@ -90,13 +90,13 @@
                     </div>
 
                     {{-- *** tampil jika pasien adalah ibu hamil --}}
-                    <div class="col-md-4" x-show="$wire.form->kategoripasien == 'bumil'">
+                    <div class="col-md-4" x-show="$wire.form.kategoripasien == 'bumil'">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="hamil_ke" wire:model='form.hamil_ke' x-mask:dynamic="$money($input)">
                             <label for="hamil_ke">Hamil Ke ?</label>
                         </div>
                     </div>
-                    <div class="col-md-4" x-show="$wire.form->kategoripasien == 'bumil'">
+                    <div class="col-md-4" x-show="$wire.form.kategoripasien == 'bumil'">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="bulan_ke" wire:model='form.bulan_ke'>
                             <label for="bulan_ke">Bulan Ke ?</label>
@@ -105,13 +105,13 @@
 
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="bb" wire:model='form.bb' x-mask:dynamic="$money($input)">
+                            <input type="number" class="form-control" id="bb" wire:model='form.bb' x-mask:dynamic="$money($input)">
                             <label for="bb">Berat Badan</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="lila" wire:model='form.lila' x-mask:dynamic="$money($input)">
+                            <input type="number" class="form-control" id="lila" wire:model='form.lila' x-mask:dynamic="$money($input)">
                             <label for="lila">Lingkar Lengan</label>
                         </div>
                     </div>
