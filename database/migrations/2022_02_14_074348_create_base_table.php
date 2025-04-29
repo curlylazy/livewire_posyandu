@@ -31,6 +31,19 @@ return new class extends Migration
             $table->date('tgl_lahir', 225)->nullable();
             $table->string('alamat', 225)->nullable();
             $table->string('nohp', 225)->nullable();
+            $table->char('jk', 1)->default('L');
+
+            // *** data untuk balita
+            $table->uuid('kodeayah')->nullable();
+            $table->uuid('kodeibu')->nullable();
+            $table->integer('anakke')->default(1);
+            $table->decimal('tinggibadan_lahir')->default(1);
+            $table->decimal('beratbadan_lahir')->default(1);
+            $table->decimal('tinggibadan')->default(1);
+            $table->decimal('beratbadan')->default(1);
+            $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
+            $table->date('tgl_bersalin')->nullable();
+            $table->string('tempatbersalin', 225)->nullable();
 
             // *** data ibu hamil
             $table->integer('hamil_ke')->nullable()->default(0);
