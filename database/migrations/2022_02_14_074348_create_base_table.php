@@ -25,8 +25,8 @@ return new class extends Migration
 
         Schema::create('tbl_pasien', function (Blueprint $table) {
             $table->uuid('kodepasien')->primary();
-            $table->string('kategoripasien', 25)->comment('nifas/hamil, lansia');
-            $table->string('nik', 225)->unique();
+            $table->string('kategoripasien', 25)->comment('nifas/hamil')->nullable();
+            $table->string('nik', 225)->unique()->nullable();
             $table->string('namapasien', 225);
             $table->date('tgl_lahir', 225)->nullable();
             $table->string('alamat', 225)->nullable();
@@ -40,7 +40,6 @@ return new class extends Migration
             $table->decimal('tinggibadan_lahir')->default(1);
             $table->decimal('beratbadan_lahir')->default(1);
             $table->decimal('tinggibadan')->default(1);
-            $table->decimal('beratbadan')->default(1);
             $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
             $table->date('tgl_bersalin')->nullable();
             $table->string('tempatbersalin', 225)->nullable();
@@ -51,7 +50,6 @@ return new class extends Migration
             $table->decimal('bb')->nullable()->default(0);
             $table->decimal('lila')->nullable()->comment('lingkar lengan atas')->default(0);
             $table->string('tekanan_darah', 50)->nullable();
-            $table->string('nama_suami', 225)->nullable();
             $table->integer('status')->default(1)->comment("0 = tidak aktif, 1 = aktif");
             $table->timestamps();
             $table->softDeletes();

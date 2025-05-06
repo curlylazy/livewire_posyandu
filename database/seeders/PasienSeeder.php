@@ -54,7 +54,45 @@ class PasienSeeder extends Seeder
                 'bb' => $faker->numberBetween(85, 120),
                 'lila' => $faker->randomFloat(20, 30, 35),
                 'tekanan_darah' => '',
-                'nama_suami' => $faker->name(gender: 'male'),
+                'status' => 1,
+            ]);
+        }
+
+        // *** pria dewasa
+        for($i=1;$i<=15;$i++)
+        {
+            PasienModel::create([
+                'kategoripasien' => 'nifas',
+                'nik' => $faker->nik(),
+                'namapasien' => $faker->name(gender: 'male'),
+                'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
+                'alamat' => $faker->address(),
+                'nohp' => $faker->phoneNumber(),
+                'bb' => $faker->numberBetween(55, 120),
+                'status' => 1,
+            ]);
+        }
+
+        // *** balita
+        // untuk balita 0 - 5 tahun
+        for($i=1;$i<=10;$i++)
+        {
+            $dataIbu =  PasienModel::selectCustom()->searchByPerempuanDewasa()->inRandomOrder()->first();
+            $dataAyah =  PasienModel::selectCustom()->searchByLakiDewasa()->inRandomOrder()->first();
+            $tgl_lahir = $faker->dateTimeBetween('-1 years', '-4 years');
+
+            PasienModel::create([
+                'kodeibu' => $dataIbu->kodepasien,
+                'kodeayah' => $dataAyah->kodepasien,
+                'namapasien' => $faker->name(),
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $faker->address(),
+                'bb' => $faker->numberBetween(85, 120),
+                'tinggibadan_lahir' => $faker->numberBetween(55, 120),
+                'beratbadan_lahir' => $faker->numberBetween(1, 10),
+                'tinggibadan' => $faker->numberBetween(55, 120),
+                'carabersalin' => $faker->numberBetween(1, 10),
+                'tgl_bersalin' => $tgl_lahir,
                 'status' => 1,
             ]);
         }

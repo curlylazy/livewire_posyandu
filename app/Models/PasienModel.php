@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class PasienModel extends Model
 {
@@ -18,6 +19,22 @@ class PasienModel extends Model
     public $incrementing = false;
 
     protected $guarded = [];
+
+    public function scopeSelectCustom(Builder $query, $katakunci): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->selectRaw("
+            CONCAT(TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()), ' tahun ', TIMESTAMPDIFF(MONTH, tanggal_lahir, CURDATE()) % 12, ' bulan ') as umur_tahun_bulan,
+            TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) as umur,
+            CASE
+                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 0 AND 5 THEN 'Balita'
+                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 6 AND 12 THEN 'Anak-anak'
+                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
+                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
+                ELSE 'Lansia'
+            END as kategori_umur
+        ");
+    }
 
     public function scopeSearch(Builder $query, $katakunci): void
     {
@@ -49,5 +66,23 @@ class PasienModel extends Model
         if($status != "") {
             $query->where('tbl_pasien.status', '=', $status);
         }
+    }
+
+    public function scopeSearchByPerempuanDewasa(Builder $query): void
+    {
+        $query
+            ->where('tbl_pasien.jk', 'P')
+            ->when(function ($query) {
+                $query->having('umur', '>', 12);
+            });
+    }
+
+    public function scopeSearchByLakiDewasa(Builder $query): void
+    {
+        $query
+            ->where('tbl_pasien.jk', 'L')
+            ->when(function ($query) {
+                $query->having('umur', '>', 12);
+            });
     }
 }
