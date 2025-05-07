@@ -7,6 +7,7 @@ use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\PasienModel;
 use App\Models\UserModel;
+use Carbon\Carbon;
 
 class PasienSeeder extends Seeder
 {
@@ -19,6 +20,20 @@ class PasienSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
+        // *** pria dewasa
+        for($i=1;$i<=15;$i++)
+        {
+            PasienModel::create([
+                'nik' => $faker->nik(),
+                'namapasien' => $faker->name(gender: 'male'),
+                'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
+                'alamat' => $faker->address(),
+                'nohp' => $faker->phoneNumber(),
+                'bb' => $faker->numberBetween(55, 120),
+                'status' => 1,
+            ]);
+        }
+
         // *** bumil
         for($i=1;$i<=10;$i++)
         {
@@ -26,6 +41,7 @@ class PasienSeeder extends Seeder
                 'kategoripasien' => 'bumil',
                 'nik' => $faker->nik(),
                 'namapasien' => $faker->name(gender: 'female'),
+                'jk' => "P",
                 'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
                 'alamat' => $faker->address(),
                 'nohp' => $faker->phoneNumber(),
@@ -34,7 +50,6 @@ class PasienSeeder extends Seeder
                 'bb' => $faker->numberBetween(85, 120),
                 'lila' => $faker->randomFloat(20, 30, 35),
                 'tekanan_darah' => '',
-                'nama_suami' => $faker->name(gender: 'male'),
                 'status' => 1,
             ]);
         }
@@ -46,6 +61,7 @@ class PasienSeeder extends Seeder
                 'kategoripasien' => 'nifas',
                 'nik' => $faker->nik(),
                 'namapasien' => $faker->name(gender: 'female'),
+                'jk' => "P",
                 'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
                 'alamat' => $faker->address(),
                 'nohp' => $faker->phoneNumber(),
@@ -58,28 +74,15 @@ class PasienSeeder extends Seeder
             ]);
         }
 
-        // *** pria dewasa
-        for($i=1;$i<=15;$i++)
-        {
-            PasienModel::create([
-                'kategoripasien' => 'nifas',
-                'nik' => $faker->nik(),
-                'namapasien' => $faker->name(gender: 'male'),
-                'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
-                'alamat' => $faker->address(),
-                'nohp' => $faker->phoneNumber(),
-                'bb' => $faker->numberBetween(55, 120),
-                'status' => 1,
-            ]);
-        }
-
         // *** balita
         // untuk balita 0 - 5 tahun
         for($i=1;$i<=10;$i++)
         {
+            // $dataIbu =  PasienModel::selectCustom()->searchByPerempuanDewasa()->inRandomOrder()->first();
+            // $dataAyah =  PasienModel::selectCustom()->searchByLakiDewasa()->inRandomOrder()->first();
             $dataIbu =  PasienModel::selectCustom()->searchByPerempuanDewasa()->inRandomOrder()->first();
             $dataAyah =  PasienModel::selectCustom()->searchByLakiDewasa()->inRandomOrder()->first();
-            $tgl_lahir = $faker->dateTimeBetween('-1 years', '-4 years');
+            $tgl_lahir = $faker->dateTimeBetween('-4 years', '-1 years');
 
             PasienModel::create([
                 'kodeibu' => $dataIbu->kodepasien,
@@ -92,7 +95,7 @@ class PasienSeeder extends Seeder
                 'beratbadan_lahir' => $faker->numberBetween(1, 10),
                 'tinggibadan' => $faker->numberBetween(55, 120),
                 'carabersalin' => $faker->numberBetween(1, 10),
-                'tgl_bersalin' => $tgl_lahir,
+                'tgl_bersalin' => Carbon::parse($tgl_lahir)->addDays(-2),
                 'status' => 1,
             ]);
         }

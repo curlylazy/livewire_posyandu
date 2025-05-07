@@ -20,17 +20,20 @@ class PasienModel extends Model
 
     protected $guarded = [];
 
-    public function scopeSelectCustom(Builder $query, $katakunci): void
+    public function scopeSelectCustom(Builder $query): void
     {
         $dateNow = Carbon::today()->toDateString();
-        $query->selectRaw("
-            CONCAT(TIMESTAMPDIFF(YEAR, tanggal_lahir, CURDATE()), ' tahun ', TIMESTAMPDIFF(MONTH, tanggal_lahir, CURDATE()) % 12, ' bulan ') as umur_tahun_bulan,
-            TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) as umur,
+        $query
+        // ->join('tbl_bayi', 'tbl_pemeriksaan.kodebayi', '=', 'tbl_bayi.kodebayi', 'left')
+        ->select('tbl_pasien.*')
+        ->selectRaw("
+            CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow), ' tahun ', TIMESTAMPDIFF(MONTH, tgl_lahir, $dateNow) % 12, ' bulan ') as umur_tahun_bulan,
+            TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) as umur,
             CASE
-                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 0 AND 5 THEN 'Balita'
-                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 6 AND 12 THEN 'Anak-anak'
-                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
-                WHEN TIMESTAMPDIFF(YEAR, tanggal_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 0 AND 5 THEN 'Balita'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 6 AND 12 THEN 'Anak-anak'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
                 ELSE 'Lansia'
             END as kategori_umur
         ");
@@ -72,17 +75,19 @@ class PasienModel extends Model
     {
         $query
             ->where('tbl_pasien.jk', 'P')
-            ->when(function ($query) {
-                $query->having('umur', '>', 12);
-            });
+            ->whereRaw("TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, ?) > ?", [date('Y-m-d'), 12]);
     }
 
     public function scopeSearchByLakiDewasa(Builder $query): void
     {
         $query
             ->where('tbl_pasien.jk', 'L')
-            ->when(function ($query) {
-                $query->having('umur', '>', 12);
-            });
+            ->whereRaw("TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, ?) > ?", [date('Y-m-d'), 12]);
+
+        // $query
+        //     ->where('tbl_pasien.jk', 'L')
+        //     ->when(function ($query) {
+        //         $query->having('umur', '>', 12);
+        //     });
     }
 }
