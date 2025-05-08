@@ -108,6 +108,17 @@ class Option
 		return $res;
 	}
 
+	public static function kategoriUmur()
+	{
+		$res = collect();
+        $res->push(['value' => 'Balita', 'name' => 'Balita']);
+        $res->push(['value' => 'Anak-anak', 'name' => 'Anak-anak']);
+        $res->push(['value' => 'Remaja', 'name' => 'Remaja']);
+        $res->push(['value' => 'Dewasa', 'name' => 'Dewasa']);
+        $res->push(['value' => 'Lansia', 'name' => 'Lansia']);
+		return $res;
+	}
+
     public static function bulan()
     {
         $res = collect();

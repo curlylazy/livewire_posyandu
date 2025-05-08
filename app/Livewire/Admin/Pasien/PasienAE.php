@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\Pasien;
 
+use App\Lib\GetString;
+use App\Lib\IDateTime;
 use App\Livewire\Forms\PasienForm;
 use App\Models\PasienModel;
 use Livewire\Component;
@@ -55,6 +57,21 @@ class PasienAE extends Component
     {
         $this->form->update();
         session()->flash('success', "berhasil edit data ".$this->form->namapasien);
+    }
+
+    // *** extra
+    public function onChangeCekKategoriUmur()
+    {
+        try {
+
+            dd($this->form->tgl_lahir);
+            $umur = IDateTime::dateDiff($this->form->tgl_lahir);
+            $this->form->kategoriumur = GetString::getKategoriUmur($umur);
+
+        } catch (\Exception $e) {
+            $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
+            return;
+        }
     }
 
     public function render()

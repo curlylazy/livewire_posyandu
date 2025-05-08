@@ -63,36 +63,15 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' wire:change='onChangeCekKategoriUmur' placeholder="">
+                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="">
                             <label for="form.tgl_lahir">Tanggal Lahir</label>
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-12">
-                        <div class="border rounded-3 p-2">
-                            <h6 class="fw-normal">Kategori Umur</h6>
-                            <div class="d-flex gap-2">
-                                <div>
-                                    <input type="radio" class="btn-check" name="kategoriumur" value="Balita" id="kategoriumur_balita" autocomplete="off" wire:model="form.kategoriumur">
-                                    <label class="btn" for="kategoriumur_balita">Balita</label>
-                                </div>
-                                <div>
-                                    <input type="radio" class="btn-check" name="kategoriumur" value="Anak-anak" id="kategoriumur_anakanak" autocomplete="off" wire:model="form.kategoriumur">
-                                    <label class="btn" for="kategoriumur_anakanak">Anak-anak</label>
-                                </div>
-                                <div>
-                                    <input type="radio" class="btn-check" name="kategoriumur" value="Remaja" id="kategoriumur_remaja" autocomplete="off" wire:model="form.kategoriumur">
-                                    <label class="btn" for="kategoriumur_remaja">Remaja</label>
-                                </div>
-                                <div>
-                                    <input type="radio" class="btn-check" name="kategoriumur" value="Dewasa" id="kategoriumur_dewasa" autocomplete="off" wire:model="form.kategoriumur">
-                                    <label class="btn" for="kategoriumur_dewasa">Dewasa</label>
-                                </div>
-                                <div>
-                                    <input type="radio" class="btn-check" name="kategoriumur" value="Lansia" id="kategoriumur_lansia" autocomplete="off" wire:model="form.kategoriumur">
-                                    <label class="btn" for="kategoriumur_lansia">Lansia</label>
-                                </div>
-                            </div>
+                    <div class="col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="nama_suami" wire:model='form.nama_suami'>
+                            <label for="nama_suami">Nama Suami</label>
                         </div>
                     </div>
 
@@ -142,23 +121,6 @@
                             <label for="tekanan_darah">Tekanan Darah</label>
                         </div>
                     </div>
-
-                    {{-- *** data balita --}}
-                    @if($kategoriumur == 'Balita')
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="namaayah" wire:model='form.namaayah'>
-                                <label for="namaayah">Nama Ayah</label>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="number" class="form-control" id="namaibu" wire:model='form.namaibu'>
-                                <label for="namaibu">Nama Ibu</label>
-                            </div>
-                        </div>
-                    @endif
-
 
                     <div class="col-12 col-md-6">
                         <div class="border rounded-3 p-2">

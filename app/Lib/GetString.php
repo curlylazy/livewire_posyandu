@@ -81,4 +81,23 @@ class GetString
         return $res;
 	}
 
+    public static function getKategoriUmur($val)
+	{
+		$res = "";
+
+        if($val >= 0 && $val <= 5) {
+            $res = "Balita";
+        } else if($val >= 6 && $val <= 12) {
+            $res = "Anak-anak";
+        } else if($val >= 13 && $val <= 17) {
+            $res = "Remaja";
+        } else if($val >= 18 && $val <= 59) {
+            $res = "Dewasa";
+        } else {
+            $res = "Lansia";
+        }
+
+        return $res;
+	}
+
 }

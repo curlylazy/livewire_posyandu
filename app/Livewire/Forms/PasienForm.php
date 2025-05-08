@@ -21,19 +21,36 @@ class PasienForm extends Form
     public $tgl_lahir = '';
     public $alamat = '';
     public $nohp = '';
-    public $hamil_ke = 1;
-    public $minggu_ke = 1;
+    public $jk = 'L';
     public $bb = 0;
-    public $lila = 0;
+    public $tinggibadan = 0;
     public $tekanan_darah = 0;
-    public $nama_suami = "";
     public $status = 1;
+
+    // *** data untuk balita
+    public $kodeayah = '';
+    public $kodeibu = '';
+    public $anakke = 0;
+    public $tinggibadan_lahir = 0;
+    public $beratbadan_lahir = 0;
+    public $carabersalin = "";
+    public $tgl_bersalin = "";
+    public $tempatbersalin = "";
+
+    // *** data untuk bumil/nifas
+    public $hamil_ke = 0;
+    public $minggu_ke = 0;
+    public $lila = 0;
+
+    // *** extra
+    public $kategoriumur = "";
+    public $namaayah = "";
+    public $namaibu = "";
 
     public function rules()
     {
         return [
-            'kategoripasien' => 'required',
-            'nik' => 'required|size:16',
+            'nik' => 'nullable|size:16',
             'namapasien' => 'required',
             'tgl_lahir' => 'nullable',
             'alamat' => 'nullable',
@@ -41,8 +58,7 @@ class PasienForm extends Form
             'hamil_ke' => 'nullable|integer',
             'minggu_ke' => 'required|integer',
             'bb' => 'required|numeric',
-            'lila' => 'required|numeric',
-            'nama_suami' => 'required',
+            'lila' => 'nullable|numeric',
         ];
     }
 
@@ -62,10 +78,23 @@ class PasienForm extends Form
         $this->hamil_ke = $data->hamil_ke;
         $this->minggu_ke = $data->minggu_ke;
         $this->bb = $data->bb;
-        $this->lila = $data->lila;
         $this->tekanan_darah = $data->tekanan_darah;
-        $this->nama_suami = $data->nama_suami;
         $this->status = $data->status;
+
+        // *** data untuk balita
+        $this->kodeayah = $data->kodeayah;
+        $this->kodeibu = $data->kodeibu;
+        $this->anakke =$data->anakke;
+        $this->tinggibadan_lahir =$data->tinggibadan_lahir;
+        $this->beratbadan_lahir =$data->beratbadan_lahir;
+        $this->carabersalin = $data->carabersalin;
+        $this->tgl_bersalin = $data->tgl_bersalin;
+        $this->tempatbersalin = $data->tempatbersalin;
+
+        // *** data untuk bumil/nifas
+        $this->hamil_ke = $data->hamil_ke;
+        $this->minggu_ke = $data->minggu_ke;
+        $this->lila = $data->lila;
     }
 
     public function prepare()
@@ -78,7 +107,7 @@ class PasienForm extends Form
 
     private function exceptData()
     {
-        $arr = [];
+        $arr = ['kategoriumur', 'namaayah', 'namaibu'];
         return $arr;
     }
 

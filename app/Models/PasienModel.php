@@ -35,7 +35,7 @@ class PasienModel extends Model
                 WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
                 WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
                 ELSE 'Lansia'
-            END as kategori_umur
+            END as kategoriumur
         ");
     }
 
