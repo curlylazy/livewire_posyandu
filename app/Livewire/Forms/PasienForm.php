@@ -43,6 +43,7 @@ class PasienForm extends Form
     public $lila = 0;
 
     // *** extra
+    public $umur = 0;
     public $kategoriumur = "";
     public $namaayah = "";
     public $namaibu = "";
@@ -78,6 +79,7 @@ class PasienForm extends Form
         $this->hamil_ke = $data->hamil_ke;
         $this->minggu_ke = $data->minggu_ke;
         $this->bb = $data->bb;
+        $this->jk = $data->jk;
         $this->tekanan_darah = $data->tekanan_darah;
         $this->status = $data->status;
 

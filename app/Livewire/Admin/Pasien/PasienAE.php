@@ -16,6 +16,9 @@ class PasienAE extends Component
     public $isEdit = false;
     public $id = "";
 
+    public $pilihanayahibu = "";
+    public $judulModalPasien = "";
+
     public PasienForm $form;
 
     public function mount($id = null)
@@ -62,16 +65,32 @@ class PasienAE extends Component
     // *** extra
     public function onChangeCekKategoriUmur()
     {
-        try {
+        $this->form->umur = IDateTime::dateDiff($this->form->tgl_lahir);
+        $this->form->kategoriumur = GetString::getKategoriUmur($this->form->umur);
+    }
 
-            dd($this->form->tgl_lahir);
-            $umur = IDateTime::dateDiff($this->form->tgl_lahir);
-            $this->form->kategoriumur = GetString::getKategoriUmur($umur);
+    public function onClickOpenModalPasien($pilihan)
+    {
+        $this->pilihanayahibu = $pilihan;
+        $this->judulModalPasien = ($pilihan == "lakilakiDewasa") ? "Daftar Ayah" : "Daftar Ibu";
+        $this->dispatch('open-modal', namamodal : 'modalPasien');
+    }
 
-        } catch (\Exception $e) {
-            $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
-            return;
+    // *** extra : action on modal
+    public function modalSelectPasien($data)
+    {
+        if($this->pilihanayahibu == "lakilakiDewasa")
+        {
+            $this->form->kodeayah = $data->kodepasien;
+            $this->form->namaayah = $data->namapasien;
         }
+        elseif($this->pilihanayahibu == "perempuanDewasa")
+        {
+            $this->form->kodeibu = $data->kodepasien;
+            $this->form->namaibu = $data->namapasien;
+        }
+
+        $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
 
     public function render()

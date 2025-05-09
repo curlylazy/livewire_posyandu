@@ -4,6 +4,7 @@ namespace App\Livewire\Partial;
 
 use App\Models\PasienModel;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Reactive;
 use Livewire\Component;
 use Livewire\Features\SupportPagination\WithoutUrlPagination;
 use Livewire\WithPagination;
@@ -14,24 +15,37 @@ class ModalPasien extends Component
 
     public $katakunci = "";
 
+    #[Reactive]
+    public $kategoriumur = "", $jk = "", $pilihanayahibu = "", $judulModal = "Daftar Pasien";
+
     public function mount()
     {
-
     }
 
     #[Computed()]
     public function dataPasien()
     {
         $data = PasienModel::search($this->katakunci)
-                ->searchByStatus(1)
-                ->paginate(10, pageName: 'pasien-page');
+                ->searchByStatus(1);
+
+        if($this->pilihanayahibu == "lakilakiDewasa")
+        {
+            $data = $data->searchByLakiDewasa();
+        }
+
+        if($this->pilihanayahibu == "perempuanDewasa")
+        {
+            $data = $data->searchByPerempuanDewasa();
+        }
+
+        $data = $data->paginate(10, pageName: 'pasien-page');
 
         return $data;
     }
 
     public function selectRow($data)
     {
-        $this->dispatch('on-selectpasien', data: $data);
+        $this->dispatch('selectpasien', data: $data);
     }
 
     public function render()
@@ -42,7 +56,7 @@ class ModalPasien extends Component
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="modalPasienLabel">Daftar Pasien</h5>
+                                <h5 class="modal-title" id="modalPasienLabel">{{ $judulModal ?? "Daftar Pasien" }}</h5>
                                 <button type="button" class="btn-close" data-coreui-dismiss="modal" data-coreui-toggle="modal"></button>
                             </div>
                             <div class="modal-body m-0">

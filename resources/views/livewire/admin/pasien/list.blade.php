@@ -35,13 +35,13 @@
                         <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                     <div class="row g-2">
-                        <div class="col-12 col-md-8">
+                        <div class="col-12 col-md-6">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="katakunci" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
                                 <label for="katakunci">Katakunci</label>
                             </div>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-3">
                             <div class="form-floating">
                                 <select class="form-select" id="status" wire:model='status' wire:change='$commit'>
                                     <option value="">Semua Pasien</option>
@@ -49,6 +49,17 @@
                                     <option value="0">Tidak Aktif</option>
                                 </select>
                                 <label for="status">Status Pasien</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-3">
+                            <div class="form-floating">
+                                <select class="form-select" id="kategoriumur" wire:model='kategoriumur' wire:change='$commit'>
+                                    <option value="">Semua Kategori Umur</option>
+                                    @foreach (Option::kategoriUmur() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kategoriumur">Kategori Umur</label>
                             </div>
                         </div>
                     </div>

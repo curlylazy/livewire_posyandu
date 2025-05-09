@@ -17,7 +17,7 @@ class PasienList extends Component
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "", $status = 1;
+    public $katakunci = "", $kategoriumur = "", $status = 1;
 
     public function mount()
     {
