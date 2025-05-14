@@ -45,7 +45,7 @@ class ModalPasien extends Component
 
     public function selectRow($data)
     {
-        $this->dispatch('selectpasien', data: $data);
+        $this->dispatch('selectpasien', data: json_encode($data));
     }
 
     public function render()
@@ -65,7 +65,7 @@ class ModalPasien extends Component
                                 </div>
                                 <ul class="list-group">
                                     @foreach($this->dataPasien as $data)
-                                        <li class="list-group-item" role="button" wire:click="selectRow('{{ $data->toJson() }}')">
+                                        <li class="list-group-item" role="button" wire:click="selectRow('{{ $data }}')">
                                             <small>{{ $data->nik }}</small>
                                             <h6>{{ $data->namapasien }}</h6>
                                         </li>
