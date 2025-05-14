@@ -79,9 +79,7 @@ class PasienAE extends Component
     // *** extra : action on modal
     public function modalSelectPasien($data)
     {
-        $data = $data;
-        dd($data);
-        dd($data['kodepasien']);
+        $data = json_decode($data);
         if($this->pilihanayahibu == "lakilakiDewasa")
         {
             $this->form->kodeayah = $data->kodepasien;

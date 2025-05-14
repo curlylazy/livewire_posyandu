@@ -83,7 +83,7 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12">
+                    <div class="col-md-12" x-show="$wire.form.umur >= 17" x-cloak>
                         <div class="form-floating">
                             <input type="text" class="form-control" id="nik" wire:model='form.nik'>
                             <label for="nik">NIK</label>
@@ -228,7 +228,10 @@
                             <label for="form.tempatbersalin">Tempat Bersalin</label>
                         </div>
                     </div>
-                    <div class="col-12 col-md-6">
+                </div>
+
+                <div class="row g-2 mt-0">
+                    <div class="col-12 col-md-12">
                         <div class="border rounded-3 p-2">
                             <h6 class="fw-normal">Status Aktif Pasien</h6>
                             <div class="d-flex gap-2">

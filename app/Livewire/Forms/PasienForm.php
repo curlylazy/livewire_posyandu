@@ -3,6 +3,8 @@
 namespace App\Livewire\Forms;
 
 use App\Lib\FilterString;
+use App\Lib\GetString;
+use App\Lib\IDateTime;
 use App\Lib\Upload;
 use App\Models\PasienModel;
 use Illuminate\Support\Str;
@@ -33,8 +35,8 @@ class PasienForm extends Form
     public $anakke = 0;
     public $tinggibadan_lahir = 0;
     public $beratbadan_lahir = 0;
-    public $carabersalin = "";
-    public $tgl_bersalin = "";
+    public $carabersalin = 1;
+    public $tgl_bersalin = null;
     public $tempatbersalin = "";
 
     // *** data untuk bumil/nifas
@@ -97,6 +99,11 @@ class PasienForm extends Form
         $this->hamil_ke = $data->hamil_ke;
         $this->minggu_ke = $data->minggu_ke;
         $this->lila = $data->lila;
+
+
+        // *** extra
+        $this->umur = IDateTime::dateDiff($this->tgl_lahir);
+        $this->kategoriumur = GetString::getKategoriUmur($this->umur);
     }
 
     public function prepare()
@@ -109,7 +116,7 @@ class PasienForm extends Form
 
     private function exceptData()
     {
-        $arr = ['kategoriumur', 'namaayah', 'namaibu'];
+        $arr = ['kategoriumur', 'namaayah', 'namaibu', 'umur'];
         return $arr;
     }
 
