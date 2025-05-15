@@ -75,13 +75,12 @@
                                 <tr>
                                     <th scope="col">NIK</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">JK</th>
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Kategori Umur</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Umur</th>
                                     <th scope="col" x-show="$wire.status == ''" x-cloak>Status</th>
-
-                                    {{-- *** jika bayi dan anak anak --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -89,10 +88,17 @@
                                     <tr role="button" wire:click='selectData({{ $row }})'>
                                         <td>{{ FilterString::filterString($row->nik) }}</td>
                                         <td>{{ $row->namapasien }}</td>
+                                        <td>{{ $row->jk }}</td>
                                         <td>{{ FilterString::filterString(Str::title($row->kategoripasien)) }}</td>
                                         <td>{{ $row->kategoriumur }}</td>
                                         <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
-                                        <td>{{ $row->umur }} Tahun</td>
+
+                                        @if($row->kategoriumur == 'Balita')
+                                            <td>{{ Str::title($row->umur_tahun_bulan) }}</td>
+                                        @else
+                                            <td>{{ $row->umur }} Tahun</td>
+                                        @endif
+
                                         <td x-show="$wire.status == ''" class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }} fw-bold" x-cloak>{{ $row->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     </tr>
                                 @endforeach
@@ -127,6 +133,7 @@
                 <x-slot:selectedNama>{{ $selectedNama }}</x-slot>
                 <div class="d-grid gap-2">
                     <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/edit/$selectedKode") }}" role="button"><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/detail/$selectedKode") }}" role="button"><i class="fas fa-user"></i> Detail</a>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete", { kode: "{{ $selectedKode }}", nama: "{{ $selectedNama }}" })'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>

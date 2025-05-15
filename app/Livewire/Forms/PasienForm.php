@@ -24,7 +24,7 @@ class PasienForm extends Form
     public $alamat = '';
     public $nohp = '';
     public $jk = 'L';
-    public $bb = 0;
+    public $beratbadan = 0;
     public $tinggibadan = 0;
     public $tekanan_darah = 0;
     public $status = 1;
@@ -80,7 +80,8 @@ class PasienForm extends Form
         $this->nohp = $data->nohp;
         $this->hamil_ke = $data->hamil_ke;
         $this->minggu_ke = $data->minggu_ke;
-        $this->bb = $data->bb;
+        $this->beratbadan = $data->beratbadan;
+        $this->tinggibadan = $data->tinggibadan;
         $this->jk = $data->jk;
         $this->tekanan_darah = $data->tekanan_darah;
         $this->status = $data->status;

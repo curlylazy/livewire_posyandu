@@ -20,6 +20,7 @@ use App\Livewire\Admin\Laporan\LapPemeriksaan;
 use App\Livewire\Admin\Package\PackageAE;
 use App\Livewire\Admin\package\PackageList;
 use App\Livewire\Admin\Pasien\PasienAE;
+use App\Livewire\Admin\Pasien\PasienDetail;
 use App\Livewire\Admin\Pasien\PasienList;
 use App\Livewire\Admin\Pemeriksaan\PemeriksaanAE;
 use App\Livewire\Admin\Pemeriksaan\PemeriksaanDetail;
@@ -73,6 +74,7 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
     Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');
     Route::get('/pasien/edit/{id}', PasienAE::class)->name('admin_pasien_edit');
+    Route::get('/pasien/detail/{id}', PasienDetail::class)->name('admin_pasien_detail');
 
     // *** Bayi
     Route::get('/bayi', BayiList::class)->name('admin_bayi_list');

@@ -154,7 +154,7 @@
 
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="bb" wire:model='form.bb' x-mask:dynamic="$money($input)">
+                            <input type="number" class="form-control" id="beratbadan" wire:model='form.beratbadan' x-mask:dynamic="$money($input)">
                             <label for="bb">Berat Badan</label>
                         </div>
                     </div>
