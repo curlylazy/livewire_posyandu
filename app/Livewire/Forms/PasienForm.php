@@ -70,7 +70,7 @@ class PasienForm extends Form
         if(empty($id))
             return;
 
-        $data = PasienModel::find($id);
+        $data = PasienModel::selectCustom()->find($id);
         $this->kodepasien = $data->kodepasien;
         $this->kategoripasien = $data->kategoripasien;
         $this->nik = $data->nik;
@@ -104,6 +104,8 @@ class PasienForm extends Form
         // *** extra
         $this->umur = IDateTime::dateDiff($this->tgl_lahir);
         $this->kategoriumur = GetString::getKategoriUmur($this->umur);
+        $this->namaayah = $data->namaayah;
+        $this->namaibu = $data->namaibu;
     }
 
     public function prepare()

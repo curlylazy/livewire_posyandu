@@ -76,20 +76,24 @@
                                     <th scope="col">NIK</th>
                                     <th scope="col">Nama</th>
                                     <th scope="col">Kategori</th>
+                                    <th scope="col">Kategori Umur</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Umur</th>
-                                    <th scope="col" x-show="$wire.status == ''">Status</th>
+                                    <th scope="col" x-show="$wire.status == ''" x-cloak>Status</th>
+
+                                    {{-- *** jika bayi dan anak anak --}}
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($dataRow as $row)
                                     <tr role="button" wire:click='selectData({{ $row }})'>
-                                        <td>{{ $row->nik }}</td>
+                                        <td>{{ FilterString::filterString($row->nik) }}</td>
                                         <td>{{ $row->namapasien }}</td>
-                                        <td>{{ Str::title($row->kategoripasien) }}</td>
+                                        <td>{{ FilterString::filterString(Str::title($row->kategoripasien)) }}</td>
+                                        <td>{{ $row->kategoriumur }}</td>
                                         <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>
-                                        <td>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</td>
-                                        <td x-show="$wire.status == ''" class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }} fw-bold">{{ $row->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
+                                        <td>{{ $row->umur }} Tahun</td>
+                                        <td x-show="$wire.status == ''" class="{{ $row->status == 1 ? 'text-success' : 'text-danger' }} fw-bold" x-cloak>{{ $row->status == 1 ? 'Aktif' : 'Tidak Aktif' }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

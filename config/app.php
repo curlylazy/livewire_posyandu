@@ -152,6 +152,7 @@ return [
     ],
 
     'aliases' => Facade::defaultAliases()->merge([
+        'FilterString' => 'App\Lib\FilterString',
         'Pagination' => 'App\Lib\Pagination',
         'Option' => 'App\Lib\Option',
         'GetString' => 'App\Lib\GetString',

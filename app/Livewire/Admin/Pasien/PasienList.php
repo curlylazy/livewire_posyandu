@@ -26,8 +26,9 @@ class PasienList extends Component
 
     public function readData()
     {
-        $data = PasienModel::search($this->katakunci)
-                ->latest('created_at')
+        $data = PasienModel::selectCustom()
+                ->search($this->katakunci)
+                ->latest('tbl_pasien.created_at')
                 ->searchByStatus($this->status)
                 ->paginate(20);
 

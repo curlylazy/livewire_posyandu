@@ -24,11 +24,16 @@ class FilterString
 		return $res;
 	}
 
-	public static function filterString($value)
+	public static function filterString($value, $default = "--")
 	{
 		$res = "";
 		$res = filter_var($value, FILTER_SANITIZE_FULL_SPECIAL_CHARS, FILTER_FLAG_STRIP_HIGH);
 		// $res = htmlspecialchars($value);
+
+        if(empty($res)) {
+            $res = $default;
+        }
+
 		return $res;
 	}
 

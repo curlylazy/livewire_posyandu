@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class PasienModel extends Model
 {
@@ -25,18 +26,34 @@ class PasienModel extends Model
         $dateNow = Carbon::today()->toDateString();
         $query
         // ->join('tbl_bayi', 'tbl_pemeriksaan.kodebayi', '=', 'tbl_bayi.kodebayi', 'left')
-        ->select('tbl_pasien.*')
-        ->selectRaw("
-            CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow), ' tahun ', TIMESTAMPDIFF(MONTH, tgl_lahir, $dateNow) % 12, ' bulan ') as umur_tahun_bulan,
-            TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) as umur,
-            CASE
-                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 0 AND 5 THEN 'Balita'
-                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 6 AND 12 THEN 'Anak-anak'
-                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
-                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
-                ELSE 'Lansia'
-            END as kategoriumur
-        ");
+        ->leftJoin('tbl_pasien as pasien_ayah', 'pasien_ayah.kodepasien', '=', 'tbl_pasien.kodeayah')
+        ->leftJoin('tbl_pasien as pasien_ibu', 'pasien_ibu.kodepasien', '=', 'tbl_pasien.kodeibu')
+        ->select('tbl_pasien.*', 'pasien_ayah.namapasien as namaayah', 'pasien_ibu.namapasien as namaibu',
+            DB::raw("CONCAT(TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow'), ' tahun ', TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, $dateNow) % 12, ' bulan ') as umur_tahun_bulan"),
+            DB::raw("TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') as umur"),
+            DB::raw("
+                CASE
+                    WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') <= 5 THEN 'Balita'
+                    WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') BETWEEN 6 AND 12 THEN 'Anak-anak'
+                    WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') BETWEEN 13 AND 17 THEN 'Remaja'
+                    WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') BETWEEN 18 AND 59 THEN 'Dewasa'
+                    ELSE 'Lansia'
+                END as kategoriumur
+            ")
+        );
+
+        // ->selectRaw("
+        //     tbl_pasien.*,
+        //     CONCAT(TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow), ' tahun ', TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, $dateNow) % 12, ' bulan ') as umur_tahun_bulan,
+        //     TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow) as umur,
+        //     CASE
+        //         WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow) BETWEEN 0 AND 5 THEN 'Balita'
+        //         WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow) BETWEEN 6 AND 12 THEN 'Anak-anak'
+        //         WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow) BETWEEN 13 AND 17 THEN 'Remaja'
+        //         WHEN TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, $dateNow) BETWEEN 18 AND 59 THEN 'Dewasa'
+        //         ELSE 'Lansia'
+        //     END as kategoriumur
+        // ");
     }
 
     public function scopeSearch(Builder $query, $katakunci): void
@@ -90,4 +107,11 @@ class PasienModel extends Model
         //         $query->having('umur', '>', 12);
         //     });
     }
+
+    public function getNikNamaAttribute()
+    {
+        return "($this->nik) $this->namapasien";
+    }
+
+
 }
