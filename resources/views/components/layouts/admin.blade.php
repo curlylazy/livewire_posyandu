@@ -73,12 +73,6 @@
                     Pasien
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/bayi") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">breastfeeding</span>
-                    Bayi
-                </a>
-            </li>
 
             <li class="nav-title">Pemeriksaan</li>
             <li class="nav-item">

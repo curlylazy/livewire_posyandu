@@ -19,8 +19,6 @@ class PasienDetail extends Component
     public $pilihanayahibu = "";
     public $judulModalPasien = "";
 
-    public PasienForm $form;
-
     public function mount($id)
     {
         $this->id = $id;

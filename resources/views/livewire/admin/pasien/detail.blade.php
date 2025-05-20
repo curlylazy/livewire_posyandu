@@ -5,6 +5,7 @@
         <li class="breadcrumb-item"><a href="{{ url('/admin') }}" class="text-decoration-none"><span>Home</span></a></li>
         <li class="breadcrumb-item"><a href="{{ url('/admin/pasien') }}" class="text-decoration-none"><span>Pasien</span></a></li>
         <li class="breadcrumb-item active"><span>{{ $pageTitle }}</span></li>
+        <li class="breadcrumb-item active"><span>{{ $dataPasien->namapasien }}</span></li>
     </x-slot>
 
     <div class="card">
@@ -13,7 +14,7 @@
             <div class="mb-3">
                 <div class="d-flex flex-column gap-2">
                     <div class="d-flex gap-1">
-                        <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i> Kembali</a>
+                        <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/$pageName") }}"><i class="fas fa-arrow-left"></i> Kembali</a>
                     </div>
                 </div>
             </div>
@@ -70,9 +71,24 @@
                         <div class="h5">{{ FilterString::filterString($dataPasien->beratbadan) }}</div>
                     </div>
                 </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Jenis Kelamin</div>
+                        <div class="h5">{{ GetString::getJK($dataPasien->jk) }}</div>
+                    </div>
+                </div>
+
+                {{-- *** jika wanita maka munculkan apakah yang bersangkutan nifas atau bumil atau tidak --}}
+                <div class="col-12" x-show="$wire.dataPasien->jk == 'P'" x-cloak>
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Kategori Pasien</div>
+                        <div class="h5">{{ FilterString::filterString(Str::title($dataPasien->kategoripasien)) }}</div>
+                    </div>
+                </div>
 
                 <div class="col-12 mt-4">
                     <div class="h4">Data Balita</div>
+                    <p>data saat pasien pertama kali didata / lahir</p>
                 </div>
 
                 <div class="col-12">

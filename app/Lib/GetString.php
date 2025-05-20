@@ -100,4 +100,17 @@ class GetString
         return $res;
 	}
 
+    public static function getJK($val)
+	{
+		$res = "";
+
+        if($val == "L") {
+            $res = "Laki - laki";
+        } else {
+            $res = "Perempuan";
+        }
+
+        return $res;
+	}
+
 }
