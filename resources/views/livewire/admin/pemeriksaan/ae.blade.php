@@ -30,8 +30,12 @@
 
     <livewire:partial.modal-add-pasien :kategori_periksa="$kategori_periksa"/>
     <livewire:partial.modal-add-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
-    <livewire:partial.modal-pasien />
     <livewire:partial.modal-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
+
+    <livewire:partial.modal-pasien
+        :judulModal="$judulModalPasien"
+        @selectpasien="modalSelectPasien($event.detail.data)"
+    />
 
     <x-partials.loader />
     <x-partials.flashmsg />
@@ -74,7 +78,7 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-12" x-show="$wire.kategori_periksa == 'nifas'">
+                    <div class="col-12 col-md-12" x-show="$wire.kategori_periksa == 'nifas'" x-cloak>
                         <div class="input-group">
                             <div class="form-floating">
                                 <input type="text" class="form-control pe-none" id="form.namabayi" wire:model='form.namabayi' placeholder="" readonly>
@@ -109,7 +113,7 @@
                     </div>
                 </div>
 
-                <div class="row mt-1 g-2" x-show="$wire.kategori_periksa == 'bumil'">
+                <div class="row mt-1 g-2" x-show="$wire.kategori_periksa == 'bumil'" x-cloak>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="form.periksa_hamil_ke" wire:model='form.periksa_hamil_ke' placeholder="" x-mask:dynamic="$money($input)">
@@ -381,7 +385,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <div class="d-flex mt-3 gap-2">
                     <a href="{{ url("admin/$pageName?kategori_periksa=$kategori_periksa") }}" class="btn btn-secondary" type="button" wire:navigate><i class="fas fa-arrow-left"></i></a>

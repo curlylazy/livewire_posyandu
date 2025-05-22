@@ -69,8 +69,16 @@ class PasienModel extends Model
 
     public function scopeSearchByKategori(Builder $query, $kategoripasien): void
     {
-        if(!empty($kategori)) {
+        if(!empty($kategoripasien)) {
             $query->where('tbl_pasien.kategoripasien', '=', $kategoripasien);
+        }
+    }
+
+    public function scopeSearchByKategoriUmur(Builder $query, $kategoriumur): void
+    {
+        if(!empty($kategoriumur)) {
+            $query->having('kategoriumur', '=', $kategoriumur);
+
         }
     }
 
@@ -106,6 +114,13 @@ class PasienModel extends Model
         //     ->when(function ($query) {
         //         $query->having('umur', '>', 12);
         //     });
+    }
+
+    public function scopeSearchByJK(Builder $query, $jk): void
+    {
+        if(!empty($jk)) {
+            $query->where('tbl_pasien.jk', '=', $jk);
+        }
     }
 
     public function getNikNamaAttribute()

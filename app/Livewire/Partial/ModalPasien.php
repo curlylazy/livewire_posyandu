@@ -25,18 +25,20 @@ class ModalPasien extends Component
     #[Computed()]
     public function dataPasien()
     {
-        $data = PasienModel::search($this->katakunci)
+        $data = PasienModel::selectCustom()
+                ->search($this->katakunci)
+                ->searchByKategoriUmur($this->kategoriumur)
+                ->searchByJK($this->jk)
                 ->searchByStatus(1);
 
-        if($this->pilihanayahibu == "lakilakiDewasa")
-        {
+        if($this->pilihanayahibu == "lakilakiDewasa") {
             $data = $data->searchByLakiDewasa();
         }
 
-        if($this->pilihanayahibu == "perempuanDewasa")
-        {
+        if($this->pilihanayahibu == "perempuanDewasa") {
             $data = $data->searchByPerempuanDewasa();
         }
+
 
         $data = $data->paginate(10, pageName: 'pasien-page');
 

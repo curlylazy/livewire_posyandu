@@ -28,6 +28,7 @@ class PasienList extends Component
     {
         $data = PasienModel::selectCustom()
                 ->search($this->katakunci)
+                ->searchByKategoriUmur($this->kategoriumur)
                 ->latest('tbl_pasien.created_at')
                 ->searchByStatus($this->status)
                 ->paginate(20);

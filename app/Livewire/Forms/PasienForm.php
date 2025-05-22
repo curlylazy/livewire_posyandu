@@ -78,8 +78,6 @@ class PasienForm extends Form
         $this->tgl_lahir = $data->tgl_lahir;
         $this->alamat = $data->alamat;
         $this->nohp = $data->nohp;
-        $this->hamil_ke = $data->hamil_ke;
-        $this->minggu_ke = $data->minggu_ke;
         $this->beratbadan = $data->beratbadan;
         $this->tinggibadan = $data->tinggibadan;
         $this->jk = $data->jk;

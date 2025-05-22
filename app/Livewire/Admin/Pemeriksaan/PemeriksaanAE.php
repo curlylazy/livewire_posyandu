@@ -17,6 +17,10 @@ class PemeriksaanAE extends Component
     public $isEdit = false;
     public $id = "";
 
+    public $judulModalPasien = "";
+    public $kategoriumur = "";
+    public $jk = "";
+
     #[Url()]
     public $kategori_periksa = "";
 
@@ -79,9 +83,9 @@ class PemeriksaanAE extends Component
     }
 
     // *** extra
-    #[On('on-selectpasien')]
-    public function selectPasien($data)
+    public function modalSelectPasien($data)
     {
+        $data = json_decode($data);
         $this->form->setPasien($data);
         $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
@@ -108,11 +112,22 @@ class PemeriksaanAE extends Component
         $this->dispatch('open-modal', namamodal : 'modalBayi');
     }
 
-    public function onClickPilihPasien()
+    public function onClickOpenModalPasien($pilihan)
     {
         if($this->isEdit) {
             $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama pasien lagi ya!', icon: 'warning');
             return;
+        }
+
+        if($pilihan == "bumilnifas") {
+            $this->kategoriumur = "dewasa";
+            $this->jk = "P";
+            $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
+        }
+
+        if($pilihan == "bayi") {
+            $this->kategoriumur = "balita";
+            $this->judulModalPasien = "Pilih Bayi";
         }
 
         $this->dispatch('open-modal', namamodal : 'modalPasien');

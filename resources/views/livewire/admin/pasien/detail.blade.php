@@ -37,6 +37,12 @@
             <div class="row g-3">
                 <div class="col-12">
                     <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Kategori Umur</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->kategoriumur) }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
                         <div class="h6 fw-normal flex-grow-1">NIK</div>
                         <div class="h5">{{ FilterString::filterString($dataPasien->nik) }}</div>
                     </div>
@@ -51,6 +57,12 @@
                     <div class="d-flex border-bottom">
                         <div class="h6 fw-normal flex-grow-1">Tanggal Lahir</div>
                         <div class="h5">{{ IDateTime::formatDate($dataPasien->tgl_lahir) }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Umur</div>
+                        <div class="h5">{{ ($dataPasien->kategoriumur == "Balita") ? Str::title($dataPasien->umur_tahun_bulan) : $dataPasien->umur.' Tahun' }}</div>
                     </div>
                 </div>
                 <div class="col-12">
@@ -73,6 +85,12 @@
                 </div>
                 <div class="col-12">
                     <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Tekanan Darah</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->tekanan_darah) }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
                         <div class="h6 fw-normal flex-grow-1">Jenis Kelamin</div>
                         <div class="h5">{{ GetString::getJK($dataPasien->jk) }}</div>
                     </div>
@@ -83,6 +101,47 @@
                     <div class="d-flex border-bottom">
                         <div class="h6 fw-normal flex-grow-1">Kategori Pasien</div>
                         <div class="h5">{{ FilterString::filterString(Str::title($dataPasien->kategoripasien)) }}</div>
+                    </div>
+                </div>
+
+                {{-- *** tampilkan jika yang bersangkutan nifas / bumil --}}
+                <div class="col-12" x-show="$wire.dataPasien->kategori == 'bumil'" x-cloak>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="d-flex border-bottom">
+                                <div class="h6 fw-normal flex-grow-1">Hamil Ke</div>
+                                <div class="h5">{{ FilterString::filterString($dataPasien->hamil_ke) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex border-bottom">
+                                <div class="h6 fw-normal flex-grow-1">Minggu Ke</div>
+                                <div class="h5">{{ FilterString::filterString($dataPasien->minggu_ke) }}</div>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="d-flex border-bottom">
+                                <div class="h6 fw-normal flex-grow-1">LILA</div>
+                                <div class="h5">{{ FilterString::filterString($dataPasien->lila) }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mt-4">
+                    <div class="h4">Data Orang Tua</div>
+                    <p>data saat pasien pertama kali didata / lahir</p>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Nama Ayah</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->namaayah) }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Nama Ibu</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->namaibu) }}</div>
                     </div>
                 </div>
 
@@ -105,14 +164,20 @@
                 </div>
                 <div class="col-12">
                     <div class="d-flex border-bottom">
-                        <div class="h6 fw-normal flex-grow-1">Ayah</div>
-                        <div class="h5">{{ FilterString::filterString($dataPasien->namaayah) }}</div>
+                        <div class="h6 fw-normal flex-grow-1">Cara Bersalin</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->carabersalin) }}</div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="d-flex border-bottom">
-                        <div class="h6 fw-normal flex-grow-1">Ibu</div>
-                        <div class="h5">{{ FilterString::filterString($dataPasien->namaibu) }}</div>
+                        <div class="h6 fw-normal flex-grow-1">Tanggal Bersalin</div>
+                        <div class="h5">{{ IDateTime::formatDate($dataPasien->tgl_bersalin) }}</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="d-flex border-bottom">
+                        <div class="h6 fw-normal flex-grow-1">Tempat Bersalin</div>
+                        <div class="h5">{{ FilterString::filterString($dataPasien->tempatbersalin) }}</div>
                     </div>
                 </div>
 
