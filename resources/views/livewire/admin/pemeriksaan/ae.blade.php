@@ -65,8 +65,8 @@
                     @if(!$isEdit)
                         <div class="col-12">
                             <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-primary" wire:click='$dispatch("open-modal", { namamodal: "modalPasienAdd" })'><i class="fas fa-female"></i> Tambah Pasien</button>
-                                <button type="button" x-show="$wire.kategori_periksa == 'nifas'" x-cloak class="btn btn-primary" wire:click='onClickBayiAdd'><i class="fas fa-baby"></i> Tambah Bayi</button>
+                                <button type="button" class="btn btn-primary" wire:click='onClickOpenModalAddPasien("bumilnifas")'><i class="fas fa-female"></i> Tambah Pasien</button>
+                                <button type="button" x-show="$wire.kategori_periksa == 'nifas'" x-cloak class="btn btn-primary" wire:click='onClickOpenModalAddPasien("bayi")'><i class="fas fa-baby"></i> Tambah Bayi</button>
                             </div>
                         </div>
                     @endif

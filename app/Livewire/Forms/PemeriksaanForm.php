@@ -128,7 +128,7 @@ class PemeriksaanForm extends Form
         $this->namapasien = $data->namapasien;
         $this->periksa_hamil_ke = $data->hamil_ke;
         $this->periksa_minggu_ke = $data->minggu_ke;
-        $this->periksa_bb = $data->bb;
+        $this->periksa_bb = $data->beratbadan;
         $this->periksa_tekanan_darah = $data->tekanan_darah;
         $this->periksa_lila = $data->lila;
     }
@@ -191,24 +191,21 @@ class PemeriksaanForm extends Form
     // *** extra
     private function updatePasienDanBayi()
     {
-        // *** update data pasiennya
-        if($this->kategori_periksa == 'bumil')
-        {
-            PasienModel::find($this->kodepasien)->update([
-                "hamil_ke" => $this->periksa_hamil_ke,
-                "minggu_ke" => $this->periksa_minggu_ke,
-                "bb" => $this->periksa_bb,
-                "tekanan_darah" => $this->periksa_tekanan_darah,
-                "lila" => $this->periksa_lila,
-            ]);
-        }
+        // *** update data ibu hamil/nifas
+        PasienModel::find($this->kodepasien)->update([
+            "hamil_ke" => $this->periksa_hamil_ke,
+            "minggu_ke" => $this->periksa_minggu_ke,
+            "beratbadan" => $this->periksa_bb,
+            "tekanan_darah" => $this->periksa_tekanan_darah,
+            "lila" => $this->periksa_lila,
+        ]);
 
         // *** update data bayinya
         if($this->kategori_periksa == 'bayi')
         {
-            BayiModel::find($this->kodepasien)->update([
+            PasienModel::find($this->kodebayi)->update([
                 "tinggibadan" => $this->periksa_tinggi_badan,
-                "bb" => $this->periksa_bb,
+                "beratbadan" => $this->periksa_bb,
             ]);
         }
     }

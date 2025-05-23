@@ -29,6 +29,8 @@ class ModalAddPasien extends Component
 
         $faker = Faker::create('id_ID');
         $this->form->nik = $faker->nik();
+        $this->form->hamil_ke = 1;
+        $this->form->minggu_ke = 1;
         $this->form->namapasien = $faker->name(gender: "female");
         $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
         $this->form->alamat = $faker->address();
@@ -36,17 +38,24 @@ class ModalAddPasien extends Component
 
     public function save()
     {
-        // *** cek apakah nik sudah terpakai
-        $isExistsNik = PasienModel::searchByNik($this->form->nik)->exists();
-        if($isExistsNik) {
-            $this->dispatch('notif', message : 'NIK yang diinputkan ternyata sudah ada nih di database, coba cek kembali ya NIK yang kamu gunakan', icon: 'warning');
+        try
+        {
+            // *** cek apakah nik sudah terpakai
+            $isExistsNik = PasienModel::searchByNik($this->form->nik)->exists();
+            if($isExistsNik) {
+                $this->dispatch('notif', message : 'NIK yang diinputkan ternyata sudah ada nih di database, coba cek kembali ya NIK yang kamu gunakan', icon: 'warning');
+                return;
+            }
+
+            $kodepasien = $this->form->store();
+            $data = PasienModel::find($kodepasien);
+            $this->dispatch('saved', data: json_encode($data));
+            $this->dispatch('close-modal', namamodal : 'modalPasienAdd');
+
+        } catch (\Exception $e) {
+            $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
             return;
         }
-
-        $kodepasien = $this->form->store();
-        $data = PasienModel::find($kodepasien);
-        $this->dispatch('saved', data: json_encode($data));
-        $this->dispatch('close-modal', namamodal : 'modalPasienAdd');
     }
 
     public function render()

@@ -59,8 +59,9 @@ class PasienForm extends Form
             'alamat' => 'nullable',
             'nohp' => 'nullable',
             'hamil_ke' => 'nullable|integer',
-            'minggu_ke' => 'required|integer',
-            'bb' => 'required|numeric',
+            'minggu_ke' => 'nullable|integer',
+            'beratbadan' => 'nullable|numeric',
+            'tinggibadan' => 'nullable|numeric',
             'lila' => 'nullable|numeric',
         ];
     }
