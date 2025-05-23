@@ -17,6 +17,7 @@ class PemeriksaanAE extends Component
     public $isEdit = false;
     public $id = "";
 
+    public $pulihanModalPasien = "";
     public $judulModalPasien = "";
     public $kategoriumur = "";
     public $jk = "";
@@ -85,32 +86,38 @@ class PemeriksaanAE extends Component
     // *** extra
     public function modalSelectPasien($data)
     {
-        $data = json_decode($data);
-        $this->form->setPasien($data);
+        if($this->pulihanModalPasien == "bumilnifas") {
+            $this->form->setPasien($data);
+        }
+
+        if($this->pulihanModalPasien == "bayi") {
+            $this->form->setBayi($data);
+        }
+
         $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
 
-    #[On('on-selectbayi')]
-    public function selectBayi($data)
-    {
-        $this->form->setBayi($data);
-        $this->dispatch('close-modal', namamodal : 'modalBayi');
-    }
+    // #[On('on-selectbayi')]
+    // public function selectBayi($data)
+    // {
+    //     $this->form->setBayi($data);
+    //     $this->dispatch('close-modal', namamodal : 'modalBayi');
+    // }
 
-    public function onClickPilihBayi()
-    {
-        if(empty($this->form->kodepasien)) {
-            $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian pilih anaknya', icon: 'warning');
-            return;
-        }
+    // public function onClickPilihBayi()
+    // {
+    //     if(empty($this->form->kodepasien)) {
+    //         $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian pilih anaknya', icon: 'warning');
+    //         return;
+    //     }
 
-        if($this->isEdit) {
-            $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama bayi lagi ya!', icon: 'warning');
-            return;
-        }
+    //     if($this->isEdit) {
+    //         $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama bayi lagi ya!', icon: 'warning');
+    //         return;
+    //     }
 
-        $this->dispatch('open-modal', namamodal : 'modalBayi');
-    }
+    //     $this->dispatch('open-modal', namamodal : 'modalBayi');
+    // }
 
     public function onClickOpenModalPasien($pilihan)
     {
@@ -119,18 +126,33 @@ class PemeriksaanAE extends Component
             return;
         }
 
-        if($pilihan == "bumilnifas") {
+        $this->pulihanModalPasien = $pilihan;
+
+        if($this->pulihanModalPasien == "bumilnifas") {
             $this->kategoriumur = "dewasa";
             $this->jk = "P";
             $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
         }
 
-        if($pilihan == "bayi") {
+        if($this->pulihanModalPasien == "bayi") {
             $this->kategoriumur = "balita";
             $this->judulModalPasien = "Pilih Bayi";
         }
 
         $this->dispatch('open-modal', namamodal : 'modalPasien');
+    }
+
+    public function onClickOpenModalAddPasien($pilihan)
+    {
+        $this->pulihanModalPasien = $pilihan;
+
+        if($this->pulihanModalPasien == "bumilnifas") {
+            $this->dispatch('open-modal', namamodal : 'modalPasienAdd');
+        }
+
+        if($this->pulihanModalPasien == "bayi") {
+            $this->dispatch('open-modal', namamodal : 'modalBayiAdd');
+        }
     }
 
     public function onClickBayiAdd()

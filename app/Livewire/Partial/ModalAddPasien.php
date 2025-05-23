@@ -30,7 +30,6 @@ class ModalAddPasien extends Component
         $faker = Faker::create('id_ID');
         $this->form->nik = $faker->nik();
         $this->form->namapasien = $faker->name(gender: "female");
-        $this->form->nama_suami = $faker->name(gender: "male");
         $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
         $this->form->alamat = $faker->address();
     }
@@ -46,7 +45,7 @@ class ModalAddPasien extends Component
 
         $kodepasien = $this->form->store();
         $data = PasienModel::find($kodepasien);
-        $this->dispatch('on-selectpasien', data: json_encode($data));
+        $this->dispatch('saved', data: json_encode($data));
         $this->dispatch('close-modal', namamodal : 'modalPasienAdd');
     }
 
@@ -105,13 +104,6 @@ class ModalAddPasien extends Component
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="minggu_ke" wire:model='form.minggu_ke'>
                                             <label for="minggu_ke">Minggu Ke</label>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-12">
-                                        <div class="form-floating">
-                                            <input type="text" class="form-control" id="nama_suami" wire:model='form.nama_suami'>
-                                            <label for="nama_suami">Nama Suami</label>
                                         </div>
                                     </div>
 

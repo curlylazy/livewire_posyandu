@@ -93,7 +93,6 @@ class Option
 		$res = collect();
         $res->push(['value' => 'nifas', 'name' => 'Nifas']);
         $res->push(['value' => 'bumil', 'name' => 'Bumil']);
-        $res->push(['value' => 'lansia', 'name' => 'Lansia']);
 		return $res;
 	}
 

@@ -28,9 +28,13 @@
         </script>
     @endscript
 
-    <livewire:partial.modal-add-pasien :kategori_periksa="$kategori_periksa"/>
     <livewire:partial.modal-add-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
     <livewire:partial.modal-bayi :kodepasien="$form->kodepasien" :namapasien="$form->namapasien" />
+
+    <livewire:partial.modal-add-pasien
+        :kategori_periksa="$kategori_periksa"
+        @saved="modalSelectPasien($event.detail.data)"
+    />
 
     <livewire:partial.modal-pasien
         :judulModal="$judulModalPasien"
@@ -62,7 +66,7 @@
                         <div class="col-12">
                             <div class="d-flex gap-2">
                                 <button type="button" class="btn btn-primary" wire:click='$dispatch("open-modal", { namamodal: "modalPasienAdd" })'><i class="fas fa-female"></i> Tambah Pasien</button>
-                                <button type="button" x-show="$wire.kategori_periksa == 'nifas'" class="btn btn-primary" wire:click='onClickBayiAdd'><i class="fas fa-baby"></i> Tambah Bayi</button>
+                                <button type="button" x-show="$wire.kategori_periksa == 'nifas'" x-cloak class="btn btn-primary" wire:click='onClickBayiAdd'><i class="fas fa-baby"></i> Tambah Bayi</button>
                             </div>
                         </div>
                     @endif
@@ -74,7 +78,7 @@
                                 <label for="form.namapasien">{{ ($kategori_periksa == "bumil") ? "Nama Pasien" : "Nama Ibu" }}</label>
                             </div>
                             <button x-show='$wire.form.kodepasien != ""' class="btn btn-outline-secondary" type="button" data-coreui-target="#modalPasien" data-coreui-toggle="modal"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickPilihPasien'><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickOpenModalPasien("bumilnifas")'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
@@ -85,7 +89,7 @@
                                 <label for="form.namabayi">Nama Bayi</label>
                             </div>
                             <button x-show='$wire.form.kodebayi != ""' class="btn btn-outline-secondary" type="button"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickPilihBayi'><i class="fas fa-search"></i></button>
+                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickOpenModalPasien("bayi")'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 
