@@ -38,6 +38,7 @@
 
     <livewire:partial.modal-pasien
         :judulModal="$judulModalPasien"
+        :jk="$jk"
         @selectpasien="modalSelectPasien($event.detail.data)"
     />
 

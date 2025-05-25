@@ -29,6 +29,9 @@ class PasienForm extends Form
     public $tekanan_darah = 0;
     public $status = 1;
 
+    // *** jika sudah menikah
+    public $kodesuami = '';
+
     // *** data untuk balita
     public $kodeayah = '';
     public $kodeibu = '';
@@ -49,6 +52,7 @@ class PasienForm extends Form
     public $kategoriumur = "";
     public $namaayah = "";
     public $namaibu = "";
+    public $namasuami = "";
 
     public function rules()
     {
@@ -100,12 +104,15 @@ class PasienForm extends Form
         $this->minggu_ke = $data->minggu_ke;
         $this->lila = $data->lila;
 
+        // *** jika sudah menikah
+        $this->kodesuami = $data->kodesuami;
 
         // *** extra
         $this->umur = IDateTime::dateDiff($this->tgl_lahir);
         $this->kategoriumur = GetString::getKategoriUmur($this->umur);
         $this->namaayah = $data->namaayah;
         $this->namaibu = $data->namaibu;
+        $this->namasuami = $data->namasuami;
     }
 
     public function prepare()
@@ -118,7 +125,7 @@ class PasienForm extends Form
 
     private function exceptData()
     {
-        $arr = ['kategoriumur', 'namaayah', 'namaibu', 'umur'];
+        $arr = ['kategoriumur', 'namaayah', 'namaibu', 'umur', 'namasuami'];
         return $arr;
     }
 

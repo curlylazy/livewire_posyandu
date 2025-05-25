@@ -35,6 +35,9 @@ return new class extends Migration
             $table->decimal('tinggibadan')->default(1);
             $table->decimal('beratbadan')->nullable()->default(0);
 
+            // *** jika perempuan
+            $table->uuid('kodesuami')->nullable();
+
             // *** data untuk balita
             $table->uuid('kodeayah')->nullable();
             $table->uuid('kodeibu')->nullable();

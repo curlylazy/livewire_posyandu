@@ -14,7 +14,6 @@
     @endscript
 
     <livewire:partial.modal-pasien
-        :kategoriumur="$form->kategoriumur"
         :pilihanayahibu="$pilihanayahibu"
         :judulModal="$judulModalPasien"
         @selectpasien="modalSelectPasien($event.detail.data)"
@@ -154,13 +153,13 @@
 
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="beratbadan" wire:model='form.beratbadan' x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="beratbadan" wire:model='form.beratbadan' x-mask:dynamic="$money($input)">
                             <label for="bb">Berat Badan</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="lila" wire:model='form.lila' x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="lila" wire:model='form.lila' x-mask:dynamic="$money($input)">
                             <label for="lila">Lingkar Lengan</label>
                         </div>
                     </div>
@@ -168,6 +167,19 @@
                         <div class="form-floating">
                             <input type="text" class="form-control" id="tekanan_darah" wire:model='form.tekanan_darah' x-mask:dynamic="$money($input)">
                             <label for="tekanan_darah">Tekanan Darah</label>
+                        </div>
+                    </div>
+                </div>
+
+                {{-- jika sudah remaja / dewasa dan perempuan bisa tentukan siapa suaminya --}}
+                <div class="row g-2 mt-0" x-show="$wire.form.kategoriumur == 'Dewasa' || $wire.form.kategoriumur == 'Remaja' || $wire.form.kategoriumur == 'Lansia'" x-cloak>
+                    <div class="col-md-12">
+                        <div class="input-group">
+                            <div class="form-floating pe-none">
+                                <input type="text" class="form-control" id="namasuami" wire:model='form.namasuami' placeholder="">
+                                <label for="namasuami">Suami</label>
+                            </div>
+                            <button type="button" class="input-group-text" wire:click='onClickOpenModalPasien("suami")'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
                 </div>

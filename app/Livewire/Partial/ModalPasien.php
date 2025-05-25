@@ -70,7 +70,7 @@ class ModalPasien extends Component
                                     <ul class="list-group">
                                         @foreach($this->dataPasien as $data)
                                             <li class="list-group-item" role="button" wire:click="selectRow('{{ $data }}')">
-                                                <small>{{ $data->nik }}</small>
+                                                <small>{{ $data->nik }} ({{ $data->jk }})</small>
                                                 <h6>{{ $data->namapasien }}</h6>
                                             </li>
                                         @endforeach

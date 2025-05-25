@@ -72,7 +72,15 @@ class PasienAE extends Component
     public function onClickOpenModalPasien($pilihan)
     {
         $this->pilihanayahibu = $pilihan;
-        $this->judulModalPasien = ($pilihan == "lakilakiDewasa") ? "Daftar Ayah" : "Daftar Ibu";
+
+        if($pilihan == "lakilakiDewasa") {
+            $this->judulModalPasien = "Daftar Ayah";
+        } elseif($pilihan == "perempuanDewasa") {
+            $this->judulModalPasien = "Daftar Ibu";
+        } elseif($pilihan == "suami") {
+            $this->judulModalPasien = "Suami";
+        }
+
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
@@ -89,6 +97,11 @@ class PasienAE extends Component
         {
             $this->form->kodeibu = $data->kodepasien;
             $this->form->namaibu = $data->namapasien;
+        }
+        elseif($this->pilihanayahibu == "suami")
+        {
+            $this->form->kodesuami = $data->kodepasien;
+            $this->form->namasuami = $data->namapasien;
         }
 
         $this->dispatch('close-modal', namamodal : 'modalPasien');
