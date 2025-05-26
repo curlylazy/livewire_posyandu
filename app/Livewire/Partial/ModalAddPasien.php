@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Partial;
 
+use App\Lib\IDateTime;
 use App\Livewire\Forms\PasienForm;
 use App\Models\PasienModel;
 use Livewire\Attributes\Computed;
@@ -12,50 +13,52 @@ use Faker\Factory as Faker;
 class ModalAddPasien extends Component
 {
     public PasienForm $form;
-    public $kategori_periksa, $pilihanAdd, $kodeibu, $judulModal = "Tambah Pasien";
-
-    // #[Reactive]
     // public $kategori_periksa, $pilihanAdd, $kodeibu, $judulModal = "Tambah Pasien";
 
-    public function mount($kategori_periksa = "", $pilihanAdd = "", $kodeibu = "", $judulModal = "Tambah Pasien")
-    {
-        $this->kategori_periksa = $kategori_periksa;
-        $this->pilihanAdd = $pilihanAdd;
-        $this->kodeibu = $kodeibu;
-        $this->judulModal = $judulModal;
-    }
+    #[Reactive]
+    public $kategori_periksa, $pilihanAdd, $kodeibu, $judulModal = "Tambah Pasien";
+
+    // public function mount($kategori_periksa = "", $pilihanAdd = "", $kodeibu = "", $judulModal = "Tambah Pasien")
+    // {
+    //     $this->kategori_periksa = $kategori_periksa;
+    //     $this->pilihanAdd = $pilihanAdd;
+    //     $this->kodeibu = $kodeibu;
+    //     $this->judulModal = $judulModal;
+    // }
 
     public function booted()
     {
-        // if($this->kategori_periksa == "bumil")
-        // {
-        //     $this->form->kategoripasien = "bumil";
-        // }
-        // else
-        // {
-        //     $this->form->kategoripasien = "nifas";
-        // }
+        if($this->kategori_periksa == "bumil")
+        {
+            $this->form->kategoripasien = "bumil";
+        }
+        else
+        {
+            $this->form->kategoripasien = "nifas";
+        }
 
-        // $faker = Faker::create('id_ID');
+        $faker = Faker::create('id_ID');
 
-        // if($this->pilihanAdd == "bumilnifas")
-        // {
-        //     $this->form->nik = $faker->nik();
-        //     $this->form->hamil_ke = 1;
-        //     $this->form->minggu_ke = 1;
-        //     $this->form->namapasien = $faker->name(gender: "female");
-        //     $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
-        //     $this->form->alamat = $faker->address();
-        // }
+        if($this->pilihanAdd == "bumilnifas")
+        {
+            $this->form->nik = $faker->nik();
+            $this->form->hamil_ke = 1;
+            $this->form->minggu_ke = 1;
+            $this->form->namapasien = $faker->name(gender: "female");
+            $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
+            $this->form->alamat = $faker->address();
+        }
 
-        // if($this->pilihanAdd == "bayi")
-        // {
-        //     $dataIbu = PasienModel::find($this->kodeibu);
-        //     $this->form->kodeibu = $this->kodeibu;
-        //     $this->form->namaibu = $dataIbu->namapasien;
-        //     $this->form->namapasien = $faker->name();
-        //     $this->form->tgl_lahir = $faker->dateTimeBetween('-5 months', '-1 months');
-        // }
+        // *** isikan parameter kodeibu
+        if($this->pilihanAdd == "bayi" && !empty($this->kodeibu))
+        {
+            $dataIbu = PasienModel::find($this->kodeibu);
+            $this->form->nik = "";
+            $this->form->kodeibu = $this->kodeibu;
+            $this->form->namaibu = $dataIbu->namapasien;
+            $this->form->namapasien = $faker->name();
+            $this->form->tgl_lahir = IDateTime::formatDate($faker->dateTimeBetween('-5 months', '-1 months'), "YYYY-MM-DD");
+        }
     }
 
     public function save()
@@ -122,7 +125,7 @@ class ModalAddPasien extends Component
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="">
+                                            <input type="text" class="form-control date" id="form.tgl_lahir" wire:model='form.tgl_lahir' placeholder="" autocomplete="off">
                                             <label for="form.tgl_lahir">Tanggal Lahir</label>
                                         </div>
                                     </div>
@@ -174,7 +177,7 @@ class ModalAddPasien extends Component
                                     </div>
                                     <div class="col-12 col-md-12">
                                         <div class="form-floating">
-                                            <input type="text" class="form-control date" id="form.tgl_bersalin" wire:model='form.tgl_bersalin' placeholder="">
+                                            <input type="text" class="form-control date" id="form.tgl_bersalin" wire:model='form.tgl_bersalin' placeholder="" autocomplete="off">
                                             <label for="form.tgl_bersalin">Tanggal Bersalin</label>
                                         </div>
                                     </div>

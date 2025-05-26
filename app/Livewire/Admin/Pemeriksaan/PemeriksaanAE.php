@@ -19,6 +19,7 @@ class PemeriksaanAE extends Component
 
     public $pulihanModalPasien = "";
     public $judulModalPasien = "";
+    public $keteranganModal = "";
     public $kategoriumur = "";
     public $jk = "";
 
@@ -126,32 +127,40 @@ class PemeriksaanAE extends Component
             return;
         }
 
-        $this->pulihanModalPasien = $pilihan;
+        $this->keteranganModal = "";
+        $this->jk = "";
 
-        if($this->pulihanModalPasien == "bumilnifas") {
-            $this->kategoriumur = "dewasa";
+        if($pilihan == "bumilnifas") {
+            $this->kategoriumur = "Dewasa";
             $this->jk = "P";
             $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
         }
 
-        if($this->pulihanModalPasien == "bayi") {
-            $this->kategoriumur = "balita";
+        if($pilihan == "bayi") {
+
+            if(empty($this->form->kodepasien)) {
+                $this->dispatch('notif', message: 'Oops tidak bisa, harus pilih ibunya dulu ya!', icon: 'warning');
+                return;
+            }
+
+            $this->kategoriumur = "Balita";
             $this->judulModalPasien = "Pilih Bayi";
+            $this->keteranganModal = "Ibu : ".$this->form->namapasien;
         }
 
+        $this->pulihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
     public function onClickOpenModalAddPasien($pilihan)
     {
-        $this->pulihanModalPasien = $pilihan;
 
-        if($this->pulihanModalPasien == "bumilnifas")
+        if($pilihan == "bumilnifas")
         {
             $this->judulModalPasien = "Tambah Pasien Ibu Hamil / Nifas";
         }
 
-        if($this->pulihanModalPasien == "bayi")
+        if($pilihan == "bayi")
         {
             if(empty($this->form->kodepasien)) {
                 $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian bisa menambahkan data bayi', icon: 'warning');
@@ -161,8 +170,7 @@ class PemeriksaanAE extends Component
             $this->judulModalPasien = "Tambah Pasien Bayi";
         }
 
-        // *** jika kondisi terpenuhi baru buka modal
-        // if($openModal)
+        $this->pulihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasienAdd');
     }
 

@@ -90,6 +90,13 @@ class PasienModel extends Model
         }
     }
 
+    public function scopeSearchByIbu(Builder $query, $kodeibu): void
+    {
+        if(!empty($kodeibu)) {
+            $query->where('tbl_pasien.kodeibu', '=', $kodeibu);
+        }
+    }
+
     public function scopeSearchByStatus(Builder $query, $status): void
     {
         if($status != "") {

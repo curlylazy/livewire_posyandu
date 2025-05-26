@@ -41,6 +41,9 @@
 
     <livewire:partial.modal-pasien
         :judulModal="$judulModalPasien"
+        :kategoriumur="$kategoriumur"
+        :keteranganModal="$keteranganModal"
+        :kodeibu="$form->kodepasien"
         :jk="$jk"
         @selectpasien="modalSelectPasien($event.detail.data)"
     />
@@ -75,6 +78,7 @@
                         </div>
                     @endif
 
+                    {{-- *** pilih pasien bumil --}}
                     <div class="col-12 col-md-12">
                         <div class="input-group">
                             <div class="form-floating">
@@ -86,6 +90,7 @@
                         </div>
                     </div>
 
+                    {{-- *** pilih bayi --}}
                     <div class="col-12 col-md-12" x-show="$wire.kategori_periksa == 'nifas'" x-cloak>
                         <div class="input-group">
                             <div class="form-floating">

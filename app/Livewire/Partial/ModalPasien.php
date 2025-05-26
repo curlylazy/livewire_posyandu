@@ -16,7 +16,7 @@ class ModalPasien extends Component
     public $katakunci = "";
 
     #[Reactive]
-    public $kategoriumur = "", $jk = "", $pilihanayahibu = "", $judulModal = "Daftar Pasien";
+    public $kategoriumur, $jk, $pilihanayahibu, $keteranganModal, $kodeibu, $judulModal = "Daftar Pasien";
 
     public function mount()
     {
@@ -29,6 +29,7 @@ class ModalPasien extends Component
                 ->search($this->katakunci)
                 ->searchByKategoriUmur($this->kategoriumur)
                 ->searchByJK($this->jk)
+                ->searchByIbu($this->kodeibu)
                 ->searchByStatus(1);
 
         if($this->pilihanayahibu == "lakilakiDewasa") {
@@ -38,7 +39,6 @@ class ModalPasien extends Component
         if($this->pilihanayahibu == "perempuanDewasa") {
             $data = $data->searchByPerempuanDewasa();
         }
-
 
         $data = $data->paginate(10, pageName: 'pasien-page');
 
@@ -67,23 +67,27 @@ class ModalPasien extends Component
                                     <div class="mb-2">
                                         <input class="form-control" wire:model='katakunci' placeholder="masukkan katakunci pencarian.." wire:keydown.enter='$commit'/>
                                     </div>
-                                    <ul class="list-group">
+                                    <div class="mb-2 d-flex gap-2">
+                                        <div class="p-1 border rounded-3" x-cloak x-show="$wire.keteranganModal != ''">{{ $keteranganModal }}</div>
+                                        <div class="p-1 border rounded-3" x-cloak x-show="$wire.kategoriumur != ''">Umur : {{ $kategoriumur }}</div>
+                                    </div>
+                                    @if($this->dataPasien->isEmpty())
+                                        <div>Maaf tidak ada data yang ditemukan</div>
+                                    @else
+                                        <ul class="list-group">
                                         @foreach($this->dataPasien as $data)
                                             <li class="list-group-item" role="button" wire:click="selectRow('{{ $data }}')">
                                                 <div class="d-flex align-items-center gap-2">
-                                                    <!-- <span class="material-symbols-outlined">
-                                                        male
-                                                    </span> -->
                                                     <div><i class="fas {{ ($data->jk == 'P') ? 'fa-female' : 'fa-male' }} fa-xl"></i></div>
                                                     <div class="d-flex flex-column">
                                                         <small>{{ $data->nik }}</small>
                                                         <h6>{{ $data->namapasien }}</h6>
                                                     </div>
                                                 </div>
-
                                             </li>
                                         @endforeach
-                                    </ul>
+                                        </ul>
+                                    @endif
                                 </div>
 
                                 <div wire:loading.inline>

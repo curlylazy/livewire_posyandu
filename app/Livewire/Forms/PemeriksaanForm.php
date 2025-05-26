@@ -136,8 +136,8 @@ class PemeriksaanForm extends Form
     public function setBayi($data)
     {
         $data = json_decode($data);
-        $this->kodebayi = $data->kodebayi;
-        $this->namabayi = $data->namabayi;
+        $this->kodebayi = $data->kodepasien;
+        $this->namabayi = $data->namapasien;
         $this->periksa_bb_bayi = $data->beratbadan;
         $this->periksa_tinggi_badan = $data->tinggibadan;
     }
