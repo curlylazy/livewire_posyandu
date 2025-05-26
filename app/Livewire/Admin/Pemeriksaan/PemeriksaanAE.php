@@ -146,13 +146,24 @@ class PemeriksaanAE extends Component
     {
         $this->pulihanModalPasien = $pilihan;
 
-        if($this->pulihanModalPasien == "bumilnifas") {
-            $this->dispatch('open-modal', namamodal : 'modalPasienAdd');
+        if($this->pulihanModalPasien == "bumilnifas")
+        {
+            $this->judulModalPasien = "Tambah Pasien Ibu Hamil / Nifas";
         }
 
-        if($this->pulihanModalPasien == "bayi") {
-            $this->dispatch('open-modal', namamodal : 'modalBayiAdd');
+        if($this->pulihanModalPasien == "bayi")
+        {
+            if(empty($this->form->kodepasien)) {
+                $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian bisa menambahkan data bayi', icon: 'warning');
+                return;
+            }
+
+            $this->judulModalPasien = "Tambah Pasien Bayi";
         }
+
+        // *** jika kondisi terpenuhi baru buka modal
+        // if($openModal)
+        $this->dispatch('open-modal', namamodal : 'modalPasienAdd');
     }
 
     public function onClickBayiAdd()

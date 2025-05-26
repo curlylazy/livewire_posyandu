@@ -33,6 +33,9 @@
 
     <livewire:partial.modal-add-pasien
         :kategori_periksa="$kategori_periksa"
+        :judulModal="$judulModalPasien"
+        :pilihanAdd="$pulihanModalPasien"
+        :kodeibu="$form->kodepasien"
         @saved="modalSelectPasien($event.detail.data)"
     />
 
