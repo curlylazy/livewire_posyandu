@@ -70,8 +70,17 @@ class ModalPasien extends Component
                                     <ul class="list-group">
                                         @foreach($this->dataPasien as $data)
                                             <li class="list-group-item" role="button" wire:click="selectRow('{{ $data }}')">
-                                                <small>{{ $data->nik }} ({{ $data->jk }})</small>
-                                                <h6>{{ $data->namapasien }}</h6>
+                                                <div class="d-flex align-items-center gap-2">
+                                                    <!-- <span class="material-symbols-outlined">
+                                                        male
+                                                    </span> -->
+                                                    <div><i class="fas {{ ($data->jk == 'P') ? 'fa-female' : 'fa-male' }} fa-xl"></i></div>
+                                                    <div class="d-flex flex-column">
+                                                        <small>{{ $data->nik }}</small>
+                                                        <h6>{{ $data->namapasien }}</h6>
+                                                    </div>
+                                                </div>
+
                                             </li>
                                         @endforeach
                                     </ul>

@@ -29,7 +29,7 @@
                         </li>
                         <li class="list-group-item d-flex  flex-md-row flex-column">
                             <div class="flex-grow-1">Suami :</div>
-                            <div class="fw-bold">{{ $dataRow->nama_suami }}</div>
+                            <div class="fw-bold">{{ $dataRow->namasuami }}</div>
                         </li>
                         <li class="list-group-item d-flex  flex-md-row flex-column">
                             <div class="flex-grow-1">Tanggal Lahir / Umur :</div>
