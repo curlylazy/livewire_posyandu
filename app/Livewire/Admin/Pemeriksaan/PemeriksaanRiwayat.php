@@ -16,12 +16,17 @@ class PemeriksaanRiwayat extends Component
     public $pageName = "pemeriksaan";
 
     #[Url]
-    public $kategori_periksa = "";
+    public $kategori_periksa = "", $q_hamil_ke = 0;
+
+    public $judulModalPasien = "";
+    public $kategoriumur = "";
+    public $jk = "";
 
     public $selectedKode = "";
     public $selectedNama = "";
     public $nik = "";
     public $namapasien = "";
+    public $hamil_ke = "";
 
 
     public function mount()
@@ -38,7 +43,7 @@ class PemeriksaanRiwayat extends Component
     public function readData()
     {
         $data = PemeriksaanModel::searchByNIK($this->nik)
-                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_bayi.*')
+                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*')
                 ->joinTable()
                 ->searchByKategoriPeriksa($this->kategori_periksa)
                 ->latest('tbl_pemeriksaan.tgl_periksa')
@@ -55,17 +60,27 @@ class PemeriksaanRiwayat extends Component
     }
 
     // *** extra
-    public function onClickPilihPasien()
+    public function onClickOpenModalPasien()
     {
+        $this->judulModalPasien = "Daftar Ibu Hamil";
+        $this->kategoriumur = "Dewasa";
+        $this->jk = "P";
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
-    #[On('on-selectpasien')]
-    public function selectPasien($data)
+    public function onClikSetHamilKe($hamil_ke)
+    {
+        $this->q_hamil_ke = $hamil_ke;
+        $this->readData();
+    }
+
+    public function modalSelectPasien($data)
     {
         $data = json_decode($data);
         $this->nik = $data->nik;
         $this->namapasien = $data->namapasien;
+        $this->hamil_ke = $data->hamil_ke;
+        $this->q_hamil_ke = $data->hamil_ke;
         $this->dispatch('close-modal', namamodal : 'modalPasien');
         $this->readData();
     }

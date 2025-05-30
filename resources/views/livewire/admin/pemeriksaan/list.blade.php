@@ -67,6 +67,7 @@
                                     <tr>
                                         <th scope="col">NIK</th>
                                         <th scope="col">Nama Ibu</th>
+                                        <th scope="col">Hamil Ke</th>
                                         <th scope="col">BB</th>
                                         <th scope="col">LILA</th>
                                         <th scope="col">Tanggal Lahir</th>
@@ -79,6 +80,7 @@
                                         <tr role="button" wire:click='selectData({{ $row }})'>
                                             <td>{{ $row->nik }}</td>
                                             <td>{{ $row->namapasien }}</td>
+                                            <td>{{ $row->hamil_ke }}</td>
                                             <td>{{ Number::format($row->periksa_bb) }} kg</td>
                                             <td>{{ Number::format($row->periksa_lila) }} cm</td>
                                             <td>{{ IDateTime::formatDate($row->tgl_lahir_pasien) }}</td>

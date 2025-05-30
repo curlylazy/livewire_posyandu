@@ -44,7 +44,7 @@
 
                 {{-- *** Data Bayi --}}
                 @if($kategori_periksa == "nifas")
-                    <div class="col-12">
+                    <div class="col-12 mt-4">
                         <h5>Data Bayi</h5>
                         <ul class="list-group">
                             <li class="list-group-item d-flex flex-md-row flex-column">

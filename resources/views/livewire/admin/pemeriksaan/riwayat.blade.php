@@ -1,6 +1,12 @@
 <div>
 
-    <livewire:partial.modal-pasien />
+    <livewire:partial.modal-pasien
+        :judulModal="$judulModalPasien"
+        :kategoriumur="$kategoriumur"
+        :jk="$jk"
+        @selectpasien="modalSelectPasien($event.detail.data)"
+    />
+
     <x-partials.loader />
     <x-partials.flashmsg />
     <x-slot:bc>
@@ -11,9 +17,10 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
-            <div class="mb-3">
+            <div class="mb-3 d-flex flex-column flex-md-row gap-2">
                 <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <button class="btn btn-outline-primary" type="button" wire:click='onClickPilihPasien'><i class="fas fa-search"></i> Pilih Pasien</button>
+                <button class="btn btn-outline-primary" type="button" wire:click='onClickOpenModalPasien'><i class="fas fa-search"></i> Pilih Pasien</button>
+                <button x-cloak x-show="$wire.nik != ''" class="btn btn-outline-success" type="button" wire:click='onClickOpenModalPasien'><i class="fas fa-file-export"></i> Export Excel</button>
             </div>
 
             @if(!empty($nik))
@@ -21,7 +28,17 @@
                     <h6>Nama Pasien : {{ $namapasien }}</h6>
                     <h6>NIK : {{ $nik }}</h6>
                 </div>
+                <div class="d-flex h6 align-items-center gap-2">
+                    <div>Hamil Ke ?:</div>
+                    <div>
+                        @for ($i=1;$i<=$hamil_ke;$i++)
+                            <button type="button" wire:click='onClikSetHamilKe("{{ $i }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $q_hamil_ke == $i]) >{{ $i }}</button>
+                        @endfor
+                    </div>
+                </div>
             @endif
+
+
 
             <x-partials.containerdata :dataRows="$dataRow">
                 <hr />
@@ -33,6 +50,10 @@
                                 <a href="{{ url("admin/pemeriksaan/detail/$row->kodepemeriksaan?kategori_periksa=$kategori_periksa") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
                             </div>
                             <ul class="list-group">
+                                <li class="list-group-item d-flex flex-md-row flex-column" x-cloak x-show="$wire.kategori_periksa == 'bumil'">
+                                    <div class="flex-grow-1">Hamil Ke ?:</div>
+                                    <div class="fw-bold">{{ $row->hamil_ke }}</div>
+                                </li>
                                 <li class="list-group-item d-flex flex-md-row flex-column">
                                     <div class="flex-grow-1">Berat Badan / Sesuai Kurva ?:</div>
                                     <div class="fw-bold">{{ ($kategori_periksa == "nifas") ? $row->periksa_bb_bayi : $row->periksa_bb }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_bb) }}</div>
