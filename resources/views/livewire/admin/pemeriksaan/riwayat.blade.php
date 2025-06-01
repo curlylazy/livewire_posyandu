@@ -20,7 +20,7 @@
             <div class="mb-3 d-flex flex-column flex-md-row gap-2">
                 <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
                 <button class="btn btn-outline-primary" type="button" wire:click='onClickOpenModalPasien'><i class="fas fa-search"></i> Pilih Pasien</button>
-                <button x-cloak x-show="$wire.nik != ''" class="btn btn-outline-success" type="button" wire:click='onClickOpenModalPasien'><i class="fas fa-file-export"></i> Export Excel</button>
+                <button x-cloak x-show="$wire.nik != ''" class="btn btn-outline-success" type="button" wire:click='onClickExportToExcel'><i class="fas fa-file-export"></i> Export Excel</button>
             </div>
 
             @if(!empty($nik))
@@ -28,12 +28,14 @@
                     <h6>Nama Pasien : {{ $namapasien }}</h6>
                     <h6>NIK : {{ $nik }}</h6>
                 </div>
-                <div class="d-flex h6 align-items-center gap-2">
-                    <div>Hamil Ke ?:</div>
-                    <div>
-                        @for ($i=1;$i<=$hamil_ke;$i++)
-                            <button type="button" wire:click='onClikSetHamilKe("{{ $i }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $q_hamil_ke == $i]) >{{ $i }}</button>
-                        @endfor
+                <div x-cloak x-show="$wire.kategori_periksa == 'bumil'">
+                    <div class="d-flex h6 align-items-center gap-2">
+                        <div>Hamil Ke ?:</div>
+                        <div>
+                            @for ($i=1;$i<=$hamil_ke;$i++)
+                                <button type="button" wire:click='onClikSetHamilKe("{{ $i }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $q_hamil_ke == $i]) >{{ $i }}</button>
+                            @endfor
+                        </div>
                     </div>
                 </div>
             @endif

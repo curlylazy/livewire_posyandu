@@ -80,4 +80,11 @@ class PemeriksaanModel extends Model
     {
         $query->where('tbl_pasien.nik', $nik);
     }
+
+    public function scopeSearchByHamilKe(Builder $query, $periksa_hamil_ke): void
+    {
+        if($periksa_hamil_ke != "") {
+            $query->where('tbl_pemeriksaan.periksa_hamil_ke', $periksa_hamil_ke);
+        }
+    }
 }
