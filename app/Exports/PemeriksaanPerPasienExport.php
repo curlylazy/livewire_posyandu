@@ -6,8 +6,12 @@ use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
 use Illuminate\Contracts\View\View;
 use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
+use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
-class PemeriksaanPerPasienExport implements FromView
+class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
 {
     protected $kodepasien;
     protected $kategoriperiksa;
@@ -24,6 +28,20 @@ class PemeriksaanPerPasienExport implements FromView
         $this->kategoriperiksa = $data['kategoriperiksa'];
         $this->kodepasien = $data['kodepasien'];
         $this->hamil_ke = $data['hamil_ke'];
+    }
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class => function(AfterSheet $event) {
+                // Atur wrap text untuk kolom B dan C, misalnya sampai baris 100
+                $event->sheet->getDelegate()->getStyle('B2:C100')->getAlignment()->setWrapText(true);
+
+                // Jika ingin semua kolom dari A sampai Z wrap text
+                // $event->sheet->getDelegate()->getStyle('A1:Z100')
+                //     ->getAlignment()->setWrapText(true);
+            },
+        ];
     }
 
     public function view(): View
