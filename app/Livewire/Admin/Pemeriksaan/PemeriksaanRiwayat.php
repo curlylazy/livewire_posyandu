@@ -19,7 +19,7 @@ class PemeriksaanRiwayat extends Component
 
     // *** q mengacu pada query
     #[Url]
-    public $kategori_periksa = "", $q_hamil_ke = "";
+    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "";
 
     public $judulModalPasien = "";
     public $kategoriumur = "";
@@ -28,7 +28,6 @@ class PemeriksaanRiwayat extends Component
     public $selectedKode = "";
     public $selectedNama = "";
     public $kodepasien = "";
-    public $nik = "";
     public $namapasien = "";
     public $hamil_ke = "";
 
@@ -100,12 +99,12 @@ class PemeriksaanRiwayat extends Component
     {
         $array = [
             "kategoriperiksa" => $this->kategori_periksa,
-            "kodepasien" => $this->kodepasien,
+            "nik" => $this->nik,
             "hamil_ke" => $this->q_hamil_ke,
         ];
 
         $namafile = "Laporan Pemeriksaan Per Pasien.xlsx";
-        return Excel::download(new PemeriksaanPerPasienExport(json_encode($array)), $namafile)->setContentDisposition('inline');
+        return Excel::download(new PemeriksaanPerPasienExport(json_encode($array)), $namafile);
     }
 
     public function render()

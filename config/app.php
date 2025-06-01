@@ -158,6 +158,7 @@ return [
         'GetString' => 'App\Lib\GetString',
         'IDateTime' => 'App\Lib\IDateTime',
         'ImageUtils' => 'App\Lib\ImageUtils',
+        'CssExcel' => 'App\Lib\CssExcel',
     ])->toArray(),
 
 ];
