@@ -86,7 +86,8 @@
                                 <label for="form.namapasien">{{ ($kategori_periksa == "bumil") ? "Nama Pasien" : "Nama Ibu" }}</label>
                             </div>
                             <button x-show='$wire.form.kodepasien != ""' x-cloak class="btn btn-outline-secondary" type="button" data-coreui-target="#modalPasien" data-coreui-toggle="modal"><i class="fas fa-info"></i></button>
-                            <button class="btn btn-outline-secondary" type="button" wire:click='onClickOpenModalPasien("bumilnifas")'><i class="fas fa-search"></i></button>
+                            <button x-show='$wire.form.kodepasien != "" && $wire.isEdit == false' x-cloak class="btn btn-outline-secondary" wire:click='onClickResetDataPasien()' type="button"><i class="fas fa-remove"></i></button>
+                            <button x-show='$wire.form.kodepasien == ""' x-cloak class="btn btn-outline-secondary" type="button" wire:click='onClickOpenModalPasien("bumilnifas")'><i class="fas fa-search"></i></button>
                         </div>
                     </div>
 

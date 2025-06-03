@@ -184,6 +184,12 @@ class PemeriksaanAE extends Component
         $this->dispatch('open-modal', namamodal : 'modalBayiAdd');
     }
 
+    public function onClickResetDataPasien()
+    {
+        $this->form->resetForm();
+        $this->form->kategori_periksa = $this->kategori_periksa;
+    }
+
     public function render()
     {
         return view("livewire.admin.$this->pageName.ae")

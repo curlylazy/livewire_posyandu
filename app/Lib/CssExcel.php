@@ -41,4 +41,38 @@ class CssExcel
     public static $rowHeight200px = "height: 200px;";
 
     public static $pageResult = "font-weight: bold; font-size: 14pt;";
+
+    public static function setBackground($value)
+    {
+        $res = "";
+        if($value) {
+            $res = "color: white; background-color: #015917;";
+        } else {
+            $res = "color: white; background-color: #910101;";
+        }
+
+        return $res;
+    }
+
+    public static function columnBreak($count)
+    {
+        $res = collect();
+        for($i=1;$i<=$count;$i++)
+        {
+            $res->push('<th></th>');
+        }
+
+        return $res->join('');
+    }
+
+    public static function rowBreak($count)
+    {
+        $res = collect();
+        for($i=1;$i<=$count;$i++)
+        {
+            $res->push('<tr></tr>');
+        }
+
+        return $res->join('');
+    }
 }

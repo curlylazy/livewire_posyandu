@@ -150,6 +150,12 @@ class PemeriksaanForm extends Form
         $this->periksa_tinggi_badan = 0;
     }
 
+    public function resetForm()
+    {
+        $this->reset();
+        $this->resetValidation();
+    }
+
     public function prepare()
     {
     }

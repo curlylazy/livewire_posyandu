@@ -11,8 +11,9 @@ use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
+use Maatwebsite\Excel\Concerns\WithProperties;
 
-class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
+class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize, WithProperties
 {
     protected $nik;
     protected $kategoriperiksa;
@@ -31,6 +32,22 @@ class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
         $this->hamil_ke = $data['hamil_ke'];
     }
 
+    public function properties(): array
+    {
+        return [
+            'creator'        => config('app.webcreator'),
+            'lastModifiedBy' => config('app.webcreator'),
+            'title'          => ($this->kategoriperiksa == 'bumil') ? "Pemeriksaan Ibu Hamil" : "Pemeriksaan Nifas",
+            'description'    => 'kartu mandiri per pasien yang memudahkan untuk melihat kunjungan para ibu per periodenya',
+            'subject'        => 'Pasien '.($this->kategoriperiksa == 'bumil') ? 'Ibu Hamil' : 'Ibu Nifas',
+            'keywords'       => 'pemeriksaan ibu hamil, ibu nifas',
+            'category'       => 'Report',
+            'manager'        => '--',
+            'company'        => config('app.webcreator'),
+            'zoomScale'      => 80,
+        ];
+    }
+
     public function registerEvents(): array
     {
         return [
@@ -38,7 +55,7 @@ class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
                 // Atur wrap text untuk kolom B dan C, misalnya sampai baris 100
                 // $event->sheet->getDelegate()->getStyle('A20:B20')->getAlignment()->setWrapText(true);
 
-                 $sheet = $event->sheet->getDelegate();
+                $sheet = $event->sheet->getDelegate();
                 $dimension = $sheet->calculateWorksheetDimension();
 
                 // Terapkan wrap text ke seluruh range

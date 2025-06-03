@@ -40,11 +40,9 @@
                 </div>
             @endif
 
-
-
             <x-partials.containerdata :dataRows="$dataRow">
                 <hr />
-                <div class="row">
+                <div class="row g-3">
                     @foreach ($dataRow as $row)
                         <div class="col-12">
                             <div class="d-flex justify-content-between mb-2">

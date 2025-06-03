@@ -1,8 +1,12 @@
 <table>
     <thead>
-        <tr><th style="{!! CssExcel::$pageTitle !!}" colspan="2">KARTU BANTU PEMERIKSAAN IBU HAMIL/NIFAS/MENYUSUI</th></tr>
-        <tr><th style="{!! CssExcel::$pageTitle !!}" colspan="2">{{ $page_title }}</th></tr>
-        <tr></tr>
+        <tr>
+            <th style="{!! CssExcel::$pageTitle !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$rowHeight100px !!}" colspan="12">
+                KARTU BANTU PEMERIKSAAN IBU HAMIL/NIFAS/MENYUSUI <br/>
+                {{ $page_title }}
+            </th>
+        </tr>
+        {!! CssExcel::rowBreak(3) !!}
     </thead>
 </table>
 
@@ -12,14 +16,26 @@
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Pasien</th>
             <th>: {{ $dataPasien->namapasien }}</th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Dusun/RT/RW</th>
+            <th colspan="5"></th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">NIK</th>
             <th>: {{ $dataPasien->nik }}</th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Desa/Kelurahan/Nagari</th>
+            <th colspan="5"></th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Lahir / Umur</th>
             <th>: {{ IDateTime::formatDate($dataPasien->tgl_lahir) }} / {{ $dataPasien->umur }} Tahun</th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Kecamatan</th>
+            <th colspan="5"></th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Suami</th>
@@ -27,16 +43,14 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Alamat</th>
-            <th>: {{ $dataPasien->alamat }}</th>
+            <th colspan="2">: {{ $dataPasien->alamat }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">No HP</th>
             <th>: {{ $dataPasien->nohp }}</th>
         </tr>
 
-        <tr></tr>
-        <tr></tr>
-        <tr></tr>
+        {!! CssExcel::rowBreak(3) !!}
 
         <tr>
             <th style="{!! CssExcel::$rowSize250 !!}">Ibu Hamil</th>
@@ -128,6 +142,37 @@
                 <th style="{!! CssExcel::$rowHeight25px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">{{ $i }}</th>
             @endfor
         </tr>
-
     </thead>
+
+     {{-- *** Fill data disini --}}
+    <tbody>
+        @foreach ($dataRows as $row)
+
+            @php
+                $lilaKurang235 = ($row->periksa_lila < 23.5);
+            @endphp
+
+            <tr>
+                <td style="{!! CssExcel::$textCenter !!}">{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">Minggu ke - {{ $row->hamil_ke }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_bb) !!}">{!! ($row->is_sesuai_kurva_bb) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($lilaKurang235) !!}">{!! ($lilaKurang235) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_tekanan_darah }}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_tekanan_darah) !!}">{!! ($row->is_sesuai_kurva_tekanan_darah) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_batuk) !!}">{!! ($row->is_batuk) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_demam_ya) !!}">{!! ($row->is_demam_ya) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_bb_tidak_naik_turun) !!}">{!! ($row->is_bb_tidak_naik_turun) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_kontak_pasien_tbc) !!}">{!! ($row->is_kontak_pasien_tbc) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_tablet) ? "Ya ($row->jml_tablet)" : 'Tidak' }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->konsumsi_tablet) ? "Setiap Hari" : "Tidak Setiap Hari" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_mt) ? "Ya - $row->mt_bumil" : "Tidak" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->konsumsi_mt_bumil) ? "Setiap Hari" : "Tidak Setiap Hari" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_kelas_bumil) ? "Ya" : "Tidak" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->edukasi }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_rujuk) ? "Ya" : "Tidak" }}</td>
+            </tr>
+        @endforeach
+    </tbody>
 </table>

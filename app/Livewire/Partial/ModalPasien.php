@@ -68,7 +68,7 @@ class ModalPasien extends Component
                                         <input class="form-control" wire:model='katakunci' placeholder="masukkan katakunci pencarian.." wire:keydown.enter='$commit'/>
                                     </div>
                                     <div class="mb-2 d-flex gap-2">
-                                        <div class="p-1 border rounded-3" x-cloak x-show="$wire.keteranganModal != null">{{ $keteranganModal }}</div>
+                                        <div class="p-1 border rounded-3" x-cloak x-show="$wire.keteranganModal != ''">{{ $keteranganModal }}</div>
                                         <div class="p-1 border rounded-3" x-cloak x-show="$wire.kategoriumur != ''">Umur : {{ $kategoriumur }}</div>
                                     </div>
                                     @if($this->dataPasien->isEmpty())
