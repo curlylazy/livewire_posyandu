@@ -2,7 +2,8 @@
 
 namespace App\Livewire\Admin\Pemeriksaan;
 
-use App\Exports\PemeriksaanPerPasienExport;
+use App\Exports\PemeriksaanBumilNifasPerPasienExport;
+use App\Lib\GetString;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
@@ -19,7 +20,7 @@ class PemeriksaanRiwayat extends Component
 
     // *** q mengacu pada query
     #[Url]
-    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "";
+    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "", $namapasien = "";
 
     public $judulModalPasien = "";
     public $kategoriumur = "";
@@ -28,7 +29,6 @@ class PemeriksaanRiwayat extends Component
     public $selectedKode = "";
     public $selectedNama = "";
     public $kodepasien = "";
-    public $namapasien = "";
     public $hamil_ke = "";
 
 
@@ -103,8 +103,8 @@ class PemeriksaanRiwayat extends Component
             "hamil_ke" => $this->q_hamil_ke,
         ];
 
-        $namafile = "Laporan Pemeriksaan Per Pasien.xlsx";
-        return Excel::download(new PemeriksaanPerPasienExport(json_encode($array)), $namafile);
+        $namafile = "Laporan Pemeriksaan ".GetString::getJudulByKategoriPeriksa($this->kategori_periksa)." Per Pasien.xlsx";
+        return Excel::download(new PemeriksaanBumilNifasPerPasienExport(json_encode($array)), $namafile);
     }
 
     public function render()

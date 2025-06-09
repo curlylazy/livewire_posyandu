@@ -102,11 +102,10 @@
                         </div>
                     </div>
 
-
                 </div>
 
                 {{-- *** munculkan jika adalah seorang perempuan --}}
-                <div class="row g-2 mt-0" x-show="$wire.form.jk == 'P'" x-cloak>
+                <div class="row g-2 mt-0" x-show="$wire.form.jk == 'P' && ($wire.form.kategoriumur == 'Remaja' || $wire.form.kategoriumur == 'Dewasa')" x-cloak>
                     <div class="col-12 col-md-12">
                         <div class="form-floating">
                             <select type="text" class="form-control" id="kategoripasien" wire:model='form.kategoripasien'>
@@ -205,13 +204,19 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-floating">
+                            <input type="number" class="form-control" id="anakke" wire:model='form.anakke' x-mask:dynamic="$money($input)">
+                            <label for="anakke">Anakke</label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="tinggibadan_lahir" wire:model='form.tinggibadan_lahir' x-mask:dynamic="$money($input)">
                             <label for="tinggibadan_lahir">Tinggi Badan Lahir</label>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-floating">
                             <input type="number" class="form-control" id="beratbadan_lahir" wire:model='form.beratbadan_lahir' x-mask:dynamic="$money($input)">
                             <label for="beratbadan_lahir">Berat Badan Lahir</label>

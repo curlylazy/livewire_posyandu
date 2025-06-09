@@ -90,6 +90,13 @@ class PasienModel extends Model
         }
     }
 
+    public function scopeSearchByAnakKe(Builder $query, $ke): void
+    {
+        if(!empty($ke)) {
+            $query->where('tbl_pasien.anakke', '=', $ke);
+        }
+    }
+
     public function scopeSearchByIbu(Builder $query, $kodeibu): void
     {
         if(!empty($kodeibu)) {

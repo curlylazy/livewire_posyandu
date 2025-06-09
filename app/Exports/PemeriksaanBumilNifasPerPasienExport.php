@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Lib\Utils;
 use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
 use Illuminate\Contracts\View\View;
@@ -12,8 +13,10 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use Maatwebsite\Excel\Concerns\WithProperties;
+use Maatwebsite\Excel\Concerns\WithDrawings;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize, WithProperties
+class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
 {
     protected $nik;
     protected $kategoriperiksa;
@@ -48,6 +51,31 @@ class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
         ];
     }
 
+    public function drawings()
+    {
+        $drawing = new Drawing();
+        $drawing->setName('Logo');
+        $drawing->setDescription('Logo Posyandu');
+        $drawing->setPath(public_path('logo.png')); // Logo di folder public/images
+        $drawing->setHeight(80); // Atur ukuran
+        $drawing->setCoordinates('A1'); // Logo muncul di cell A1
+        $drawing->setOffsetX(10);
+        $drawing->setOffsetY(10);
+
+         // *** watermark
+        $drawingWaterMark = new Drawing();
+        $drawingWaterMark->setName('Watermark');
+        $drawingWaterMark->setDescription('Watermark Laporan');
+        $drawingWaterMark->setPath(public_path('logo_opacity_2.png')); // Path ke gambar
+        $drawingWaterMark->setHeight(700); // Tinggi gambar dalam pixel
+        $drawingWaterMark->setCoordinates('F30'); // Letak gambar (sel awal)
+
+        return [
+            $drawing,
+            $drawingWaterMark
+        ];
+    }
+
     public function registerEvents(): array
     {
         return [
@@ -74,9 +102,7 @@ class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
                         ],
                     ],
                 ];
-
-                // Terapkan border hitam ke kolom B dan D
-                $sheet->getStyle('A20:S24')->applyFromArray($borderStyle);
+                $sheet->getStyle('A17:S21')->applyFromArray($borderStyle);
             },
         ];
     }
@@ -90,9 +116,12 @@ class PemeriksaanPerPasienExport implements FromView, WithEvents, ShouldAutoSize
                     ->searchByHamilKe($this->hamil_ke)
                     ->get();
 
+        $view = ($this->kategoriperiksa == 'bumil') ? "pemeriksaan_bumil_per_pasien" : "pemeriksaan_nifas_per_pasien";
         $page_title = ($this->kategoriperiksa == 'bumil') ? "Pemeriksaan Ibu Hamil" : "Pemeriksaan Nifas";
+        $dataPasien->q_hamil_ke = $this->hamil_ke;
+        $dataPasien->jarakkehamilan = Utils::jarakKehamilan($this->nik, $this->hamil_ke);
 
-        return view('exports.pemeriksaan_per_pasien', [
+        return view("exports.$view", [
             'page_title' => $page_title,
             'dataRows' => $dataRows,
             'dataPasien' => $dataPasien,

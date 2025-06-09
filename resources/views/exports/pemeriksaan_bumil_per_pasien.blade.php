@@ -1,12 +1,13 @@
 <table>
     <thead>
         <tr>
-            <th style="{!! CssExcel::$pageTitle !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$rowHeight100px !!}" colspan="12">
+            <td></td>
+            <td style="{!! CssExcel::$pageTitle !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$rowHeight100px !!}" colspan="12">
                 KARTU BANTU PEMERIKSAAN IBU HAMIL/NIFAS/MENYUSUI <br/>
                 {{ $page_title }}
-            </th>
+            </td>
         </tr>
-        {!! CssExcel::rowBreak(3) !!}
+        {!! CssExcel::rowBreak(2) !!}
     </thead>
 </table>
 
@@ -19,7 +20,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Dusun/RT/RW</th>
-            <th colspan="5"></th>
+            <th colspan="5">: </th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">NIK</th>
@@ -27,7 +28,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Desa/Kelurahan/Nagari</th>
-            <th colspan="5"></th>
+            <th colspan="5">: </th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Lahir / Umur</th>
@@ -35,7 +36,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Kecamatan</th>
-            <th colspan="5"></th>
+            <th colspan="5">: </th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Suami</th>
@@ -50,26 +51,26 @@
             <th>: {{ $dataPasien->nohp }}</th>
         </tr>
 
-        {!! CssExcel::rowBreak(3) !!}
+        {!! CssExcel::rowBreak(2) !!}
 
         <tr>
             <th style="{!! CssExcel::$rowSize250 !!}">Ibu Hamil</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Jarak dengan Anak Sebelumnya</th>
-            <th>: ............</th>
+            <th>: {{ $dataPasien->jarakkehamilan }} Tahun</th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th style="{!! CssExcel::$rowSize250Light !!}">Hamil Anak ke</th>
+            <th>: {{ $dataPasien->q_hamil_ke }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Berat Badan</th>
-            <th>: ............ Kg</th>
-        </tr>
-        <tr>
-            <th style="{!! CssExcel::$rowSize250Light !!}">Hamil Anak ke</th>
-            <th>:</th>
-        </tr>
-        <tr>
+            <th>: {{ $dataPasien->beratbadan }} Kg</th>
+
+            {!! CssExcel::columnBreak(3) !!}
             <th style="{!! CssExcel::$rowSize250Light !!}">Tinggi Badan</th>
-            <th>:</th>
+            <th>: {{ $dataPasien->tinggibadan }} Cm</th>
         </tr>
     </thead>
 </table>

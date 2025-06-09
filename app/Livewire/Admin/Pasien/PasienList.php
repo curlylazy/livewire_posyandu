@@ -53,6 +53,11 @@ class PasienList extends Component
         $this->readData();
     }
 
+    public function commitPage()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view("livewire.admin.$this->pageName.list", [

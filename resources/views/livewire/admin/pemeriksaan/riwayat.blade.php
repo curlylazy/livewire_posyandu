@@ -50,23 +50,6 @@
                                 <a href="{{ url("admin/pemeriksaan/detail/$row->kodepemeriksaan?kategori_periksa=$kategori_periksa") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
                             </div>
                             <ul class="list-group">
-                                <li class="list-group-item d-flex flex-md-row flex-column" x-cloak x-show="$wire.kategori_periksa == 'bumil'">
-                                    <div class="flex-grow-1">Hamil Ke ?:</div>
-                                    <div class="fw-bold">{{ $row->hamil_ke }}</div>
-                                </li>
-                                <li class="list-group-item d-flex flex-md-row flex-column">
-                                    <div class="flex-grow-1">Berat Badan / Sesuai Kurva ?:</div>
-                                    <div class="fw-bold">{{ ($kategori_periksa == "nifas") ? $row->periksa_bb_bayi : $row->periksa_bb }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_bb) }}</div>
-                                </li>
-                                <li class="list-group-item d-flex flex-md-row flex-column">
-                                    <div class="flex-grow-1">Lingkar Lengan Atas (LILA) :</div>
-                                    <div class="fw-bold">{{ $row->periksa_lila }}</div>
-                                </li>
-                                <li class="list-group-item d-flex flex-md-row flex-column">
-                                    <div class="flex-grow-1">Tekanan Darah / Sesuai Kurva ?:</div>
-                                    <div class="fw-bold">{{ $row->periksa_tekanan_darah }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_tekanan_darah) }}</div>
-                                </li>
-
                                 @if($kategori_periksa == "bumil")
                                     <li class="list-group-item d-flex  flex-md-row flex-column">
                                         <div class="flex-grow-1">Hamil Ke / Minggu Ke :</div>
@@ -80,6 +63,21 @@
                                         <div class="fw-bold">{{ $row->namabayi }}</div>
                                     </li>
                                 @endif
+
+                                <li class="list-group-item d-flex flex-md-row flex-column">
+                                    <div class="flex-grow-1">Berat Badan / Sesuai Kurva ?:</div>
+                                    <div class="fw-bold">{{ ($kategori_periksa == "nifas") ? $row->periksa_bb_bayi : $row->periksa_bb }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_bb) }}</div>
+                                </li>
+                                <li class="list-group-item d-flex flex-md-row flex-column">
+                                    <div class="flex-grow-1">Lingkar Lengan Atas (LILA) :</div>
+                                    <div class="fw-bold">{{ $row->periksa_lila }}</div>
+                                </li>
+                                <li class="list-group-item d-flex flex-md-row flex-column">
+                                    <div class="flex-grow-1">Tekanan Darah / Sesuai Kurva ?:</div>
+                                    <div class="fw-bold">{{ $row->periksa_tekanan_darah }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_tekanan_darah) }}</div>
+                                </li>
+
+
                             </ul>
                         </div>
                     @endforeach

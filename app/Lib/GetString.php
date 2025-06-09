@@ -113,4 +113,17 @@ class GetString
         return $res;
 	}
 
+    public static function getJudulByKategoriPeriksa($kategori)
+	{
+		$res = "";
+
+        if($kategori == "bumil") {
+            $res = "Ibu Hamil";
+        } elseif($kategori == "nifas") {
+            $res = "Nifas dan Menyusui";
+        }
+
+        return $res;
+	}
+
 }

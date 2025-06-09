@@ -53,7 +53,7 @@
                         </div>
                         <div class="col-12 col-md-3">
                             <div class="form-floating">
-                                <select class="form-select" id="kategoriumur" wire:model='kategoriumur' wire:change='$commit'>
+                                <select class="form-select" id="kategoriumur" wire:model='kategoriumur' wire:change='commitPage'>
                                     <option value="">Semua Kategori Umur</option>
                                     @foreach (Option::kategoriUmur() as $data)
                                         <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
