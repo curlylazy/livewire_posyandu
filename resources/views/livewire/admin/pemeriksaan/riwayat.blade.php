@@ -24,11 +24,11 @@
             </div>
 
             @if(!empty($nik))
-                <div>
-                    <h6>Nama Pasien : {{ $namapasien }}</h6>
-                    <h6>NIK : {{ $nik }}</h6>
-                </div>
-                <div x-cloak x-show="$wire.kategori_periksa == 'bumil'">
+                @if($kategori_periksa == "bumil")
+                    <div>
+                        <h6>Nama Pasien : {{ $namapasien }}</h6>
+                        <h6>NIK : {{ $nik }}</h6>
+                    </div>
                     <div class="d-flex h6 align-items-center gap-2">
                         <div>Hamil Ke ?:</div>
                         <div>
@@ -37,7 +37,9 @@
                             @endfor
                         </div>
                     </div>
-                </div>
+                @else
+
+                @endif
             @endif
 
             <x-partials.containerdata :dataRows="$dataRow">

@@ -17,7 +17,8 @@ class PasienList extends Component
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "", $kategoriumur = "", $status = 1;
+    public $katakunci = "", $kategoriumur = "", $status = 1, $kategoripasien = "", $kodeibu = "";
+    public $namaibu = "";
 
     public function mount()
     {
@@ -29,6 +30,8 @@ class PasienList extends Component
         $data = PasienModel::selectCustom()
                 ->search($this->katakunci)
                 ->searchByKategoriUmur($this->kategoriumur)
+                ->searchByKategoriPasien($this->kategoripasien)
+                ->searchByIbu($this->kodeibu)
                 ->latest('tbl_pasien.created_at')
                 ->searchByStatus($this->status)
                 ->paginate(20);
@@ -56,6 +59,15 @@ class PasienList extends Component
     public function commitPage()
     {
         $this->resetPage();
+    }
+
+    // *** extra : action on modal
+    public function modalSelectPasien($data)
+    {
+        $data = json_decode($data);
+        $this->kodeibu = $data->kodepasien;
+        $this->namaibu = $data->namapasien;
+        $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
 
     public function render()

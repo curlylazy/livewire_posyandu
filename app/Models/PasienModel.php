@@ -138,6 +138,13 @@ class PasienModel extends Model
         }
     }
 
+    public function scopeSearchByKategoriPasien(Builder $query, $kategoripasien): void
+    {
+        if(!empty($kategoripasien)) {
+            $query->where('tbl_pasien.kategoripasien', '=', $kategoripasien);
+        }
+    }
+
     public function getNikNamaAttribute()
     {
         return "($this->nik) $this->namapasien";

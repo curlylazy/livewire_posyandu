@@ -33,7 +33,6 @@ class PemeriksaanList extends Component
     public function readData()
     {
         $data = PemeriksaanModel::search($this->katakunci)
-                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_bayi.*')
                 ->joinTable()
                 ->searchByKategoriPeriksa($this->kategori_periksa)
                 ->latest('tbl_pemeriksaan.tgl_periksa')

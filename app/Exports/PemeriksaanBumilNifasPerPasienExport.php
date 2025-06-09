@@ -118,8 +118,13 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
 
         $view = ($this->kategoriperiksa == 'bumil') ? "pemeriksaan_bumil_per_pasien" : "pemeriksaan_nifas_per_pasien";
         $page_title = ($this->kategoriperiksa == 'bumil') ? "Pemeriksaan Ibu Hamil" : "Pemeriksaan Nifas";
-        $dataPasien->q_hamil_ke = $this->hamil_ke;
-        $dataPasien->jarakkehamilan = Utils::jarakKehamilan($this->nik, $this->hamil_ke);
+
+        if($this->kategoriperiksa == 'bumil') {
+            $dataPasien->q_hamil_ke = $this->hamil_ke;
+            $dataPasien->jarakkehamilan = Utils::jarakKehamilan($this->nik, $this->hamil_ke);
+        } else {
+
+        }
 
         return view("exports.$view", [
             'page_title' => $page_title,
