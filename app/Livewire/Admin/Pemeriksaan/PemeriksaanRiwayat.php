@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Pemeriksaan;
 
 use App\Exports\PemeriksaanBumilNifasPerPasienExport;
 use App\Lib\GetString;
+use App\Models\PasienModel;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
@@ -20,7 +21,7 @@ class PemeriksaanRiwayat extends Component
 
     // *** q mengacu pada query
     #[Url]
-    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "", $namapasien = "";
+    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "", $namapasien = "", $kodebayi = "";
 
     public $judulModalPasien = "";
     public $kategoriumur = "";
@@ -30,6 +31,8 @@ class PemeriksaanRiwayat extends Component
     public $selectedNama = "";
     public $kodepasien = "";
     public $hamil_ke = "";
+
+    public $listAnak = [];
 
 
     public function mount()
@@ -41,17 +44,19 @@ class PemeriksaanRiwayat extends Component
         if($this->kategori_periksa == "nifas"){
             $this->pageTitle = "Riwayat Pemeriksaan Nifas";
         }
+
+        $this->listAnak = collect();
     }
 
     public function readData()
     {
         $data = PemeriksaanModel::searchByNIK($this->nik)
-                ->select('tbl_pemeriksaan.*', 'tbl_pasien.*')
-                ->joinTable()
-                ->searchByKategoriPeriksa($this->kategori_periksa)
-                ->searchByHamilKe($this->q_hamil_ke)
-                ->latest('tbl_pemeriksaan.tgl_periksa')
-                ->paginate(10);
+            ->searchByKategoriPeriksa($this->kategori_periksa)
+            ->searchByHamilKe($this->q_hamil_ke)
+            ->searchByBayi($this->kodebayi)
+            ->joinTable()
+            ->latest('tbl_pemeriksaan.tgl_periksa')
+            ->paginate(10);
 
         return $data;
     }
@@ -78,6 +83,16 @@ class PemeriksaanRiwayat extends Component
         $this->readData();
     }
 
+    public function onClikSetAnak($kodebayi)
+    {
+        $this->kodebayi = "";
+        if(!empty($kodebayi))
+        {
+            $this->kodebayi = $kodebayi;
+            $this->readData();
+        }
+    }
+
     public function modalSelectPasien($data)
     {
         $data = json_decode($data);
@@ -89,6 +104,8 @@ class PemeriksaanRiwayat extends Component
         if($this->kategori_periksa == "bumil") {
             $this->hamil_ke = $data->hamil_ke;
             $this->q_hamil_ke = $data->hamil_ke;
+        } elseif($this->kategori_periksa == "nifas") {
+            $this->listAnak = PasienModel::searchByIbu($this->kodepasien)->get();
         }
 
         $this->dispatch('close-modal', namamodal : 'modalPasien');
@@ -101,7 +118,20 @@ class PemeriksaanRiwayat extends Component
             "kategoriperiksa" => $this->kategori_periksa,
             "nik" => $this->nik,
             "hamil_ke" => $this->q_hamil_ke,
+            "kodebayi" => $this->kodebayi,
         ];
+
+        if(empty($this->nik)) {
+            $this->dispatch('notif', message: "pilih pasien dulu ya, baru bisa export excelnya!", icon: "error");
+            return;
+        }
+
+        if($this->kategori_periksa == "nifas"){
+            if(empty($this->kodebayi)) {
+                $this->dispatch('notif', message: "pilih balita dulu ya, baru bisa export excelnya!", icon: "error");
+                return;
+            }
+        }
 
         $namafile = "Laporan Pemeriksaan ".GetString::getJudulByKategoriPeriksa($this->kategori_periksa)." Per Pasien.xlsx";
         return Excel::download(new PemeriksaanBumilNifasPerPasienExport(json_encode($array)), $namafile);
@@ -109,7 +139,7 @@ class PemeriksaanRiwayat extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.riwayat", [
+        return view('livewire.admin.'.$this->pageName.'.riwayat', [
             "dataRow" => $this->readData(),
         ])
         ->layout('components.layouts.admin')

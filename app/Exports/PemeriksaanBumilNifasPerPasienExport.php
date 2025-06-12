@@ -19,6 +19,7 @@ use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
 {
     protected $nik;
+    protected $kodebayi;
     protected $kategoriperiksa;
     protected $hamil_ke;
 
@@ -33,6 +34,7 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
         $this->kategoriperiksa = $data['kategoriperiksa'];
         $this->nik = $data['nik'];
         $this->hamil_ke = $data['hamil_ke'];
+        $this->kodebayi = $data['kodebayi'];
     }
 
     public function properties(): array
@@ -114,6 +116,7 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
                     ->searchByNik($this->nik)
                     ->searchByKategoriPeriksa($this->kategoriperiksa)
                     ->searchByHamilKe($this->hamil_ke)
+                    ->searchByBayi($this->kodebayi)
                     ->get();
 
         $view = ($this->kategoriperiksa == 'bumil') ? "pemeriksaan_bumil_per_pasien" : "pemeriksaan_nifas_per_pasien";
@@ -123,10 +126,15 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
             $dataPasien->q_hamil_ke = $this->hamil_ke;
             $dataPasien->jarakkehamilan = Utils::jarakKehamilan($this->nik, $this->hamil_ke);
         } else {
-
+            $dataBayi = PasienModel::find($this->kodebayi);
+            $dataPasien->namabayi = $dataBayi->namapasien;
+            $dataPasien->bayi_tgl_bersalin = $dataBayi->tgl_bersalin;
+            $dataPasien->bayi_tempatbersalin = $dataBayi->tempatbersalin;
+            $dataPasien->bayi_anakke = $dataBayi->anakke;
+            $dataPasien->bayi_tinggibadan_lahir = $dataBayi->tinggibadan_lahir;
         }
 
-        return view("exports.$view", [
+        return view('exports.' . $view, [
             'page_title' => $page_title,
             'dataRows' => $dataRows,
             'dataPasien' => $dataPasien,

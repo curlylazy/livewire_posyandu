@@ -54,23 +54,15 @@
         {!! CssExcel::rowBreak(2) !!}
 
         <tr>
-            <th style="{!! CssExcel::$rowSize250 !!}">Ibu Hamil</th>
+            <th style="{!! CssExcel::$rowSize250 !!}">Ibu Nifas / Menyusui</th>
         </tr>
         <tr>
-            <th style="{!! CssExcel::$rowSize250Light !!}">Jarak dengan Anak Sebelumnya</th>
+            <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Bersalin</th>
             <th>: {{ $dataPasien->jarakkehamilan }} Tahun</th>
 
             {!! CssExcel::columnBreak(3) !!}
             <th style="{!! CssExcel::$rowSize250Light !!}">Hamil Anak ke</th>
             <th>: {{ $dataPasien->q_hamil_ke }}</th>
-        </tr>
-        <tr>
-            <th style="{!! CssExcel::$rowSize250Light !!}">Berat Badan</th>
-            <th>: {{ $dataPasien->beratbadan }} Kg</th>
-
-            {!! CssExcel::columnBreak(3) !!}
-            <th style="{!! CssExcel::$rowSize250Light !!}">Tinggi Badan</th>
-            <th>: {{ $dataPasien->tinggibadan }} Cm</th>
         </tr>
     </thead>
 </table>
@@ -83,8 +75,7 @@
             <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="4">Usia Kehamilan</th>
 
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="10">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">Pemberian TTD dan MT Bumil KEK</th>
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize200Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" rowspan="2">Kelas Ibu Hamil</th>
+            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">Pemberian Vit A, Menyusui dan KB</th>
 
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize200Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPurple !!}" rowspan="4">Edukasi yang Diberikan</th>
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize200Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}" rowspan="4">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
@@ -97,9 +88,10 @@
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="2">Tekanan Darah</th>
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">Skrining TBC</th>
 
-            {{-- Pemberian TTD dan MT Bumil KEK --}}
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="2">Tablet Tambah Darah</th>
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="2">Makanan Tambahan KEK</th>
+            {{-- Pemberian Vit A, Menyusui dan KB --}}
+            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="2">Vitamin A</th>
+            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">Menyusui</th>
+            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">KB</th>
         </tr>
 
         <tr>
@@ -107,11 +99,8 @@
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="6">(Jika hasil: tidak/merah maka rujuk ke Pustu / Puskesmas)</th>
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">(Jika 2 gejala terpenuhi maka rujuk ke Pustu/Puskesmas)</th>
 
-            {{-- Pemberian TTD dan MT Bumil KEK --}}
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">(Jika konsumsi tidak setiap hari maka berikan edukasi)</th>
-
-            {{-- Kelas Ibu Hamil --}}
-            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">Jika Tidak Diberikan Edukasi</th>
+            {{-- Pemberian Vit A, Menyusui dan KB --}}
+            <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">Jika sasaran tidak : konsumsi Vit A, menyusui dan KB berikan edukasi</th>
         </tr>
 
         <tr>
@@ -122,31 +111,28 @@
             <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightYellow !!}">23.5cm (hijau) / < 23.5cm (merah)</th>
             <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgYellow !!}">Sistole / Diastole (mm/Hg)</th>
             <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightYellow !!}">Sesuai kurva Buku KIAYa (hijau)/ Tidak (merah)</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Batuk terus menerus Ya / Tidak</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Demam lebih dari ≥2 minggu Ya / Tidak</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">BB tidak naik atau turun  dalam 2 bulan berturut-turut Ya / Tidak</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Kontak erat dengan Pasien TBC Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgYellow !!}">Batuk terus menerus Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightYellow !!}">Demam lebih dari ≥2 minggu Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgYellow !!}">BB tidak naik atau turun  dalam 2 bulan berturut-turut Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightYellow !!}">Kontak erat dengan Pasien TBC Ya / Tidak</th>
 
-            {{-- Pemberian TTD dan MT Bumil KEK --}}
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Jika nakes memberikan TTD Tuliskan jumlah tablet</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Konsumsi Tablet Tambah Darah Setiap hari / Tidak setiap hari</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Jika nakes memberikan MT Bumil KEK, Tuliskan komposisi dan jumlah porsi</th>
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Konsumsi MT Bumil KEK Setiap hari / Tidak setiap hari</th>
-
-            {{-- Kelas Ibu Hamil --}}
-            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize200Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPurple !!}">Mengikuti Kelas Ibu Ya / Tidak</th>
+            {{-- Pemberian Vit A, Menyusui dan KB --}}
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Jika nakes memberikan Vit A tuliskan jumlah kapsul</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Konsumsi Vit A Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Menyusui Ya / Tidak</th>
+            <th style="{!! CssExcel::$rowHeight200px !!} {!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgLightBlue !!}">Mengikuti KB Pasca Persalinan Ya / Tidak</th>
         </tr>
 
         <tr>
             {{-- Number --}}
-            @for ($i = 1; $i <=19; $i++)
+            @for ($i = 1; $i <=18; $i++)
                 <th style="{!! CssExcel::$rowHeight25px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">{{ $i }}</th>
             @endfor
         </tr>
     </thead>
 
-     {{-- *** Fill data disini --}}
-    <tbody>
+    {{-- *** Fill data disini --}}
+    {{-- <tbody>
         @foreach ($dataRows as $row)
 
             @php
@@ -175,5 +161,5 @@
                 <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_rujuk) ? "Ya" : "Tidak" }}</td>
             </tr>
         @endforeach
-    </tbody>
+    </tbody> --}}
 </table>

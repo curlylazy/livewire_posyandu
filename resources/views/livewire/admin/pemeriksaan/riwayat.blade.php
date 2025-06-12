@@ -20,7 +20,7 @@
             <div class="mb-3 d-flex flex-column flex-md-row gap-2">
                 <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
                 <button class="btn btn-outline-primary" type="button" wire:click='onClickOpenModalPasien'><i class="fas fa-search"></i> Pilih Pasien</button>
-                <button x-cloak x-show="$wire.nik != ''" class="btn btn-outline-success" type="button" wire:click='onClickExportToExcel'><i class="fas fa-file-export"></i> Export Excel</button>
+                <button class="btn btn-outline-success" type="button" wire:click='onClickExportToExcel'><i class="fas fa-file-export"></i> Export Excel</button>
             </div>
 
             @if(!empty($nik))
@@ -38,7 +38,17 @@
                         </div>
                     </div>
                 @else
-
+                    <div>
+                        <h6>Nama Pasien : {{ $namapasien }}</h6>
+                        <h6>NIK : {{ $nik }}</h6>
+                    </div>
+                    <div class="d-flex h6 align-items-center gap-2 flex-wrap">
+                        <div>Anak : </div>
+                        <button type="button" wire:click='onClikSetAnak("")' class="btn btn-sm btn-outline-secondary">Semua Anak</button>
+                        @foreach ($listAnak as $data)
+                            <button type="button" wire:click='onClikSetAnak("{{ $data->kodepasien }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $kodebayi == $data->kodepasien]) >{{ $data->namapasien }}</button>
+                        @endforeach
+                    </div>
                 @endif
             @endif
 

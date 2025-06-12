@@ -47,6 +47,7 @@ class ModalPasien extends Component
 
     public function selectRow($data)
     {
+        $this->katakunci = "";
         $this->dispatch('selectpasien', data: $data);
     }
 
