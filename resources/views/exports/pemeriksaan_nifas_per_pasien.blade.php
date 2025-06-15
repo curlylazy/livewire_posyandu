@@ -58,11 +58,27 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Bersalin</th>
-            <th>: {{ $dataPasien->jarakkehamilan }} Tahun</th>
+            <th>: {{ IDateTime::formatDate($dataPasien->bayi_tgl_bersalin) }} </th>
 
             {!! CssExcel::columnBreak(3) !!}
-            <th style="{!! CssExcel::$rowSize250Light !!}">Hamil Anak ke</th>
-            <th>: {{ $dataPasien->q_hamil_ke }}</th>
+            <th style="{!! CssExcel::$rowSize250Light !!}">Tempat Bersalin</th>
+            <th>: {{ $dataPasien->bayi_tempatbersalin }}</th>
+        </tr>
+        <tr>
+            <th style="{!! CssExcel::$rowSize250Light !!}">Anak Ke</th>
+            <th>: {{ $dataPasien->bayi_anakke }} </th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th style="{!! CssExcel::$rowSize250Light !!}">Cara Bersalin</th>
+            <th>: {{ Option::getOptionName(Option::$optNameCaraBersalin, $dataPasien->bayi_carabersalin) }}</th>
+        </tr>
+        <tr>
+            <th style="{!! CssExcel::$rowSize250Light !!}">Berat Badan</th>
+            <th>: {{ $dataPasien->bayi_beratbadan }} Kg</th>
+
+            {!! CssExcel::columnBreak(3) !!}
+            <th style="{!! CssExcel::$rowSize250Light !!}">Tinggi Badan</th>
+            <th>: {{ $dataPasien->bayi_tinggibadan }} Cm</th>
         </tr>
     </thead>
 </table>

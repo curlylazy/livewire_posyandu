@@ -124,7 +124,7 @@ return [
     'x' => '',
     'youtube' => 'https://www.youtube.com/@RuralBaliAdventure',
     'email' => 'ruralbaliadventure@gmail.com',
-    'webname' => 'Posyandu Ramah Ibu dan Anak',
+    'webname' => 'Posyandu ILP Kelurahan Kesiman',
     'tagline' => 'Melayani dengan Hati, Menjaga Generasi Negeri',
     'kodepos' => '80572',
     'title' => 'Rural Bali Adventure',

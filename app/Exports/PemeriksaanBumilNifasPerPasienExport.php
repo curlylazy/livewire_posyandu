@@ -104,7 +104,7 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
                         ],
                     ],
                 ];
-                $sheet->getStyle('A17:S21')->applyFromArray($borderStyle);
+                $sheet->getStyle('A16:R20')->applyFromArray($borderStyle);
             },
         ];
     }
@@ -130,8 +130,12 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
             $dataPasien->namabayi = $dataBayi->namapasien;
             $dataPasien->bayi_tgl_bersalin = $dataBayi->tgl_bersalin;
             $dataPasien->bayi_tempatbersalin = $dataBayi->tempatbersalin;
+            $dataPasien->bayi_carabersalin = $dataBayi->carabersalin;
             $dataPasien->bayi_anakke = $dataBayi->anakke;
             $dataPasien->bayi_tinggibadan_lahir = $dataBayi->tinggibadan_lahir;
+            $dataPasien->bayi_beratbadan_lahir = $dataBayi->beratbadan_lahir;
+            $dataPasien->bayi_tinggibadan = $dataBayi->tinggibadan;
+            $dataPasien->bayi_beratbadan = $dataBayi->beratbadan;
         }
 
         return view('exports.' . $view, [

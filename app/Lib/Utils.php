@@ -17,6 +17,11 @@ class Utils
         $kodeibu = PasienModel::searchByNik($nik)->first()->kodepasien;
         $anakke = $kehamilan_ke - 1;
         $dataPasien = PasienModel::searchByIbu($kodeibu)->searchByAnakKe($anakke)->first();
+
+        // *** jika tidak diketahui anak sebelumnya
+        if(!$dataPasien)
+            return $res;
+
         $dateAnakSebelumnya = Carbon::parse($dataPasien->tgl_lahir);
 
         // *** kita ambil pemeriksaan pertama saja, karena tidak dicatan kapan tanggal hamillnya
