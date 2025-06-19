@@ -16,7 +16,7 @@
     <thead>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Pasien</th>
-            <th>: {{ $dataPasien->namapasien }}</th>
+            <th colspan="3">: {{ $dataPasien->namapasien }}</th>
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Dusun/RT/RW</th>
@@ -24,7 +24,7 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">NIK</th>
-            <th>: {{ $dataPasien->nik }}</th>
+            <th colspan="3">: {{ $dataPasien->nik }}</th>
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Desa/Kelurahan/Nagari</th>
@@ -32,7 +32,7 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Lahir / Umur</th>
-            <th>: {{ IDateTime::formatDate($dataPasien->tgl_lahir) }} / {{ $dataPasien->umur }} Tahun</th>
+            <th colspan="3">: {{ IDateTime::formatDate($dataPasien->tgl_lahir) }} / {{ $dataPasien->umur }} Tahun</th>
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Kecamatan</th>
@@ -40,15 +40,15 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Suami</th>
-            <th>: {{ $dataPasien->namasuami }}</th>
+            <th colspan="3">: {{ $dataPasien->namasuami }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Alamat</th>
-            <th colspan="2">: {{ $dataPasien->alamat }}</th>
+            <th colspan="3">: {{ $dataPasien->alamat }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">No HP</th>
-            <th>: {{ $dataPasien->nohp }}</th>
+            <th colspan="3">: {{ $dataPasien->nohp }}</th>
         </tr>
 
         {!! CssExcel::rowBreak(2) !!}
@@ -57,27 +57,31 @@
             <th style="{!! CssExcel::$rowSize250 !!}">Ibu Nifas / Menyusui</th>
         </tr>
         <tr>
+            <th style="{!! CssExcel::$rowSize250Light !!}">Nama Anak</th>
+            <th colspan="2">: {{ $dataPasien->namabayi }} </th>
+        </tr>
+        <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Bersalin</th>
-            <th>: {{ IDateTime::formatDate($dataPasien->bayi_tgl_bersalin) }} </th>
+            <th colspan="2">: {{ IDateTime::formatDate($dataPasien->bayi_tgl_bersalin) }} </th>
 
             {!! CssExcel::columnBreak(3) !!}
-            <th style="{!! CssExcel::$rowSize250Light !!}">Tempat Bersalin</th>
-            <th>: {{ $dataPasien->bayi_tempatbersalin }}</th>
+            <th style="{!! CssExcel::$rowSize250Light !!}" colspan="2">Tempat Bersalin</th>
+            <th colspan="2">: {{ $dataPasien->bayi_tempatbersalin }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Anak Ke</th>
-            <th>: {{ $dataPasien->bayi_anakke }} </th>
+            <th colspan="2">: {{ $dataPasien->bayi_anakke }} </th>
 
             {!! CssExcel::columnBreak(3) !!}
-            <th style="{!! CssExcel::$rowSize250Light !!}">Cara Bersalin</th>
-            <th>: {{ Option::getOptionName(Option::$optNameCaraBersalin, $dataPasien->bayi_carabersalin) }}</th>
+            <th style="{!! CssExcel::$rowSize250Light !!}" colspan="2">Cara Bersalin</th>
+            <th colspan="2">: {{ Option::getOptionName(Option::$optNameCaraBersalin, $dataPasien->bayi_carabersalin) }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Berat Badan</th>
-            <th>: {{ $dataPasien->bayi_beratbadan }} Kg</th>
+            <th colspan="2">: {{ $dataPasien->bayi_beratbadan }} Kg</th>
 
             {!! CssExcel::columnBreak(3) !!}
-            <th style="{!! CssExcel::$rowSize250Light !!}">Tinggi Badan</th>
+            <th style="{!! CssExcel::$rowSize250Light !!}" colspan="2">Tinggi Badan</th>
             <th>: {{ $dataPasien->bayi_tinggibadan }} Cm</th>
         </tr>
     </thead>
@@ -88,7 +92,6 @@
     <thead>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="4">Waktu Ke Posyandu (Tanggal/Bulan/Tahun)</th>
-            <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="4">Usia Kehamilan</th>
 
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="10">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
             <th style="{!! CssExcel::$rowHeight50px !!} {!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="4">Pemberian Vit A, Menyusui dan KB</th>
@@ -141,14 +144,14 @@
 
         <tr>
             {{-- Number --}}
-            @for ($i = 1; $i <=18; $i++)
+            @for ($i = 1; $i <=17; $i++)
                 <th style="{!! CssExcel::$rowHeight25px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}">{{ $i }}</th>
             @endfor
         </tr>
     </thead>
 
     {{-- *** Fill data disini --}}
-    {{-- <tbody>
+    <tbody>
         @foreach ($dataRows as $row)
 
             @php
@@ -157,7 +160,6 @@
 
             <tr>
                 <td style="{!! CssExcel::$textCenter !!}">{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">Minggu ke - {{ $row->hamil_ke }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_bb) !!}">{!! ($row->is_sesuai_kurva_bb) ? "✓" : "✗" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
@@ -168,14 +170,13 @@
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_demam_ya) !!}">{!! ($row->is_demam_ya) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_bb_tidak_naik_turun) !!}">{!! ($row->is_bb_tidak_naik_turun) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_kontak_pasien_tbc) !!}">{!! ($row->is_kontak_pasien_tbc) ? "Ya" : "Tidak" !!}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_tablet) ? "Ya ($row->jml_tablet)" : 'Tidak' }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->konsumsi_tablet) ? "Setiap Hari" : "Tidak Setiap Hari" }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_mt) ? "Ya - $row->mt_bumil" : "Tidak" }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->konsumsi_mt_bumil) ? "Setiap Hari" : "Tidak Setiap Hari" }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_kelas_bumil) ? "Ya" : "Tidak" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_vit_a) ? "Ya ($row->jml_tablet_vit_a)" : 'Tidak' }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_konsumsi_vit_a) ? "Ya" : "Tidak" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_menyusui) ? "Ya" : "Tidak" }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_kb) ? "Ya" : "Tidak" }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->edukasi }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_rujuk) ? "Ya" : "Tidak" }}</td>
             </tr>
         @endforeach
-    </tbody> --}}
+    </tbody>
 </table>

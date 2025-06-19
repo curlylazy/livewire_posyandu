@@ -42,10 +42,10 @@ class PemeriksaanForm extends Form
     // ** Pemberian TTD & MT Bumil KEK
     public $is_beri_tablet = false;
     public $jml_tablet = 0;
-    public $konsumsi_tablet = 1;
+    public $konsumsi_tablet = 0;
     public $is_beri_mt = 0;
     public $mt_bumil = '';
-    public $konsumsi_mt_bumil = 1;
+    public $konsumsi_mt_bumil = 0;
 
     // ** Pemberian Vit A, Menyusui dan KB
     public $periksa_bb_bayi = 0;

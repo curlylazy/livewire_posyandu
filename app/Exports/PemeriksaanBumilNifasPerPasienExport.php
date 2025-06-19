@@ -104,7 +104,16 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
                         ],
                     ],
                 ];
-                $sheet->getStyle('A16:R20')->applyFromArray($borderStyle);
+
+                // *** bedakan bordernya, karena masing masing sheet berbeda column dan row numbernya
+                if($this->kategoriperiksa == "bumil") {
+                    $sheet->getStyle('A17:S21')->applyFromArray($borderStyle);
+                }
+                else
+                {
+                    $sheet->getStyle('A19:Q23')->applyFromArray($borderStyle);
+                }
+
             },
         ];
     }

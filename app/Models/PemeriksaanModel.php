@@ -62,13 +62,13 @@ class PemeriksaanModel extends Model
         }
     }
 
-    public function scopeSearchByMonthYear(Builder $query, $month, $year): void
+    public function scopeSearchByMonthYear(Builder $query, $month = "", $year = ""): void
     {
-        if(!empty($month) && !empty($year)) {
-            $query
-                ->whereMonth('tbl_pemeriksaan.tgl_periksa', $month)
-                ->whereYear('tbl_pemeriksaan.tgl_periksa', $year);
-        }
+        if(!empty($month))
+            $query->whereMonth('tbl_pemeriksaan.tgl_periksa', $month);
+
+        if(!empty($year))
+            $query->whereYear('tbl_pemeriksaan.tgl_periksa', $year);
     }
 
     public function scopeSearchByKodePasien(Builder $query, $kodepasien): void

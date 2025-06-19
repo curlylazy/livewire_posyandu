@@ -17,6 +17,7 @@ use App\Livewire\Admin\Blog\BlogList;
 use App\Livewire\Admin\Galeri\GaleriAE;
 use App\Livewire\Admin\Galeri\GaleriList;
 use App\Livewire\Admin\Laporan\LapPemeriksaan;
+use App\Livewire\Admin\Laporan\RekapBumilNifas;
 use App\Livewire\Admin\Package\PackageAE;
 use App\Livewire\Admin\package\PackageList;
 use App\Livewire\Admin\Pasien\PasienAE;
@@ -90,4 +91,5 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
 
     // *** Laporan
     Route::get('/laporan/pemeriksaan', LapPemeriksaan::class)->name('admin_laporan_pemeriksaan');
+    Route::get('/laporan/rekapbumilnifas', RekapBumilNifas::class)->name('admin_laporan_rekapbumilnifas');
 });

@@ -102,6 +102,12 @@
 
             <li class="nav-title">Laporan</li>
             <li class="nav-item">
+                <a class="nav-link" href="{{ url("admin/laporan/rekapbumilnifas") }}" wire:navigate>
+                    <span class="nav-icon material-symbols-outlined">medical_information</span>
+                    Rekap Bumil & Nifas
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ url("admin/laporan/pemeriksaan?kategori_periksa=bumil") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">lab_profile</span>
                     Lap Periksa Bumil
@@ -113,6 +119,7 @@
                     Lap Periksa Nifas
                 </a>
             </li>
+
 
             {{-- LOG OUT --}}
             <li class="nav-item">
