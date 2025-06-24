@@ -87,20 +87,20 @@
                     Periksa Nifas
                 </a>
             </li>
+
+            <li class="nav-title">Laporan</li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/riwayat?kategori_periksa=bumil") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/laporan/riwayat?kategori_periksa=bumil") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">medical_information</span>
                     Riwayat Ibu Hamil
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/riwayat?kategori_periksa=nifas") }}" wire:navigate>
+                <a class="nav-link" href="{{ url("admin/laporan/riwayat?kategori_periksa=nifas") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">medical_information</span>
                     Riwayat Nifas
                 </a>
             </li>
-
-            <li class="nav-title">Laporan</li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ url("admin/laporan/rekapbumilnifas") }}" wire:navigate>
                     <span class="nav-icon material-symbols-outlined">medical_information</span>

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\Laporan;
 
 use App\Exports\LapPemeriksaanMultiSheetExport;
+use App\Exports\RekapPemeriksaanBumilNifasExport;
 use App\Lib\AkunTansi;
 use App\Lib\Rekap;
 use App\Models\PemeriksaanModel;
@@ -20,7 +21,7 @@ class RekapBumilNifas extends Component
 {
     use WithPagination;
 
-    public $pageTitle = "Rekap Bumil & Nifas";
+    public $pageTitle = "Rekap Bumil dan Nifas";
     public $pageName = "rekap_bumil_nifas";
 
     #[Url]
@@ -34,7 +35,6 @@ class RekapBumilNifas extends Component
     public function readData()
     {
         $rowsData = Rekap::pemeriksaan($this->tahun);
-        dd($rowsData);
         return $rowsData;
     }
 
@@ -43,14 +43,12 @@ class RekapBumilNifas extends Component
         try
         {
             $array = [
-                'kategori_periksa' => $this->kategori_periksa,
-                'katakunci' => $this->katakunci,
                 'tahun' => $this->tahun,
             ];
 
-            $namafile = "Laporan Pemeriksaan $this->pageTitle Tahun $this->tahun.xlsx";
+            $namafile = "Rekap Pemeriksaan $this->pageTitle Tahun $this->tahun.xlsx";
             return Excel::download(
-                new LapPemeriksaanMultiSheetExport(json_encode($array)),
+                new RekapPemeriksaanBumilNifasExport(json_encode($array)),
                 $namafile,
             );
 

@@ -77,18 +77,15 @@
                                 <th scope="col">Nifas Datang</th>
                             </tr>
                         </thead>
-                        {{-- <tbody>
+                        <tbody>
                             @foreach ($dataRow as $row)
                                 <tr role="button">
-                                    <td>{{ $row->nik }}</td>
-                                    <td>{{ $row->namapasien }}</td>
-                                    <td>{{ $row->namabayi }}</td>
-                                    <td>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</td>
-                                    <td>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</td>
-                                    <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                                    <td>{{ $row->periode }}</td>
+                                    <td>{{ $row->jml_bumil_datang }}</td>
+                                    <td>{{ $row->jml_nifas_datang }}</td>
                                 </tr>
                             @endforeach
-                        </tbody> --}}
+                        </tbody>
                     </table>
                 </div>
             </x-partials.viewlarge>
@@ -99,16 +96,8 @@
                     <hr />
                     @foreach ($dataRow as $row)
                         <div class="col-12 col-md-12">
-                            <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                            <div class="card" role="button">
                                 <div class="card-body px-2 py-2">
-                                    <div class="h5 mb-1">{{ $row->namabayi }}</div>
-                                    <div>Ibu {{ $row->namapasien }}</div>
-                                    <div>{{ $row->namabayi }}</div>
-                                    <div>BB : {{ Number::format($row->beratbadan) }} kg</div>
-                                    <div>Tinggi : {{ Number::format($row->tinggibadan) }} cm</div>
-                                    <div>{{ IDateTime::formatDate($row->tgl_lahir_bayi) }}</div>
-                                    <div>{{ IDateTime::dateDiffFormat($row->tgl_lahir_bayi) }}</div>
-                                    <div>{{ IDateTime::formatDate($row->tgl_periksa) }}</div>
                                 </div>
                             </div>
                         </div>
