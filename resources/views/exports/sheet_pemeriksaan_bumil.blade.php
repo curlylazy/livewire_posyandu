@@ -11,40 +11,40 @@
     <tr>
         {{-- DATA --}}
         <th style="font-weight: bold; height: 100px;">No</th>
-        <th style="{!! $rowSize200 !!}">NIK</th>
-        <th style="{!! $rowSize250 !!}">Nama Ibu</th>
-        <th style="{!! $rowSize200 !!}">Tanggal Lahir</th>
-        <th style="{!! $rowSize200 !!}">Umur</th>
-        <th style="{!! $rowSize250 !!}">Alamat</th>
-        <th style="{!! $rowSize200 !!}">No Hp</th>
-        <th style="{!! $rowSize200 !!}">Hamil Ke</th>
-        <th style="{!! $rowSize200 !!}">Minggu Ke</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">NIK</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Nama Ibu</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Tanggal Lahir</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Umur</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">No Hp</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Hamil Ke</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Minggu Ke</th>
 
         {{-- *** Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
-        <th style="{!! $rowSize200 !!}">Berat Badan (Kg)</th>
-        <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
-        <th style="{!! $rowSize200 !!}">LILA (cm)</th>
-        <th style="{!! $rowSize200 !!}">Tekanan Darah</th>
-        <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Berat Badan (Kg)</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">LILA (cm)</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Tekanan Darah</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
 
         {{-- *** Skrining TBC --}}
-        <th style="{!! $rowSize250 !!}">Batuk Terus Menerus</th>
-        <th style="{!! $rowSize300 !!}">Demam Lebih ≥2 minggu</th>
-        <th style="{!! $rowSize350 !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
-        <th style="{!! $rowSize350 !!}">Kontak Erat Dengan Pasien TBC</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Batuk Terus Menerus</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Demam Lebih ≥2 minggu</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Kontak Erat Dengan Pasien TBC</th>
 
         {{-- Pemberian TTD & MT Bumil KEK --}}
-        <th style="{!! $rowSize350 !!}">Diberikan Tablet Oleh Nakes ?</th>
-        <th style="{!! $rowSize200 !!}">Jumlah Tablet</th>
-        <th style="{!! $rowSize350 !!}">Konsumsi Tablet Tambah Darah</th>
-        <th style="{!! $rowSize350 !!}">Diberikan MT Bumil Kek Oleh Nakes ?</th>
-        <th style="{!! $rowSize350 !!}">MT Untuk Bumil KEK</th>
-        <th style="{!! $rowSize300 !!}">Konsumsi MT Bumil KEK</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Diberikan Tablet Oleh Nakes ?</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Jumlah Tablet</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Konsumsi Tablet Tambah Darah</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Diberikan MT Bumil Kek Oleh Nakes ?</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">MT Untuk Bumil KEK</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Konsumsi MT Bumil KEK</th>
 
         {{-- Kelas Ibu Hamil --}}
-        <th style="{!! $rowSize300 !!}">Mengikut Kelas Ibu Hamil</th>
-        <th style="{!! $rowSize300 !!}">Edukasi yang Diberikan</th>
-        <th style="{!! $rowSize300 !!}">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Mengikut Kelas Ibu Hamil</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Edukasi yang Diberikan</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
     </tr>
 </thead>
 <tbody>

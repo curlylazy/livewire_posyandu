@@ -11,6 +11,7 @@ use Maatwebsite\Excel\Events\AfterSheet;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Style\Alignment;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 
 class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatting, WithEvents
 {
@@ -84,6 +85,28 @@ class SheetLapPemeriksaanView implements FromView, WithTitle, WithColumnFormatti
                 $drawing->setHeight(700); // Tinggi gambar dalam pixel
                 $drawing->setCoordinates('X20'); // Letak gambar (sel awal)
                 $drawing->setWorksheet($event->sheet->getDelegate());
+
+                $sheet = $event->sheet->getDelegate();
+                $dimension = $sheet->calculateWorksheetDimension();
+
+                $sheet->getStyle($dimension)
+                    ->getAlignment()
+                    ->setWrapText(true);
+
+                $event->sheet->getDelegate()
+                    ->getStyle($event->sheet->getDelegate()->calculateWorksheetDimension())
+                    ->getAlignment()
+                    ->setVertical(Alignment::VERTICAL_CENTER);
+
+                $borderStyle = [
+                    'borders' => [
+                        'allBorders' => [
+                            'borderStyle' => Border::BORDER_MEDIUM,
+                            'color' => ['rgb' => 'FFFFFF'], // Warna putih
+                        ],
+                    ],
+                ];
+                $sheet->getStyle('A5:AA6')->applyFromArray($borderStyle);
             },
         ];
     }
