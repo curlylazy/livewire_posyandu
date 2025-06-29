@@ -11,11 +11,11 @@
     <tr>
         {{-- DATA --}}
         <th style="font-weight: bold; height: 100px;">No</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">NIK</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">NIK</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Nama Ibu</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Tanggal Lahir</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Umur</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
+        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">No Hp</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Hamil Ke</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Minggu Ke</th>

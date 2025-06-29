@@ -10,43 +10,43 @@
 <thead>
     <tr>
         {{-- DATA --}}
-        <th style="font-weight: bold; height: 100px;">No</th>
-        <th style="{!! $rowSize200 !!}">NIK</th>
-        <th style="{!! $rowSize300 !!}">Nama Ibu Nifas / Menyusui</th>
-        <th style="{!! $rowSize300 !!}">Nama Suami</th>
-        <th style="{!! $rowSize300 !!}">Nama Bayi</th>
-        <th style="{!! $rowSize250 !!}">Tanggal Lahir</th>
-        <th style="{!! $rowSize200 !!}">Umur</th>
-        <th style="{!! $rowSize300 !!}">Alamat</th>
-        <th style="{!! $rowSize300 !!}">No HP</th>
-        <th style="{!! $rowSize200 !!}">Tinggi Badan</th>
-        <th style="{!! $rowSize200 !!}">Anak Ke</th>
-        <th style="{!! $rowSize350 !!}">Tanggal Bersalin</th>
-        <th style="{!! $rowSize350 !!}">Tempat Bersalin</th>
-        <th style="{!! $rowSize300 !!}">Cara Bersalin</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">No</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">NIK</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Ibu Nifas / Menyusui</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Suami</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Bayi</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tanggal Lahir</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Umur</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">No HP</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tinggi Badan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Anak Ke</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tanggal Bersalin</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tempat Bersalin</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Cara Bersalin</th>
 
         {{-- Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
-        <th style="{!! $rowSize200 !!}">Berat Badan (Kg)</th>
-        <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
-        <th style="{!! $rowSize200 !!}">LILA (cm)</th>
-        <th style="{!! $rowSize200 !!}">Tekanan Darah</th>
-        <th style="{!! $rowSize200 !!}">Sesuai Kurva Buku KIA</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Berat Badan (Kg)</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">LILA (cm)</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tekanan Darah</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
 
         {{-- Skrining TBC --}}
-        <th style="{!! $rowSize250 !!}">Batuk Terus Menerus</th>
-        <th style="{!! $rowSize300 !!}">Demam Lebih ≥2 minggu</th>
-        <th style="{!! $rowSize350 !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
-        <th style="{!! $rowSize350 !!}">Kontak Erat Dengan Pasien TBC</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Batuk Terus Menerus</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Demam Lebih ≥2 minggu</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kontak Erat Dengan Pasien TBC</th>
 
         {{-- Pemberian Vit A, Menyusui dan KB --}}
-        <th style="{!! $rowSize350 !!}">Nakes Berikan Vitamin A</th>
-        <th style="{!! $rowSize350 !!}">Jumlah Konsumsi Vitamin A</th>
-        <th style="{!! $rowSize250 !!}">Apakah Menyusui</th>
-        <th style="{!! $rowSize350 !!}">Mengikuti KB Pasca Persalinan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nakes Berikan Vitamin A</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Jumlah Konsumsi Vitamin A</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Apakah Menyusui</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Mengikuti KB Pasca Persalinan</th>
 
         {{-- Edukasi --}}
-        <th style="{!! $rowSize300 !!}">Edukasi yang Diberikan</th>
-        <th style="{!! $rowSize350 !!}">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Edukasi yang Diberikan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
     </tr>
 </thead>
 <tbody>
