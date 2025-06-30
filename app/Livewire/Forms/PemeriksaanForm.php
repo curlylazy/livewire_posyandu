@@ -22,6 +22,9 @@ class PemeriksaanForm extends Form
     public $is_rujuk = false;
     public $edukasi = '';
 
+    public $periksa_umur_bulan = 0;
+    public $periksa_umur_tahun = 0;
+
     // ** Bumil
     public $periksa_hamil_ke = 0;
     public $periksa_minggu_ke = 0;
@@ -58,6 +61,13 @@ class PemeriksaanForm extends Form
 
     // *** pemeriksaan Balita
     public $lingkar_kepala = 0;
+    public $is_asi_ekslusif = false;
+    public $is_mpasi_sesuai = false;
+    public $is_imunisasi_lengkap = false;
+    public $is_beri_obat_cacing = false;
+    public $is_mt_pangan_lokal_pemulihan = false;
+    public $is_gejala_sakit = false;
+    public $gejala_sakit_keterangan = "";
 
     // *** extra
     public $namapasien;

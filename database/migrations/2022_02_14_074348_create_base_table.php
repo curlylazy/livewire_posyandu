@@ -80,8 +80,11 @@ return new class extends Migration
             $table->uuid('kodepemeriksaan')->primary();
             $table->uuid('kodepasien');
             $table->uuid('kodebayi')->nullable();
-            $table->string('kategori_periksa', 25)->comment('nifas, hamil, lansia');
+            $table->string('kategori_periksa', 25)->comment('nifas, hamil, lansia, bayibalita');
             $table->date('tgl_periksa');
+
+            $table->integer('periksa_umur_bulan')->nullable();
+            $table->integer('periksa_umur_tahun')->nullable();
 
             // *** BUMIL
             $table->integer('periksa_hamil_ke')->nullable()->default(0);
@@ -127,11 +130,16 @@ return new class extends Migration
 
             // *** comment berarti menggunakan table yang sudah ada, hanya membantu pembuatan menu saja
             // ** Pemeriksaan Balita
+            // $table->integer('periksa_umur_bulan')->nullable();
+            // $table->integer('periksa_umur_tahun')->nullable();
+            // $table->integer('periksa_bb')->nullable()->default(0);
+            // $table->integer('periksa_tinggi_badan')->nullable()->default(0);
+            // $table->integer('periksa_lingkar_kepala')->nullable()->default(0);
             $table->integer('is_asi_ekslusif')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mpasi_sesuai')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_imunisasi_lengkap')->default(1)->comment('0 = tidak, 1 = ya');
             // $table->integer('is_beri_vit_a')->nullable()->default(0);
-            $table->integer('is_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('is_beri_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
