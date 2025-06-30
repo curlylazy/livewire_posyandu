@@ -38,6 +38,7 @@ class PasienForm extends Form
     public $anakke = 0;
     public $tinggibadan_lahir = 0;
     public $beratbadan_lahir = 0;
+    public $lingkar_kepala = 0;
     public $carabersalin = 1;
     public $tgl_bersalin = null;
     public $tempatbersalin = "";

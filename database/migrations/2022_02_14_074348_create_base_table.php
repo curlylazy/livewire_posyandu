@@ -42,8 +42,9 @@ return new class extends Migration
             $table->uuid('kodeayah')->nullable();
             $table->uuid('kodeibu')->nullable();
             $table->integer('anakke')->default(1);
-            $table->decimal('tinggibadan_lahir')->default(1);
-            $table->decimal('beratbadan_lahir')->default(1);
+            $table->decimal('tinggibadan_lahir')->default(0);
+            $table->decimal('beratbadan_lahir')->default(0);
+            $table->decimal('lingkar_kepala')->default(0);
             $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
             $table->date('tgl_bersalin')->nullable();
             $table->string('tempatbersalin', 225)->nullable();
@@ -117,11 +118,25 @@ return new class extends Migration
             // ** Pemberian Vit A, Menyusui dan KB
             $table->integer('periksa_bb_bayi')->nullable()->default(0);
             $table->integer('periksa_tinggi_badan')->nullable()->default(0);
+            $table->integer('periksa_lingkar_kepala')->nullable()->default(0);
             $table->integer('is_beri_vit_a')->nullable()->default(0);
             $table->integer('jml_tablet_vit_a')->nullable()->default(0);
             $table->integer('is_konsumsi_vit_a')->nullable()->default(0);
             $table->integer('is_menyusui')->nullable()->default(0);
             $table->integer('is_kb')->nullable()->default(0);
+
+            // *** comment berarti menggunakan table yang sudah ada, hanya membantu pembuatan menu saja
+            // ** Pemeriksaan Balita
+            $table->integer('is_asi_ekslusif')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('is_mpasi_sesuai')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('is_imunisasi_lengkap')->default(1)->comment('0 = tidak, 1 = ya');
+            // $table->integer('is_beri_vit_a')->nullable()->default(0);
+            $table->integer('is_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
+            // $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');
+            // $table->integer('is_rujuk')->nullable()->default(0)->comment('Rujuk Pustu/Puskesmas/Rumah Sakit');
 
             $table->timestamps();
             $table->softDeletes();

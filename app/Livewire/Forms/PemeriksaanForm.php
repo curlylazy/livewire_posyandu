@@ -56,6 +56,9 @@ class PemeriksaanForm extends Form
     public $is_menyusui = false;
     public $is_kb = false;
 
+    // *** pemeriksaan Balita
+    public $lingkar_kepala = 0;
+
     // *** extra
     public $namapasien;
     public $namabayi;
