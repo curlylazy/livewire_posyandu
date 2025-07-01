@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Pemeriksaan;
+namespace App\Livewire\Admin\PemeriksaanBumilNifas;
 
 use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
@@ -10,14 +10,15 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 
-class PemeriksaanAE extends Component
+class PemeriksaanBumilNifasAE extends Component
 {
     public $pageTitle = "Pemeriksaan";
     public $pageName = "pemeriksaan";
+    public $dirView = "pemeriksaan_bumilnifas";
     public $isEdit = false;
     public $id = "";
 
-    public $pulihanModalPasien = "";
+    public $pilihanModalPasien = "";
     public $judulModalPasien = "";
     public $keteranganModal = "";
     public $kategoriumur = "";
@@ -87,11 +88,11 @@ class PemeriksaanAE extends Component
     // *** extra
     public function modalSelectPasien($data)
     {
-        if($this->pulihanModalPasien == "bumilnifas") {
+        if($this->pilihanModalPasien == "bumilnifas") {
             $this->form->setPasien($data);
         }
 
-        if($this->pulihanModalPasien == "bayi") {
+        if($this->pilihanModalPasien == "bayi") {
             $this->form->setBayi($data);
         }
 
@@ -148,7 +149,7 @@ class PemeriksaanAE extends Component
             $this->keteranganModal = "Ibu : ".$this->form->namapasien;
         }
 
-        $this->pulihanModalPasien = $pilihan;
+        $this->pilihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
@@ -170,7 +171,7 @@ class PemeriksaanAE extends Component
             $this->judulModalPasien = "Tambah Pasien Bayi";
         }
 
-        $this->pulihanModalPasien = $pilihan;
+        $this->pilihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasienAdd');
     }
 
@@ -192,7 +193,7 @@ class PemeriksaanAE extends Component
 
     public function render()
     {
-        return view('livewire.admin.' . $this->pageName . '.ae')
+        return view('livewire.admin.' . $this->dirView . '.ae')
             ->layout('components.layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }

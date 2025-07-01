@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Pemeriksaan;
+namespace App\Livewire\Admin\PemeriksaanBumilNifas;
 
 use App\Exports\PemeriksaanBumilNifasPerPasienExport;
 use App\Lib\GetString;
@@ -12,12 +12,13 @@ use App\Models\PemeriksaanModel;
 use Livewire\Attributes\On;
 use Maatwebsite\Excel\Facades\Excel;
 
-class PemeriksaanRiwayat extends Component
+class PemeriksaanBumilNifasRiwayat extends Component
 {
     use WithPagination;
 
     public $pageTitle = "Pemeriksaan Riwayat";
     public $pageName = "pemeriksaan";
+    public $dirView = "pemeriksaan_bumilnifas";
 
     // *** q mengacu pada query
     #[Url]
@@ -139,7 +140,7 @@ class PemeriksaanRiwayat extends Component
 
     public function render()
     {
-        return view('livewire.admin.'.$this->pageName.'.riwayat', [
+        return view('livewire.admin.'.$this->dirView.'.riwayat', [
             "dataRow" => $this->readData(),
         ])
         ->layout('components.layouts.admin')

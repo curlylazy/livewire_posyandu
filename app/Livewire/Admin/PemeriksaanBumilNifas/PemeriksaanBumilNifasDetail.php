@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\Pemeriksaan;
+namespace App\Livewire\Admin\PemeriksaanBumilNifas;
 
 use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
@@ -11,10 +11,11 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 
-class PemeriksaanDetail extends Component
+class PemeriksaanBumilNifasDetail extends Component
 {
     public $pageTitle = "Pemeriksaan";
     public $pageName = "pemeriksaan";
+    public $dirView = "pemeriksaan_bumilnifas";
     public $isEdit = false;
     public $id = "";
 
@@ -48,7 +49,7 @@ class PemeriksaanDetail extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.detail")
+        return view('livewire.admin.' . $this->dirView . '.detail')
             ->with([
                 "dataRow" => $this->readData()
             ])

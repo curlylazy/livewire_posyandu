@@ -30,7 +30,7 @@
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
             <div class="mb-3">
                 <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add?kategori_periksa=$kategori_periksa") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
+                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/bumilnifas/add?kategori_periksa=$kategori_periksa") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
                 <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
             </div>
 

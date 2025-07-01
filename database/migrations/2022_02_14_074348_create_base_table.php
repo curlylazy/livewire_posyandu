@@ -83,6 +83,7 @@ return new class extends Migration
             $table->string('kategori_periksa', 25)->comment('nifas, hamil, lansia, bayibalita');
             $table->date('tgl_periksa');
 
+            // *** saat diperiksa berapa usianya, biasa digunakan untuk pemeriksaan bayi/balita
             $table->integer('periksa_umur_bulan')->nullable();
             $table->integer('periksa_umur_tahun')->nullable();
 

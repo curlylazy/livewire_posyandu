@@ -34,7 +34,7 @@
     <livewire:partial.modal-add-pasien
         :kategori_periksa="$kategori_periksa"
         :judulModal="$judulModalPasien"
-        :pilihanAdd="$pulihanModalPasien"
+        :pilihanAdd="$pilihanModalPasien"
         :kodeibu="$form->kodepasien"
         @saved="modalSelectPasien($event.detail.data)"
     />
@@ -52,7 +52,7 @@
     <x-partials.flashmsg />
     <x-slot:bc>
         <li class="breadcrumb-item"><a href="{{ url("/admin") }}" class="text-decoration-none" wire:navigate><span>Home</span></a></li>
-        <li class="breadcrumb-item"><a href="{{ url("/admin/$pageName") }}" class="text-decoration-none" wire:navigate><span>{{ $pageTitle }}</span></a></li>
+        <li class="breadcrumb-item"><a href="{{ url("/admin/$pageName/bumilnifas") }}" class="text-decoration-none" wire:navigate><span>{{ $pageTitle }}</span></a></li>
         @if($isEdit)
             <li class="breadcrumb-item"><span>Edit</span></li>
             <li class="breadcrumb-item active"><span>{{ $form->namapasien }}</span></li>

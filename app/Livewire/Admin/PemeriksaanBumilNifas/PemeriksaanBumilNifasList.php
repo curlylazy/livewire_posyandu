@@ -1,18 +1,19 @@
 <?php
 
-namespace App\Livewire\Admin\Pemeriksaan;
+namespace App\Livewire\Admin\PemeriksaanBumilNifas;
 
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use App\Models\PemeriksaanModel;
 
-class PemeriksaanList extends Component
+class PemeriksaanBumilNifasList extends Component
 {
     use WithPagination;
 
     public $pageTitle = "Pemeriksaan";
     public $pageName = "pemeriksaan";
+    public $dirView = "pemeriksaan_bumilnifas";
     public $selectedKode = "";
     public $selectedNama = "";
 
@@ -60,7 +61,7 @@ class PemeriksaanList extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.list", [
+        return view('livewire.admin.' . $this->dirView . '.list', [
             "dataRow" => $this->readData(),
         ])
         ->layout('components.layouts.admin')

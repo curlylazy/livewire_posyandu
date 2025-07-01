@@ -22,9 +22,10 @@ use App\Livewire\Admin\Laporan\RekapBumilNifas;
 use App\Livewire\Admin\Pasien\PasienAE;
 use App\Livewire\Admin\Pasien\PasienDetail;
 use App\Livewire\Admin\Pasien\PasienList;
-use App\Livewire\Admin\Pemeriksaan\PemeriksaanAE;
-use App\Livewire\Admin\Pemeriksaan\PemeriksaanDetail;
-use App\Livewire\Admin\Pemeriksaan\PemeriksaanList;
+use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasList;
+use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasAE;
+use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasDetail;
+use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasRiwayat;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -80,12 +81,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/bayi/add', BayiAE::class)->name('admin_bayi_add');
     Route::get('/bayi/edit/{id}', BayiAE::class)->name('admin_bayi_edit');
 
-    // *** Pemeriksaan
-    Route::get('/pemeriksaan', PemeriksaanList::class)->name('admin_pemeriksaan_list');
-    // Route::get('/pemeriksaan/riwayat', PemeriksaanRiwayat::class)->name('admin_pemeriksaan_riwayat');
-    Route::get('/pemeriksaan/detail/{id}', PemeriksaanDetail::class)->name('admin_pemeriksaan_detail');
-    Route::get('/pemeriksaan/add', PemeriksaanAE::class)->name('admin_pemeriksaan_add');
-    Route::get('/pemeriksaan/edit/{id}', PemeriksaanAE::class)->name('admin_pemeriksaan_edit');
+    // *** Pemeriksaan Bumil Nifas
+    Route::get('/pemeriksaan/bumilnifas/', PemeriksaanBumilNifasList::class)->name('admin_pemeriksaan_bumilnifas_list');
+    Route::get('/pemeriksaan/bumilnifas/detail/{id}', PemeriksaanBumilNifasDetail::class)->name('admin_pemeriksaan_bumilnifas_detail');
+    Route::get('/pemeriksaan/bumilnifas/add', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_add');
+    Route::get('/pemeriksaan/bumilnifas/edit/{id}', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_edit');
 
     // *** Laporan
     Route::get('/laporan/riwayat', PemeriksaanRiwayat::class)->name('admin_laporan_riwayat');
