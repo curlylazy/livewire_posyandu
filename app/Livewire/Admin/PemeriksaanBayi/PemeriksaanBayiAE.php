@@ -11,11 +11,12 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 
-class PemeriksaanBumilNifasAE extends Component
+class PemeriksaanBayiAE extends Component
 {
     public $pageTitle = "Pemeriksaan";
     public $pageName = "pemeriksaan";
-    public $dirView = "pemeriksaan_bumilnifas";
+    public $subPage = "bayi";
+    public $dirView = "pemeriksaan_bayi";
     public $isEdit = false;
     public $id = "";
 
@@ -24,9 +25,6 @@ class PemeriksaanBumilNifasAE extends Component
     public $keteranganModal = "";
     public $kategoriumur = "";
     public $jk = "";
-
-    #[Url()]
-    public $kategori_periksa = "";
 
     public PemeriksaanForm $form;
 
@@ -38,14 +36,6 @@ class PemeriksaanBumilNifasAE extends Component
 
     public function setTitle()
     {
-        if($this->kategori_periksa == "bumil"){
-            $this->pageTitle = "Pemeriksaan Ibu Hamil";
-        }
-
-        if($this->kategori_periksa == "nifas"){
-            $this->pageTitle = "Pemeriksaan Nifas";
-        }
-
         $this->form->tgl_periksa = date('Y-m-d');
         $this->form->kategori_periksa = $this->kategori_periksa;
     }
@@ -66,7 +56,7 @@ class PemeriksaanBumilNifasAE extends Component
         try {
             ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
 
-            $this->redirect("/admin/$this->pageName/bumilnifas?kategori_periksa=".$this->kategori_periksa, navigate: true);
+            $this->redirect("/admin/$this->pageName/$this->subPage", navigate: true);
 
         } catch (\Exception $e) {
             $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
@@ -89,40 +79,11 @@ class PemeriksaanBumilNifasAE extends Component
     // *** extra
     public function modalSelectPasien($data)
     {
-        if($this->pilihanModalPasien == "bumilnifas") {
-            $this->form->setPasien($data);
-        }
-
-        if($this->pilihanModalPasien == "bayi") {
-            $this->form->setBayi($data);
-        }
-
+        $this->form->setPasien($data);
         $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
 
-    // #[On('on-selectbayi')]
-    // public function selectBayi($data)
-    // {
-    //     $this->form->setBayi($data);
-    //     $this->dispatch('close-modal', namamodal : 'modalBayi');
-    // }
-
-    // public function onClickPilihBayi()
-    // {
-    //     if(empty($this->form->kodepasien)) {
-    //         $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian pilih anaknya', icon: 'warning');
-    //         return;
-    //     }
-
-    //     if($this->isEdit) {
-    //         $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama bayi lagi ya!', icon: 'warning');
-    //         return;
-    //     }
-
-    //     $this->dispatch('open-modal', namamodal : 'modalBayi');
-    // }
-
-    public function onClickOpenModalPasien($pilihan)
+    public function onClickOpenModalPasien()
     {
         if($this->isEdit) {
             $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama pasien lagi ya!', icon: 'warning');
@@ -130,27 +91,10 @@ class PemeriksaanBumilNifasAE extends Component
         }
 
         $this->keteranganModal = "";
-        $this->jk = "";
+        $this->kategoriumur = "Bayi";
+        $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
 
-        if($pilihan == "bumilnifas") {
-            $this->kategoriumur = "Dewasa";
-            $this->jk = "P";
-            $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
-        }
-
-        if($pilihan == "bayi") {
-
-            if(empty($this->form->kodepasien)) {
-                $this->dispatch('notif', message: 'Oops tidak bisa, harus pilih ibunya dulu ya!', icon: 'warning');
-                return;
-            }
-
-            $this->kategoriumur = "Balita";
-            $this->judulModalPasien = "Pilih Bayi";
-            $this->keteranganModal = "Ibu : ".$this->form->namapasien;
-        }
-
-        $this->pilihanModalPasien = $pilihan;
+        // $this->pilihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 

@@ -28,14 +28,14 @@ class IDateTime
         return $res;
     }
 
-    public static function dateDiff($date, $in = "year")
+    public static function dateDiff($date, $date2 = "", $in = "year")
     {
         // $dbDate = \Carbon\Carbon::parse($date);
         // $diffYears = \Carbon\Carbon::now()->diffInYears($dbDate);
         // return $diffYears;
 
         $date1 = \Carbon\Carbon::parse($date);
-        $date2 = \Carbon\Carbon::now();
+        $date2 = ($date2 == "") ? \Carbon\Carbon::now() : $date2;
         $diff = $date1->diff($date2);
 
         if($in == "year"){

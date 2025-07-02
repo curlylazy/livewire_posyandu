@@ -7,36 +7,29 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use App\Models\PemeriksaanModel;
 
-class PemeriksaanBumilNifasList extends Component
+class PemeriksaanBayiList extends Component
 {
     use WithPagination;
 
-    public $pageTitle = "Pemeriksaan";
+    public $pageTitle = "Pemeriksaan Bayi";
     public $pageName = "pemeriksaan";
-    public $subPage = "bumilnifas";
-    public $dirView = "pemeriksaan_bumilnifas";
+    public $subPage = "bayi";
+    public $dirView = "pemeriksaan_bayi";
     public $selectedKode = "";
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "", $kategori_periksa = "";
+    public $katakunci = "";
 
     public function mount()
     {
-        if($this->kategori_periksa == "bumil"){
-            $this->pageTitle = "Pemeriksaan Ibu Hamil";
-        }
-
-        if($this->kategori_periksa == "nifas"){
-            $this->pageTitle = "Pemeriksaan Nifas";
-        }
     }
 
     public function readData()
     {
         $data = PemeriksaanModel::search($this->katakunci)
                 ->joinTable()
-                ->searchByKategoriPeriksa($this->kategori_periksa)
+                ->searchByKategoriPeriksa($this->subPage)
                 ->latest('tbl_pemeriksaan.tgl_periksa')
                 ->paginate(20);
 

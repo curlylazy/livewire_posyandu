@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Forms;
 
+use App\Lib\IDateTime;
 use App\Lib\Upload;
 use App\Models\BayiModel;
 use App\Models\PasienModel;
@@ -21,9 +22,6 @@ class PemeriksaanForm extends Form
     public $is_kelas_bumil = false;
     public $is_rujuk = false;
     public $edukasi = '';
-
-    public $periksa_umur_bulan = 0;
-    public $periksa_umur_tahun = 0;
 
     // ** Bumil
     public $periksa_hamil_ke = 0;
@@ -60,7 +58,7 @@ class PemeriksaanForm extends Form
     public $is_kb = false;
 
     // *** pemeriksaan Balita
-    public $lingkar_kepala = 0;
+    public $periksa_lingkar_kepala = 0;
     public $is_asi_ekslusif = false;
     public $is_mpasi_sesuai = false;
     public $is_imunisasi_lengkap = false;
@@ -99,6 +97,9 @@ class PemeriksaanForm extends Form
         $this->is_rujuk = $data->is_rujuk;
         $this->edukasi = $data->edukasi;
 
+        $this->periksa_hamil_ke = $data->periksa_hamil_ke;
+        $this->periksa_minggu_ke = $data->periksa_minggu_ke;
+
         // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
         $this->periksa_bb = $data->periksa_bb;
         $this->is_sesuai_kurva_bb = $data->is_sesuai_kurva_bb;
@@ -129,8 +130,20 @@ class PemeriksaanForm extends Form
         $this->is_menyusui = $data->is_menyusui;
         $this->is_kb = $data->is_kb;
 
-        $this->setPasien(json_encode($data));
-        $this->setBayi(json_encode($data));
+        // ** Pemeriksaan Bayi
+        $this->periksa_lingkar_kepala = $data->periksa_lingkar_kepala;
+        $this->is_asi_ekslusif = $data->is_asi_ekslusif;
+        $this->is_mpasi_sesuai = $data->is_mpasi_sesuai;
+        $this->is_imunisasi_lengkap = $data->is_imunisasi_lengkap;
+        $this->is_beri_vit_a = $data->is_beri_vit_a;
+        $this->is_beri_obat_cacing = $data->is_beri_obat_cacing;
+        $this->is_mt_pangan_lokal_pemulihan = $data->is_mt_pangan_lokal_pemulihan;
+        $this->is_gejala_sakit = $data->is_gejala_sakit;
+        $this->gejala_sakit_keterangan = $data->gejala_sakit_keterangan;
+
+        // ** field pembantu
+        $this->namapasien = $data->namapasien;
+        $this->namabayi = $data->namabayi;
     }
 
     public function setPasien($data)
@@ -143,6 +156,11 @@ class PemeriksaanForm extends Form
         $this->periksa_minggu_ke = $data->minggu_ke;
         $this->periksa_bb = $data->beratbadan;
         $this->periksa_tekanan_darah = $data->tekanan_darah;
+        $this->periksa_lila = $data->lila;
+
+        // *** periksa : bayi
+        $this->periksa_lingkar_kepala = $data->lingkar_kepala;
+        $this->periksa_bb = $data->beratbadan;
         $this->periksa_lila = $data->lila;
     }
 
@@ -189,7 +207,7 @@ class PemeriksaanForm extends Form
         $this->validate();
         $this->aftervalidated();
 
-        $this->updatePasienDanBayi();
+        $this->updatePasien();
 
         $data = PemeriksaanModel::create($this->except($this->exceptData()));
         $kodepemeriksaan = $data->kodepemeriksaan;
@@ -202,29 +220,50 @@ class PemeriksaanForm extends Form
         $this->validate();
         $this->aftervalidated();
 
-        $this->updatePasienDanBayi();
+        $this->updatePasien();
 
         PemeriksaanModel::find($this->kodepemeriksaan)->update($this->except($this->exceptData()));
     }
 
     // *** extra
-    private function updatePasienDanBayi()
+    private function updatePasien()
     {
-        // *** update data ibu hamil/nifas
-        PasienModel::find($this->kodepasien)->update([
-            "hamil_ke" => $this->periksa_hamil_ke,
-            "minggu_ke" => $this->periksa_minggu_ke,
-            "beratbadan" => $this->periksa_bb,
-            "tekanan_darah" => $this->periksa_tekanan_darah,
-            "lila" => $this->periksa_lila,
-        ]);
-
-        // *** update data bayinya
-        if($this->kategori_periksa == 'bayi')
+        // *** katerogi periksa : bumil dan nifas
+        if($this->kategori_periksa == 'bumil')
         {
+            PasienModel::find($this->kodepasien)->update([
+                "hamil_ke" => $this->periksa_hamil_ke,
+                "minggu_ke" => $this->periksa_minggu_ke,
+                "beratbadan" => $this->periksa_bb,
+                "tekanan_darah" => $this->periksa_tekanan_darah,
+                "lila" => $this->periksa_lila,
+            ]);
+        }
+
+        // *** katerogi periksa : nifas
+        if($this->kategori_periksa == 'nifas')
+        {
+            PasienModel::find($this->kodepasien)->update([
+                "hamil_ke" => $this->periksa_hamil_ke,
+                "minggu_ke" => $this->periksa_minggu_ke,
+                "beratbadan" => $this->periksa_bb,
+                "tekanan_darah" => $this->periksa_tekanan_darah,
+                "lila" => $this->periksa_lila,
+            ]);
+
             PasienModel::find($this->kodebayi)->update([
                 "tinggibadan" => $this->periksa_tinggi_badan,
+                "beratbadan" => $this->periksa_bb_bayi,
+            ]);
+        }
+
+        // *** kategori periksa : bayi
+        if($this->kategori_periksa == 'bayi')
+        {
+            PasienModel::find($this->kodepasien)->update([
+                "lingkar_kepala" => $this->periksa_lingkar_kepala,
                 "beratbadan" => $this->periksa_bb,
+                "lila" => $this->periksa_lila,
             ]);
         }
     }

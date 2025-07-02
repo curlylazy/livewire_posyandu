@@ -140,8 +140,8 @@
                 <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
                 <x-slot:selectedNama>{{ $selectedNama }}</x-slot>
                 <div class="d-grid gap-2">
-                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/edit/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-edit"></i> Edit</a>
-                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/detail/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-stethoscope"></i> Detail</a>
+                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/$subPage/edit/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/$subPage/detail/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-stethoscope"></i> Detail</a>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete", { kode: "{{ $selectedKode }}", nama: "{{ $selectedNama }}" })'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>

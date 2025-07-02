@@ -83,14 +83,6 @@ return new class extends Migration
             $table->string('kategori_periksa', 25)->comment('nifas, hamil, lansia, bayibalita');
             $table->date('tgl_periksa');
 
-            // *** saat diperiksa berapa usianya, biasa digunakan untuk pemeriksaan bayi/balita
-            $table->integer('periksa_umur_bulan')->nullable();
-            $table->integer('periksa_umur_tahun')->nullable();
-
-            // *** BUMIL
-            $table->integer('periksa_hamil_ke')->nullable()->default(0);
-            $table->integer('periksa_minggu_ke')->nullable()->default(0);
-
             // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
             $table->integer('periksa_bb')->nullable()->default(0);
             $table->integer('is_sesuai_kurva_bb')->nullable()->default(0);
@@ -143,7 +135,7 @@ return new class extends Migration
             $table->integer('is_beri_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
-            $table->integer('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
+            $table->text('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
             // $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');
             // $table->integer('is_rujuk')->nullable()->default(0)->comment('Rujuk Pustu/Puskesmas/Rumah Sakit');
 
