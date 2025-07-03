@@ -134,6 +134,7 @@ return new class extends Migration
             // $table->integer('is_beri_vit_a')->nullable()->default(0);
             $table->integer('is_beri_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->string('mt_pangan_lokal_porsi')->nullable()->comment('0 = tidak, 1 = ya');
             $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
             $table->text('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
             // $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');

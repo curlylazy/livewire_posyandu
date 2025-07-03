@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\PemeriksaanBumilNifas;
+namespace App\Livewire\Admin\PemeriksaanBayi;
 
 use Livewire\Component;
 use Livewire\WithPagination;

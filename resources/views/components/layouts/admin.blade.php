@@ -54,72 +54,23 @@
             <button class="btn-close d-lg-none" type="button" data-coreui-theme="dark" onclick='Livewire.dispatch("close-sidebar")'></button>
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
+
             <li class="nav-title">Master Data</li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">home</span>
-                    Dashboard
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/user") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">person</span>
-                    User
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pasien") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">pregnancy</span>
-                    Pasien
-                </a>
-            </li>
+            <x-partials.sidelink href="admin/" icon="home" title="User" />
+            <x-partials.sidelink href="admin/user" icon="person" title="User" />
+            <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
 
             <li class="nav-title">Pemeriksaan</li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumilnifas?kategori_periksa=bumil") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">stethoscope</span>
-                    Periksa Ibu Hamil
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/pemeriksaan/bumilnifas?kategori_periksa=nifas") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">stethoscope</span>
-                    Periksa Nifas
-                </a>
-            </li>
+            <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=bumil" icon="stethoscope" title="Periksa Ibu Hamil" />
+            <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=nifas" icon="stethoscope" title="Periksa Nifas" />
+            <x-partials.sidelink href="admin/pemeriksaan/bayi" icon="stethoscope" title="Periksa Bayi" />
 
             <li class="nav-title">Laporan</li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/laporan/riwayat?kategori_periksa=bumil") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">medical_information</span>
-                    Riwayat Ibu Hamil
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/laporan/riwayat?kategori_periksa=nifas") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">medical_information</span>
-                    Riwayat Nifas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/laporan/rekapbumilnifas") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">medical_information</span>
-                    Rekap Bumil & Nifas
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/laporan/pemeriksaan?kategori_periksa=bumil") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">lab_profile</span>
-                    Lap Periksa Bumil
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url("admin/laporan/pemeriksaan?kategori_periksa=nifas") }}" wire:navigate>
-                    <span class="nav-icon material-symbols-outlined">lab_profile</span>
-                    Lap Periksa Nifas
-                </a>
-            </li>
-
+            <x-partials.sidelink href="admin/laporan/riwayat?kategori_periksa=bumil" icon="medical_information" title="Riwayat Ibu Hamil" />
+            <x-partials.sidelink href="admin/laporan/riwayat?kategori_periksa=nifas" icon="medical_information" title="Riwayat Ibu Nifas" />
+            <x-partials.sidelink href="admin/laporan/rekapbumilnifas" icon="medical_information" title="Rekap Bumil & Nifas" />
+            <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=bumil" icon="lab_profile" title="Lap Periksa Bumil" />
+            <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=nifas" icon="lab_profile" title="Lap Periksa Nifas" />
 
             {{-- LOG OUT --}}
             <li class="nav-item">

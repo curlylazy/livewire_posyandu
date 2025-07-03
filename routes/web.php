@@ -22,6 +22,8 @@ use App\Livewire\Admin\Laporan\RekapBumilNifas;
 use App\Livewire\Admin\Pasien\PasienAE;
 use App\Livewire\Admin\Pasien\PasienDetail;
 use App\Livewire\Admin\Pasien\PasienList;
+use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiAE;
+use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiList;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasList;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasAE;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasDetail;
@@ -86,6 +88,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/pemeriksaan/bumilnifas/detail/{id}', PemeriksaanBumilNifasDetail::class)->name('admin_pemeriksaan_bumilnifas_detail');
     Route::get('/pemeriksaan/bumilnifas/add', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_add');
     Route::get('/pemeriksaan/bumilnifas/edit/{id}', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_edit');
+
+    // *** Pemeriksaan Bayi
+    Route::get('/pemeriksaan/bayi/', PemeriksaanBayiList::class)->name('admin_pemeriksaan_bayi_list');
+    Route::get('/pemeriksaan/bayi/add', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_add');
+    Route::get('/pemeriksaan/bayi/edit/{id}', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_edit');
 
     // *** Laporan
     Route::get('/laporan/riwayat', PemeriksaanRiwayat::class)->name('admin_laporan_riwayat');

@@ -22,7 +22,7 @@ class PemeriksaanModel extends Model
     public function scopeJoinTable(Builder $query): void
     {
         $query
-            ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_pemeriksaan.kodepasien', 'tbl_pasien.tgl_lahir as tgl_lahir_pasien', 'pasien_suami.namapasien as namasuami', 'pasien_bayi.namapasien as namabayi')
+            ->select('tbl_pemeriksaan.*', 'tbl_pasien.*', 'tbl_pemeriksaan.kodepasien', 'tbl_pasien.tgl_lahir as tgl_lahir_pasien', 'pasien_suami.namapasien as namasuami', 'pasien_bayi.namapasien as namabayi', 'pasien_ibu.kodepasien as kodeibu', 'pasien_ibu.namapasien as namaibu')
             ->join('tbl_pasien', 'tbl_pemeriksaan.kodepasien', '=', 'tbl_pasien.kodepasien')
             ->leftJoin('tbl_pasien as pasien_bayi', 'pasien_bayi.kodepasien', '=', 'tbl_pemeriksaan.kodebayi')
             ->leftJoin('tbl_pasien as pasien_ayah', 'pasien_ayah.kodepasien', '=', 'tbl_pasien.kodeayah')

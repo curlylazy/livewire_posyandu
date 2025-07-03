@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin\PemeriksaanBumilNifas;
+namespace App\Livewire\Admin\PemeriksaanBayi;
 
 use App\Lib\IDateTime;
 use App\Livewire\Forms\PasienForm;
@@ -37,7 +37,7 @@ class PemeriksaanBayiAE extends Component
     public function setTitle()
     {
         $this->form->tgl_periksa = date('Y-m-d');
-        $this->form->kategori_periksa = $this->kategori_periksa;
+        $this->form->kategori_periksa = $this->subPage;
     }
 
     public function readData($id = null)
@@ -79,29 +79,48 @@ class PemeriksaanBayiAE extends Component
     // *** extra
     public function modalSelectPasien($data)
     {
-        $this->form->setPasien($data);
+        if($this->pilihanModalPasien == "ibu") {
+            $this->form->resetBayi();
+            $this->form->setIbu($data);
+        }
+
+        if($this->pilihanModalPasien == "bayi") {
+            $this->form->setPasien($data);
+        }
+
         $this->dispatch('close-modal', namamodal : 'modalPasien');
     }
 
-    public function onClickOpenModalPasien()
+    public function onClickOpenModalPasien($pilihan)
     {
         if($this->isEdit) {
             $this->dispatch('notif', message: 'Untuk edit tidak bisa ubah nama pasien lagi ya!', icon: 'warning');
             return;
         }
 
-        $this->keteranganModal = "";
-        $this->kategoriumur = "Bayi";
-        $this->judulModalPasien = "Pilih Ibu Nifas / Hamil";
+        $this->jk = "";
 
-        // $this->pilihanModalPasien = $pilihan;
+        if($pilihan == "ibu")
+        {
+            $this->kategoriumur = "Dewasa";
+            $this->jk = "P";
+            $this->judulModalPasien = "Pilih Ibu";
+        }
+
+        if($pilihan == "bayi")
+        {
+            $this->kategoriumur = "Balita";
+            $this->judulModalPasien = "Pilih Bayi";
+        }
+
+        $this->pilihanModalPasien = $pilihan;
         $this->dispatch('open-modal', namamodal : 'modalPasien');
     }
 
     public function onClickOpenModalAddPasien($pilihan)
     {
 
-        if($pilihan == "bumilnifas")
+        if($pilihan == "ibu")
         {
             $this->judulModalPasien = "Tambah Pasien Ibu Hamil / Nifas";
         }
@@ -112,7 +131,6 @@ class PemeriksaanBayiAE extends Component
                 $this->dispatch('notif', message: 'Pilih dulu Ibu, baru kemudian bisa menambahkan data bayi', icon: 'warning');
                 return;
             }
-
             $this->judulModalPasien = "Tambah Pasien Bayi";
         }
 
@@ -133,7 +151,7 @@ class PemeriksaanBayiAE extends Component
     public function onClickResetDataPasien()
     {
         $this->form->resetForm();
-        $this->form->kategori_periksa = $this->kategori_periksa;
+        $this->form->kategori_periksa = $this->subPage;
     }
 
     public function render()

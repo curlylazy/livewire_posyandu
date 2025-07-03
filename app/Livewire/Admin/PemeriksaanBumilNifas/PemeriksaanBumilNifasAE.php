@@ -90,6 +90,7 @@ class PemeriksaanBumilNifasAE extends Component
     public function modalSelectPasien($data)
     {
         if($this->pilihanModalPasien == "bumilnifas") {
+            $this->form->resetBayi();
             $this->form->setPasien($data);
         }
 

@@ -66,8 +66,11 @@ class PemeriksaanForm extends Form
     public $is_mt_pangan_lokal_pemulihan = false;
     public $is_gejala_sakit = false;
     public $gejala_sakit_keterangan = "";
+    public $mt_pangan_lokal_porsi = "";
 
     // *** extra
+    public $kodeibu;
+    public $namaibu;
     public $namapasien;
     public $namabayi;
 
@@ -142,14 +145,15 @@ class PemeriksaanForm extends Form
         $this->gejala_sakit_keterangan = $data->gejala_sakit_keterangan;
 
         // ** field pembantu
+        $this->kodeibu = $data->kodeibu;
         $this->namapasien = $data->namapasien;
         $this->namabayi = $data->namabayi;
+        $this->namaibu = $data->namaibu;
     }
 
     public function setPasien($data)
     {
         $data = json_decode($data);
-        $this->resetBayi();
         $this->kodepasien = $data->kodepasien;
         $this->namapasien = $data->namapasien;
         $this->periksa_hamil_ke = $data->hamil_ke;
@@ -162,6 +166,13 @@ class PemeriksaanForm extends Form
         $this->periksa_lingkar_kepala = $data->lingkar_kepala;
         $this->periksa_bb = $data->beratbadan;
         $this->periksa_lila = $data->lila;
+    }
+
+    public function setIbu($data)
+    {
+        $data = json_decode($data);
+        $this->kodeibu = $data->kodepasien;
+        $this->namaibu = $data->namapasien;
     }
 
     public function setBayi($data)
@@ -197,7 +208,7 @@ class PemeriksaanForm extends Form
 
     private function exceptData()
     {
-        $arr = ['namapasien', 'namabayi'];
+        $arr = ['namapasien', 'namabayi', 'kodeibu', 'namaibu'];
         return $arr;
     }
 
