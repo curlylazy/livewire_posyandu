@@ -35,6 +35,7 @@ class PemeriksaanBayiList extends Component
         $data = PemeriksaanModel::search($this->katakunci)
                 ->joinTable()
                 ->searchByKategoriPeriksa($this->subPage)
+                ->searchByMonthYear(month : $this->bulan, year: $this->tahun)
                 ->latest('tbl_pemeriksaan.tgl_periksa')
                 ->paginate(20);
 
