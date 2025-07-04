@@ -24,6 +24,7 @@ class PemeriksaanBayiAE extends Component
     public $judulModalPasien = "";
     public $keteranganModal = "";
     public $kategoriumur = "";
+    public $kategoriumurArr = [];
     public $jk = "";
 
     public PemeriksaanForm $form;
@@ -99,6 +100,8 @@ class PemeriksaanBayiAE extends Component
         }
 
         $this->jk = "";
+        $this->kategoriumur = "";
+        $this->kategoriumurArr = [];
 
         if($pilihan == "ibu")
         {
@@ -109,7 +112,7 @@ class PemeriksaanBayiAE extends Component
 
         if($pilihan == "bayi")
         {
-            $this->kategoriumur = "Balita";
+            $this->kategoriumurArr = ["'Balita'", "'Anak-anak'"];
             $this->judulModalPasien = "Pilih Bayi";
         }
 
@@ -122,7 +125,7 @@ class PemeriksaanBayiAE extends Component
 
         if($pilihan == "ibu")
         {
-            $this->judulModalPasien = "Tambah Pasien Ibu Hamil / Nifas";
+            $this->judulModalPasien = "Tambah Ibu";
         }
 
         if($pilihan == "bayi")

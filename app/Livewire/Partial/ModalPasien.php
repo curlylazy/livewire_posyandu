@@ -16,7 +16,7 @@ class ModalPasien extends Component
     public $katakunci = "";
 
     #[Reactive]
-    public $kategoriumur = "", $jk = "", $pilihanayahibu = "", $keteranganModal = "", $kodeibu, $judulModal = "Daftar Pasien";
+    public $kategoriumur = "", $jk = "", $pilihanayahibu = "", $kategoriumurArr = [], $keteranganModal = "", $kodeibu, $judulModal = "Daftar Pasien";
 
     public function mount()
     {
@@ -30,6 +30,7 @@ class ModalPasien extends Component
                 ->searchByKategoriUmur($this->kategoriumur)
                 ->searchByJK($this->jk)
                 ->searchByIbu($this->kodeibu)
+                ->searchByKategoriUmurInArray($this->kategoriumurArr)
                 ->searchByStatus(1);
 
         if($this->pilihanayahibu == "lakilakiDewasa") {

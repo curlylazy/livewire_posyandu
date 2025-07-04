@@ -18,11 +18,16 @@ class PemeriksaanBayiList extends Component
     public $selectedKode = "";
     public $selectedNama = "";
 
+    public $bulan = "";
+    public $tahun = "";
+
     #[Url]
     public $katakunci = "";
 
     public function mount()
     {
+        $this->bulan = date('m');
+        $this->tahun = date('Y');
     }
 
     public function readData()
@@ -34,6 +39,16 @@ class PemeriksaanBayiList extends Component
                 ->paginate(20);
 
         return $data;
+    }
+
+    public function getSetPeriode($data = "")
+    {
+        if(empty($data)) {
+            $this->dispatch('open-modal', namamodal: "modalYearMonthPicker");
+            return;
+        }
+
+        // dd(json_decode($data, true)['bulan']);
     }
 
     public function selectData($data)

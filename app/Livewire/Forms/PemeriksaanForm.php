@@ -272,6 +272,8 @@ class PemeriksaanForm extends Form
         if($this->kategori_periksa == 'bayi')
         {
             PasienModel::find($this->kodepasien)->update([
+                "tinggibadan" => $this->periksa_tinggi_badan,
+                "beratbadan" => $this->periksa_bb,
                 "lingkar_kepala" => $this->periksa_lingkar_kepala,
                 "beratbadan" => $this->periksa_bb,
                 "lila" => $this->periksa_lila,

@@ -28,7 +28,7 @@ class ModalAddPasien extends Component
 
     public function booted()
     {
-        if($this->kategori_periksa == "bumil")
+        if($this->kategori_periksa == "bumil" || $this->kategori_periksa == "ibu")
         {
             $this->form->kategoripasien = "bumil";
         }
@@ -39,7 +39,7 @@ class ModalAddPasien extends Component
 
         $faker = Faker::create('id_ID');
 
-        if($this->pilihanAdd == "bumilnifas")
+        if($this->pilihanAdd == "bumilnifas" || $this->kategori_periksa == "ibu")
         {
             $this->form->nik = $faker->nik();
             $this->form->hamil_ke = 1;
@@ -99,7 +99,7 @@ class ModalAddPasien extends Component
                             <div class="modal-body">
                                 <div class="row g-2 mb-2">
                                     <div class="col-md-12">
-                                        <div class="form-floating" x-show="$wire.pilihanAdd == 'bumilnifas'" x-cloak>
+                                        <div class="form-floating" x-show="$wire.pilihanAdd == 'bumilnifas' || $wire.pilihanAdd == 'ibu'" x-cloak>
                                             <input type="text" class="form-control" id="nik" wire:model='form.nik'>
                                             <label for="nik">NIK</label>
                                         </div>
@@ -132,7 +132,7 @@ class ModalAddPasien extends Component
                                 </div>
 
                                 <!-- *** untuk data ibu -->
-                                <div class="row g-2" x-show="$wire.pilihanAdd == 'bumilnifas'" x-cloak>
+                                <div class="row g-2" x-show="$wire.pilihanAdd == 'bumilnifas' || $wire.pilihanAdd == 'ibu'" x-cloak>
                                     <div class="col-12 col-md-6">
                                         <div class="form-floating">
                                             <input type="text" class="form-control" id="hamil_ke" wire:model='form.hamil_ke'>

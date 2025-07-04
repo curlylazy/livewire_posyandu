@@ -84,6 +84,8 @@ return new class extends Migration
             $table->date('tgl_periksa');
 
             // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
+            $table->integer('periksa_hamil_ke')->nullable()->default(0);
+            $table->integer('periksa_minggu_ke')->nullable()->default(0);
             $table->integer('periksa_bb')->nullable()->default(0);
             $table->integer('is_sesuai_kurva_bb')->nullable()->default(0);
             $table->integer('periksa_lila')->nullable()->default(0);

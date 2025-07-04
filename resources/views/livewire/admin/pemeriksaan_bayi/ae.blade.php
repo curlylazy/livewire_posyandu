@@ -39,6 +39,7 @@
     <livewire:partial.modal-pasien
         :judulModal="$judulModalPasien"
         :kategoriumur="$kategoriumur"
+        :kategoriumurArr="$kategoriumurArr"
         :keteranganModal="$keteranganModal"
         :kodeibu="$form->kodeibu"
         :jk="$jk"
@@ -69,7 +70,7 @@
                     @if(!$isEdit)
                         <div class="col-12">
                             <div class="d-flex gap-2">
-                                <button type="button" class="btn btn-primary" wire:click='onClickOpenModalAddPasien("bumilnifas")'><i class="fas fa-female"></i> Tambah Pasien</button>
+                                <button type="button" class="btn btn-primary" wire:click='onClickOpenModalAddPasien("ibu")'><i class="fas fa-female"></i> Tambah Pasien</button>
                                 <button type="button" class="btn btn-primary" wire:click='onClickOpenModalAddPasien("bayi")'><i class="fas fa-baby"></i> Tambah Bayi</button>
                             </div>
                         </div>
