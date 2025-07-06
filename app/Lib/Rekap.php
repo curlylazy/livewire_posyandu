@@ -10,7 +10,7 @@ use App\Models\PemeriksaanModel;
 
 class Rekap
 {
-	public static function pemeriksaan($tahun)
+	public static function pemeriksaanBumilNifas($tahun)
 	{
         $rowsData = collect();
 

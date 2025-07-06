@@ -12,7 +12,7 @@ use App\Models\PemeriksaanModel;
 use Livewire\Attributes\On;
 use Maatwebsite\Excel\Facades\Excel;
 
-class PemeriksaanRiwayat extends Component
+class PemeriksaanRiwayatBumilNifas extends Component
 {
     use WithPagination;
 
@@ -139,7 +139,7 @@ class PemeriksaanRiwayat extends Component
 
     public function render()
     {
-        return view('livewire.admin.laporan.riwayat', [
+        return view('livewire.admin.laporan.riwayat_bumil_nifas', [
             "dataRow" => $this->readData(),
         ])
         ->layout('components.layouts.admin')

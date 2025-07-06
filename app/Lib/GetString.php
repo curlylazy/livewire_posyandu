@@ -121,6 +121,8 @@ class GetString
             $res = "Ibu Hamil";
         } elseif($kategori == "nifas") {
             $res = "Nifas dan Menyusui";
+        } elseif($kategori == "bayi") {
+            $res = "Bayi-Apras-Anak";
         }
 
         return $res;

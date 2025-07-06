@@ -66,8 +66,9 @@
             <x-partials.sidelink href="admin/pemeriksaan/bayi" icon="stethoscope" title="Periksa Bayi" />
 
             <li class="nav-title">Laporan</li>
-            <x-partials.sidelink href="admin/laporan/riwayat?kategori_periksa=bumil" icon="medical_information" title="Riwayat Ibu Hamil" />
-            <x-partials.sidelink href="admin/laporan/riwayat?kategori_periksa=nifas" icon="medical_information" title="Riwayat Ibu Nifas" />
+            <x-partials.sidelink href="admin/laporan/riwayat/bumilnifas?kategori_periksa=bumil" icon="medical_information" title="Riwayat Ibu Hamil" />
+            <x-partials.sidelink href="admin/laporan/riwayat/bumilnifas?kategori_periksa=nifas" icon="medical_information" title="Riwayat Ibu Nifas" />
+            <x-partials.sidelink href="admin/laporan/riwayat/bayi" icon="medical_information" title="Riwayat Bayi" />
             <x-partials.sidelink href="admin/laporan/rekapbumilnifas" icon="medical_information" title="Rekap Bumil & Nifas" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=bumil" icon="lab_profile" title="Lap Periksa Bumil" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=nifas" icon="lab_profile" title="Lap Periksa Nifas" />

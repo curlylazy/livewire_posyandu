@@ -19,8 +19,8 @@
     @endscript
 
     <livewire:partial.modal-year-month-picker
-        :bulan="$bulan"
-        :tahun="$tahun"
+        wire:model="bulan"
+        wire:model="tahun"
         @selectdateyear="getSetPeriode($event.detail.data)"
     />
 

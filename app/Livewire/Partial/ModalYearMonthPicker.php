@@ -5,6 +5,7 @@ namespace App\Livewire\Partial;
 use App\Models\ProdukModel;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\Modelable;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Reactive;
 use Livewire\Attributes\Title;
@@ -13,7 +14,13 @@ use Livewire\Component;
 class ModalYearMonthPicker extends Component
 {
     #[Reactive]
-    public $title = "Bulan dan Tahun", $bulan, $tahun;
+    public $title = "Bulan dan Tahun";
+
+    #[Modelable]
+    public $bulan;
+
+    #[Modelable]
+    public $tahun;
 
     public function save()
     {

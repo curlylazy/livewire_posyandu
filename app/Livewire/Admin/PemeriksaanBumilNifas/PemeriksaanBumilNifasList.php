@@ -19,17 +19,13 @@ class PemeriksaanBumilNifasList extends Component
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "", $kategori_periksa = "";
+    public $katakunci = "", $kategori_periksa = "", $bulan = "", $tahun = "";
 
     public function mount()
     {
-        if($this->kategori_periksa == "bumil"){
-            $this->pageTitle = "Pemeriksaan Ibu Hamil";
-        }
-
-        if($this->kategori_periksa == "nifas"){
-            $this->pageTitle = "Pemeriksaan Nifas";
-        }
+        $this->pageTitle = ($this->kategori_periksa == "bumil") ? "Pemeriksaan Ibu Hamil" : "Pemeriksaan Nifas";
+        $this->bulan = date('m');
+        $this->tahun = date('Y');
     }
 
     public function readData()
@@ -41,6 +37,18 @@ class PemeriksaanBumilNifasList extends Component
                 ->paginate(20);
 
         return $data;
+    }
+
+    public function getSetPeriode($data = "")
+    {
+        if(empty($data)) {
+            $this->dispatch('open-modal', namamodal: "modalYearMonthPicker");
+            return;
+        }
+
+        $this->bulan = json_decode($data, true)['bulan'];
+        $this->tahun = json_decode($data, true)['tahun'];
+        $this->readData();
     }
 
     public function selectData($data)

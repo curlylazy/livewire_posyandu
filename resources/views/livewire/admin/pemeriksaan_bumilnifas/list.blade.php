@@ -18,6 +18,12 @@
         </script>
     @endscript
 
+    <livewire:partial.modal-year-month-picker
+        wire:model="bulan"
+        wire:model="tahun"
+        @selectdateyear="getSetPeriode($event.detail.data)"
+    />
+
     <x-partials.loader />
     <x-partials.flashmsg />
     <x-slot:bc>
@@ -28,10 +34,29 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
-            <div class="mb-3">
-                <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/bumilnifas/add?kategori_periksa=$kategori_periksa") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
-                <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
+            <div class="row g-3 mb-3">
+                <div class="col-12">
+                    <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
+                    <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/$subPage/add?kategori_periksa=$kategori_periksa") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="katakunci" wire:model='katakunci' placeholder="" wire:keydown.enter='$commit'>
+                        <label for="katakunci">Katakunci</label>
+                    </div>
+                </div>
+                <div class="col-12 col-md-4">
+                    <div class="input-group">
+                        <div class="form-floating">
+                            <input type="text" class="form-control pe-none" id="yearmonth_keterangan" value="{{ IDateTime::formatDate("$tahun-$bulan-01", "MMMM Y") }}" placeholder="">
+                            <label for="tgl_keterangan">Periode Pemeriksaan</label>
+                        </div>
+                        @if(!empty($tgl_dari))
+                            <button class="btn btn-outline-secondary" type="button" x-on:click="$wire.bulan = ''; $wire.tahun = ''; $wire.readData();"><i class="fas fa-close"></i></button>
+                        @endif
+                        <button class="btn btn-outline-secondary" type="button" wire:click='getSetPeriode'><i class="fas fa-calendar"></i></button>
+                    </div>
+                </div>
             </div>
 
             <x-partials.containerdata :dataRows="$dataRow">

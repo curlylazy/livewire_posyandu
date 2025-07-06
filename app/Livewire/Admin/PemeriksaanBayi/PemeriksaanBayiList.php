@@ -18,11 +18,8 @@ class PemeriksaanBayiList extends Component
     public $selectedKode = "";
     public $selectedNama = "";
 
-    public $bulan = "";
-    public $tahun = "";
-
     #[Url]
-    public $katakunci = "";
+    public $katakunci = "", $bulan = "", $tahun = "";
 
     public function mount()
     {
@@ -49,7 +46,9 @@ class PemeriksaanBayiList extends Component
             return;
         }
 
-        // dd(json_decode($data, true)['bulan']);
+        $this->bulan = json_decode($data, true)['bulan'];
+        $this->tahun = json_decode($data, true)['tahun'];
+        $this->readData();
     }
 
     public function selectData($data)

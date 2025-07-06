@@ -17,10 +17,12 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class RekapPemeriksaanBumilNifasExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
+class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
 {
     protected $tahun;
     protected $page_title;
+    protected $kodepasien;
+    protected $kategoriperiksa = "bayi";
 
     public function __construct($dataArr)
     {
@@ -30,8 +32,8 @@ class RekapPemeriksaanBumilNifasExport implements FromView, WithEvents, ShouldAu
     private function readDataArray($dataArr)
     {
         $data = json_decode($dataArr, true);
-        $this->tahun = $data['tahun'];
-        $this->page_title = "REKAPITULASI HASIL PEMERIKSAAN IBU HAMIL/NIFAS/MENYUSUI";
+        $this->kodepasien = $data['kodepasien'];
+        $this->page_title = "KARTU BANTU PEMERIKSAAN BAYI, BALITA DAN APRAS";
     }
 
     public function properties(): array
@@ -40,7 +42,7 @@ class RekapPemeriksaanBumilNifasExport implements FromView, WithEvents, ShouldAu
             'creator'        => config('app.webcreator'),
             'lastModifiedBy' => config('app.webcreator'),
             'title'          => $this->page_title,
-            'description'    => 'kartu mandiri per pasien yang memudahkan untuk melihat kunjungan para ibu per periodenya',
+            'description'    => 'kartu bantu pemeriksaan bayi, balita dan apras',
             'subject'        => $this->page_title,
             'keywords'       => 'pemeriksaan ibu hamil, ibu nifas',
             'category'       => 'Report',
@@ -112,10 +114,15 @@ class RekapPemeriksaanBumilNifasExport implements FromView, WithEvents, ShouldAu
 
     public function view(): View
     {
-        $dataRows = Rekap::pemeriksaanBumilNifas($this->tahun);
+        $dataPasien = PasienModel::selectCustom()->find($this->kodepasien);
+        $dataRows = PemeriksaanModel::joinTable()
+                    ->searchByKodePasien($this->kodepasien)
+                    ->searchByKategoriPeriksa($this->kategoriperiksa)
+                    ->get();
 
-        return view('exports.rekap_pemeriksaan_bumil_nifas', [
+        return view('exports.pemeriksaan_bayi_per_pasien', [
             'page_title' => $this->page_title,
+            'dataPasien' => $dataPasien,
             'dataRows' => $dataRows,
         ]);
     }
