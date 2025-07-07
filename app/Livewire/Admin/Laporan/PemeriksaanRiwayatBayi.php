@@ -20,7 +20,6 @@ class PemeriksaanRiwayatBayi extends Component
     public $pageTitle = "Pemeriksaan Riwayat Bayi";
     public $pageName = "pemeriksaan";
 
-    // *** q mengacu pada query
     #[Url]
     public $namapasien = "", $kodebayi = "";
 
@@ -44,7 +43,7 @@ class PemeriksaanRiwayatBayi extends Component
 
     public function readData()
     {
-        $data = PemeriksaanModel::searchByNIK($this->nik)
+        $data = PemeriksaanModel::searchByKodePasien($this->kodepasien)
             ->searchByKategoriPeriksa($this->kategori_periksa)
             ->joinTable()
             ->latest('tbl_pemeriksaan.tgl_periksa')
@@ -80,14 +79,14 @@ class PemeriksaanRiwayatBayi extends Component
 
     public function onClickExportToExcel()
     {
-        $array = [
-            "kodepasien" => $this->kodepasien,
-        ];
-
         if(empty($this->kodepasien)) {
             $this->dispatch('notif', message: "pilih pasien dulu ya, baru bisa export excelnya!", icon: "error");
             return;
         }
+
+        $array = [
+            "kodepasien" => $this->kodepasien,
+        ];
 
         $namafile = "Laporan Pemeriksaan ".GetString::getJudulByKategoriPeriksa($this->kategori_periksa)." Per Pasien.xlsx";
         return Excel::download(new PemeriksaanBayiExport(json_encode($array)), $namafile);

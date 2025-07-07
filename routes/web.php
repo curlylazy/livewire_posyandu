@@ -17,6 +17,7 @@ use App\Livewire\Admin\Blog\BlogList;
 use App\Livewire\Admin\Galeri\GaleriAE;
 use App\Livewire\Admin\Galeri\GaleriList;
 use App\Livewire\Admin\Laporan\LapPemeriksaan;
+use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBayi;
 use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBumilNifas;
 use App\Livewire\Admin\Laporan\RekapBumilNifas;
 use App\Livewire\Admin\Pasien\PasienAE;
@@ -24,10 +25,10 @@ use App\Livewire\Admin\Pasien\PasienDetail;
 use App\Livewire\Admin\Pasien\PasienList;
 use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiAE;
 use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiList;
+use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiDetail;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasList;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasAE;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasDetail;
-use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasRiwayat;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -93,9 +94,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/pemeriksaan/bayi/', PemeriksaanBayiList::class)->name('admin_pemeriksaan_bayi_list');
     Route::get('/pemeriksaan/bayi/add', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_add');
     Route::get('/pemeriksaan/bayi/edit/{id}', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_edit');
+    Route::get('/pemeriksaan/bayi/detail/{id}', PemeriksaanBayiDetail::class)->name('admin_pemeriksaan_bayi_detail');
 
     // *** Laporan
-    Route::get('/laporan/riwayat/bumilnifas', PemeriksaanRiwayatBumilNifas::class)->name('admin_laporan_riwayat');
+    Route::get('/laporan/riwayat/bumilnifas', PemeriksaanRiwayatBumilNifas::class)->name('admin_laporan_riwayat_bumilnifas');
+    Route::get('/laporan/riwayat/bayi', PemeriksaanRiwayatBayi::class)->name('admin_laporan_riwayat_bayi');
     Route::get('/laporan/pemeriksaan', LapPemeriksaan::class)->name('admin_laporan_pemeriksaan');
     Route::get('/laporan/rekapbumilnifas', RekapBumilNifas::class)->name('admin_laporan_rekapbumilnifas');
 });

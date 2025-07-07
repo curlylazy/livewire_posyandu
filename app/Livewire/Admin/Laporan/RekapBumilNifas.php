@@ -34,7 +34,7 @@ class RekapBumilNifas extends Component
 
     public function readData()
     {
-        $rowsData = Rekap::pemeriksaan($this->tahun);
+        $rowsData = Rekap::pemeriksaanBumilNifas($this->tahun);
         return $rowsData;
     }
 

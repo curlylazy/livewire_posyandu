@@ -73,9 +73,7 @@ class PemeriksaanModel extends Model
 
     public function scopeSearchByKodePasien(Builder $query, $kodepasien): void
     {
-        if(!empty($kodepasien)) {
-            $query->where('tbl_pemeriksaan.kodepasien', $kodepasien);
-        }
+        $query->where('tbl_pemeriksaan.kodepasien', $kodepasien);
     }
 
     public function scopeSearchByBayi(Builder $query, $kodebayi): void

@@ -2,8 +2,7 @@
 
     <livewire:partial.modal-pasien
         :judulModal="$judulModalPasien"
-        :kategoriumur="$kategoriumur"
-        :jk="$jk"
+        :kategoriumurArr="$kategoriumurArr"
         @selectpasien="modalSelectPasien($event.detail.data)"
     />
 
@@ -23,33 +22,10 @@
                 <button class="btn btn-outline-success" type="button" wire:click='onClickExportToExcel'><i class="fas fa-file-export"></i> Export Excel</button>
             </div>
 
-            @if(!empty($nik))
-                @if($kategori_periksa == "bumil")
-                    <div>
-                        <h6>Nama Pasien : {{ $namapasien }}</h6>
-                        <h6>NIK : {{ $nik }}</h6>
-                    </div>
-                    <div class="d-flex h6 align-items-center gap-2">
-                        <div>Hamil Ke ?:</div>
-                        <div>
-                            @for ($i=1;$i<=$hamil_ke;$i++)
-                                <button type="button" wire:click='onClikSetHamilKe("{{ $i }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $q_hamil_ke == $i]) >{{ $i }}</button>
-                            @endfor
-                        </div>
-                    </div>
-                @else
-                    <div>
-                        <h6>Nama Pasien : {{ $namapasien }}</h6>
-                        <h6>NIK : {{ $nik }}</h6>
-                    </div>
-                    <div class="d-flex h6 align-items-center gap-2 flex-wrap">
-                        <div>Anak : </div>
-                        <button type="button" wire:click='onClikSetAnak("")' class="btn btn-sm btn-outline-secondary">Semua Anak</button>
-                        @foreach ($listAnak as $data)
-                            <button type="button" wire:click='onClikSetAnak("{{ $data->kodepasien }}")' @class(['btn btn-sm', 'btn-outline-secondary' => true, 'btn-primary text-white' => $kodebayi == $data->kodepasien]) >{{ $data->namapasien }}</button>
-                        @endforeach
-                    </div>
-                @endif
+            @if(!empty($kodepasien))
+                <div>
+                    <h6>Nama Pasien : {{ $namapasien }}</h6>
+                </div>
             @endif
 
             <x-partials.containerdata :dataRows="$dataRow">
@@ -59,23 +35,9 @@
                         <div class="col-12">
                             <div class="d-flex justify-content-between mb-2">
                                 <h6>Periode : {{ IDateTime::formatDate($row->tgl_periksa) }}</h6>
-                                <a href="{{ url("admin/pemeriksaan/detail/$row->kodepemeriksaan?kategori_periksa=$kategori_periksa") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
+                                <a href="{{ url("admin/pemeriksaan/bayi/detail/$row->kodepemeriksaan") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
                             </div>
                             <ul class="list-group">
-                                @if($kategori_periksa == "bumil")
-                                    <li class="list-group-item d-flex  flex-md-row flex-column">
-                                        <div class="flex-grow-1">Hamil Ke / Minggu Ke :</div>
-                                        <div class="fw-bold">{{ $row->hamil_ke }} / {{ $row->minggu_ke }}</div>
-                                    </li>
-                                @endif
-
-                                @if($kategori_periksa == "nifas")
-                                    <li class="list-group-item d-flex flex-md-row flex-column">
-                                        <div class="flex-grow-1">Nama Bayi :</div>
-                                        <div class="fw-bold">{{ $row->namabayi }}</div>
-                                    </li>
-                                @endif
-
                                 <li class="list-group-item d-flex flex-md-row flex-column">
                                     <div class="flex-grow-1">Berat Badan / Sesuai Kurva ?:</div>
                                     <div class="fw-bold">{{ ($kategori_periksa == "nifas") ? $row->periksa_bb_bayi : $row->periksa_bb }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_bb) }}</div>
@@ -88,8 +50,6 @@
                                     <div class="flex-grow-1">Tekanan Darah / Sesuai Kurva ?:</div>
                                     <div class="fw-bold">{{ $row->periksa_tekanan_darah }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_tekanan_darah) }}</div>
                                 </li>
-
-
                             </ul>
                         </div>
                     @endforeach
