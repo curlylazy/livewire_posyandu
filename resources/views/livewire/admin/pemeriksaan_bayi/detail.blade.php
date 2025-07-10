@@ -104,29 +104,6 @@
                     </ul>
                 </div>
 
-                @if($kategori_periksa == "bumil")
-                    <div class="col-12">
-                        <h5 class="mt-4">Pemberian Tablet Tambah Darah (TTD) & MT Bumil Kurang Energi Kronis (KEK)</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Apakah diberikan tablet ? / Jumlah :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_beri_tablet) }} / {{ $dataRow->jml_tablet }}</div>
-                            </li>
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Konsumsi Tablet :</div>
-                                <div class="fw-bold">{{ Option::getKonsumsiHarian($dataRow->konsumsi_tablet) }}</div>
-                            </li>
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Apakah diberikan MT :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_beri_mt) }}</div>
-                            </li>
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">MT Bumil :</div>
-                                <div class="fw-bold">{{ $dataRow->mt_bumil }}</div>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
 
                 @if($kategori_periksa == "nifas")
                     <div class="col-12">

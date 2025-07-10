@@ -2,6 +2,8 @@
 
 namespace App\Livewire\Admin\PemeriksaanBayi;
 
+use App\Lib\IDateTime;
+use App\Lib\Pemeriksaan;
 use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
 use App\Models\PasienModel;
@@ -39,11 +41,45 @@ class PemeriksaanBayiDetail extends Component
         return $data;
     }
 
+    public function readDataHasilPenimbangan($data)
+    {
+        $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa($this->kategori_periksa)
+            ->orderBy('created_at', 'desc')
+            ->where('created_at', '<', $data->created_at)
+            ->first();
+
+        // *** umur yang digunakan adalah saat pemeriksaan
+        $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
+
+        $bbSaatIni = $data->periksa_bb;
+        $bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
+        $isBBNaik = Pemeriksaan::isBeratBadanNaik($bbSaatIni, $bbSebelumnya);
+        $kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
+        $kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
+        $kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+        $kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
+        $kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+
+        $data = (object) [
+            'isBBNaik' => $isBBNaik,
+            'kesimpulanBB' => $kesimpulanBB,
+            'kesimpulanTB' => $kesimpulanTB,
+            'kesimpulanGizi' => $kesimpulanGizi,
+            'kesimpulanLK' => $kesimpulanLK,
+            'kesimpulanLila' => $kesimpulanLila,
+        ];
+
+        return $data;
+    }
+
     public function render()
     {
+        $data = $this->readData();
+
         return view('livewire.admin.' . $this->dirView . '.detail')
             ->with([
-                "dataRow" => $this->readData()
+                "dataRow" => $data,
+                "dataHasilPenimbangan" => $this->readDataHasilPenimbangan($data),
             ])
             ->layout('components.layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
