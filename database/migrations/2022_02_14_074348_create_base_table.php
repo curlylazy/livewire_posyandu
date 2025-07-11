@@ -133,6 +133,7 @@ return new class extends Migration
             $table->integer('is_asi_ekslusif')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mpasi_sesuai')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_imunisasi_lengkap')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->text('jenis_imunisasi')->nullable()->comment('keterangan jenis imunisasi yang diberikan');
             // $table->integer('is_beri_vit_a')->nullable()->default(0);
             $table->integer('is_beri_obat_cacing')->default(1)->comment('0 = tidak, 1 = ya');
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');

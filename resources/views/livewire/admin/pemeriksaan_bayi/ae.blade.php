@@ -266,6 +266,13 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 col-md-12" x-cloak x-show="$wire.form.is_imunisasi_lengkap == 1">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="form.jenis_imunisasi" wire:model='form.jenis_imunisasi' placeholder="">
+                                <label for="form.jenis_imunisasi">Jenis Imunisasi yang Diberikan</label>
+                            </div>
+                        </div>
+
                         <div class="col-12 col-md-12">
                             <div class="border rounded-3 p-2">
                                 <h6 class="fw-normal">Obat Cacing ?</h6>

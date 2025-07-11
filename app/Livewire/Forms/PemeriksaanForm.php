@@ -62,6 +62,7 @@ class PemeriksaanForm extends Form
     public $is_asi_ekslusif = false;
     public $is_mpasi_sesuai = false;
     public $is_imunisasi_lengkap = false;
+    public $jenis_imunisasi = "";
     public $is_beri_obat_cacing = false;
     public $is_mt_pangan_lokal_pemulihan = false;
     public $is_gejala_sakit = false;
@@ -138,9 +139,11 @@ class PemeriksaanForm extends Form
         $this->is_asi_ekslusif = $data->is_asi_ekslusif;
         $this->is_mpasi_sesuai = $data->is_mpasi_sesuai;
         $this->is_imunisasi_lengkap = $data->is_imunisasi_lengkap;
+        $this->jenis_imunisasi = $data->jenis_imunisasi;
         $this->is_beri_vit_a = $data->is_beri_vit_a;
         $this->is_beri_obat_cacing = $data->is_beri_obat_cacing;
         $this->is_mt_pangan_lokal_pemulihan = $data->is_mt_pangan_lokal_pemulihan;
+        $this->mt_pangan_lokal_porsi = $data->mt_pangan_lokal_porsi;
         $this->is_gejala_sakit = $data->is_gejala_sakit;
         $this->gejala_sakit_keterangan = $data->gejala_sakit_keterangan;
 

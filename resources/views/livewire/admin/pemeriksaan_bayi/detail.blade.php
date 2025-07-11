@@ -83,6 +83,36 @@
                 </div>
 
                 <div class="col-12">
+                    <h5 class="mt-4">Hasil Penimbangan Pengukuran</h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Hasil Penimbangan BB Bayi/Balita dibandingkan bulan sebelumnya :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->isBBNaik }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Hasil Pengukuran BB/Umur 0-5 tahun :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanBB }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Hasil Pengukuran PB/TB/Umur 0-5 tahun :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanTB }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Hasil Pengukuran BB/PB atau BB/TB :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanGizi }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Hasil Pengukuran Lingkar Kepala 0-5 tahun :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanLK }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Hasil Lingkar Lengan Atas Bayi/Balita :</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanLila }}</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-12">
                     <h5 class="mt-4">Hasil Skrining TBC</h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex flex-md-row flex-column">
@@ -104,48 +134,71 @@
                     </ul>
                 </div>
 
-
-                @if($kategori_periksa == "nifas")
-                    <div class="col-12">
-                        <h5 class="mt-4">Pemberian Tablet Tambah Darah (TTD) & MT Bumil Kurang Energi Kronis (KEK)</h5>
-                        <ul class="list-group">
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Apakah diberikan Vitamin A :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_beri_vit_a) }} / {{ $dataRow->jml_tablet_vit_a }}</div>
-                            </li>
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Apakah Ibu Sedang Menyusui :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_menyusui) }}</div>
-                            </li>
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Mengikuti KB Pasca Persalinan :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_kb) }}</div>
-                            </li>
-                        </ul>
-                    </div>
-                @endif
-
                 <div class="col-12">
-                    <h5 class="mt-4">{{ ($kategori_periksa == "bumil") ? 'Kelas Ibu Hamil' : 'Edukasi' }}</h5>
+                    <h5 class="mt-4">Bayi/Balita mendapatkan : </h5>
                     <ul class="list-group">
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">ASI Ekslusif ? :</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_asi_ekslusif) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">MP ASI (Komposisi, jenis sesuai umur) :</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_mpasi_sesuai) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Imunisasi (Lengkap sesuai umur) ? :</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_imunisasi_lengkap) }}</div>
+                        </li>
 
-                        @if($kategori_periksa == "bumil")
-                            <li class="list-group-item d-flex flex-md-row flex-column">
-                                <div class="flex-grow-1">Apakah diberikan Edukasi Ibu Hamil :</div>
-                                <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_kelas_bumil) }}</div>
+                        @if($dataRow->is_imunisasi_lengkap == 1)
+                            <li class="list-group-item flex-column">
+                                <div class="flex-grow-1">Jenis Imunisasi yang diberikan :</div>
+                                <div class="fw-bold">{{ $dataRow->jenis_imunisasi }}</div>
                             </li>
                         @endif
 
                         <li class="list-group-item d-flex flex-md-row flex-column">
-                            <div class="flex-grow-1">Edukasi yang diberikan :</div>
+                            <div class="flex-grow-1">Vitamin A ?</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_beri_vit_a) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Obat Cacing ?</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_beri_obat_cacing) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">MT Pangan Lokal Untuk Pemulihan (Konsumsi patuh) ?</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_mt_pangan_lokal_pemulihan) }}</div>
+                        </li>
+
+                        @if($dataRow->is_imunisasi_lengkap == 1)
+                            <li class="list-group-item flex-column">
+                                <div class="flex-grow-1">Porsi yang Diberikan :</div>
+                                <div class="fw-bold">{{ $dataRow->mt_pangan_lokal_porsi }}</div>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
+
+                 <div class="col-12">
+                    <h5 class="mt-4">Lainnya : </h5>
+                    <ul class="list-group">
+                        <li class="list-group-item flex-column">
+                            <div class="flex-grow-1">Edukasi/Konseling :</div>
                             <div class="fw-bold">{{ $dataRow->edukasi }}</div>
                         </li>
                         <li class="list-group-item d-flex flex-md-row flex-column">
-                            <div class="flex-grow-1">Rujuk Pustu/Puskesmas/Rumah Sakit :</div>
-                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_rujuk) }}</div>
+                            <div class="flex-grow-1">Ada Gejala Sakit ?</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->is_gejala_sakit) }}</div>
                         </li>
+
+                        @if($dataRow->is_gejala_sakit == 1)
+                            <li class="list-group-item flex-column">
+                                <div class="flex-grow-1">Keterangan Gejala Sakit :</div>
+                                <div class="fw-bold">{{ $dataRow->gejala_sakit_keterangan }}</div>
+                            </li>
+                        @endif
                     </ul>
-                </div>
+                 </div>
             </div>
 
             <div class="d-flex mt-3 gap-2">
