@@ -2,6 +2,8 @@
 
 namespace App\Exports;
 
+use App\Lib\IDateTime;
+use App\Lib\Pemeriksaan;
 use App\Lib\Rekap;
 use App\Lib\Utils;
 use App\Models\PasienModel;
@@ -119,6 +121,25 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
                     ->searchByKodePasien($this->kodepasien)
                     ->searchByKategoriPeriksa($this->kategoriperiksa)
                     ->get();
+
+        foreach($dataRows as $data)
+        {
+            $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa($this->kategoriperiksa)
+                ->orderBy('created_at', 'desc')
+                ->where('created_at', '<', $data->created_at)
+                ->first();
+
+            $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
+
+            $data->bbSaatIni = $data->periksa_bb;
+            $data->bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
+            $data->isBBNaik = Pemeriksaan::isBeratBadanNaik($data->bbSaatIni, $data->bbSebelumnya);
+            $data->kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
+            $data->kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
+            $data->kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+            $data->kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
+            $data->kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+        }
 
         return view('exports.pemeriksaan_bayi_per_pasien', [
             'page_title' => $this->page_title,
