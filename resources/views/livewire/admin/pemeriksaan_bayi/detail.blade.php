@@ -20,10 +20,6 @@
                     <h5>Data Pasien</h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex flex-md-row flex-column">
-                            <div class="flex-grow-1">NIK :</div>
-                            <div class="fw-bold">{{ $dataRow->nik ?? "--"}}</div>
-                        </li>
-                        <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Nama Pasien :</div>
                             <div class="fw-bold">{{ $dataRow->namapasien }}</div>
                         </li>
@@ -171,7 +167,7 @@
                         </li>
 
                         @if($dataRow->is_imunisasi_lengkap == 1)
-                            <li class="list-group-item flex-column">
+                            <li class="list-group-item d-flex flex-md-row flex-column">
                                 <div class="flex-grow-1">Porsi yang Diberikan :</div>
                                 <div class="fw-bold">{{ $dataRow->mt_pangan_lokal_porsi }}</div>
                             </li>
@@ -192,7 +188,7 @@
                         </li>
 
                         @if($dataRow->is_gejala_sakit == 1)
-                            <li class="list-group-item flex-column">
+                            <li class="list-group-item d-flex flex-md-row flex-column">
                                 <div class="flex-grow-1">Keterangan Gejala Sakit :</div>
                                 <div class="fw-bold">{{ $dataRow->gejala_sakit_keterangan }}</div>
                             </li>

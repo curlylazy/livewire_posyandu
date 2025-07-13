@@ -39,16 +39,20 @@
                             </div>
                             <ul class="list-group">
                                 <li class="list-group-item d-flex flex-md-row flex-column">
-                                    <div class="flex-grow-1">Berat Badan / Sesuai Kurva ?:</div>
-                                    <div class="fw-bold">{{ ($kategori_periksa == "nifas") ? $row->periksa_bb_bayi : $row->periksa_bb }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_bb) }}</div>
+                                    <div class="flex-grow-1">Berat Badan :</div>
+                                    <div class="fw-bold">{{ $row->periksa_bb }} Kg</div>
+                                </li>
+                                <li class="list-group-item d-flex flex-md-row flex-column">
+                                    <div class="flex-grow-1">Tingi Badan :</div>
+                                    <div class="fw-bold">{{ $row->periksa_tinggi_badan }} Cm</div>
+                                </li>
+                                <li class="list-group-item d-flex flex-md-row flex-column">
+                                    <div class="flex-grow-1">Lingkar Kepala :</div>
+                                    <div class="fw-bold">{{ $row->periksa_lingkar_kepala }}</div>
                                 </li>
                                 <li class="list-group-item d-flex flex-md-row flex-column">
                                     <div class="flex-grow-1">Lingkar Lengan Atas (LILA) :</div>
                                     <div class="fw-bold">{{ $row->periksa_lila }}</div>
-                                </li>
-                                <li class="list-group-item d-flex flex-md-row flex-column">
-                                    <div class="flex-grow-1">Tekanan Darah / Sesuai Kurva ?:</div>
-                                    <div class="fw-bold">{{ $row->periksa_tekanan_darah }} Kg / {{ Option::getYaAtauTidak($row->is_sesuai_kurva_tekanan_darah) }}</div>
                                 </li>
                             </ul>
                         </div>

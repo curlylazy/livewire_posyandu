@@ -21,7 +21,7 @@ class PemeriksaanRiwayatBayi extends Component
     public $pageName = "pemeriksaan";
 
     #[Url]
-    public $namapasien = "", $kodebayi = "";
+    public $namapasien = "", $kodepasien = "";
 
     public $judulModalPasien = "";
     public $kategoriumurArr = [];
@@ -29,11 +29,9 @@ class PemeriksaanRiwayatBayi extends Component
 
     public $selectedKode = "";
     public $selectedNama = "";
-    public $kodepasien = "";
     public $kategori_periksa = "bayi";
 
     public $listAnak = [];
-
 
     public function mount()
     {

@@ -303,7 +303,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12" x-cloak x-bind:class="$wire.form.is_mt_pangan_lokal_pemulihan == 0 ? 'd-none' : ''">
+                        <div class="col-12 col-md-12" x-cloak x-show="$wire.form.is_mt_pangan_lokal_pemulihan == 1">
                             <div class="form-floating">
                                 <input class="form-control" id="form.mt_pangan_lokal_porsi" wire:model='form.mt_pangan_lokal_porsi' placeholder="">
                                 <label for="form.mt_pangan_lokal_porsi">Porsi yang Diberikan</label>
@@ -325,7 +325,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-12 col-md-12" x-cloak x-bind:class="$wire.form.is_gejala_sakit == 0 ? 'd-none' : ''">
+                        <div class="col-12 col-md-12" x-cloak x-show="$wire.form.is_gejala_sakit == 1">
                             <div class="form-floating">
                                 <input class="form-control" id="form.gejala_sakit_keterangan" wire:model='form.gejala_sakit_keterangan' placeholder="">
                                 <label for="form.gejala_sakit_keterangan">Keterangan Gejala Sakit</label>
