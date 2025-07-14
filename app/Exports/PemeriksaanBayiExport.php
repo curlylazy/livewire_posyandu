@@ -108,7 +108,7 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
                     ],
                 ];
 
-                $sheet->getStyle('A9:AC12')->applyFromArray($borderStyle);
+                $sheet->getStyle('A19:Z22')->applyFromArray($borderStyle);
 
             },
         ];
