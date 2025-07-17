@@ -23,27 +23,27 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Berat Badan Lahir</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->beratbadan_lahir }} Kg</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Panjang Badan Lahir</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->tinggibadan_lahir }} Cm</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Ayah</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->nama_ayah }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Ibu</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->nama_ibu }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Alamat</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->alamat }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">No HP</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ $dataPasien->nohp }}</th>
         </tr>
     </thead>
 </table>
@@ -134,4 +134,45 @@
             @endfor
         </tr>
     </thead>
+
+    <tbody>
+        @foreach ($dataRows as $row)
+            <tr>
+                <td>{{ $row->umur }}</td>
+                <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                <td>--</td>
+
+                {{-- *** Hasil Penimbangan --}}
+                <td>{{ $row->periksa_bb }} Kg</td>
+                <td>{{ Option::getYaAtauTidak($row->isBBNaik) }}</td>
+                <td>{{ $row->kesimpulanBB }}</td>
+                <td>{{ $row->periksa_tinggi_badan }} Cm</td>
+                <td>{{ $row->kesimpulanTinggiBadan }}</td>
+                <td>{{ $row->kesimpulanGizi }}</td>
+                <td>{{ $row->periksa_lingkar_kepala }}</td>
+                <td>{{ $row->kesimpulanLK }}</td>
+                <td>{{ $row->periksa_lila }}</td>
+                <td>{{ $row->kesimpulanLila }}</td>
+
+                {{-- *** Skrining TBC --}}
+                <td>{{ Option::getYaAtauTidak($row->is_batuk) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_demam) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_bb_tidak_naik_turun) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_kontak_pasien_tbc) }}</td>
+
+                {{-- *** Balita Mendapatkan --}}
+                <td>{{ Option::getYaAtauTidak($row->is_asi_ekslusif) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_mpasi_sesuai) }}</td>
+                <td>
+                    {{ Option::getYaAtauTidak($row->is_imunisasi_lengkap) }}<br />
+                    @if ($row->is_imunisasi_lengkap)
+                        {{ $row->jenis_imunisasi }}
+                    @endif
+                </td>
+                <td>{{ Option::getYaAtauTidak($row->is_beri_vit_a) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_beri_obat_cacing) }}</td>
+                <td>{{ Option::getYaAtauTidak($row->is_beri_obat_cacing) }}</td>
+            </tr>
+        @endforeach
+    </tbody>
 </table>

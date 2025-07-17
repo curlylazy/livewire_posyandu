@@ -130,7 +130,9 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
                 ->first();
 
             $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
+            $umurBayiBulan = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa, "month");
 
+            $data->umur = $umurBayiBulan;
             $data->bbSaatIni = $data->periksa_bb;
             $data->bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
             $data->isBBNaik = Pemeriksaan::isBeratBadanNaik($data->bbSaatIni, $data->bbSebelumnya);
