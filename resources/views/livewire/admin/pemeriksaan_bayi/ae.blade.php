@@ -354,6 +354,22 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-12 col-md-12">
+                            <div class="border rounded-3 p-2">
+                                <h6 class="fw-normal">Apakah Checklist Pemeriksaan Lengkap ?</h6>
+                                <div class="d-flex gap-2">
+                                    <div>
+                                        <input type="radio" class="btn-check" name="is_checklist_pemeriksaan_lengkap" value="1" id="is_checklist_pemeriksaan_lengkap_ya" autocomplete="off" wire:model="form.is_checklist_pemeriksaan_lengkap">
+                                        <label class="btn" for="is_checklist_pemeriksaan_lengkap_ya">Iya</label>
+                                    </div>
+                                    <div>
+                                        <input type="radio" class="btn-check" name="is_checklist_pemeriksaan_lengkap" value="0" id="is_checklist_pemeriksaan_lengkap_tidak" autocomplete="off" wire:model="form.is_checklist_pemeriksaan_lengkap">
+                                        <label class="btn" for="is_checklist_pemeriksaan_lengkap_tidak">Tidak</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

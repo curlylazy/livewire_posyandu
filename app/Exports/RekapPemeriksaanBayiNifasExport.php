@@ -2,8 +2,6 @@
 
 namespace App\Exports;
 
-use App\Lib\IDateTime;
-use App\Lib\Pemeriksaan;
 use App\Lib\Rekap;
 use App\Lib\Utils;
 use App\Models\PasienModel;
@@ -19,12 +17,10 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
+class RekapPemeriksaanBayiNifasExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
 {
     protected $tahun;
     protected $page_title;
-    protected $kodepasien;
-    protected $kategoriperiksa = "bayi";
 
     public function __construct($dataArr)
     {
@@ -34,8 +30,8 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
     private function readDataArray($dataArr)
     {
         $data = json_decode($dataArr, true);
-        $this->kodepasien = $data['kodepasien'];
-        $this->page_title = "KARTU BANTU PEMERIKSAAN BAYI, BALITA DAN APRAS";
+        $this->tahun = $data['tahun'];
+        $this->page_title = "REKAPITULASI HASIL PEMERIKSAAN BAYI / APRAS / ANAK - ANAK";
     }
 
     public function properties(): array
@@ -44,9 +40,9 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
             'creator'        => config('app.webcreator'),
             'lastModifiedBy' => config('app.webcreator'),
             'title'          => $this->page_title,
-            'description'    => 'kartu bantu pemeriksaan bayi, balita dan apras',
+            'description'    => 'kartu mandiri per pasien yang memudahkan untuk melihat kunjungan para ibu per periodenya',
             'subject'        => $this->page_title,
-            'keywords'       => 'pemeriksaan ibu hamil, ibu nifas',
+            'keywords'       => 'pemeriksaan rekap, bayi, anak',
             'category'       => 'Report',
             'manager'        => '--',
             'company'        => config('app.webcreator'),
@@ -108,7 +104,7 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
                     ],
                 ];
 
-                $sheet->getStyle('A18:Z21')->applyFromArray($borderStyle);
+                // $sheet->getStyle('A9:AC12')->applyFromArray($borderStyle);
 
             },
         ];
@@ -116,37 +112,10 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
 
     public function view(): View
     {
-        $dataPasien = PasienModel::selectCustom()->find($this->kodepasien);
-        $dataRows = PemeriksaanModel::joinTable()
-                    ->searchByKodePasien($this->kodepasien)
-                    ->searchByKategoriPeriksa($this->kategoriperiksa)
-                    ->get();
+        $dataRows = Rekap::pemeriksaanBumilNifas($this->tahun);
 
-        foreach($dataRows as $data)
-        {
-            $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa($this->kategoriperiksa)
-                ->searchByKodePasien($this->kodepasien)
-                ->orderBy('created_at', 'desc')
-                ->where('created_at', '<', $data->created_at)
-                ->first();
-
-            $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
-            $umurBayiBulan = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa, "month");
-
-            $data->umur = $umurBayiBulan;
-            $data->bbSaatIni = $data->periksa_bb;
-            $data->bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
-            $data->isBBNaik = Pemeriksaan::isBeratBadanNaik($data->bbSaatIni, $data->bbSebelumnya);
-            $data->kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
-            $data->kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
-            $data->kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
-            $data->kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
-            $data->kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
-        }
-
-        return view('exports.pemeriksaan_bayi_per_pasien', [
+        return view('exports.rekap_pemeriksaan_bumil_nifas', [
             'page_title' => $this->page_title,
-            'dataPasien' => $dataPasien,
             'dataRows' => $dataRows,
         ]);
     }

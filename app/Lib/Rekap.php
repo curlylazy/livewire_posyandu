@@ -109,4 +109,153 @@ class Rekap
         return $rowsData;
 	}
 
+    public static function pemeriksaanBayi($tahun)
+	{
+        $rowsData = collect();
+
+        for($i=1;$i<=12;$i++)
+        {
+            $bulan = $i;
+            $dateName = IDateTime::formatDate(date("$tahun-$bulan-01"), "MMMM YYYY");
+            $jmlBayi = PasienModel::searchByKategoriPasien('bayi')->searchByUmurBayi()->count();
+            $jmlBalitaApras = PasienModel::searchByKategoriPasien('bayi')->searchByUmurBalitaApras()->count();
+
+            // *** Jumlah Sasaran
+            $jmlBayiDatang = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBayi()->count();
+            $jmlBalitaAprasDatang = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBalitaApras()->count();
+            $jmlBayiDatangTidakDatang = $jmlBayi - $jmlBayiDatang;
+            $jmlBalitaAprasDatangTidakDatang = $jmlBalitaApras - $jmlBalitaAprasDatang;
+
+            // *** Jumlah Bayi/Balita/Apras dengan Hasil Penimbangan dan Pengukuran/Pemantauan/Pemeriksaan
+            $dataPeriksaBayi = self::cekPeriksaBayi($bulan, $tahun);
+            $jmlBayiCheckListLengkap = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByCheckListLengkap(1)->count();
+            $jmlBayiCheckListTidakLengkap = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByCheckListLengkap(0)->count();
+            $jmlBergejalaTBC = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByGejalaTBC()->count();
+
+            // *** Jumlah Bayi mendapatkan
+            $jmlAsiEksklusif = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_asi_ekslusif', 1)->count();
+            $jmlMpasi = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_mpasi_sesuai', 1)->count();
+            $jmlImunisasiLengkap = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_imunisasi_lengkap', 1)->count();
+            $jmlBeriVitA = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_beri_vit_a', 1)->count();
+            $jmlBeriObatCacing = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_beri_obat_cacing', 1)->count();
+            $jmlMTPanganLokal = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_mt_pangan_lokal_pemulihan', 1)->count();
+            $jmlEdukasi = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('edukasi','!=', "")->count();
+            $jmlSakit = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_gejala_sakit', 1)->count();
+
+            // *** Jumlah Sasaran Dirujuk / Tidak
+            $jmlBayiDirujuk = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBayi()->count();
+            $jmlBalitaAprasDirujuk = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBalitaApras()->count();
+
+            $object = (object)[
+                'periode' => $dateName,
+                'jml_bayi' => $jmlBayi,
+                'jml_balita_apras' => $jmlBalitaApras,
+                'jml_bayi_datang' => $jmlBayiDatang,
+                'jml_balita_apras_datang' => $jmlBalitaAprasDatang,
+                'jml_bayi_tidak_datang' => $jmlBayiDatangTidakDatang,
+                'jml_balita_apras_tidak_datang' => $jmlBalitaAprasDatangTidakDatang,
+                'jml_bayi_checklist_lengkap' => $jmlBayiCheckListLengkap,
+                'jml_bayi_checklist_tidak_lengkap' => $jmlBayiCheckListTidakLengkap,
+            ];
+
+            $rowsData->push($object);
+        }
+    }
+
+    private function cekPeriksaBayi($bulan, $tahun)
+    {
+        $dataRows= PemeriksaanModel::joinTable()
+                ->searchByKategoriPeriksa('bayi')
+                ->searchByMonthYear($bulan, $tahun)
+                ->get();
+
+        $jmlBBNaik = 0;
+        $jmlBBTidakNaik = 0;
+        $jmlBBNormal = 0;
+        $jmlBBTidakNormal = 0;
+        $jmlTBNormal = 0;
+        $jmlTBTidakNormal = 0;
+        $jmlGiziBaik = 0;
+        $jmlGiziTidakBaik = 0;
+        $jmlLKNormal = 0;
+        $jmlLKTidakNormal = 0;
+        $jmlLilaNormal = 0;
+        $jmlLilaTidakNormal = 0;
+
+        foreach($dataRows as $data)
+        {
+            $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa('bayi')
+                ->searchByKodePasien($data->kodepasien)
+                ->orderBy('created_at', 'desc')
+                ->where('created_at', '<', $data->created_at)
+                ->first();
+
+            $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
+            $umurBayiBulan = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa, "month");
+
+
+            $bbSaatIni = $data->periksa_bb;
+            $bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
+            $isBBNaik = Pemeriksaan::isBeratBadanNaik($bbSaatIni, $bbSebelumnya);
+            $kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
+            $kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
+            $kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+            $kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
+            $kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+
+            if($isBBNaik) {
+                $jmlBBNaik++;
+            } else {
+                $jmlBBTidakNaik++;
+            }
+
+            if($kesimpulanBB == "Normal") {
+                $jmlBBNormal++;
+            } else {
+                $jmlBBTidakNormal++;
+            }
+
+            if($kesimpulanTB == "Normal") {
+                $jmlTBNormal++;
+            } else {
+                $jmlTBTidakNormal++;
+            }
+
+            if($kesimpulanGizi == "Normal") {
+                $jmlGiziBaik++;
+            } else {
+                $jmlGiziTidakBaik++;
+            }
+
+            if($kesimpulanLK == "Normal") {
+                $jmlLKNormal++;
+            } else {
+                $jmlLKTidakNormal++;
+            }
+
+            if($kesimpulanLila == "Normal") {
+                $jmlLilaNormal++;
+            } else {
+                $jmlLilaTidakNormal++;
+            }
+        }
+
+        $res = [
+            "jmlBBNaik" => $jmlBBNaik,
+            "jmlBBTidakNaik" => $jmlBBTidakNaik,
+            "jmlBBNormal" => $jmlBBNormal,
+            "jmlBBTidakNormal" => $jmlBBTidakNormal,
+            "jmlTBNormal" => $jmlTBNormal,
+            "jmlTBTidakNormal" => $jmlTBTidakNormal,
+            "jmlGiziBaik" => $jmlGiziBaik,
+            "jmlGiziTidakBaik" => $jmlGiziTidakBaik,
+            "jmlLKNormal" => $jmlLKNormal,
+            "jmlLKTidakNormal" => $jmlLKTidakNormal,
+            "jmlLilaNormal" => $jmlLilaNormal,
+            "jmlLilaTidakNormal" => $jmlLilaTidakNormal,
+        ];
+
+        return $res;
+    }
+
 }

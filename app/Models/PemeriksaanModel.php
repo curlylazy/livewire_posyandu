@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class PemeriksaanModel extends Model
 {
@@ -93,5 +94,28 @@ class PemeriksaanModel extends Model
         if($periksa_hamil_ke != "") {
             $query->where('tbl_pemeriksaan.periksa_hamil_ke', $periksa_hamil_ke);
         }
+    }
+
+    public function scopeSearchByCheckListLengkap(Builder $query, $status): void
+    {
+        $query->where('tbl_pemeriksaan.is_checklist_pemeriksaan_lengkap', $status);
+    }
+
+    public function scopeSearchByGejalaTBC(Builder $query): void
+    {
+        $query->whereRaw('(tbl_pemeriksaan.is_batuk + tbl_pemeriksaan.is_demam + tbl_pemeriksaan.is_bb_tidak_naik_turun + tbl_pemeriksaan.is_kontak_pasien_tbc) >= 2');
+    }
+
+    // *** Pemeriksaan Bayi
+    public function scopeSearchByUmurBayi(Builder $query): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->whereRaw("(TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) <= 6");
+    }
+
+    public function scopeSearchByUmurBalitaApras(Builder $query): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->whereRaw("((TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) > 6 AND (TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) <= 32)");
     }
 }

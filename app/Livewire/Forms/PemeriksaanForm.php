@@ -26,6 +26,7 @@ class PemeriksaanForm extends Form
     // ** Bumil
     public $periksa_hamil_ke = 0;
     public $periksa_minggu_ke = 0;
+    public $is_checklist_pemeriksaan_lengkap = 1;
 
     // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
     public $periksa_bb = 0;
@@ -103,6 +104,7 @@ class PemeriksaanForm extends Form
 
         $this->periksa_hamil_ke = $data->periksa_hamil_ke;
         $this->periksa_minggu_ke = $data->periksa_minggu_ke;
+        $this->is_checklist_pemeriksaan_lengkap = $data->is_checklist_pemeriksaan_lengkap;
 
         // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
         $this->periksa_bb = $data->periksa_bb;

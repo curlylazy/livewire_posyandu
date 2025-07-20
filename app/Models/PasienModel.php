@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class PasienModel extends Model
 {
@@ -160,6 +160,18 @@ class PasienModel extends Model
         if(!empty($kategoripasien)) {
             $query->where('tbl_pasien.kategoripasien', '=', $kategoripasien);
         }
+    }
+
+    public function scopeSearchUmurByBayi(Builder $query): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->whereRaw("(TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) <= 6");
+    }
+
+    public function scopeSearchByUmurBalitaApras(Builder $query): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->whereRaw("((TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) > 6 AND (TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12) <= 32)");
     }
 
     public function getNikNamaAttribute()

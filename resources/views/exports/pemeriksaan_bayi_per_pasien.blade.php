@@ -138,40 +138,54 @@
     <tbody>
         @foreach ($dataRows as $row)
             <tr>
-                <td>{{ $row->umur }}</td>
-                <td>{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
-                <td>--</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->umur }} Bulan</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">--</td>
 
                 {{-- *** Hasil Penimbangan --}}
-                <td>{{ $row->periksa_bb }} Kg</td>
-                <td>{{ Option::getYaAtauTidak($row->isBBNaik) }}</td>
-                <td>{{ $row->kesimpulanBB }}</td>
-                <td>{{ $row->periksa_tinggi_badan }} Cm</td>
-                <td>{{ $row->kesimpulanTinggiBadan }}</td>
-                <td>{{ $row->kesimpulanGizi }}</td>
-                <td>{{ $row->periksa_lingkar_kepala }}</td>
-                <td>{{ $row->kesimpulanLK }}</td>
-                <td>{{ $row->periksa_lila }}</td>
-                <td>{{ $row->kesimpulanLila }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }} Kg</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->isBBNaik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanBB }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_tinggi_badan }} Cm</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanTB }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanGizi }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lingkar_kepala }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanLK }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanLila }}</td>
 
                 {{-- *** Skrining TBC --}}
-                <td>{{ Option::getYaAtauTidak($row->is_batuk) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_demam) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_bb_tidak_naik_turun) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_kontak_pasien_tbc) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_batuk) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_demam) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_bb_tidak_naik_turun) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_kontak_pasien_tbc) }}</td>
 
                 {{-- *** Balita Mendapatkan --}}
-                <td>{{ Option::getYaAtauTidak($row->is_asi_ekslusif) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_mpasi_sesuai) }}</td>
-                <td>
-                    {{ Option::getYaAtauTidak($row->is_imunisasi_lengkap) }}<br />
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_asi_ekslusif) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_mpasi_sesuai) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">
+                    {{ Option::getYaAtauTidak($row->is_imunisasi_lengkap) }}
                     @if ($row->is_imunisasi_lengkap)
-                        {{ $row->jenis_imunisasi }}
+                        <br />{{ $row->jenis_imunisasi }}
                     @endif
                 </td>
-                <td>{{ Option::getYaAtauTidak($row->is_beri_vit_a) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_beri_obat_cacing) }}</td>
-                <td>{{ Option::getYaAtauTidak($row->is_beri_obat_cacing) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_beri_vit_a) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_beri_obat_cacing) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">
+                    {{ Option::getYaAtauTidak($row->is_mt_pangan_lokal_pemulihan) }}
+                    @if ($row->is_mt_pangan_lokal_pemulihan)
+                        <br />{{ $row->mt_pangan_lokal_porsi }}
+                    @endif
+                </td>
+
+                <td style="{!! CssExcel::$textCenter !!}">{{ $row->edukasi }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">
+                    {{ Option::getYaAtauTidak($row->is_gejala_sakit) }}
+                    @if ($row->is_gejala_sakit)
+                        <br />{{ $row->gejala_sakit_keterangan }}
+                    @endif
+                </td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_rujuk) }}</td>
             </tr>
         @endforeach
     </tbody>
