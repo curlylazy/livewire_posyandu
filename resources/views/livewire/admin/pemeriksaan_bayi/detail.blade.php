@@ -95,7 +95,7 @@
                         </li>
                         <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Kesimpulan Hasil Pengukuran BB/PB atau BB/TB :</div>
-                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanGizi }}</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanBBGizi }}</div>
                         </li>
                         <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Kesimpulan Hasil Pengukuran Lingkar Kepala 0-5 tahun :</div>
@@ -103,7 +103,7 @@
                         </li>
                         <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Hasil Lingkar Lengan Atas Bayi/Balita :</div>
-                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanLila }}</div>
+                            <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanLilaGizi }}</div>
                         </li>
                     </ul>
                 </div>

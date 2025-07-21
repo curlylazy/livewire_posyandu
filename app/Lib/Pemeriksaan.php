@@ -52,7 +52,7 @@ class Pemeriksaan
         return $res;
 	}
 
-    public static function kesimpulanGizi($umur, $bb)
+    public static function kesimpulanBBGizi($umur, $bb)
 	{
         $res = "";
         $bbIdeal = ($umur * 2) + 8;
@@ -120,7 +120,7 @@ class Pemeriksaan
         return $res;
 	}
 
-    public static function kesimpulanLila($lila)
+    public static function kesimpulanLilaGizi($lila)
 	{
         if($lila < 11.5) {
             $res = "Gizi Buruk";

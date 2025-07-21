@@ -56,17 +56,17 @@ class PemeriksaanBayiDetail extends Component
         $isBBNaik = Pemeriksaan::isBeratBadanNaik($bbSaatIni, $bbSebelumnya);
         $kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
         $kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
-        $kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+        $kesimpulanBBGizi = Pemeriksaan::kesimpulanBBGizi($umurBayi, $data->periksa_bb);
         $kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
-        $kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+        $kesimpulanLilaGizi = Pemeriksaan::kesimpulanLilaGizi($data->periksa_lila);
 
         $data = (object) [
             'isBBNaik' => $isBBNaik,
             'kesimpulanBB' => $kesimpulanBB,
             'kesimpulanTB' => $kesimpulanTB,
-            'kesimpulanGizi' => $kesimpulanGizi,
+            'kesimpulanBBGizi' => $kesimpulanBBGizi,
             'kesimpulanLK' => $kesimpulanLK,
-            'kesimpulanLila' => $kesimpulanLila,
+            'kesimpulanLilaGizi' => $kesimpulanLilaGizi,
         ];
 
         return $data;

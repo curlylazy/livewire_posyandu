@@ -117,17 +117,33 @@ class Rekap
         {
             $bulan = $i;
             $dateName = IDateTime::formatDate(date("$tahun-$bulan-01"), "MMMM YYYY");
-            $jmlBayi = PasienModel::searchByKategoriPasien('bayi')->searchByUmurBayi()->count();
+
+            $dataFiltered = PemeriksaanModel::searchByMonthYear($bulan, $tahun)
+                ->searchByKategoriPeriksa('bayi')
+                ->get();
+
+            $jmlBayi = PasienModel::searchByKategoriPasien('bayi')->searchUmurByBayi()->count();
             $jmlBalitaApras = PasienModel::searchByKategoriPasien('bayi')->searchByUmurBalitaApras()->count();
 
             // *** Jumlah Sasaran
-            $jmlBayiDatang = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBayi()->count();
-            $jmlBalitaAprasDatang = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBalitaApras()->count();
+            $jmlBayiDatang = PemeriksaanModel::joinTable()->searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBayi()->count();
+            $jmlBalitaAprasDatang = PemeriksaanModel::joinTable()->searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBalitaApras()->count();
             $jmlBayiDatangTidakDatang = $jmlBayi - $jmlBayiDatang;
             $jmlBalitaAprasDatangTidakDatang = $jmlBalitaApras - $jmlBalitaAprasDatang;
 
             // *** Jumlah Bayi/Balita/Apras dengan Hasil Penimbangan dan Pengukuran/Pemantauan/Pemeriksaan
             $dataPeriksaBayi = self::cekPeriksaBayi($bulan, $tahun);
+            $jmlBBNaik = $dataPeriksaBayi['jmlBBNaik'];
+            $jmlBBTidakNaik = $dataPeriksaBayi['jmlBBTidakNaik'];
+            $jmlBBNormal = $dataPeriksaBayi['jmlBBNormal'];
+            $jmlBBTidakNormal = $dataPeriksaBayi['jmlBBTidakNormal'];
+            $jmlTBNormal = $dataPeriksaBayi['jmlTBNormal'];
+            $jmlBBGiziBaik = $dataPeriksaBayi['jmlBBGiziBaik'];
+            $jmlBBGiziTidakBaik = $dataPeriksaBayi['jmlBBGiziTidakBaik'];
+            $jmlLKNormal = $dataPeriksaBayi['jmlLKNormal'];
+            $jmlLKTidakNormal = $dataPeriksaBayi['jmlLKTidakNormal'];
+            $jmlGiziLilaNormal = $dataPeriksaBayi['jmlGiziLilaNormal'];
+            $jmlGiziLilaTidakNormal = $dataPeriksaBayi['jmlGiziLilaTidakNormal'];
             $jmlBayiCheckListLengkap = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByCheckListLengkap(1)->count();
             $jmlBayiCheckListTidakLengkap = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByCheckListLengkap(0)->count();
             $jmlBergejalaTBC = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByGejalaTBC()->count();
@@ -143,31 +159,65 @@ class Rekap
             $jmlSakit = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_gejala_sakit', 1)->count();
 
             // *** Jumlah Sasaran Dirujuk / Tidak
-            $jmlBayiDirujuk = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBayi()->count();
-            $jmlBalitaAprasDirujuk = PemeriksaanModel::searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBalitaApras()->count();
+            $jmlBayiDirujuk = PemeriksaanModel::joinTable()->searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBayi()->count();
+            $jmlBalitaAprasDirujuk = PemeriksaanModel::joinTable()->searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->where('is_rujuk', 1)->searchByUmurBalitaApras()->count();
 
             $object = (object)[
                 'periode' => $dateName,
                 'jml_bayi' => $jmlBayi,
-                'jml_balita_apras' => $jmlBalitaApras,
                 'jml_bayi_datang' => $jmlBayiDatang,
+                'jml_balita_apras' => $jmlBalitaApras,
                 'jml_balita_apras_datang' => $jmlBalitaAprasDatang,
                 'jml_bayi_tidak_datang' => $jmlBayiDatangTidakDatang,
                 'jml_balita_apras_tidak_datang' => $jmlBalitaAprasDatangTidakDatang,
                 'jml_bayi_checklist_lengkap' => $jmlBayiCheckListLengkap,
                 'jml_bayi_checklist_tidak_lengkap' => $jmlBayiCheckListTidakLengkap,
+
+                'jml_bb_naik' => $jmlBBNaik,
+                'jml_bb_tidak_naik' => $jmlBBTidakNaik,
+                'jml_bb_normal' => $jmlBBNormal,
+                'jml_bb_tidak_normal' => $jmlBBTidakNormal,
+                'jml_tb_normal' => $jmlTBNormal,
+                'jml_tb_tidak_normal' => $jmlBBTidakNormal,
+                'jml_bb_gizi_baik' => $jmlBBGiziBaik,
+                'jml_bb_gizi_tidak_baik' => $jmlBBGiziTidakBaik,
+                'jml_lk_normal' => $jmlLKNormal,
+                'jml_lk_tidak_normal' => $jmlLKTidakNormal,
+                'jml_lila_gizi_normal' => $jmlGiziLilaNormal,
+                'jml_lila_gizi_tidak_normal' => $jmlGiziLilaTidakNormal,
+                'jml_bergejala_tbc' => $jmlBergejalaTBC,
+
+                'jml_asi_eksklusif' => $jmlAsiEksklusif,
+                'jml_mpasi' => $jmlMpasi,
+                'jml_imunisasi_lengkap' => $jmlImunisasiLengkap,
+                'jml_beri_vit_a' => $jmlBeriVitA,
+                'jml_beri_obat_cacing' => $jmlBeriObatCacing,
+                'jml_mt_pangan_lokal' => $jmlMTPanganLokal,
+                'jml_edukasi' => $jmlEdukasi,
+                'jml_sakit' => $jmlSakit,
+
+                'jml_bayi_dirujuk' => $jmlBayiDirujuk,
+                'jml_balita_apras_dirujuk' => $jmlBalitaAprasDirujuk,
             ];
 
             $rowsData->push($object);
         }
+
+        return $rowsData;
     }
 
-    private function cekPeriksaBayi($bulan, $tahun)
+    private static function cekPeriksaBayi($bulan, $tahun)
     {
         $dataRows= PemeriksaanModel::joinTable()
                 ->searchByKategoriPeriksa('bayi')
                 ->searchByMonthYear($bulan, $tahun)
                 ->get();
+
+        $allPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa('bayi')
+            ->searchByMonthYear($bulan, $tahun)
+            ->orderBy('created_at', 'asc')
+            ->get()
+            ->groupBy('kodepasien');
 
         $jmlBBNaik = 0;
         $jmlBBTidakNaik = 0;
@@ -175,33 +225,45 @@ class Rekap
         $jmlBBTidakNormal = 0;
         $jmlTBNormal = 0;
         $jmlTBTidakNormal = 0;
-        $jmlGiziBaik = 0;
-        $jmlGiziTidakBaik = 0;
+        $jmlBBGiziBaik = 0;
+        $jmlBBGiziTidakBaik = 0;
         $jmlLKNormal = 0;
         $jmlLKTidakNormal = 0;
-        $jmlLilaNormal = 0;
-        $jmlLilaTidakNormal = 0;
+        $jmlGiziLilaNormal = 0;
+        $jmlGiziLilaTidakNormal = 0;
 
         foreach($dataRows as $data)
         {
-            $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa('bayi')
-                ->searchByKodePasien($data->kodepasien)
-                ->orderBy('created_at', 'desc')
+            $pemeriksaanPasien = $allPemeriksaan[$data->kodepasien] ?? collect();
+
+            // Ambil pemeriksaan terakhir sebelum data ini
+            $previousPemeriksaan = $pemeriksaanPasien
                 ->where('created_at', '<', $data->created_at)
+                ->sortByDesc('created_at')
                 ->first();
+
+            // lanjut ke pasien berikutnya
+            if (!$previousPemeriksaan) {
+                continue;
+            }
+
+            // $previousPemeriksaan = PemeriksaanModel::searchByKategoriPeriksa('bayi')
+            //     ->searchByKodePasien($data->kodepasien)
+            //     ->orderBy('created_at', 'desc')
+            //     ->where('created_at', '<', $data->created_at)
+            //     ->first();
 
             $umurBayi = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa);
             $umurBayiBulan = IDateTime::dateDiff($data->tgl_lahir, $data->tgl_periksa, "month");
-
 
             $bbSaatIni = $data->periksa_bb;
             $bbSebelumnya = ($previousPemeriksaan) ? $previousPemeriksaan->periksa_bb : 0;
             $isBBNaik = Pemeriksaan::isBeratBadanNaik($bbSaatIni, $bbSebelumnya);
             $kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
             $kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
-            $kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+            $kesimpulanBBGizi = Pemeriksaan::kesimpulanBBGizi($umurBayi, $data->periksa_bb);
             $kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
-            $kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+            $kesimpulanLilaGizi = Pemeriksaan::kesimpulanLilaGizi($data->periksa_lila);
 
             if($isBBNaik) {
                 $jmlBBNaik++;
@@ -221,10 +283,10 @@ class Rekap
                 $jmlTBTidakNormal++;
             }
 
-            if($kesimpulanGizi == "Normal") {
-                $jmlGiziBaik++;
+            if($kesimpulanBBGizi == "Normal") {
+                $jmlBBGiziBaik++;
             } else {
-                $jmlGiziTidakBaik++;
+                $jmlBBGiziTidakBaik++;
             }
 
             if($kesimpulanLK == "Normal") {
@@ -233,10 +295,10 @@ class Rekap
                 $jmlLKTidakNormal++;
             }
 
-            if($kesimpulanLila == "Normal") {
-                $jmlLilaNormal++;
+            if($kesimpulanLilaGizi == "Normal") {
+                $jmlGiziLilaNormal++;
             } else {
-                $jmlLilaTidakNormal++;
+                $jmlGiziLilaTidakNormal++;
             }
         }
 
@@ -247,12 +309,12 @@ class Rekap
             "jmlBBTidakNormal" => $jmlBBTidakNormal,
             "jmlTBNormal" => $jmlTBNormal,
             "jmlTBTidakNormal" => $jmlTBTidakNormal,
-            "jmlGiziBaik" => $jmlGiziBaik,
-            "jmlGiziTidakBaik" => $jmlGiziTidakBaik,
+            "jmlBBGiziBaik" => $jmlBBGiziBaik,
+            "jmlBBGiziTidakBaik" => $jmlBBGiziTidakBaik,
             "jmlLKNormal" => $jmlLKNormal,
             "jmlLKTidakNormal" => $jmlLKTidakNormal,
-            "jmlLilaNormal" => $jmlLilaNormal,
-            "jmlLilaTidakNormal" => $jmlLilaTidakNormal,
+            "jmlGiziLilaNormal" => $jmlGiziLilaNormal,
+            "jmlGiziLilaTidakNormal" => $jmlGiziLilaTidakNormal,
         ];
 
         return $res;

@@ -70,6 +70,7 @@
             <x-partials.sidelink href="admin/laporan/riwayat/bumilnifas?kategori_periksa=nifas" icon="medical_information" title="Riwayat Ibu Nifas" />
             <x-partials.sidelink href="admin/laporan/riwayat/bayi" icon="medical_information" title="Riwayat Bayi" />
             <x-partials.sidelink href="admin/laporan/rekapbumilnifas" icon="medical_information" title="Rekap Bumil & Nifas" />
+            <x-partials.sidelink href="admin/laporan/rekapbayi" icon="medical_information" title="Rekap Periksa Bayi" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=bumil" icon="lab_profile" title="Lap Periksa Bumil" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=nifas" icon="lab_profile" title="Lap Periksa Nifas" />
 

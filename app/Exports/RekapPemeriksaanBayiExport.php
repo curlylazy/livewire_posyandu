@@ -17,7 +17,7 @@ use Maatwebsite\Excel\Concerns\WithProperties;
 use Maatwebsite\Excel\Concerns\WithDrawings;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
-class RekapPemeriksaanBayiNifasExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
+class RekapPemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, WithProperties, WithDrawings
 {
     protected $tahun;
     protected $page_title;
@@ -114,7 +114,7 @@ class RekapPemeriksaanBayiNifasExport implements FromView, WithEvents, ShouldAut
     {
         $dataRows = Rekap::pemeriksaanBumilNifas($this->tahun);
 
-        return view('exports.rekap_pemeriksaan_bumil_nifas', [
+        return view('exports.rekap_pemeriksaan_bayi', [
             'page_title' => $this->page_title,
             'dataRows' => $dataRows,
         ]);

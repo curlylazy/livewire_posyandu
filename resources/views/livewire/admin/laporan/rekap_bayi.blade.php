@@ -57,16 +57,18 @@
                         <thead>
                             <tr>
                                 <th scope="col">Bulan</th>
-                                <th scope="col">Bumil Datang</th>
-                                <th scope="col">Nifas Datang</th>
+                                <th scope="col">Jml Bayi dan Anak</th>
+                                <th scope="col">Bayi Datang</th>
+                                <th scope="col">Apras Datang</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($dataRow as $row)
                                 <tr role="button">
                                     <td>{{ $row->periode }}</td>
-                                    <td>{{ $row->jml_bumil_datang }}</td>
-                                    <td>{{ $row->jml_nifas_datang }}</td>
+                                    <td>{{ $row->jml_bayi }}</td>
+                                    <td>{{ $row->jml_bayi_datang }}</td>
+                                    <td>{{ $row->jml_balita_apras_datang }}</td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -88,12 +90,12 @@
                                         <div class="text-right">{{ $row->jml_bayi }}</div>
                                     </div>
                                     <div class="d-flex">
-                                        <div class="flex-grow-1">Bumil Datang</div>
-                                        <div class="text-right">{{ $row->jml_bumil_datang }}</div>
+                                        <div class="flex-grow-1">Bayi Datang</div>
+                                        <div class="text-right">{{ $row->jml_bayi_datang }}</div>
                                     </div>
                                     <div class="d-flex">
-                                        <div class="flex-grow-1">Nifas Datang</div>
-                                        <div class="text-right">{{ $row->jml_nifas_datang }}</div>
+                                        <div class="flex-grow-1">Apras Datang</div>
+                                        <div class="text-right">{{ $row->jml_balita_apras_datang }}</div>
                                     </div>
                                 </div>
                             </div>
