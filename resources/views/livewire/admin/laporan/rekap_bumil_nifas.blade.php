@@ -84,10 +84,6 @@
                                 <div class="card-body px-2 py-2 d-flex flex-column">
                                     <div>{{ $row->periode }}</div>
                                     <div class="d-flex">
-                                        <div class="flex-grow-1 fw-bold">Jml Anak/Bayi</div>
-                                        <div class="text-right">{{ $row->jml_bayi }}</div>
-                                    </div>
-                                    <div class="d-flex">
                                         <div class="flex-grow-1">Bumil Datang</div>
                                         <div class="text-right">{{ $row->jml_bumil_datang }}</div>
                                     </div>

@@ -139,9 +139,9 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
             $data->isBBNaik = Pemeriksaan::isBeratBadanNaik($data->bbSaatIni, $data->bbSebelumnya);
             $data->kesimpulanBB = Pemeriksaan::kesimpulanBeratBadan($umurBayi, $data->periksa_bb);
             $data->kesimpulanTB = Pemeriksaan::kesimpulanTinggiBadan($umurBayi, $data->periksa_tinggi_badan);
-            $data->kesimpulanGizi = Pemeriksaan::kesimpulanGizi($umurBayi, $data->periksa_bb);
+            $data->kesimpulanGizi = Pemeriksaan::kesimpulanBBGizi($umurBayi, $data->periksa_bb);
             $data->kesimpulanLK = Pemeriksaan::kesimpulanLingkarKepala($umurBayi, $data->periksa_lingkar_kepala, $data->jk);
-            $data->kesimpulanLila = Pemeriksaan::kesimpulanLila($data->periksa_lila);
+            $data->kesimpulanLila = Pemeriksaan::kesimpulanLilaGizi($data->periksa_lila);
         }
 
         return view('exports.pemeriksaan_bayi_per_pasien', [

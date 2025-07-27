@@ -104,7 +104,7 @@ class RekapPemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize
                     ],
                 ];
 
-                // $sheet->getStyle('A9:AC12')->applyFromArray($borderStyle);
+                $sheet->getStyle('A10:AF13')->applyFromArray($borderStyle);
 
             },
         ];
@@ -112,10 +112,11 @@ class RekapPemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize
 
     public function view(): View
     {
-        $dataRows = Rekap::pemeriksaanBumilNifas($this->tahun);
+        $dataRows = Rekap::pemeriksaanBayi($this->tahun);
 
         return view('exports.rekap_pemeriksaan_bayi', [
             'page_title' => $this->page_title,
+            'tahun' => $this->tahun,
             'dataRows' => $dataRows,
         ]);
     }
