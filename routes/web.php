@@ -16,6 +16,8 @@ use App\Livewire\Admin\Blog\BlogAE;
 use App\Livewire\Admin\Blog\BlogList;
 use App\Livewire\Admin\Galeri\GaleriAE;
 use App\Livewire\Admin\Galeri\GaleriList;
+use App\Livewire\Admin\Laporan\GrafikPasien;
+use App\Livewire\Admin\Laporan\GrafikPemeriksaan;
 use App\Livewire\Admin\Laporan\LapPemeriksaan;
 use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBayi;
 use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBumilNifas;
@@ -103,4 +105,6 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/laporan/pemeriksaan', LapPemeriksaan::class)->name('admin_laporan_pemeriksaan');
     Route::get('/laporan/rekapbumilnifas', RekapBumilNifas::class)->name('admin_laporan_rekapbumilnifas');
     Route::get('/laporan/rekapbayi', RekapBayi::class)->name('admin_laporan_rekapbayi');
+    Route::get('/laporan/grafik_pemeriksaan', GrafikPemeriksaan::class)->name('admin_grafik_pemeriksaan');
+    Route::get('/laporan/grafik_pasien', GrafikPasien::class)->name('admin_grafik_pasien');
 });
