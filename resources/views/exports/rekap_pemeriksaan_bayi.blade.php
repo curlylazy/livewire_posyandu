@@ -120,6 +120,29 @@
                 <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_balita_apras_tidak_datang) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bayi_checklist_lengkap) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bayi_checklist_tidak_lengkap) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_naik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_tidak_naik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_tidak_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_tb_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_tb_tidak_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_gizi_baik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bb_gizi_tidak_baik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_lk_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_lk_tidak_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_lila_gizi_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_lila_gizi_tidak_normal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bergejala_tbc) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_asi_eksklusif) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_mpasi) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_imunisasi_lengkap) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_beri_vit_a) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_beri_obat_cacing) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_mt_pangan_lokal) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_edukasi) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_sakit) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_bayi_dirujuk) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Number::format($row->jml_balita_apras_dirujuk) }}</td>
             </tr>
         @endforeach
     </tbody>
