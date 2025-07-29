@@ -7,13 +7,13 @@
     @script
         <script>
             document.addEventListener('livewire:navigated', (event) => {
-                const ctx = document.getElementById('pemeriksaanChart').getContext('2d');
+                const ctx = document.getElementById('myChart');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: @json($dataChart->labels),
                         datasets: [{
-                            label: 'Pemeriksaan Bayi', // Label untuk dataset pertama
+                            label: 'Kategori Pasien', // Label untuk dataset pertama
                             data: @json($dataChart->values), // Data untuk dataset pertama
                             backgroundColor: 'rgba(255, 99, 132, 0.6)', // Warna latar belakang
                             borderColor: 'rgba(255, 99, 132, 1)', // Warna border
@@ -52,7 +52,8 @@
             </div>
 
             <div class="row">
-                <div class="col-12" id="pemeriksaanChart">
+                <div class="col-12">
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
 

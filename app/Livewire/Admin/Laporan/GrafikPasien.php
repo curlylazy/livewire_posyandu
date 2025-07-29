@@ -53,6 +53,24 @@ class GrafikPasien extends Component
         $labels = [];
         $values = [];
 
+        $categories = collect([
+            ['kategoriumur' => 'Balita', 'total' => 0],
+            ['kategoriumur' => 'Anak-anak', 'total' => 0],
+            ['kategoriumur' => 'Remaja', 'total' => 0],
+            ['kategoriumur' => 'Dewasa', 'total' => 0],
+            ['kategoriumur' => 'Lansia', 'total' => 0],
+        ]);
+
+        $result = $categories->map(function ($row) use ($rows) {
+            $found = $rows->firstWhere('kategoriumur', $row['kategoriumur']);
+            return [
+                'kategoriumur' => $row['kategoriumur'],
+                'total' => $found ? $found->total : 0
+            ];
+        });
+
+        dd($result);
+
         foreach ($rows as $row) {
             $labels[] = $row->kategoriumur;
             $values[] = $row->total;

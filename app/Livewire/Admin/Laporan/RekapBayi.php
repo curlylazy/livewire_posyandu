@@ -2,20 +2,11 @@
 
 namespace App\Livewire\Admin\Laporan;
 
-use App\Exports\LapPemeriksaanMultiSheetExport;
 use App\Exports\RekapPemeriksaanBayiExport;
-use App\Exports\RekapPemeriksaanBumilNifasExport;
-use App\Lib\AkunTansi;
 use App\Lib\Rekap;
-use App\Models\PemeriksaanModel;
-use Illuminate\Support\Str;
-use App\Models\PesanHDModel;
-use Illuminate\Support\Arr;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
-use Illuminate\Support\Facades\Crypt;
-use Livewire\Attributes\On;
 use Maatwebsite\Excel\Facades\Excel;
 
 class RekapBayi extends Component
