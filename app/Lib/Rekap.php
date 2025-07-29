@@ -122,8 +122,8 @@ class Rekap
                 ->searchByKategoriPeriksa('bayi')
                 ->get();
 
-            $jmlBayi = PasienModel::searchByKategoriPasien('bayi')->searchUmurByBayi()->count();
-            $jmlBalitaApras = PasienModel::searchByKategoriPasien('bayi')->searchByUmurBalitaApras()->count();
+            $jmlBayi = PasienModel::searchUmurByBayi()->count();
+            $jmlBalitaApras = PasienModel::searchByUmurBalitaApras()->count();
 
             // *** Jumlah Sasaran
             $jmlBayiDatang = PemeriksaanModel::joinTable()->searchByMonthYear($bulan, $tahun)->searchByKategoriPeriksa('bayi')->searchByUmurBayi()->count();

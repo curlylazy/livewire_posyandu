@@ -2,12 +2,25 @@
 
 namespace App\Lib;
 
+use App\Models\PemeriksaanModel;
 use App\Models\PesanDTModel;
+use Carbon\Carbon;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class Pemeriksaan
 {
+    public static function isExistPemeriksaan($tgl_periksa, $kategori_periksa, $kodepasien)
+    {
+        $date = Carbon::parse($tgl_periksa);
+        $isExist = PemeriksaanModel::searchByKategoriPeriksa($kategori_periksa)
+                        ->searchByKodePasien($kodepasien)
+                        ->searchByMonthYear($date->month, $date->year)
+                        ->exists();
+
+        return $isExist;
+    }
+
 	public static function isBeratBadanNaik($bbSaatIni, $bbSebelumnya)
 	{
         $res = ($bbSaatIni > $bbSebelumnya) ? true : false;

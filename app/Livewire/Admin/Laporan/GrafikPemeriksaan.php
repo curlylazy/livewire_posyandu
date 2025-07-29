@@ -2,18 +2,11 @@
 
 namespace App\Livewire\Admin\Laporan;
 
-use App\Exports\LapPemeriksaanMultiSheetExport;
-use App\Lib\AkunTansi;
 use App\Models\PemeriksaanModel;
-use Illuminate\Support\Str;
-use App\Models\PesanHDModel;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
-use Livewire\WithPagination;
 use Livewire\Attributes\Url;
-use Livewire\Attributes\On;
-use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 use stdClass;
 
 class GrafikPemeriksaan extends Component
@@ -21,13 +14,11 @@ class GrafikPemeriksaan extends Component
 
     public $pageTitle = "Grafik Pemeriksaan";
     public $pageName = "grafik_pemeriksaan";
-
-    #[Url]
     public $tahun = "";
 
     public function mount()
     {
-        $this->tahun = (empty($this->tahun)) ? date("Y") : $this->tahun;
+        $this->readData();
     }
 
     public function readData()
@@ -37,37 +28,38 @@ class GrafikPemeriksaan extends Component
                     ->groupBy('kategori_periksa')
                     ->get();
 
-        $valuesPeriksaBayi = [];
-        $valuesPeriksaBumil = [];
-        $valuesPeriksaNifas = [];
+        $categories = collect([
+            ['kategori_periksa' => 'bayi', 'total' => 0],
+            ['kategori_periksa' => 'bumil', 'total' => 0],
+            ['kategori_periksa' => 'nifas', 'total' => 0],
+        ]);
 
-        foreach ($rows as $row) {
-            if($row->kategori_periksa == 'bayi') {
-                $valuesPeriksaBayi[] = $row->total;
-            }
+        $result = $categories->map(function ($row) use ($rows) {
+            $found = $rows->firstWhere('kategori_periksa', $row['kategori_periksa']);
+            return [
+                'kategori_periksa' =>  $row['kategori_periksa'],
+                'total' => $found ? $found->total : 0
+            ];
+        });
 
-            else if($row->kategori_periksa == 'bumil') {
-                $valuesPeriksaBumil[] = $row->total;
-            }
+        $labels = [];
+        $values = [];
 
-            else if($row->kategori_periksa == 'nifas') {
-                $valuesPeriksaNifas[] = $row->total;
-            }
+        foreach ($result as $row) {
+            $labels[] = Str::title($row['kategori_periksa']);
+            $values[] = $row['total'];
         }
 
         $res = new stdClass();
-        $res->valuesPeriksaBayi = $valuesPeriksaBayi;
-        $res->valuesPeriksaBumil = $valuesPeriksaBumil;
-        $res->valuesPeriksaNifas = $valuesPeriksaNifas;
+        $res->labels = $labels;
+        $res->values = $values;
 
-        return $res;
+        $this->dispatch('update-chart', labels: $labels, values: $values, tahun: $this->tahun);
     }
 
     public function render()
     {
-        return view('livewire.admin.laporan.' . $this->pageName, [
-            "dataChart" => $this->readData(),
-        ])
+        return view('livewire.admin.laporan.' . $this->pageName)
         ->layout('components.layouts.admin')
         ->title($this->pageTitle);
     }
