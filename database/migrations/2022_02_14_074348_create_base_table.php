@@ -86,9 +86,9 @@ return new class extends Migration
             // ** Hasil Penimbangan/Pengukuran/Pemeriksaan
             $table->integer('periksa_hamil_ke')->nullable()->default(0);
             $table->integer('periksa_minggu_ke')->nullable()->default(0);
-            $table->integer('periksa_bb')->nullable()->default(0);
+            $table->decimal('periksa_bb')->nullable()->default(0);
             $table->integer('is_sesuai_kurva_bb')->nullable()->default(0);
-            $table->integer('periksa_lila')->nullable()->default(0);
+            $table->decimal('periksa_lila')->nullable()->default(0);
             $table->string('periksa_tekanan_darah', 50)->nullable();
             $table->integer('is_sesuai_kurva_tekanan_darah')->nullable()->default(0);
 
@@ -114,9 +114,9 @@ return new class extends Migration
             // *** NIFAS
 
             // ** Pemberian Vit A, Menyusui dan KB
-            $table->integer('periksa_bb_bayi')->nullable()->default(0);
-            $table->integer('periksa_tinggi_badan')->nullable()->default(0);
-            $table->integer('periksa_lingkar_kepala')->nullable()->default(0);
+            $table->decimal('periksa_bb_bayi')->nullable()->default(0);
+            $table->decimal('periksa_tinggi_badan')->nullable()->default(0);
+            $table->decimal('periksa_lingkar_kepala')->nullable()->default(0);
             $table->integer('is_beri_vit_a')->nullable()->default(0);
             $table->integer('jml_tablet_vit_a')->nullable()->default(0);
             $table->integer('is_konsumsi_vit_a')->nullable()->default(0);
