@@ -50,9 +50,6 @@ class GrafikPasien extends Component
                 ->groupBy('kategoriumur') // Grouping berdasarkan alias 'kategoriumur'
                 ->get();
 
-        $labels = [];
-        $values = [];
-
         $categories = collect([
             ['kategoriumur' => 'Balita', 'total' => 0],
             ['kategoriumur' => 'Anak-anak', 'total' => 0],
@@ -69,11 +66,12 @@ class GrafikPasien extends Component
             ];
         });
 
-        dd($result);
+        $labels = [];
+        $values = [];
 
-        foreach ($rows as $row) {
-            $labels[] = $row->kategoriumur;
-            $values[] = $row->total;
+        foreach ($result as $row) {
+            $labels[] = $row['kategoriumur'];
+            $values[] = $row['total'];
         }
 
         $res = new stdClass();

@@ -171,6 +171,10 @@ class PemeriksaanForm extends Form
         $this->periksa_lingkar_kepala = $data->lingkar_kepala;
         $this->periksa_bb = $data->beratbadan;
         $this->periksa_lila = $data->lila;
+
+        // *** table pembantu
+        $this->kodeibu = $data->kodeibu;
+        $this->namaibu = $data->namaibu;
     }
 
     public function setIbu($data)

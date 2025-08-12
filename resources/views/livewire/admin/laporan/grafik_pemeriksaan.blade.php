@@ -7,50 +7,35 @@
     @script
         <script>
             document.addEventListener('livewire:navigated', (event) => {
-                const ctx = document.getElementById('pemeriksaanChart').getContext('2d');
+                const ctx = document.getElementById('myChart');
                 var myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
-                        labels: ['Pemeriksaan Bayi', 'Pemeriksaan Bumil', 'Pemeriksaan Nifas'],
-                        datasets: [
-                            {
-                                label: 'Pemeriksaan Bayi', // Label untuk dataset pertama
-                                data: @json($dataChart->valuesPeriksaBayi), // Data untuk dataset pertama
-                                backgroundColor: 'rgba(255, 99, 132, 0.6)', // Warna latar belakang
-                                borderColor: 'rgba(255, 99, 132, 1)', // Warna border
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Pemeriksann Bumil', // Label untuk dataset kedua
-                                data: @json($dataChart->valuesPeriksaBumil), // Data untuk dataset kedua
-                                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Warna latar belakang yang berbeda
-                                borderColor: 'rgba(54, 162, 235, 1)', // Warna border yang berbeda
-                                borderWidth: 1
-                            },
-                            {
-                                label: 'Pemeriksaan Nifas', // Label untuk dataset kedua
-                                data: @json($dataChart->valuesPeriksaNifas), // Data untuk dataset kedua
-                                backgroundColor: 'rgba(54, 162, 235, 0.6)', // Warna latar belakang yang berbeda
-                                borderColor: 'rgba(54, 162, 235, 1)', // Warna border yang berbeda
-                                borderWidth: 1
-                            }
-                        ]
+                        labels: [],
+                        datasets: [{
+                            label: '', // Label untuk dataset pertama
+                            data: [], // Data untuk dataset pertama
+                            backgroundColor: 'rgba(255, 99, 132, 0.6)', // Warna latar belakang
+                            borderColor: 'rgba(255, 99, 132, 1)', // Warna border
+                            borderWidth: 1
+                        }]
                     },
                     options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
                     }
+                });
+
+                // *** update cart
+                $wire.on('update-chart', (e) => {
+                    myChart.data.labels = e.labels;
+                    myChart.data.datasets[0].data = e.values;
+                    myChart.data.datasets[0].label = `Kategori Pemeriksaan Tahun ${e.tahun}`;
+                    myChart.update();
                 });
             });
 
 
         </script>
     @endscript
-
-    <livewire:partial.modal-year-month />
 
     <x-partials.loader />
     <x-partials.flashmsg />
@@ -69,24 +54,23 @@
                 <a class="btn btn-outline-secondary" type="button" wire:click='readData'><i class="fas fa-search"></i> Cari</a>
             </div>
 
-            <form autocomplete="off">
-                <div class="row g-2 mb-3">
-                    <div class="col-12">
-                        <div class="form-floating">
-                            <select class="form-select" id="tahun" wire:model='tahun' aria-label="tahun pemeriksaan">
-                                <option value="">Pilih Tahun</option>
-                                @foreach (Option::tahun() as $data)
-                                    <option value="{{ $data }}">{{ $data }}</option>
-                                @endforeach
-                            </select>
-                            <label for="tahun">Tahun</label>
-                        </div>
+            <div class="row g-2 mb-3">
+                <div class="col-12">
+                    <div class="form-floating">
+                        <select class="form-select" id="tahun" wire:model='tahun' aria-label="tahun pemeriksaan" wire:change='readData'>
+                            <option value="">Pilih Tahun</option>
+                            @foreach (Option::tahun() as $data)
+                                <option value="{{ $data['value'] }}">{{ $data['value'] }}</option>
+                            @endforeach
+                        </select>
+                        <label for="tahun">Tahun</label>
                     </div>
                 </div>
-            </form>
+            </div>
 
-            <div class="row">
-                <div class="col-12" id="pemeriksaanChart">
+            <div class="row" x-cloak x-show='$wire.tahun != ""'>
+                <div class="col-12">
+                    <canvas id="myChart"></canvas>
                 </div>
             </div>
 

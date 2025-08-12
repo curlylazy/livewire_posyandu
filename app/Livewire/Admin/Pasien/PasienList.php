@@ -72,7 +72,7 @@ class PasienList extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.list", [
+        return view('livewire.admin.' . $this->pageName . '.list', [
             "dataRow" => $this->readData(),
         ])
         ->layout('components.layouts.admin')

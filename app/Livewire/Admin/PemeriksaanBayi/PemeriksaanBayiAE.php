@@ -3,9 +3,12 @@
 namespace App\Livewire\Admin\PemeriksaanBayi;
 
 use App\Lib\IDateTime;
+use App\Lib\Pemeriksaan;
 use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
 use App\Models\PasienModel;
+use App\Models\PemeriksaanModel;
+use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -54,8 +57,23 @@ class PemeriksaanBayiAE extends Component
 
     public function save()
     {
-        try {
-            ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
+        try
+        {
+            if($this->isEdit)
+            {
+                $this->saveEdit();
+            }
+            else
+            {
+                $isExist = Pemeriksaan::isExistPemeriksaan($this->form->tgl_periksa, 'bayi', $this->form->kodepasien);
+                if($isExist)
+                {
+                    $this->dispatch('notif', message: 'Pasien dengan nama '.$this->form->namapasien.' sudah melakukan pemeriksaan untuk periode '.$this->form->tgl_periksa, icon: 'warning');
+                    return;
+                }
+
+                $this->saveAdd();
+            }
 
             $this->redirect("/admin/$this->pageName/$this->subPage", navigate: true);
 
@@ -67,6 +85,12 @@ class PemeriksaanBayiAE extends Component
 
     public function saveAdd()
     {
+        // $date = Carbon::parse($this->form->tgl_periksa);
+        // $isExist = PemeriksaanModel::searchByKategoriPeriksa('bayi')
+        //                 ->searchByKodePasien($this->form->kodepasien)
+        //                 ->searchByMonthYear($date->month, $date->year)
+        //                 ->exists();
+
         $this->form->store();
         session()->flash('success', "berhasil tambah data ".$this->form->namapasien);
     }
