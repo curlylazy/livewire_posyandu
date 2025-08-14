@@ -159,7 +159,7 @@
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_bb) !!}">{!! ($row->is_sesuai_kurva_bb) ? "✓" : "✗" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($lilaKurang235) !!}">{!! ($lilaKurang235) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($lilaKurang235) !!}">{!! ($lilaKurang235) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_tekanan_darah }}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_tekanan_darah) !!}">{!! ($row->is_sesuai_kurva_tekanan_darah) ? "✓" : "✗" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_batuk) !!}">{!! ($row->is_batuk) ? "Ya" : "Tidak" !!}</td>

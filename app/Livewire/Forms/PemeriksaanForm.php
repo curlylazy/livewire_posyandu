@@ -75,6 +75,7 @@ class PemeriksaanForm extends Form
     public $namaibu;
     public $namapasien;
     public $namabayi;
+    public $tgl_periksa_old = '';
 
     public function rules()
     {
@@ -154,6 +155,7 @@ class PemeriksaanForm extends Form
         $this->namapasien = $data->namapasien;
         $this->namabayi = $data->namabayi;
         $this->namaibu = $data->namaibu;
+        $this->tgl_periksa_old = $data->tgl_periksa;
     }
 
     public function setPasien($data)
@@ -217,7 +219,7 @@ class PemeriksaanForm extends Form
 
     private function exceptData()
     {
-        $arr = ['namapasien', 'namabayi', 'kodeibu', 'namaibu'];
+        $arr = ['namapasien', 'namabayi', 'kodeibu', 'namaibu', 'tgl_periksa_old'];
         return $arr;
     }
 

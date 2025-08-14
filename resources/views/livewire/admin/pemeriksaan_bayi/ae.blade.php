@@ -107,26 +107,26 @@
 
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="form.periksa_bb" wire:model='form.periksa_bb' placeholder="" x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="form.periksa_bb" wire:model='form.periksa_bb' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_bb">Berat Badan</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="form.periksa_tinggi_badan" wire:model='form.periksa_tinggi_badan' placeholder="" x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="form.periksa_tinggi_badan" wire:model='form.periksa_tinggi_badan' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_tinggi_badan">Tinggi Badan</label>
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="form.periksa_lingkar_kepala" wire:model='form.periksa_lingkar_kepala' placeholder="" x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="form.periksa_lingkar_kepala" wire:model='form.periksa_lingkar_kepala' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_lingkar_kepala">Lingkar Kepala</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="form.periksa_lila" wire:model='form.periksa_lila' placeholder="" x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="form.periksa_lila" wire:model='form.periksa_lila' placeholder="" x-mask:dynamic="$money($input)">
                             <label for="form.periksa_lila">Lingkar Lengan Atas</label>
                         </div>
                     </div>

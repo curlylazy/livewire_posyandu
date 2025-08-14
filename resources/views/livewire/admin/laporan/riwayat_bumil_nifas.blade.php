@@ -58,8 +58,8 @@
                     @foreach ($dataRow as $row)
                         <div class="col-12">
                             <div class="d-flex justify-content-between mb-2">
-                                <h6>Periode : {{ IDateTime::formatDate($row->tgl_periksa) }}</h6>
-                                <a href="{{ url("admin/pemeriksaan/detail/$row->kodepemeriksaan?kategori_periksa=$kategori_periksa") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
+                                <h6>Periode : {{ IDateTime::formatDate($row->tgl_periksa, "MMMM Y") }}</h6>
+                                <a href="{{ url("admin/pemeriksaan/$subPage/detail/$row->kodepemeriksaan?kategori_periksa=$kategori_periksa") }}" class="btn btn-sm btn-outline-secondary"> Cek Detail</a>
                             </div>
                             <ul class="list-group">
                                 @if($kategori_periksa == "bumil")

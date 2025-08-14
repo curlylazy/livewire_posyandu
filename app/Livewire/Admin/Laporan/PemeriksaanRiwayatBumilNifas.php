@@ -18,10 +18,11 @@ class PemeriksaanRiwayatBumilNifas extends Component
 
     public $pageTitle = "Pemeriksaan Riwayat";
     public $pageName = "pemeriksaan";
+    public $subPage = "bumilnifas";
 
     // *** q mengacu pada query
     #[Url]
-    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "", $namapasien = "", $kodebayi = "";
+    public $kategori_periksa = "", $q_hamil_ke = "", $nik = "", $namapasien = "", $kodebayi = "", $hamil_ke = "";
 
     public $judulModalPasien = "";
     public $kategoriumur = "";
@@ -30,7 +31,6 @@ class PemeriksaanRiwayatBumilNifas extends Component
     public $selectedKode = "";
     public $selectedNama = "";
     public $kodepasien = "";
-    public $hamil_ke = "";
 
     public $listAnak = [];
 
@@ -55,7 +55,7 @@ class PemeriksaanRiwayatBumilNifas extends Component
             ->searchByHamilKe($this->q_hamil_ke)
             ->searchByBayi($this->kodebayi)
             ->joinTable()
-            ->latest('tbl_pemeriksaan.tgl_periksa')
+            ->orderBy('tbl_pemeriksaan.tgl_periksa', 'ASC')
             ->paginate(10);
 
         return $data;

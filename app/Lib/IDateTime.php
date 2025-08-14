@@ -64,4 +64,16 @@ class IDateTime
         return $diffYears->format('%y Tahun, %m Bulan');
     }
 
+    public static function getMonth($date)
+    {
+        $res = date('m', strtotime($date));
+        return $res;
+    }
+
+    public static function getYear($date)
+    {
+        $res = date('Y', strtotime($date));
+        return $res;
+    }
+
 }

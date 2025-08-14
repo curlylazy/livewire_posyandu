@@ -24,7 +24,7 @@ class Dashboard extends Component
     public function mount()
     {
         $this->jmlPasien = PasienModel::count();
-        $this->jmlBayi = BayiModel::count();
+        $this->jmlBayi = PasienModel::selectCustom()->searchByKategoriUmur('Balita')->count();
         $this->jmlPeriksaTahunIni = PemeriksaanModel::searchByYear(date('Y'))->count();
         $this->jmlPeriksaBulanIni = PemeriksaanModel::searchByMonthYear(date('m'), date('Y'))->count();
     }

@@ -32,8 +32,9 @@ class PemeriksaanBumilNifasList extends Component
     {
         $data = PemeriksaanModel::search($this->katakunci)
                 ->joinTable()
+                ->searchByMonthYear(month : $this->bulan, year: $this->tahun)
                 ->searchByKategoriPeriksa($this->kategori_periksa)
-                ->latest('tbl_pemeriksaan.tgl_periksa')
+                ->orderBy('tbl_pemeriksaan.tgl_periksa', 'ASC')
                 ->paginate(20);
 
         return $data;

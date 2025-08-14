@@ -6,6 +6,7 @@ use App\Lib\IDateTime;
 use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
 use App\Models\PasienModel;
+use App\Models\PemeriksaanModel;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -63,11 +64,29 @@ class PemeriksaanBumilNifasAE extends Component
 
     public function save()
     {
-        try {
+        try
+        {
+            // *** cek apakah pasien sudah melakukan pemeriksaan, jika tanggalnya tidak sama maka lakukan validasi
+            if($this->form->tgl_periksa != $this->form->tgl_periksa_old)
+            {
+                $bulan = IDateTime::getMonth($this->form->tgl_periksa);
+                $tahun = IDateTime::getYear($this->form->tgl_periksa);
+                $isExist = PemeriksaanModel::searchByKodePasien($this->form->kodepasien)
+                                ->searchByMonthYear(month: $bulan, year: $tahun)
+                                ->searchByKategoriPeriksa($this->kategori_periksa)
+                                ->exists();
+
+                if($isExist)
+                {
+                    $this->dispatch('notif', message: "Maaf data tidak bisa disimpan, dikarenakan pasien {$this->form->namapasien} sudah melakukan pemeriksan di bulan ".IDateTime::formatDate($this->form->tgl_periksa, "MMMM Y") , icon: "error");
+                    return;
+                }
+            }
+
+
             ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
 
             $this->redirect("/admin/$this->pageName/bumilnifas?kategori_periksa=".$this->kategori_periksa, navigate: true);
-
         } catch (\Exception $e) {
             $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
             return;
@@ -84,6 +103,7 @@ class PemeriksaanBumilNifasAE extends Component
     {
         $this->form->update();
         session()->flash('success', "berhasil edit data ".$this->form->namapasien);
+        $this->redirect("/admin/$this->pageName/bumilnifas?kategori_periksa=".$this->kategori_periksa, navigate: true);
     }
 
     // *** extra

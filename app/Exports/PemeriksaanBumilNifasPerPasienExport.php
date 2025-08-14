@@ -126,6 +126,7 @@ class PemeriksaanBumilNifasPerPasienExport implements FromView, WithEvents, Shou
                     ->searchByKategoriPeriksa($this->kategoriperiksa)
                     ->searchByHamilKe($this->hamil_ke)
                     ->searchByBayi($this->kodebayi)
+                    ->orderBy('tbl_pemeriksaan.tgl_periksa', 'ASC')
                     ->get();
 
         $view = ($this->kategoriperiksa == 'bumil') ? "pemeriksaan_bumil_per_pasien" : "pemeriksaan_nifas_per_pasien";

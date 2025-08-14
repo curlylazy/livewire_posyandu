@@ -59,22 +59,6 @@ return new class extends Migration
             $table->softDeletes();
         });
 
-        Schema::create('tbl_bayi', function (Blueprint $table) {
-            $table->uuid('kodebayi')->primary();
-            $table->uuid('kodepasien');
-            $table->string('namabayi', 225);
-            $table->integer('anakke')->default(1);
-            $table->decimal('tinggibadan')->default(1);
-            $table->decimal('beratbadan')->default(1);
-            $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
-            $table->date('tgl_lahir');
-            $table->date('tgl_bersalin')->nullable();
-            $table->string('tempatbersalin', 225)->nullable();
-            $table->char('jk', 1)->default('L');
-            $table->timestamps();
-            $table->softDeletes();
-        });
-
         // *** pemeriksaan
         Schema::create('tbl_pemeriksaan', function (Blueprint $table) {
             $table->uuid('kodepemeriksaan')->primary();
@@ -160,6 +144,22 @@ return new class extends Migration
         //     $table->string('tekanan_darah', 50)->nullable();
         //     $table->integer('is_sesuai_kurva')->nullable()->default(0);
 
+        //     $table->timestamps();
+        //     $table->softDeletes();
+        // });
+
+        // Schema::create('tbl_bayi', function (Blueprint $table) {
+        //     $table->uuid('kodebayi')->primary();
+        //     $table->uuid('kodepasien');
+        //     $table->string('namabayi', 225);
+        //     $table->integer('anakke')->default(1);
+        //     $table->decimal('tinggibadan')->default(1);
+        //     $table->decimal('beratbadan')->default(1);
+        //     $table->integer('carabersalin')->default(1)->comment("1 = Persalinan Normal, 2 = Persalinan Caesar, 3 = Persalinan dengan Bantuan Alat, 4 = Persalinan di Air, 5 = Persalinan Lotus");
+        //     $table->date('tgl_lahir');
+        //     $table->date('tgl_bersalin')->nullable();
+        //     $table->string('tempatbersalin', 225)->nullable();
+        //     $table->char('jk', 1)->default('L');
         //     $table->timestamps();
         //     $table->softDeletes();
         // });
