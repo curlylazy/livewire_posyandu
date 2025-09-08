@@ -39,26 +39,26 @@ class ModalAddPasien extends Component
 
         $faker = Faker::create('id_ID');
 
-        if($this->pilihanAdd == "bumilnifas" || $this->kategori_periksa == "ibu")
-        {
-            $this->form->nik = $faker->nik();
-            $this->form->hamil_ke = 1;
-            $this->form->minggu_ke = 1;
-            $this->form->namapasien = $faker->name(gender: "female");
-            $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
-            $this->form->alamat = $faker->address();
-        }
+        // if($this->pilihanAdd == "bumilnifas" || $this->kategori_periksa == "ibu")
+        // {
+        //     $this->form->nik = $faker->nik();
+        //     $this->form->hamil_ke = 1;
+        //     $this->form->minggu_ke = 1;
+        //     $this->form->namapasien = $faker->name(gender: "female");
+        //     $this->form->tgl_lahir = $faker->dateTimeBetween('-40 years', '-30 years');
+        //     $this->form->alamat = $faker->address();
+        // }
 
-        // *** isikan parameter kodeibu
-        if($this->pilihanAdd == "bayi" && !empty($this->kodeibu))
-        {
-            $dataIbu = PasienModel::find($this->kodeibu);
-            $this->form->nik = "";
-            $this->form->kodeibu = $this->kodeibu;
-            $this->form->namaibu = $dataIbu->namapasien;
-            $this->form->namapasien = $faker->name();
-            $this->form->tgl_lahir = IDateTime::formatDate($faker->dateTimeBetween('-5 months', '-1 months'), "YYYY-MM-DD");
-        }
+        // // *** isikan parameter kodeibu
+        // if($this->pilihanAdd == "bayi" && !empty($this->kodeibu))
+        // {
+        //     $dataIbu = PasienModel::find($this->kodeibu);
+        //     $this->form->nik = "";
+        //     $this->form->kodeibu = $this->kodeibu;
+        //     $this->form->namaibu = $dataIbu->namapasien;
+        //     $this->form->namapasien = $faker->name();
+        //     $this->form->tgl_lahir = IDateTime::formatDate($faker->dateTimeBetween('-5 months', '-1 months'), "YYYY-MM-DD");
+        // }
     }
 
     public function save()
@@ -73,7 +73,7 @@ class ModalAddPasien extends Component
             }
 
             $kodepasien = $this->form->store();
-            $data = PasienModel::find($kodepasien);
+            $data = PasienModel::selectCustom()->find($kodepasien);
             $this->dispatch('saved', data: json_encode($data));
             $this->dispatch('close-modal', namamodal : 'modalPasienAdd');
 

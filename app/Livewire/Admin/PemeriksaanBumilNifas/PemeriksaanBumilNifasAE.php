@@ -16,6 +16,7 @@ class PemeriksaanBumilNifasAE extends Component
 {
     public $pageTitle = "Pemeriksaan";
     public $pageName = "pemeriksaan";
+    public $subPage = "bumilnifas";
     public $dirView = "pemeriksaan_bumilnifas";
     public $isEdit = false;
     public $id = "";

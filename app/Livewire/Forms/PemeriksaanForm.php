@@ -99,6 +99,7 @@ class PemeriksaanForm extends Form
         $this->kodebayi = $data->kodebayi;
         $this->kategori_periksa = $data->kategori_periksa;
         $this->tgl_periksa = $data->tgl_periksa;
+        // dd($this->tgl_periksa);
         $this->is_kelas_bumil = $data->is_kelas_bumil;
         $this->is_rujuk = $data->is_rujuk;
         $this->edukasi = $data->edukasi;

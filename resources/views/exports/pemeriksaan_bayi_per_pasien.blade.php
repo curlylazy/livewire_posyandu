@@ -31,11 +31,11 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Ayah</th>
-            <th colspan="3">: {{ $dataPasien->nama_ayah }}</th>
+            <th colspan="3">: {{ $dataPasien->namaayah }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Ibu</th>
-            <th colspan="3">: {{ $dataPasien->nama_ibu }}</th>
+            <th colspan="3">: {{ $dataPasien->namaibu }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Alamat</th>
@@ -71,7 +71,7 @@
     <thead>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="3">Bulan dan Tahun</th>
-            <th style="{!! CssExcel::$rowSize150Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="3">Waktu kunjungan ke Posyandu (Tanggal, Bulan, Tahun)</th>
+            <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgPink !!}" rowspan="3">Waktu kunjungan ke Posyandu (Tanggal, Bulan, Tahun)</th>
             <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$rowHeight150px !!} {!! CssExcel::$textCenter !!} {!! CssExcel::$bgGray !!}" colspan="11">
                     Hasil Penimbangan/Pengukuran <br />
                     (Jika ditemukan Bayi/Balita/Apras dengan hasil Penimbangan BB tidak Naik/BGM/Atas Garis Oranye/Gizi

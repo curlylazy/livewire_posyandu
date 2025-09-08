@@ -161,15 +161,15 @@
             <tr>
                 <td style="{!! CssExcel::$textCenter !!}">{{ IDateTime::formatDate($row->tgl_periksa) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_bb) !!}">{!! ($row->is_sesuai_kurva_bb) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_bb) !!}">{!! ($row->is_sesuai_kurva_bb) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($lilaKurang235) !!}">{!! ($lilaKurang235) ? "✓" : "✗" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($lilaKurang235) !!}">{!! ($lilaKurang235) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_tekanan_darah }}</td>
                 <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_sesuai_kurva_tekanan_darah) !!}">{!! ($row->is_sesuai_kurva_tekanan_darah) ? "✓" : "✗" !!}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_batuk) !!}">{!! ($row->is_batuk) ? "Ya" : "Tidak" !!}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_demam_ya) !!}">{!! ($row->is_demam_ya) ? "Ya" : "Tidak" !!}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_bb_tidak_naik_turun) !!}">{!! ($row->is_bb_tidak_naik_turun) ? "Ya" : "Tidak" !!}</td>
-                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground($row->is_kontak_pasien_tbc) !!}">{!! ($row->is_kontak_pasien_tbc) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground(!$row->is_batuk) !!}">{!! ($row->is_batuk) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground(!$row->is_demam_ya) !!}">{!! ($row->is_demam_ya) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground(!$row->is_bb_tidak_naik_turun) !!}">{!! ($row->is_bb_tidak_naik_turun) ? "Ya" : "Tidak" !!}</td>
+                <td style="{!! CssExcel::$textCenter !!} {!! CssExcel::setBackground(!$row->is_kontak_pasien_tbc) !!}">{!! ($row->is_kontak_pasien_tbc) ? "Ya" : "Tidak" !!}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_beri_vit_a) ? "Ya ($row->jml_tablet_vit_a)" : 'Tidak' }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_konsumsi_vit_a) ? "Ya" : "Tidak" }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ ($row->is_menyusui) ? "Ya" : "Tidak" }}</td>

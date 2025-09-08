@@ -17,6 +17,7 @@
         <script>
             $wire.on('notif', (e) => {
                 Swal.fire({
+                    title: "Login Info",
                     text: e.message,
                     icon: e.icon
                 });

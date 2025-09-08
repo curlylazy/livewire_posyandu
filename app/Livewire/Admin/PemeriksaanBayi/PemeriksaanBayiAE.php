@@ -34,8 +34,8 @@ class PemeriksaanBayiAE extends Component
 
     public function mount($id = null)
     {
-        $this->readData($id);
         $this->setTitle();
+        $this->readData($id);
     }
 
     public function setTitle()

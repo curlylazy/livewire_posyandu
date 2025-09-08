@@ -2,6 +2,12 @@
 
     @script
         <script>
+            $wire.on('selected-data', (e) => {
+                $wire.selectedNama = e.data.namapasien;
+                $wire.selectedKode = e.data.kodepemeriksaan;
+                $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
+            });
+
             $wire.on('confirm-delete', (e) => {
                 Swal.fire({
                     title: 'Hapus Data',
@@ -77,7 +83,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($dataRow as $row)
-                                        <tr role="button" wire:click='selectData({{ $row }})'>
+                                        <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                             <td>{{ $row->nik }}</td>
                                             <td>{{ $row->namapasien }}</td>
                                             <td>{{ $row->namabayi }}</td>
@@ -102,7 +108,7 @@
                                 </thead>
                                 <tbody>
                                     @foreach ($dataRow as $row)
-                                        <tr role="button" wire:click='selectData({{ $row }})'>
+                                        <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                             <td>{{ $row->nik }}</td>
                                             <td>{{ $row->namapasien }}</td>
                                             <td>{{ $row->hamil_ke }}</td>
@@ -126,7 +132,7 @@
                         @if($kategori_periksa == 'nifas')
                             @foreach ($dataRow as $row)
                                 <div class="col-12 col-md-4">
-                                    <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                         <div class="card-body px-2 py-2">
                                             <div class="h5 mb-1">{{ $row->namabayi }}</div>
                                             <div>Ibu {{ $row->namapasien }}</div>
@@ -141,7 +147,7 @@
                         @else
                             @foreach ($dataRow as $row)
                                 <div class="col-12 col-md-4">
-                                    <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                         <div class="card-body px-2 py-2">
                                             <div class="h5 mb-1">{{ $row->namapasien }}</div>
                                             <div>{{ $row->nik }}</div>
@@ -161,13 +167,24 @@
             </x-partials.containerdata>
 
             {{-- *** Modal Selected --}}
-            <x-partials.modalselected>
+            {{-- <x-partials.modalselected>
                 <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
                 <x-slot:selectedNama>{{ $selectedNama }}</x-slot>
                 <div class="d-grid gap-2">
                     <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/$subPage/edit/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-edit"></i> Edit</a>
                     <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/$subPage/detail/$selectedKode?kategori_periksa=$kategori_periksa") }}" role="button" wire:navigated><i class="fas fa-stethoscope"></i> Detail</a>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete", { kode: "{{ $selectedKode }}", nama: "{{ $selectedNama }}" })'><i class="fas fa-trash"></i> Hapus</button>
+                    <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
+                </div>
+            </x-partials.modalselected> --}}
+
+            <x-partials.modalselected>
+                <x-slot:pageTitle><span wire:text="pageTitle"></span></x-slot>
+                <x-slot:selectedNama><span wire:text="selectedNama"></span></x-slot>
+                <div class="d-grid gap-2" x-data="{ selectedKode: $wire.entangle('selectedKode'), pageName: $wire.entangle('pageName'), subPage: $wire.entangle('subPage'),  kategori_periksa: $wire.entangle('kategori_periksa')}">
+                    <a class="btn btn-lg btn-outline-primary" id="edit" role="button" :href="`/admin/${pageName}/${subPage}/edit/${selectedKode}?kategori_periksa=${kategori_periksa}`" wire:navigate><i class="fas fa-edit"></i> Edit</a>
+                    <a class="btn btn-lg btn-outline-primary" id="edit" role="button" :href="`/admin/${pageName}/${subPage}detail/${selectedKode}?kategori_periksa=${kategori_periksa}`" wire:navigate><i class="fas fa-stethoscope"></i> Detail</a>
+                    <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete")'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>
             </x-partials.modalselected>

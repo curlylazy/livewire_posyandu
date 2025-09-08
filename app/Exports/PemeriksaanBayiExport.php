@@ -120,6 +120,7 @@ class PemeriksaanBayiExport implements FromView, WithEvents, ShouldAutoSize, Wit
         $dataRows = PemeriksaanModel::joinTable()
                     ->searchByKodePasien($this->kodepasien)
                     ->searchByKategoriPeriksa($this->kategoriperiksa)
+                    ->orderBy('tbl_pemeriksaan.tgl_periksa', 'ASC')
                     ->get();
 
         foreach($dataRows as $data)

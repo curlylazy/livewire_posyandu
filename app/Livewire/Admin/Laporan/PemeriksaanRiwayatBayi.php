@@ -44,7 +44,7 @@ class PemeriksaanRiwayatBayi extends Component
         $data = PemeriksaanModel::searchByKodePasien($this->kodepasien)
             ->searchByKategoriPeriksa($this->kategori_periksa)
             ->joinTable()
-            ->latest('tbl_pemeriksaan.tgl_periksa')
+            ->orderBy('tbl_pemeriksaan.tgl_periksa', 'ASC')
             ->paginate(10);
 
         return $data;
