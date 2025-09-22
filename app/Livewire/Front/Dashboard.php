@@ -3,34 +3,23 @@
 namespace App\Livewire\Front;
 
 use App\Lib\MetaTag;
-use App\Models\ActivityModel;
-use App\Models\BeritaModel;
-use App\Models\GaleriModel;
-use App\Models\KategoriModel;
-use App\Models\KegiatanModel;
-use App\Models\PackageModel;
-use App\Models\PelangganModel;
-use App\Models\PesanHDModel;
-use App\Models\ProdukModel;
+use App\Models\PasienModel;
+use App\Models\PemeriksaanModel;
 use Livewire\Component;
 
 class Dashboard extends Component
 {
+    public $jmlPasien = 0;
+    public $jmlBayi = 0;
+    public $jmlPeriksaBulanIni = 0;
+    public $jmlPeriksaTahunIni = 0;
+
     public function mount()
     {
-
-    }
-
-    public function readDataPackages()
-    {
-        $data = PackageModel::get();
-        return $data;
-    }
-
-    public function readDataActivity()
-    {
-        $data = ActivityModel::get();
-        return $data;
+        $this->jmlPasien = PasienModel::count();
+        $this->jmlBayi = PasienModel::selectCustom()->searchByKategoriUmur('Balita')->count();
+        $this->jmlPeriksaTahunIni = PemeriksaanModel::searchByYear(date('Y'))->count();
+        $this->jmlPeriksaBulanIni = PemeriksaanModel::searchByMonthYear(date('m'), date('Y'))->count();
     }
 
     public function render()

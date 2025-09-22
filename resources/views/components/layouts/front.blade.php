@@ -20,13 +20,20 @@
     <!-- Main CSS File -->
     <link href="{{ asset("asset_front/css/main.css") }}" rel="stylesheet">
 
-    <!-- =======================================================
-    * Template Name: Dewi
-    * Template URL: https://bootstrapmade.com/dewi-free-multi-purpose-html-template/
-    * Updated: Aug 07 2024 with Bootstrap v5.3.3
-    * Author: BootstrapMade.com
-    * License: https://bootstrapmade.com/license/
-    ======================================================== -->
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('asset_front/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset_front/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset_front/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset_front/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset_front/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+    <!-- Main CSS File -->
+    <link href="{{ asset('asset_front/css/main.css') }}" rel="stylesheet">
 
     {!! Meta::toHtml() !!}
 
@@ -36,27 +43,26 @@
 <body class="starter-page-page">
 
     <header id="header" class="header d-flex align-items-center fixed-top">
-        <div class="container-fluid container-xl position-relative d-flex align-items-center">
+        <div class="container-fluid position-relative d-flex align-items-center justify-content-between">
 
-            <a href="{{ url('/') }}" class="logo d-flex align-items-center me-auto">
-                <!-- Uncomment the line below if you also wish to use an image logo -->
-                <img src="{{ asset("logo.png") }}" alt="{{ config('app.webname') }}">
-                <h1 class="sitename">{{ config('app.webname') }}</h1>
-            </a>
+        <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
+            <!-- Uncomment the line below if you also wish to use an image logo -->
+            <!-- <img src="assets/img/logo.png" alt=""> -->
+            <h1 class="sitename">{{ config('app.webname') }}</h1><span>.</span>
+        </a>
 
-            <nav id="navmenu" class="navmenu">
-                <ul>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li><a href="{{ url('/packages') }}">Packages</a></li>
-                    <li><a href="{{ url('/activities') }}">Activities</a></li>
-                    <li><a href="{{ url('/galery') }}">Galery</a></li>
-                    <li><a href="{{ url('/video') }}">Video</a></li>
-                    <li><a href="{{ url('/contact') }}">Contact</a></li>
-                </ul>
-                <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-            </nav>
+        <nav id="navmenu" class="navmenu">
+            <ul>
+                <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/berita') }}">Berita</a></li>
+                <li><a href="{{ url('/galeri') }}">Galeri</a></li>
+                <li><a href="{{ url('/kontak') }}">Kontak</a></li>
+            </ul>
+            <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
 
-            <a class="cta-btn" href="https://wa.me/{{ config('app.wa') }}"><i class="bi bi-whatsapp"></i> Whatsapp Now</a>
+        <a class="btn-getstarted" href="index.html#about">Get Started</a>
+
         </div>
     </header>
 

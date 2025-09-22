@@ -14,6 +14,7 @@
         <meta name="description" content="{{ config('app.webname') }} - {{ config('app.tagline') }}">
         <meta name="author" content="Balicoding.com">
         <meta name="keyword" content="">
+        <meta name="robots" content="noindex">
         <title>{{ $title ?? 'Admin '.config('app.webname') }}</title>
 
 
