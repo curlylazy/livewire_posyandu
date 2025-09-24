@@ -21,16 +21,36 @@ class MetaTag
 	public function __construct()
     {
         $this->keywords = collect([
-            "adventure travel packages",
-            "best adventure vacations",
-            "outdoor adventure trips",
-            "extreme adventure tours",
-            "adventure holiday deals",
-            "adrenaline-filled travel",
-            "hiking and trekking tours",
-            "wildlife and nature expeditions",
-            "thrill-seeking travel experiences",
-            "best destinations for adventure travel"
+            "posyandu",
+            "posyandu balita",
+            "posyandu lansia",
+            "posyandu remaja",
+            "jadwal posyandu",
+            "kegiatan posyandu",
+            "fungsi posyandu",
+            "manfaat posyandu",
+            "peran posyandu",
+            "kader posyandu",
+            "data posyandu",
+            "aplikasi posyandu",
+            "laporan posyandu",
+            "sistem informasi posyandu",
+            "pencatatan posyandu",
+            "tugas kader posyandu",
+            "tujuan posyandu",
+            "jenis posyandu",
+            "posyandu online",
+            "posyandu digital",
+            "posyandu ibu hamil",
+            "posyandu bayi",
+            "posyandu anak",
+            "posyandu kesehatan",
+            "materi posyandu",
+            "pembinaan posyandu",
+            "contoh laporan posyandu",
+            "kegiatan posyandu balita",
+            "aplikasi posyandu android",
+            "software posyandu",
         ]);
     }
 
@@ -66,7 +86,7 @@ class MetaTag
 			$this->creator = config('app.webcreator');
 
 		if(empty($this->image))
-			$this->image = asset('cover.jpg');
+			$this->image = asset('logo.png');
 
 		if(empty($this->favIcon))
 			$this->favIcon = asset('favicon.ico');
@@ -87,7 +107,6 @@ class MetaTag
             ->addMeta('author', ['content' => $this->creator])
             ->setKeywords($this->keywords->all())
             ->setFavicon($this->favIcon)
-            ->setCanonical($this->url)
             ->setRobots('nofollow,noindex')
             ->registerPackage($og);
 

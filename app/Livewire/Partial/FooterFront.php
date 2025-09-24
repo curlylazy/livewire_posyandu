@@ -22,13 +22,6 @@ class FooterFront extends Component
 
     }
 
-    #[Computed()]
-    public function dataPackage()
-    {
-        $data = PackageModel::get();
-        return $data;
-    }
-
     public function render()
     {
         return <<<'HTML'
@@ -63,14 +56,6 @@ class FooterFront extends Component
                                     <li><i class="bi bi-chevron-right"></i> <a href="{{ url('galery') }}">Galery</a></li>
                                     <li><i class="bi bi-chevron-right"></i> <a href="{{ url('video') }}">Video</a></li>
                                     <li><i class="bi bi-chevron-right"></i> <a href="{{ url('contact') }}">Contact</a></li>
-                                </ul>
-                            </div>
-                            <div class="col-lg-3 col-md-3 footer-links">
-                                <h4>{{ config('app.webname') }} Package</h4>
-                                <ul>
-                                    @foreach($this->dataPackage as $data)
-                                        <li><i class="bi bi-chevron-right"></i> <a href="{{ url('/packages') }}">{{ $data->namapackage }}</a></li>
-                                    @endforeach
                                 </ul>
                             </div>
                         </div>

@@ -1,114 +1,112 @@
 <div>
-
     <section id="hero" class="hero section dark-background">
-        <img src="{{ asset("static/cover.jpg") }}" alt="{{ config('app.webname') }}" data-aos="fade-in">
-        <div class="container d-flex flex-column align-items-center">
-            <h2 data-aos="fade-up" data-aos-delay="100">{{ config('app.webname') }}</h2>
-            <p data-aos="fade-up" data-aos-delay="200">{{ config('app.tagline') }}</p>
-            <div class="d-flex mt-4" data-aos="fade-up" data-aos-delay="300">
-                <a href="#about" class="btn-get-started">Check Our Package</a>
-                <a href="{{ config('app.youtube') }}" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div>
-        </div>
-    </section>
-
-    <section id="welcome" class="about section">
+        <img src="{{ asset("static/cover3.jpg") }}" alt="{{ config('app.webname') }}" data-aos="fade-in">
         <div class="container">
-            <div class="row gy-4">
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-
-                    <img src="{{ asset('static/image2.jpg') }}" class="img-fluid rounded-4 mb-4" alt="{{ config('app.webname') }}">
-
-                </div>
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
-                    <h3>Welcome To {{ config('app.webname') }}</h3>
-                    <p>Escape the tourist crowds and immerse yourself in the untouched beauty of rural Bali. Our Rural Bali Adventure takes you on a journey through lush rice terraces, traditional villages, and breathtaking landscapes where time slows down, and Balinese culture thrives.</p>
-                    <div class="content">
-                        <p class="fst-italic">
-                            What to Expect :
-                        </p>
-                        <ul>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Scenic Trekking & Cycling – Wander through emerald-green rice fields and cycle along peaceful countryside roads.</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Cultural Experiences – Visit ancient temples, interact with local artisans, and witness time-honored traditions.</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Farm & Village Life – Learn how to plant rice, taste fresh tropical fruits, and enjoy an authentic Balinese meal prepared by locals.</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Hidden Waterfalls & Rivers – Discover secluded waterfalls and take a refreshing dip in natural pools.</span></li>
-                        </ul>
-                        <p>
-                            Whether you’re seeking adventure, cultural immersion, or simply a peaceful retreat, our Rural Bali Adventure promises a unique and unforgettable experience.
-                        </p>
-
-                        {{-- <div class="position-relative mt-4">
-                            <img src="{{ asset('static/image3.jpg') }}" class="img-fluid rounded-4" alt="">
-                            <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox pulsating-play-btn"></a>
-                        </div> --}}
-                    </div>
+            <div class="row">
+                <div class="col-lg-10">
+                    <div><img data-aos="fade-up" data-aos-delay="100" src="{{ asset('logo.png') }}" class="mb-4" style="width: 150px; object-fit: contain; position: relative;" /></div>
+                    <div data-aos="fade-up" data-aos-delay="100" class="h4 text-warning fw-bold">Selamat Datang</div>
+                    <h1 class="display-4" data-aos="fade-up" data-aos-delay="200">Website {{ config('app.webname') }}</h1>
+                    <h2 class="fs-5 fw-normal" data-aos="fade-up" data-aos-delay="300">{{ config('app.tagline2')}}</h2>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="activity" class="services section">
+    <section id="about" class="about section light-background">
+        <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+            <div class="row align-items-xl-center gy-5">
 
-        <div class="container section-title" data-aos="fade-up" wire:ignore.self>
-            <h2>Activities</h2>
-            <p>{{ config('app.webname') }} Activities<br></p>
-        </div>
+                <div class="col-xl-5 content">
+                    <h3>Tentang Kami</h3>
+                    <h2>{{ config('app.webname') }}</h2>
+                    <p>Kami hadir untuk memberikan layanan kesehatan yang lebih dekat dengan masyarakat. Melalui pemantauan rutin, edukasi, dan pendampingan, kami berkomitmen untuk mendukung tumbuh kembang anak serta kesehatan keluarga secara berkesinambungan</p>
+                    <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
+                </div>
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100" wire:ignore.self>
-            <div class="row gy-5">
+                <div class="col-xl-7">
+                    <div class="row gy-5 icon-boxes">
+                        @php
+                            $aos = 200;
+                        @endphp
 
-                @foreach ($dataActivity as $data)
-                    <div class="col-xl-4 col-md-6" data-aos="zoom-in" data-aos-delay="200" wire:ignore.self>
-                        <div class="service-item">
-                            <div class="img">
-                                <img src="{{ ImageUtils::getImageThumb($data->gambaractivity) }}" class="img-fluid" alt="" style="height: 300px; width: 100%; object-fit: cover;">
-                            </div>
-                            <div class="details position-relative">
-                                <div class="icon">
-                                    <img src="{{ asset('logo.png') }}" class="img-fluid" alt="{{ config('app.webname') }}">
+                        @foreach ($dataAbout as $data)
+                            <div class="col-md-6 aos-init aos-animate" data-aos="fade-up" data-aos-delay="{{ $aos }}">
+                                <div class="icon-box">
+                                    <i class="bi {{ $data->icon }}"></i>
+                                    <h3>{{ $data->title }}</h3>
+                                    <p>{{ $data->description }}</p>
                                 </div>
-                                <a href='{{ url("activity/$data->seoactivity") }}' class="stretched-link">
-                                    <h3>{{ $data->namaactivity }}</h3>
-                                </a>
-                                <p class="text-start">{{ Str::limit($data->keterangansingkat, 200) }}</p>
                             </div>
-                        </div>
+
+                            @php
+                                $aos = $aos + 100;
+                            @endphp
+                        @endforeach
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="package" class="services-2 section light-background">
-        <div class="container section-title" data-aos="fade-up">
-            <h2>Packages</h2>
-            <p>{{ config('app.webname') }} Packages<br></p>
-        </div>
+    <section id="stats" class="stats section dark-background">
 
-        <div class="container" data-aos="fade-up" data-aos-delay="100" wire:ignore.self>
-            <div class="row justify-content-md-center">
-                @foreach ($dataPackage as $data)
-                    <div class="col-md-5 text-center">
-                        <div class="border border-success border-2 rounded p-2">
-                            <h3 class="mt-3">{{ $data->namapackage }}</h3>
-                            <p>{{ $data->keterangan }}</p>
-                            <h6>Activities Include</h6>
-                            <ul class="list-group list-group-flush bg-transparent">
-                                @foreach(json_decode($data->activityinclude) as $dataAct)
-                                    <li class="list-group-item bg-transparent">{{ $dataAct }}</li>
-                                @endforeach
-                            </ul>
-                            <hr />
-                            <h2>IDR{{ Number::format($data->harga) }}</h2>
-                        </div>
+        <img src="{{ asset("static/cover5.jpg") }}" alt="" data-aos="fade-in" class="aos-init aos-animate">
+
+        <div class="container position-relative aos-init aos-animate" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4">
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $jmlBalita + $jmlAnakAnak }}" data-purecounter-duration="0" class="purecounter">{{ $jmlBalita + $jmlAnakAnak }}</span>
+                        <p>Balita & Anak</p>
                     </div>
-                @endforeach
-            </div>
-        </div>
+                </div>
 
-        <div class="col-12 text-center mt-5" data-aos="fade-up" data-aos-delay="100" wire:ignore.self>
-            <a class="btn btn-lg btn-success" type="button" href="https://wa.me/{{ config('app.wa') }}"><i class="bi bi-whatsapp"></i> Contact Us</a>
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $jmlRemaja }}" data-purecounter-duration="0" class="purecounter">{{ $jmlRemaja }}</span>
+                        <p>Remaja</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $jmlDewasa }}" data-purecounter-duration="0" class="purecounter">{{ $jmlDewasa }}</span>
+                        <p>Dewasa</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <div class="stats-item text-center w-100 h-100">
+                        <span data-purecounter-start="0" data-purecounter-end="{{ $jmlLansia }}" data-purecounter-duration="0" class="purecounter">{{ $jmlLansia }}</span>
+                        <p>Lansia</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </section>
+
+    <section id="about" class="about section light-background">
+        <div class="container section-title aos-init aos-animate" data-aos="fade-up">
+            <h2>Galeri Kegiatan</h2>
+            <p>Galeri ini menampilkan momen-momen Posyandu yang melayani semua usia, dari bayi hingga lansia, dalam semangat kebersamaan</p>
+        </div>
+
+        <div class="container">
+            <div class="row g-3">
+                @for ($i = 1; $i <= 10; $i++)
+                    <div class="col-12 col-md-3">
+                        <a href="{{ asset("galeri/".$i.".jpg") }}" class="glightbox img-galeri" data-glightbox="title: galeri web;">
+                            <img class="img-thumbnail" src="{{ asset("galeri/".$i.".jpg") }}" style="width: 100%; height: 250px; object-fit: cover;" />
+                        </a>
+                    </div>
+                @endfor
+            </div>
+        </div>
+
+    </section>
+
 </div>
