@@ -8,7 +8,9 @@ use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
 use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
+use App\Models\PosyanduModel;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -34,6 +36,7 @@ class PemeriksaanBayiAE extends Component
 
     public function mount($id = null)
     {
+        $this->form->kodeuser = Auth::guard()->user()->kodeuser;
         $this->setTitle();
         $this->readData($id);
     }

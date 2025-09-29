@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\User;
 
+use App\Models\PosyanduModel;
 use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
@@ -26,10 +27,16 @@ class UserList extends Component
 
     public function readData()
     {
-        $data = UserModel::search($this->katakunci)
+        $data = UserModel::with(['posyandu'])->search($this->katakunci)
                 ->paginate(20);
 
         return $data;
+    }
+
+    public function readDataPosyandu()
+    {
+        $res = PosyanduModel::pluck('namaposyandu', 'kodeposyandu');
+        return $res;
     }
 
     public function hapus($id)
@@ -44,8 +51,9 @@ class UserList extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.list", [
+        return view("livewire.admin.".$this->pageName.".list", [
             "dataRow" => $this->readData(),
+            "dataPosyandu" => $this->readDataPosyandu(),
         ])
         ->layout('components.layouts.admin')
         ->title("$this->pageTitle | ".config('app.webname'));

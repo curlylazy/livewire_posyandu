@@ -39,6 +39,17 @@
             <form wire:submit="save">
 
                 <div class="row g-2">
+                    <div class="col-12 col-md-12">
+                        <div class="form-floating">
+                            <select type="text" class="form-control" id="kodeposyandu" wire:model='form.kodeposyandu'>
+                                <option value="">Pilih Posyandu</option>
+                                @foreach ($dataposyandu as $id => $name)
+                                    <option value="{{ $id }}">{{ $name }}</option>
+                                @endforeach
+                            </select>
+                            <label for="kodeposyandu">Posyandu</label>
+                        </div>
+                    </div>
                     <div class="col-12 col-md-6">
                         <div class="border rounded-3 p-2">
                             <h6 class="fw-normal">Kategori Umur</h6>

@@ -108,26 +108,26 @@
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.periksa_bb" wire:model='form.periksa_bb' placeholder="" x-mask:dynamic="$money($input)">
-                            <label for="form.periksa_bb">Berat Badan</label>
+                            <label for="form.periksa_bb">Berat Badan (Kg)</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.periksa_tinggi_badan" wire:model='form.periksa_tinggi_badan' placeholder="" x-mask:dynamic="$money($input)">
-                            <label for="form.periksa_tinggi_badan">Tinggi Badan</label>
+                            <label for="form.periksa_tinggi_badan">Tinggi Badan (cm)</label>
                         </div>
                     </div>
 
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.periksa_lingkar_kepala" wire:model='form.periksa_lingkar_kepala' placeholder="" x-mask:dynamic="$money($input)">
-                            <label for="form.periksa_lingkar_kepala">Lingkar Kepala</label>
+                            <label for="form.periksa_lingkar_kepala">Lingkar Kepala (cm)</label>
                         </div>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="form-floating">
                             <input type="text" class="form-control" id="form.periksa_lila" wire:model='form.periksa_lila' placeholder="" x-mask:dynamic="$money($input)">
-                            <label for="form.periksa_lila">Lingkar Lengan Atas</label>
+                            <label for="form.periksa_lila">Lingkar Lengan Atas (cm)</label>
                         </div>
                     </div>
 
@@ -196,6 +196,69 @@
                                         <label class="btn" for="is_kontak_pasien_tbc_tidak">Tidak</label>
                                     </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- *** Kesimpulan : --}}
+                    <div class="row mt-1 g-2">
+                        <div class="col-12">
+                            <hr />
+                            <h6>Kesimpulan</h6>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_berat_badan" wire:model='form.kesimpulan_berat_badan'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    @foreach (Option::kesimpulanBeratBadan() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kesimpulan_berat_badan">Kesimpulan Berat Badan</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_tinggi_badan" wire:model='form.kesimpulan_tinggi_badan'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    @foreach (Option::kesimpulanTinggiBadan() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kesimpulan_tinggi_badan">Kesimpulan Tinggi Badan</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_lingkar_kepala" wire:model='form.kesimpulan_lingkar_kepala'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    @foreach (Option::kesimpulanLila() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kesimpulan_lingkar_kepala">Kesimpulan Lingkar Kepala</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_gizi_bb" wire:model='form.kesimpulan_gizi_bb'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    @foreach (Option::kesimpulanGiziBB() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kesimpulan_gizi_bb">Kesimpulan Gizi Berat Badan</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_gizi_lila" wire:model='form.kesimpulan_gizi_lila'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    @foreach (Option::kesimpulanGiziLila() as $data)
+                                        <option value="{{ $data['value'] }}">{{ $data['name'] }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kesimpulan_gizi_lila">Kesimpulan Gizi Lila</label>
                             </div>
                         </div>
                     </div>

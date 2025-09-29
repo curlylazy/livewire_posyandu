@@ -27,7 +27,7 @@ class Pemeriksaan
         return $res;
 	}
 
-    public static function kesimpulanBeratBadan($umur, $bb)
+    public static function kesimpulanBeratBadan($umur, $bb, $kategori_umur = "Bayi")
 	{
         $res = "";
         $bbIdeal = ($umur * 2) + 8;

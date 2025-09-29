@@ -11,6 +11,7 @@ use Livewire\Form;
 class UserForm extends Form
 {
     public $kodeuser = '';
+    public $kodeposyandu = '';
     public $username = '';
     public $namauser = '';
     public $password = '';
@@ -33,6 +34,7 @@ class UserForm extends Form
 
         $data = UserModel::find($id);
         $this->kodeuser = $data->kodeuser;
+        $this->kodeposyandu = $data->kodeposyandu;
         $this->username = $data->username;
         $this->namauser = $data->namauser;
         $this->password_old = $data->password;
@@ -77,6 +79,8 @@ class UserForm extends Form
         $user = UserModel::find($this->kodeuser)->update($this->except($this->exceptData()));
 
         // *** set role
+        // $user->assignRole($this->akses);
+
         // $user = UserModel::find($this->kodeuser);
         // $user->assignRole($this->akses);
     }

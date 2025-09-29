@@ -16,6 +16,7 @@ class PemeriksaanForm extends Form
 
     public $kodepemeriksaan = '';
     public $kodepasien = '';
+    public $kodeuser = '';
     public $kodebayi = '';
     public $kategori_periksa = '';
     public $tgl_periksa = '';
@@ -69,6 +70,11 @@ class PemeriksaanForm extends Form
     public $is_gejala_sakit = false;
     public $gejala_sakit_keterangan = "";
     public $mt_pangan_lokal_porsi = "";
+    public $kesimpulan_berat_badan = 0;
+    public $kesimpulan_tinggi_badan = 0;
+    public $kesimpulan_lingkar_kepala = 0;
+    public $kesimpulan_gizi_bb = 0;
+    public $kesimpulan_gizi_lila = 0;
 
     // *** extra
     public $kodeibu;
@@ -81,6 +87,7 @@ class PemeriksaanForm extends Form
     {
         return [
             'kodepasien' => 'required',
+            'kodeuser' => 'required',
             'kodebayi' => 'nullable',
             'kategori_periksa' => 'required',
             'tgl_periksa' => 'required',
@@ -95,6 +102,7 @@ class PemeriksaanForm extends Form
 
         $data = PemeriksaanModel::joinTable()->find($id);
         $this->kodepemeriksaan = $data->kodepemeriksaan;
+        $this->kodeuser = $data->kodeuser;
         $this->kodepasien = $data->kodepasien;
         $this->kodebayi = $data->kodebayi;
         $this->kategori_periksa = $data->kategori_periksa;
@@ -150,6 +158,11 @@ class PemeriksaanForm extends Form
         $this->mt_pangan_lokal_porsi = $data->mt_pangan_lokal_porsi;
         $this->is_gejala_sakit = $data->is_gejala_sakit;
         $this->gejala_sakit_keterangan = $data->gejala_sakit_keterangan;
+        $this->kesimpulan_berat_badan = 0;
+        $this->kesimpulan_tinggi_badan = 0;
+        $this->kesimpulan_lingkar_kepala = 0;
+        $this->kesimpulan_gizi_bb = 0;
+        $this->kesimpulan_gizi_lila = 0;
 
         // ** field pembantu
         $this->kodeibu = $data->kodeibu;

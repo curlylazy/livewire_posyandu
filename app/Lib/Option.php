@@ -118,6 +118,55 @@ class Option
 		return $res;
 	}
 
+	public static function kesimpulanBeratBadan()
+	{
+		$res = collect();
+        $res->push(['value' => 0, 'name' => 'Berat Badan Sangat Kurang']);
+        $res->push(['value' => 1, 'name' => 'Berat Badan Kurang']);
+        $res->push(['value' => 2, 'name' => 'Berat Badan Normal']);
+        $res->push(['value' => 3, 'name' => 'Berat Badan Berlebih']);
+		return $res;
+	}
+
+	public static function kesimpulanTinggiBadan()
+	{
+		$res = collect();
+        $res->push(['value' => 0, 'name' => 'Sangat Pendek']);
+        $res->push(['value' => 1, 'name' => 'Normal']);
+        $res->push(['value' => 2, 'name' => 'Tinggi Melebihi Normal']);
+		return $res;
+	}
+
+    public static function kesimpulanLila()
+	{
+		$res = collect();
+        $res->push(['value' => 0, 'name' => 'Melebihi Normal']);
+        $res->push(['value' => 1, 'name' => 'Normal']);
+        $res->push(['value' => 2, 'name' => 'Kurang Normal']);
+		return $res;
+	}
+
+	public static function kesimpulanGiziBB()
+	{
+		$res = collect();
+        $res->push(['value' => 0, 'name' => 'Gizi Buruk']);
+        $res->push(['value' => 1, 'name' => 'Gizi Kurang']);
+        $res->push(['value' => 2, 'name' => 'Gizi Baik']);
+        $res->push(['value' => 3, 'name' => 'Berisiko Gizi Lebih']);
+        $res->push(['value' => 4, 'name' => 'Gizi Lebih']);
+        $res->push(['value' => 5, 'name' => 'Obesitas']);
+		return $res;
+	}
+
+	public static function kesimpulanGiziLila()
+	{
+		$res = collect();
+        $res->push(['value' => 0, 'name' => 'Gizi Kurang']);
+        $res->push(['value' => 1, 'name' => 'Normal']);
+        $res->push(['value' => 2, 'name' => 'Gizi Buruk']);
+		return $res;
+	}
+
     public static function bulan()
     {
         $res = collect();

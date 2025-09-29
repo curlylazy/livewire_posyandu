@@ -25,6 +25,7 @@ class PasienModel extends Model
     {
         $dateNow = Carbon::today()->toDateString();
         $query
+            ->join('tbl_posyandu', 'tbl_posyandu.kodeposyandu', '=', 'tbl_pasien.kodeposyandu')
             ->leftJoin('tbl_pasien as pasien_ayah', 'pasien_ayah.kodepasien', '=', 'tbl_pasien.kodeayah')
             ->leftJoin('tbl_pasien as pasien_ibu', 'pasien_ibu.kodepasien', '=', 'tbl_pasien.kodeibu')
             ->leftJoin('tbl_pasien as pasien_suami', 'pasien_suami.kodepasien', '=', 'tbl_pasien.kodesuami')
@@ -73,6 +74,13 @@ class PasienModel extends Model
     {
         if(!empty($kategoripasien)) {
             $query->where('tbl_pasien.kategoripasien', '=', $kategoripasien);
+        }
+    }
+
+    public function scopeSearchByPosyandu(Builder $query, $kodeposyandu): void
+    {
+        if(!empty($kodeposyandu)) {
+            $query->where('tbl_pasien.kodeposyandu', '=', $kodeposyandu);
         }
     }
 

@@ -3,6 +3,7 @@
 namespace App\Livewire\Admin\User;
 
 use App\Livewire\Forms\UserForm;
+use App\Models\PosyanduModel;
 use App\Models\UserModel;
 use Livewire\Component;
 
@@ -31,7 +32,12 @@ class UserAE extends Component
         $this->nama = $this->form->namauser;
         $this->isEdit = (empty($id)) ? false : true;
         $this->pageTitle = (empty($id)) ? "Tambah User" : "Edit User";
+    }
 
+    public function readDataPosyandu()
+    {
+        $res = PosyanduModel::pluck('namaposyandu', 'kodeposyandu');
+        return $res;
     }
 
     public function save()
@@ -67,7 +73,10 @@ class UserAE extends Component
 
     public function render()
     {
-        return view("livewire.admin.$this->pageName.ae")
+        return view("livewire.admin.".$this->pageName.".ae")
+            ->with([
+                'dataPosyandu' => $this->readDataPosyandu(),
+            ])
             ->layout('components.layouts.admin')
             ->title("$this->pageTitle | ".config('app.webname'));
     }

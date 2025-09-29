@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('tbl_user', function (Blueprint $table) {
             $table->uuid('kodeuser')->primary();
+            $table->uuid('kodeposyandu')->nullable();
             $table->string('username', 25);
             $table->string('password', 255);
             $table->string('namauser', 50);
@@ -23,8 +24,18 @@ return new class extends Migration
             $table->softDeletes();
         });
 
+        Schema::create('tbl_posyandu', function (Blueprint $table) {
+            $table->uuid('kodeposyandu')->primary();
+            $table->string('namaposyandu', 225);
+            $table->string('seoposyandu', 225);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('tbl_pasien', function (Blueprint $table) {
             $table->uuid('kodepasien')->primary();
+            $table->uuid('kodeuser');
+            $table->uuid('kodeposyandu');
             $table->string('kategoripasien', 25)->comment('nifas/hamil')->nullable();
             $table->string('nik', 225)->unique()->nullable();
             $table->string('namapasien', 225);
@@ -63,6 +74,7 @@ return new class extends Migration
         Schema::create('tbl_pemeriksaan', function (Blueprint $table) {
             $table->uuid('kodepemeriksaan')->primary();
             $table->uuid('kodepasien');
+            $table->uuid('kodeuser');
             $table->uuid('kodebayi')->nullable();
             $table->string('kategori_periksa', 25)->comment('nifas, hamil, lansia, bayibalita');
             $table->date('tgl_periksa');
@@ -124,6 +136,11 @@ return new class extends Migration
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
             $table->text('mt_pangan_lokal_porsi')->nullable()->comment('0 = tidak, 1 = ya');
             $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('kesimpulan_berat_badan')->default(1)->comment('0 = Berat Badan Sangat Kurang, 1 = Berat Badan Kurang, 2 = Berat Badan Normal, 3 = Berat Badan Berlebih');
+            $table->integer('kesimpulan_tinggi_badan')->default(1)->comment('0 = Sangat Pendek, 1 = Normal, 2 = Melebihi Normal');
+            $table->integer('kesimpulan_lingkar_kepala')->default(1)->comment('0 = Kurang dari Normal, 1 = Normal, 2 = Melebihi Normal');
+            $table->integer('kesimpulan_gizi_bb')->default(1)->comment('0 = Gizi Buruk, 1 = Gizi Kurang, 2 = Gizi Baik, 3 =  Berisiko Gizi Lebih, 4 = Gizi Lebih, 5 = Obesitas');
+            $table->integer('kesimpulan_gizi_lila')->default(1)->comment('0 = Gizi Kurang, 1 = Normal, 2 = Gizi Buruk');
             $table->text('gejala_sakit_keterangan')->nullable()->comment('jika ada gejala sakit, sebutkan alasannya');
             // $table->text('edukasi')->nullable()->comment('Edukasi yang Diberikan');
             // $table->integer('is_rujuk')->nullable()->default(0)->comment('Rujuk Pustu/Puskesmas/Rumah Sakit');

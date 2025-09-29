@@ -6,6 +6,8 @@ use App\Lib\GetString;
 use App\Lib\IDateTime;
 use App\Livewire\Forms\PasienForm;
 use App\Models\PasienModel;
+use App\Models\PosyanduModel;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
 
@@ -23,6 +25,8 @@ class PasienAE extends Component
 
     public function mount($id = null)
     {
+        $this->form->kodeuser = Auth::guard('admin')->user()->kodeuser;
+        $this->form->kodeposyandu = PosyanduModel::searchBySeo('kebonkuri-lukluk')->first()->kodeposyandu;
         $this->readData($id);
     }
 
@@ -35,6 +39,12 @@ class PasienAE extends Component
         $this->id = $id;
         $this->isEdit = true;
         $this->pageTitle = "Edit ".Str::title($this->pageName);
+    }
+
+    public function readDataPosyandu()
+    {
+        $res = PosyanduModel::pluck('namaposyandu', 'kodeposyandu');
+        return $res;
     }
 
     public function save()
@@ -110,6 +120,9 @@ class PasienAE extends Component
     public function render()
     {
         return view('livewire.admin.' . $this->pageName . '.ae')
+            ->with([
+                'dataPosyandu' => $this->readDataPosyandu(),
+            ])
             ->layout('components.layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }

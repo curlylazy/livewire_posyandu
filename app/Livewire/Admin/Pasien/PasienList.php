@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use App\Models\PasienModel;
+use App\Models\PosyanduModel;
 
 class PasienList extends Component
 {
@@ -17,7 +18,7 @@ class PasienList extends Component
     public $selectedNama = "";
 
     #[Url]
-    public $katakunci = "", $kategoriumur = "", $status = 1, $kategoripasien = "", $kodeibu = "";
+    public $katakunci = "", $kategoriumur = "", $status = 1, $kategoripasien = "", $kodeibu = "", $kodeposyandu = "";
     public $namaibu = "";
 
     public function mount()
@@ -30,6 +31,7 @@ class PasienList extends Component
         $data = PasienModel::selectCustom()
                 ->search($this->katakunci)
                 ->searchByKategoriUmur($this->kategoriumur)
+                ->searchByPosyandu($this->kodeposyandu)
                 ->searchByKategoriPasien($this->kategoripasien)
                 ->searchByIbu($this->kodeibu)
                 ->latest('tbl_pasien.created_at')
@@ -37,6 +39,12 @@ class PasienList extends Component
                 ->paginate(20);
 
         return $data;
+    }
+
+    public function readDataPosyandu()
+    {
+        $res = PosyanduModel::pluck('namaposyandu', 'kodeposyandu');
+        return $res;
     }
 
     public function selectData($data)
@@ -74,6 +82,7 @@ class PasienList extends Component
     {
         return view('livewire.admin.' . $this->pageName . '.list', [
             "dataRow" => $this->readData(),
+            "dataPosyandu" => $this->readDataPosyandu(),
         ])
         ->layout('components.layouts.admin')
         ->title($this->pageTitle." - ".config('app.webname'));

@@ -6,6 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\PasienModel;
+use App\Models\PosyanduModel;
 use App\Models\UserModel;
 use Carbon\Carbon;
 
@@ -19,11 +20,15 @@ class PasienSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create('id_ID');
+        $kodeuser = UserModel::where('username', 'admin')->first()->kodeuser;
+        $kodeposyandu = PosyanduModel::searchBySeo('kebonkuri-lukluk')->first()->kodeposyandu;
 
         // *** pria dewasa
         for($i=1;$i<=15;$i++)
         {
             PasienModel::create([
+                'kodeposyandu' => $kodeposyandu,
+                'kodeuser' => $kodeuser,
                 'nik' => $faker->nik(),
                 'namapasien' => $faker->name(gender: 'male'),
                 'tgl_lahir' => $faker->dateTimeBetween('-40 years', '-30 years'),
@@ -38,6 +43,8 @@ class PasienSeeder extends Seeder
         for($i=1;$i<=10;$i++)
         {
             PasienModel::create([
+                'kodeposyandu' => $kodeposyandu,
+                'kodeuser' => $kodeuser,
                 'kategoripasien' => 'bumil',
                 'nik' => $faker->nik(),
                 'namapasien' => $faker->name(gender: 'female'),
@@ -58,6 +65,8 @@ class PasienSeeder extends Seeder
         for($i=1;$i<=10;$i++)
         {
             PasienModel::create([
+                'kodeposyandu' => $kodeposyandu,
+                'kodeuser' => $kodeuser,
                 'kategoripasien' => 'nifas',
                 'nik' => $faker->nik(),
                 'namapasien' => $faker->name(gender: 'female'),
@@ -85,6 +94,8 @@ class PasienSeeder extends Seeder
             $tgl_lahir = $faker->dateTimeBetween('-4 years', '-1 years');
 
             PasienModel::create([
+                'kodeposyandu' => $kodeposyandu,
+                'kodeuser' => $kodeuser,
                 'kodeibu' => $dataIbu->kodepasien,
                 'kodeayah' => $dataAyah->kodepasien,
                 'namapasien' => $faker->name(),

@@ -88,6 +88,18 @@
                         </div>
 
                         <div class="col-12 col-lg-3 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kodeposyandu" wire:model='kodeposyandu' wire:change='commitPage'>
+                                    <option value="">Pilih Posyandu</option>
+                                    @foreach ($dataPosyandu as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kodeposyandu">Posyandu</label>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-lg-3 col-md-4">
                             <div class="input-group">
                                 <div class="form-floating pe-none">
                                     <input type="text" class="form-control" id="namaibu" wire:model='namaibu' placeholder="">

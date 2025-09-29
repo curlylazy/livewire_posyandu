@@ -2,6 +2,13 @@
 
     @script
         <script>
+
+            $wire.on('selected-data', (e) => {
+                $wire.selectedNama = e.data.namauser;
+                $wire.selectedKode = e.data.kodeuser;
+                $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
+            });
+
             $wire.on('confirm-delete', (e) => {
                 Swal.fire({
                     title: 'Hapus Data',
@@ -28,10 +35,30 @@
     <div class="card">
         <div class="card-body">
             <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
-            <div class="mb-3">
-                <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
-                <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
-                <input type="text" class="form-control mt-2" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
+            <div class="d-flex flex-column gap-2 mb-3">
+                <div class="d-flex gap-1">
+                    <a class="btn btn-outline-secondary" type="button" href="{{ url("admin/") }}"><i class="fas fa-arrow-left"></i></a>
+                    <a class="btn btn-outline-primary" role="button" href="{{ url("admin/$pageName/add") }}" wire:navigate><i class="fas fa-plus"></i> Tambah</a>
+                </div>
+                <div class="row g-2">
+                    <div class="col-12 col-lg-3 col-md-4">
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="katakunci" placeholder="masukkan kata kunci pencarian..." wire:model='katakunci' wire:keydown.enter='$commit'>
+                            <label for="katakunci">Katakunci</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-3 col-md-4">
+                            <div class="form-floating">
+                                <select type="text" class="form-control" id="kodeposyandu" wire:model='kodeposyandu' wire:change='commitPage'>
+                                    <option value="">Pilih Posyandu</option>
+                                    @foreach ($dataPosyandu as $id => $name)
+                                        <option value="{{ $id }}">{{ $name }}</option>
+                                    @endforeach
+                                </select>
+                                <label for="kodeposyandu">Posyandu</label>
+                            </div>
+                        </div>
+                </div>
             </div>
 
             {{-- *** Large Device --}}
@@ -42,14 +69,16 @@
                             <tr>
                                 <th scope="col">Username</th>
                                 <th scope="col">Nama</th>
+                                <th scope="col">Posyandu</th>
                                 <th scope="col">Akses</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($dataRow as $row)
-                                <tr role="button" wire:click='selectData({{ $row }})'>
+                                <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                     <td>{{ $row->username }}</td>
                                     <td>{{ $row->namauser }}</td>
+                                    <td>{{ $row->posyandu->namaposyandu ?? "(Belum Ditentukan)" }}</td>
                                     <td>{{ $row->akses }}</td>
                                 </tr>
                             @endforeach
@@ -67,6 +96,7 @@
                                 <div class="card-body px-2 py-2">
                                     <div class="h5 mb-1">{{ $row->username }}</div>
                                     <div>{{ $row->namauser }}</div>
+                                    <div>{{ $row->posyandu->namaposyandu ?? "(Belum Ditentukan)" }}</div>
                                     <div>{{ $row->akses }}</div>
                                 </div>
                             </div>
@@ -77,11 +107,11 @@
 
             {{-- *** Modal Selected --}}
             <x-partials.modalselected>
-                <x-slot:pageTitle>{{ $pageTitle }}</x-slot>
-                <x-slot:selectedNama>{{ $selectedNama }}</x-slot>
-                <div class="d-grid gap-2">
-                    <a class="btn btn-lg btn-outline-primary" href="{{ url("admin/$pageName/edit/$selectedKode") }}" role="button"><i class="fas fa-edit"></i> Edit</a>
-                    <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete", { kode: "{{ $selectedKode }}", nama: "{{ $selectedNama }}" })'><i class="fas fa-trash"></i> Hapus</button>
+                <x-slot:pageTitle><span wire:text="pageTitle"></span></x-slot>
+                <x-slot:selectedNama><span wire:text="selectedNama"></span></x-slot>
+                <div class="d-grid gap-2" x-data="{ selectedKode: $wire.entangle('selectedKode'), pageName: $wire.entangle('pageName')}">
+                    <a class="btn btn-lg btn-outline-primary" id="edit" role="button" :href="`/admin/${pageName}/edit/${selectedKode}`" wire:navigate><i class="fas fa-edit"></i> Edit</a>
+                    <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete")'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>
             </x-partials.modalselected>

@@ -57,7 +57,7 @@
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
 
             <li class="nav-title">Master Data</li>
-            <x-partials.sidelink href="admin/" icon="home" title="User" />
+            <x-partials.sidelink href="admin/" icon="home" title="Beranda" />
             <x-partials.sidelink href="admin/user" icon="person" title="User" />
             <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
 

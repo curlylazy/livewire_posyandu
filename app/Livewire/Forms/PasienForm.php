@@ -17,6 +17,8 @@ class PasienForm extends Form
     use WithFileUploads;
 
     public $kodepasien = '';
+    public $kodeposyandu = '';
+    public $kodeuser = '';
     public $kategoripasien = '';
     public $nik = '';
     public $namapasien = '';
@@ -50,6 +52,7 @@ class PasienForm extends Form
 
     // *** extra
     public $umur = 0;
+    public $namaposyandu = "";
     public $kategoriumur = "";
     public $namaayah = "";
     public $namaibu = "";
@@ -59,6 +62,8 @@ class PasienForm extends Form
     {
         return [
             'nik' => 'nullable|size:16',
+            'kodeuser' => 'required',
+            'kodeposyandu' => 'required',
             'namapasien' => 'required',
             'tgl_lahir' => 'nullable',
             'alamat' => 'nullable',
@@ -77,6 +82,7 @@ class PasienForm extends Form
             return;
 
         $data = PasienModel::selectCustom()->find($id);
+        $this->kodeposyandu = $data->kodeposyandu;
         $this->kodepasien = $data->kodepasien;
         $this->kategoripasien = $data->kategoripasien;
         $this->nik = $data->nik;
@@ -111,6 +117,7 @@ class PasienForm extends Form
         // *** extra
         $this->umur = IDateTime::dateDiff($this->tgl_lahir);
         $this->kategoriumur = GetString::getKategoriUmur($this->umur);
+        $this->namaposyandu = $data->namaposyandu;
         $this->namaayah = $data->namaayah;
         $this->namaibu = $data->namaibu;
         $this->namasuami = $data->namasuami;
@@ -126,7 +133,7 @@ class PasienForm extends Form
 
     private function exceptData()
     {
-        $arr = ['kategoriumur', 'namaayah', 'namaibu', 'umur', 'namasuami'];
+        $arr = ['kategoriumur', 'namaayah', 'namaibu', 'umur', 'namasuami', 'namaposyandu'];
         return $arr;
     }
 
