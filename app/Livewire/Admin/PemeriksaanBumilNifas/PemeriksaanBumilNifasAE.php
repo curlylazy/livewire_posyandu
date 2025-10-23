@@ -7,6 +7,7 @@ use App\Livewire\Forms\PasienForm;
 use App\Livewire\Forms\PemeriksaanForm;
 use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
 use Livewire\Attributes\On;
@@ -34,6 +35,7 @@ class PemeriksaanBumilNifasAE extends Component
 
     public function mount($id = null)
     {
+        $this->form->kodeuser = Auth::user()->kodeuser;
         $this->readData($id);
         $this->setTitle();
     }

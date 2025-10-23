@@ -136,6 +136,7 @@ return new class extends Migration
             $table->integer('is_mt_pangan_lokal_pemulihan')->default(1)->comment('0 = tidak, 1 = ya');
             $table->text('mt_pangan_lokal_porsi')->nullable()->comment('0 = tidak, 1 = ya');
             $table->integer('is_gejala_sakit')->default(1)->comment('0 = tidak, 1 = ya');
+            $table->integer('kesimpulan_berat_badan_naik')->default(1)->comment('0 = Tidak, 1 = Ya');
             $table->integer('kesimpulan_berat_badan')->default(1)->comment('0 = Berat Badan Sangat Kurang, 1 = Berat Badan Kurang, 2 = Berat Badan Normal, 3 = Berat Badan Berlebih');
             $table->integer('kesimpulan_tinggi_badan')->default(1)->comment('0 = Sangat Pendek, 1 = Normal, 2 = Melebihi Normal');
             $table->integer('kesimpulan_lingkar_kepala')->default(1)->comment('0 = Kurang dari Normal, 1 = Normal, 2 = Melebihi Normal');

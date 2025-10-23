@@ -144,15 +144,15 @@
 
                 {{-- *** Hasil Penimbangan --}}
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_bb }} Kg</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->isBBNaik) }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanBB }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->kesimpulan_berat_badan_naik) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getOptionName(Option::$optNameKesimpulanBB, $row->kesimpulan_berat_badan) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_tinggi_badan }} Cm</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanTB }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanGizi }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getOptionName(Option::$optNameKesimpulanTinggiBadan, $row->kesimpulan_tinggi_badan) }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getOptionName(Option::$optNameKesimpulanGiziBB, $row->kesimpulan_gizi_bb) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lingkar_kepala }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanLK }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getOptionName(Option::$optNameKesimpulanLila, $row->kesimpulan_lingkar_kepala) }}</td>
                 <td style="{!! CssExcel::$textCenter !!}">{{ $row->periksa_lila }}</td>
-                <td style="{!! CssExcel::$textCenter !!}">{{ $row->kesimpulanLila }}</td>
+                <td style="{!! CssExcel::$textCenter !!}">{{ Option::getOptionName(Option::$optNameKesimpulanGiziLila, $row->kesimpulan_gizi_lila) }}</td>
 
                 {{-- *** Skrining TBC --}}
                 <td style="{!! CssExcel::$textCenter !!}">{{ Option::getYaAtauTidak($row->is_batuk) }}</td>

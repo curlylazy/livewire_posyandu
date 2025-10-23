@@ -9,6 +9,11 @@ class Option
 {
     public static $optNameKategori = "kategori";
     public static $optNameCaraBersalin = "carabersalin";
+    public static $optNameKesimpulanBB = "kesimpulan_bb";
+    public static $optNameKesimpulanTinggiBadan = "kesimpulan_tinggi_badan";
+    public static $optNameKesimpulanLila = "kesimpulan_lila";
+    public static $optNameKesimpulanGiziBB = "kesimpulan_gizi_bb";
+    public static $optNameKesimpulanGiziLila = "kesimpulan_gizi_lila";
 
 	public static function statusPesan()
 	{
@@ -195,6 +200,26 @@ class Option
         elseif($name == self::$optNameCaraBersalin)
         {
             $res = self::caraBersalin()->firstWhere('value', $value)['name'];
+        }
+        elseif($name == self::$optNameKesimpulanBB)
+        {
+            $res = self::kesimpulanBeratBadan()->firstWhere('value', $value)['name'];
+        }
+        elseif($name == self::$optNameKesimpulanTinggiBadan)
+        {
+            $res = self::kesimpulanTinggiBadan()->firstWhere('value', $value)['name'];
+        }
+        elseif($name == self::$optNameKesimpulanLila)
+        {
+            $res = self::kesimpulanLila()->firstWhere('value', $value)['name'];
+        }
+        elseif($name == self::$optNameKesimpulanGiziBB)
+        {
+            $res = self::kesimpulanGiziBB()->firstWhere('value', $value)['name'];
+        }
+        elseif($name == self::$optNameKesimpulanGiziLila)
+        {
+            $res = self::kesimpulanGiziLila()->firstWhere('value', $value)['name'];
         }
 
 		return $res;

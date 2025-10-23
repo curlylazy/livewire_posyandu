@@ -70,6 +70,7 @@ class PemeriksaanForm extends Form
     public $is_gejala_sakit = false;
     public $gejala_sakit_keterangan = "";
     public $mt_pangan_lokal_porsi = "";
+    public $kesimpulan_berat_badan_naik = 0;
     public $kesimpulan_berat_badan = 0;
     public $kesimpulan_tinggi_badan = 0;
     public $kesimpulan_lingkar_kepala = 0;
@@ -158,6 +159,7 @@ class PemeriksaanForm extends Form
         $this->mt_pangan_lokal_porsi = $data->mt_pangan_lokal_porsi;
         $this->is_gejala_sakit = $data->is_gejala_sakit;
         $this->gejala_sakit_keterangan = $data->gejala_sakit_keterangan;
+        $this->kesimpulan_berat_badan_naik = 0;
         $this->kesimpulan_berat_badan = 0;
         $this->kesimpulan_tinggi_badan = 0;
         $this->kesimpulan_lingkar_kepala = 0;

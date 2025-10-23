@@ -208,6 +208,16 @@
                         </div>
                         <div class="col-12 col-md-4">
                             <div class="form-floating">
+                                <select type="text" class="form-control" id="kesimpulan_berat_badan_naik" wire:model='form.kesimpulan_berat_badan_naik'>
+                                    <option value="">Pilih Kesimpulan</option>
+                                    <option value="0">Tidak</option>
+                                    <option value="1">Ya</option>
+                                </select>
+                                <label for="kesimpulan_berat_badan_naik">Berat Badan Naik ?</label>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-4">
+                            <div class="form-floating">
                                 <select type="text" class="form-control" id="kesimpulan_berat_badan" wire:model='form.kesimpulan_berat_badan'>
                                     <option value="">Pilih Kesimpulan</option>
                                     @foreach (Option::kesimpulanBeratBadan() as $data)

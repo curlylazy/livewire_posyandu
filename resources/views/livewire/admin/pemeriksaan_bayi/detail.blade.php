@@ -175,7 +175,7 @@
                     </ul>
                 </div>
 
-                 <div class="col-12">
+                <div class="col-12">
                     <h5 class="mt-4">Lainnya : </h5>
                     <ul class="list-group">
                         <li class="list-group-item flex-column">
@@ -194,7 +194,37 @@
                             </li>
                         @endif
                     </ul>
-                 </div>
+                </div>
+
+                <div class="col-12">
+                    <h5 class="mt-4">Kesimpulan : </h5>
+                    <ul class="list-group">
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Berat Badan Naik ? :</div>
+                            <div class="fw-bold">{{ Option::getYaAtauTidak($dataRow->kesimpulan_berat_badan_naik) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Berat Badan :</div>
+                            <div class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanBB, $dataRow->kesimpulan_berat_badan) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Tinggi Badan :</div>
+                            <div class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanTinggiBadan, $dataRow->kesimpulan_tinggi_badan) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Lingkar Kepala :</div>
+                            <div class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanLila, $dataRow->kesimpulan_lingkar_kepala) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Gizi BB :</div>
+                            <div class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanGiziBB, $dataRow->kesimpulan_gizi_bb) }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">Kesimpulan Gizi Lila :</div>
+                            <div class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanGiziLila, $dataRow->kesimpulan_gizi_lila) }}</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="d-flex mt-3 gap-2">
