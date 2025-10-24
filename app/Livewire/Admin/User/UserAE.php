@@ -45,11 +45,7 @@ class UserAE extends Component
         try {
             $this->validate();
 
-            if($this->isEdit) {
-                $this->saveEdit();
-            } else {
-                $this->saveAdd();
-            }
+            ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
 
             $this->redirect("/admin/$this->pageName", navigate: true);
 

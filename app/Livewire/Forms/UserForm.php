@@ -79,7 +79,7 @@ class UserForm extends Form
         $user = UserModel::find($this->kodeuser)->update($this->except($this->exceptData()));
 
         // *** set role
-        // $user->assignRole($this->akses);
+        $user->assignRole($this->akses);
 
         // $user = UserModel::find($this->kodeuser);
         // $user->assignRole($this->akses);

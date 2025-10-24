@@ -25,8 +25,8 @@ class PasienAE extends Component
 
     public function mount($id = null)
     {
-        $this->form->kodeuser = Auth::guard('admin')->user()->kodeuser;
-        $this->form->kodeposyandu = PosyanduModel::searchBySeo('kebonkuri-lukluk')->first()->kodeposyandu;
+        $this->form->kodeuser = Auth::user()->kodeuser;
+        // $this->form->kodeposyandu = PosyanduModel::searchBySeo('kebonkuri-lukluk')->first()->kodeposyandu;
         $this->readData($id);
     }
 

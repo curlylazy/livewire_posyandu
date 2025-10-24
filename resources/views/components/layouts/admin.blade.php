@@ -56,12 +56,17 @@
         </div>
         <ul class="sidebar-nav" data-coreui="navigation" data-simplebar="">
 
-            <li class="nav-title">Master Data</li>
-            <x-partials.sidelink href="admin/" icon="home" title="Beranda" />
-            <x-partials.sidelink href="admin/user" icon="person" title="User" />
-            <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
+            @role('admin')
+                <li class="nav-title">Master Data</li>
+                <x-partials.sidelink href="admin/" icon="home" title="Beranda" />
+                <x-partials.sidelink href="admin/user" icon="person" title="User" />
+                <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
+            @endrole
 
             <li class="nav-title">Pemeriksaan</li>
+            @role('staff')
+                <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
+            @endrole
             <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=bumil" icon="stethoscope" title="Periksa Ibu Hamil" />
             <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=nifas" icon="stethoscope" title="Periksa Nifas" />
             <x-partials.sidelink href="admin/pemeriksaan/bayi" icon="stethoscope" title="Periksa Bayi" />
