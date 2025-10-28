@@ -29,7 +29,7 @@ class PasienModel extends Model
             ->leftJoin('tbl_pasien as pasien_ayah', 'pasien_ayah.kodepasien', '=', 'tbl_pasien.kodeayah')
             ->leftJoin('tbl_pasien as pasien_ibu', 'pasien_ibu.kodepasien', '=', 'tbl_pasien.kodeibu')
             ->leftJoin('tbl_pasien as pasien_suami', 'pasien_suami.kodepasien', '=', 'tbl_pasien.kodesuami')
-            ->select('tbl_pasien.*', 'pasien_ayah.namapasien as namaayah', 'pasien_ibu.namapasien as namaibu', 'pasien_suami.namapasien as namasuami',
+            ->select('tbl_pasien.*', 'pasien_ayah.namapasien as namaayah', 'pasien_ibu.namapasien as namaibu', 'pasien_suami.namapasien as namasuami', 'tbl_posyandu.namaposyandu',
                 DB::raw("CONCAT(TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow'), ' tahun ', TIMESTAMPDIFF(MONTH, tbl_pasien.tgl_lahir, '$dateNow') % 12, ' bulan ') as umur_tahun_bulan"),
                 DB::raw("TIMESTAMPDIFF(YEAR, tbl_pasien.tgl_lahir, '$dateNow') as umur"),
                 DB::raw("

@@ -82,10 +82,10 @@
                         </div>
                     </div>
 
-                    <div class="col-md-12" x-show="$wire.form.umur >= 17" x-cloak>
+                    <div class="col-md-12">
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="nik" wire:model='form.nik'>
-                            <label for="nik">NIK</label>
+                            <input type="text" class="form-control" id="nik" wire:model='form.nik' maxlength="16">
+                            <label for="nik">NIK <span x-text="$wire.form.nik ? `(${$wire.form.nik.length}/16)` : `(0/16)`"></span></label>
                         </div>
                     </div>
 
@@ -182,7 +182,7 @@
                 </div>
 
                 {{-- jika sudah remaja / dewasa dan perempuan bisa tentukan siapa suaminya --}}
-                <div class="row g-2 mt-0" x-show="$wire.form.kategoriumur == 'Dewasa' || $wire.form.kategoriumur == 'Remaja' || $wire.form.kategoriumur == 'Lansia'" x-cloak>
+                <div class="row g-2 mt-0" x-show="($wire.form.kategoriumur == 'Dewasa' || $wire.form.kategoriumur == 'Remaja' || $wire.form.kategoriumur == 'Lansia') && $wire.form.jk == 'P'" x-cloak>
                     <div class="col-md-12">
                         <div class="input-group">
                             <div class="form-floating pe-none">
@@ -217,19 +217,19 @@
 
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="anakke" wire:model='form.anakke' x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="anakke" wire:model='form.anakke' x-mask:dynamic="$money($input)">
                             <label for="anakke">Anakke</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="tinggibadan_lahir" wire:model='form.tinggibadan_lahir' x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="tinggibadan_lahir" wire:model='form.tinggibadan_lahir' x-mask:dynamic="$money($input)">
                             <label for="tinggibadan_lahir">Tinggi Badan Lahir</label>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-floating">
-                            <input type="number" class="form-control" id="beratbadan_lahir" wire:model='form.beratbadan_lahir' x-mask:dynamic="$money($input)">
+                            <input type="text" class="form-control" id="beratbadan_lahir" wire:model='form.beratbadan_lahir' x-mask:dynamic="$money($input)">
                             <label for="beratbadan_lahir">Berat Badan Lahir</label>
                         </div>
                     </div>

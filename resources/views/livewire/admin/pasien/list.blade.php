@@ -87,17 +87,19 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-lg-3 col-md-4">
-                            <div class="form-floating">
-                                <select type="text" class="form-control" id="kodeposyandu" wire:model='kodeposyandu' wire:change='commitPage'>
-                                    <option value="">Pilih Posyandu</option>
-                                    @foreach ($dataPosyandu as $id => $name)
-                                        <option value="{{ $id }}">{{ $name }}</option>
-                                    @endforeach
-                                </select>
-                                <label for="kodeposyandu">Posyandu</label>
+                        @if ($isShowPosyandu)
+                            <div class="col-12 col-lg-3 col-md-4">
+                                <div class="form-floating">
+                                    <select type="text" class="form-control" id="kodeposyandu" wire:model='kodeposyandu' wire:change='commitPage'>
+                                        <option value="">Pilih Posyandu</option>
+                                        @foreach ($dataPosyandu as $id => $name)
+                                            <option value="{{ $id }}">{{ $name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <label for="kodeposyandu">Posyandu</label>
+                                </div>
                             </div>
-                        </div>
+                        @endif
 
                         <div class="col-12 col-lg-3 col-md-4">
                             <div class="input-group">
@@ -121,6 +123,7 @@
                                 <tr>
                                     <th scope="col">NIK</th>
                                     <th scope="col">Nama</th>
+                                    <th scope="col">Posyandu</th>
                                     <th scope="col">JK</th>
                                     <th scope="col">Kategori</th>
                                     <th scope="col">Kategori Umur</th>
@@ -134,6 +137,7 @@
                                     <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
                                         <td>{{ FilterString::filterString($row->nik) }}</td>
                                         <td>{{ $row->namapasien }}</td>
+                                        <td>{{ $row->namaposyandu }}</td>
                                         <td>{{ $row->jk }}</td>
                                         <td>{{ FilterString::filterString(Str::title($row->kategoripasien)) }}</td>
                                         <td>{{ $row->kategoriumur }}</td>
@@ -163,6 +167,7 @@
                                 <div class="card-body px-2 py-2">
                                     <div class="h5 mb-1">{{ $row->namapasien }}</div>
                                     <div>{{ $row->nik }}</div>
+                                    <div>{{ $row->namaposyandu }}</div>
                                     <div>{{ Str::title($row->kategoripasien) }}</div>
                                     <div>{{ IDateTime::formatDate($row->tgl_lahir) }}</div>
                                     <div>{{ IDateTime::dateDiff($row->tgl_lahir) }} Tahun</div>

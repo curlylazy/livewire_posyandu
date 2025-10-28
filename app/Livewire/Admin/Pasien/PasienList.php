@@ -7,6 +7,7 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use App\Models\PasienModel;
 use App\Models\PosyanduModel;
+use Illuminate\Support\Facades\Auth;
 
 class PasienList extends Component
 {
@@ -16,6 +17,7 @@ class PasienList extends Component
     public $pageName = "pasien";
     public $selectedKode = "";
     public $selectedNama = "";
+    public $isShowPosyandu = true;
 
     #[Url]
     public $katakunci = "", $kategoriumur = "", $status = 1, $kategoripasien = "", $kodeibu = "", $kodeposyandu = "";
@@ -23,7 +25,11 @@ class PasienList extends Component
 
     public function mount()
     {
-
+        // *** jika bukan admin maka tampilkan sesuai posyandunya
+        if(Auth::user()->akses == 'staff') {
+            $this->isShowPosyandu = false;
+            $this->kodeposyandu = Auth::user()->kodeposyandu;
+        }
     }
 
     public function readData()

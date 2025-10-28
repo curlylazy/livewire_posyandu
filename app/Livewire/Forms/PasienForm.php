@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
 use Livewire\WithFileUploads;
 use Livewire\Form;
+use Illuminate\Validation\Rule;
 
 class PasienForm extends Form
 {
@@ -60,12 +61,19 @@ class PasienForm extends Form
 
     public function rules()
     {
+
+        $nikRule = [
+            'nullable',
+            'size:16',
+            Rule::unique('tbl_pasien', 'nik')->ignore($this->kodepasien, 'kodepasien'),
+        ];
+
         return [
-            'nik' => 'nullable|size:16',
+            'nik' => $nikRule,
             'kodeuser' => 'required',
             'kodeposyandu' => 'required',
             'namapasien' => 'required',
-            'tgl_lahir' => 'nullable',
+            'tgl_lahir' => 'required',
             'alamat' => 'nullable',
             'nohp' => 'nullable',
             'hamil_ke' => 'nullable|integer',
