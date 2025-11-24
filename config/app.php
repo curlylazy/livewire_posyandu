@@ -130,12 +130,14 @@ return [
     'tagline' => 'Melayani dengan Hati, Menjaga Generasi Negeri',
     'tagline2' => 'Posyandu: Dari Ayunan Hingga Usia Senja, Kesehatan Adalah Milik Kita Bersama',
     'kodepos' => '80572',
-    'title' => 'Rural Bali Adventure',
+    'title' => 'Posyandu ILP Kelurahan Kesiman',
     'alamat2' => 'Bali, Kab.Gianyar, Kec.Gianyar 80572',
     'alamat' => 'Br.Begawan, Payangan',
     'webcreator' => 'Bali Coding | balicoding.com',
     'webdesc' => 'Posyandu - "Sehat Bersama, Tumbuh Bahagia". Tempat terbaik untuk pemantauan tumbuh kembang anak, imunisasi, dan edukasi kesehatan keluarga. Dikelola oleh kader lokal, Posyandu hadir untuk mendukung generasi sehat dari desa',
     'angkatan' => 2025,
+    'desa' => "Kesiman",
+    'kecamatan' => "Gianyar",
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
