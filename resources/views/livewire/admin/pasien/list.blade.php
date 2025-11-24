@@ -9,15 +9,19 @@
                 $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
             });
 
-            $wire.on('confirm-delete', (e) => {
+            $wire.on('edit', (e) => {
+                Livewire.navigate(`{{ url("admin/$pageName/edit") }}/${$wire.selectedKode}`);
+            });
+
+            $wire.on('confirm-delete', () => {
                 Swal.fire({
                     title: 'Hapus Data',
-                    text: `Hapus data ${e.nama} dari sistem, lanjutkan ?`,
+                    text: `Hapus data ${$wire.selectedNama} dari sistem, lanjutkan ?`,
                     icon: "question",
                     showCancelButton: true,
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        $wire.hapus(e.kode);
+                        $wire.hapus($wire.selectedKode);
                         $wire.dispatch('close-modal', { namamodal: "modalPilihData" });
                     }
                 });
@@ -183,7 +187,7 @@
                 <x-slot:pageTitle><span wire:text="pageTitle"></span></x-slot>
                 <x-slot:selectedNama><span wire:text="selectedNama"></span></x-slot>
                 <div class="d-grid gap-2" x-data="{ selectedKode: $wire.entangle('selectedKode'), pageName: $wire.entangle('pageName')}">
-                    <a class="btn btn-lg btn-outline-primary" id="edit" role="button" :href="`/admin/${pageName}/edit/${selectedKode}`" wire:navigate><i class="fas fa-edit"></i> Edit</a>
+                    <button type="button" class="btn btn-lg btn-outline-primary" data-coreui-dismiss="modal" wire:click='$dispatch("edit")'><i class="fa-solid fa-edit"></i> Edit</button>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete")'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>
