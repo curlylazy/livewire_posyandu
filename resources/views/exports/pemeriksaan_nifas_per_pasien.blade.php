@@ -20,7 +20,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Dusun/RT/RW</th>
-            <th colspan="5">: </th>
+            <th colspan="5">:  {{ $dataPasien->namaposyandu }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">NIK</th>
@@ -28,7 +28,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Desa/Kelurahan/Nagari</th>
-            <th colspan="5">: </th>
+            <th colspan="5">: {{ config('app.desa') }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Tanggal Lahir / Umur</th>
@@ -36,7 +36,7 @@
 
             {!! CssExcel::columnBreak(3) !!}
             <th colspan="2" style="{!! CssExcel::$rowSize250Light !!}">Kecamatan</th>
-            <th colspan="5">: </th>
+            <th colspan="5">: {{ config('app.kecamatan') }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Nama Suami</th>

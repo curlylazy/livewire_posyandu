@@ -20,11 +20,11 @@
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Desa/Kelurahan/Negari</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ config('app.desa') }}</th>
         </tr>
         <tr>
             <th style="{!! CssExcel::$rowSize250Light !!}">Kecamatan</th>
-            <th colspan="3">: </th>
+            <th colspan="3">: {{ config('app.kecamatan') }}</th>
         </tr>
     </thead>
 </table>
