@@ -137,7 +137,7 @@ return [
     'webdesc' => 'Posyandu - "Sehat Bersama, Tumbuh Bahagia". Tempat terbaik untuk pemantauan tumbuh kembang anak, imunisasi, dan edukasi kesehatan keluarga. Dikelola oleh kader lokal, Posyandu hadir untuk mendukung generasi sehat dari desa',
     'angkatan' => 2025,
     'desa' => "Kesiman",
-    'kecamatan' => "Gianyar",
+    'kecamatan' => "Denpasar Timur",
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
