@@ -78,7 +78,8 @@
                     </ul>
                 </div>
 
-                <div class="col-12">
+                {{-- *** sudah menggunakan hasil langsung bukan lewat rumus --}}
+                {{-- <div class="col-12">
                     <h5 class="mt-4">Hasil Penimbangan Pengukuran</h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex flex-md-row flex-column">
@@ -106,7 +107,7 @@
                             <div class="fw-bold">{{ $dataHasilPenimbangan->kesimpulanLilaGizi }}</div>
                         </li>
                     </ul>
-                </div>
+                </div> --}}
 
                 <div class="col-12">
                     <h5 class="mt-4">Hasil Skrining TBC</h5>
@@ -197,7 +198,7 @@
                 </div>
 
                 <div class="col-12">
-                    <h5 class="mt-4">Kesimpulan : </h5>
+                    <h5 class="mt-4">Hasil Penimbangan Pengukuran : </h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Berat Badan Naik ? :</div>
