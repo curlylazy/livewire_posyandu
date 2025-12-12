@@ -61,6 +61,7 @@
                 <x-partials.sidelink href="admin/" icon="home" title="Beranda" />
                 <x-partials.sidelink href="admin/user" icon="person" title="User" />
                 <x-partials.sidelink href="admin/pasien" icon="pregnancy" title="Pasien" />
+                <x-partials.sidelink href="admin/posyandu" icon="family_home" title="Posyandu" />
             @endrole
 
             <li class="nav-title">Pemeriksaan</li>

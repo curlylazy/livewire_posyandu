@@ -32,6 +32,8 @@ use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiDetail;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasList;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasAE;
 use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasDetail;
+use App\Livewire\Admin\Posyandu\PosyanduAE;
+use App\Livewire\Admin\Posyandu\PosyanduList;
 use App\Livewire\Admin\User\UserAE;
 use App\Livewire\Admin\User\UserList;
 
@@ -86,6 +88,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/bayi', BayiList::class)->name('admin_bayi_list');
     Route::get('/bayi/add', BayiAE::class)->name('admin_bayi_add');
     Route::get('/bayi/edit/{id}', BayiAE::class)->name('admin_bayi_edit');
+
+    // *** Posyandu
+    Route::get('/posyandu', PosyanduList::class)->name('admin_posyandu_list');
+    Route::get('/posyandu/add', PosyanduAE::class)->name('admin_posyandu_add');
+    Route::get('/posyandu/edit/{id}', PosyanduAE::class)->name('admin_posyandu_edit');
 
     // *** Pemeriksaan Bumil Nifas
     Route::get('/pemeriksaan/bumilnifas/', PemeriksaanBumilNifasList::class)->name('admin_pemeriksaan_bumilnifas_list');
