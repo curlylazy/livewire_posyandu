@@ -80,6 +80,7 @@
             <x-partials.sidelink href="admin/laporan/rekapbayi" icon="medical_information" title="Rekap Periksa Bayi" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=bumil" icon="lab_profile" title="Lap Periksa Bumil" />
             <x-partials.sidelink href="admin/laporan/pemeriksaan?kategori_periksa=nifas" icon="lab_profile" title="Lap Periksa Nifas" />
+            <x-partials.sidelink href="admin/laporan/pemeriksaan/bayi" icon="lab_profile" title="Lap Periksa Bayi" />
             <x-partials.sidelink href="admin/laporan/grafik_pasien" icon="bar_chart" title="Grafik Pasien" />
             <x-partials.sidelink href="admin/laporan/grafik_pemeriksaan" icon="bar_chart" title="Grafik Pemeriksaan" />
 
