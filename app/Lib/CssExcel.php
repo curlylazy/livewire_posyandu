@@ -26,6 +26,7 @@ class CssExcel
     public static $bgLightBlue = "background-color: #D0D8E8;";
     public static $bgPurple = "background-color: #CCBBEB;";
 
+    public static $rowSize50Light = "width: 50px;";
     public static $rowSize100Light = "width: 100px;";
     public static $rowSize150Light = "width: 100px;";
     public static $rowSize200Light = "width: 200px;";

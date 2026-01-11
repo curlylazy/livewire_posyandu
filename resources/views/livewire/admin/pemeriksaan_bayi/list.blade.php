@@ -80,6 +80,7 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
+                                    <th scope="col">NIK</th>
                                     <th scope="col">Nama Bayi</th>
                                     <th scope="col">Nama Ibu</th>
                                     <th scope="col">Tanggal Lahir</th>
@@ -90,6 +91,7 @@
                             <tbody>
                                 @foreach ($dataRow as $row)
                                     <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                        <td>{{ $row->nik }}</td>
                                         <td>{{ $row->namapasien }}</td>
                                         <td>{{ $row->namaibu }}</td>
                                         <td>{{ IDateTime::formatDate($row->tgl_lahir) }}</td>

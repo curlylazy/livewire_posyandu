@@ -20,6 +20,10 @@
                     <h5>Data Pasien</h5>
                     <ul class="list-group">
                         <li class="list-group-item d-flex flex-md-row flex-column">
+                            <div class="flex-grow-1">NIK :</div>
+                            <div class="fw-bold">{{ $dataRow->nik }}</div>
+                        </li>
+                        <li class="list-group-item d-flex flex-md-row flex-column">
                             <div class="flex-grow-1">Nama Pasien :</div>
                             <div class="fw-bold">{{ $dataRow->namapasien }}</div>
                         </li>

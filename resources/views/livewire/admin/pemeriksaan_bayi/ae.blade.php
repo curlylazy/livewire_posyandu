@@ -50,7 +50,7 @@
     <x-partials.flashmsg />
     <x-slot:bc>
         <li class="breadcrumb-item"><a href="{{ url("/admin") }}" class="text-decoration-none" wire:navigate><span>Home</span></a></li>
-        <li class="breadcrumb-item"><a href="{{ url("/admin/$pageName/bumilnifas") }}" class="text-decoration-none" wire:navigate><span>{{ $pageTitle }}</span></a></li>
+        <li class="breadcrumb-item"><a href="{{ url("/admin/$pageName/bumilnifas") }}" class="text-decoration-none" wire:navigate><span>{{ $pageTitle }} Bayi</span></a></li>
         @if($isEdit)
             <li class="breadcrumb-item"><span>Edit</span></li>
             <li class="breadcrumb-item active"><span>{{ $form->namapasien }}</span></li>
@@ -61,7 +61,7 @@
 
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title mb-3">{{ $pageTitle }}</h5>
+            <h5 class="card-title mb-3">{{ $pageTitle }} Bayi</h5>
 
             <form>
 

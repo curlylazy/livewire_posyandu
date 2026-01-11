@@ -46,4 +46,25 @@ class PdfController extends Controller
         ])->setPaper('a4', 'landscape')->stream();
     }
 
+    public function cetak_pemeriksaan_bayi(Request $request)
+    {
+        $katakunci = $request->query('katakunci');
+        $bulan = $request->query('bulan');
+        $tahun = $request->query('tahun');
+        $pageTitle = "Laporan Pemeriksaan Bayi";
+
+        $dataRows = PemeriksaanModel::joinTable()
+                ->search($katakunci)
+                ->searchByMonthYear($bulan, $tahun)
+                ->searchByKategoriPeriksa("bayi")
+                ->get();
+
+        return DomPdf::loadView("pdf.pemeriksaan_bayi", [
+            'pageTitle' => $pageTitle,
+            'dataRows' => $dataRows,
+            'bulan' => $bulan,
+            'tahun' => $tahun,
+        ])->setPaper('a4', 'landscape')->stream();
+    }
+
 }

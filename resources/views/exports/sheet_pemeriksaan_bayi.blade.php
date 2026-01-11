@@ -22,101 +22,112 @@
 
     <thead>
     <tr>
-        <th style="{!! $heading !!}" colspan="9">DATA</th>
-        <th style="{!! $heading !!}" colspan="5">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
-        <th style="{!! $heading !!}" colspan="4">Skrining TBC</th>
-        <th style="{!! $heading !!}" colspan="6">Pemberian TTD dan MT Bumil KEK</th>
-        <th style="{!! $heading !!}" colspan="3">Kelas Ibu Hamil</th>
+        <th style="{!! $heading !!}" colspan="8">Data Pasien</th>
+        <th style="{!! $heading !!}" colspan="1">Info Pemeriksaan</th>
+        <th style="{!! $heading !!}" colspan="4">Hasil Penimbangan/Pengukuran/Pemeriksaan</th>
+        <th style="{!! $heading !!}" colspan="4">Hasil Skrining TBC</th>
+        <th style="{!! $heading !!}" colspan="6">Bayi Balita mendapatkan</th>
+        <th style="{!! $heading !!}" colspan="6">Hasil Penimbangan Pengukuran</th>
+        <th style="{!! $heading !!}" colspan="2">Lainnya</th>
     </tr>
 </thead>
 <thead>
     <tr>
-        {{-- DATA --}}
-        <th style="font-weight: bold; height: 100px;">No</th>
+        {{-- Data Pasien --}}
+        <th style="{!! CssExcel::$rowSize50Light !!} {!! CssExcel::$bgGray !!}">No</th>
         <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">NIK</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Nama Ibu</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Tanggal Lahir</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Pasien</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Ibu</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Nama Ayah</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tanggal Lahir</th>
         <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Umur</th>
-        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">No Hp</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Hamil Ke</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Minggu Ke</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Alamat</th>
 
-        {{-- *** Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Berat Badan (Kg)</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">LILA (cm)</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Tekanan Darah</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Sesuai Kurva Buku KIA</th>
+        {{-- Info Pemeriksaan --}}
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tanggal Pemeriksaan</th>
 
-        {{-- *** Skrining TBC --}}
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Batuk Terus Menerus</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Demam Lebih ≥2 minggu</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Berat Badan Tidak Naik/Turun Dalam 2 Bulan</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Kontak Erat Dengan Pasien TBC</th>
+        {{-- Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Berat Badan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Lingkar Lengan Atas (LILA)</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Tinggi Badan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Lingkar Kepala</th>
 
-        {{-- Pemberian TTD & MT Bumil KEK --}}
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Diberikan Tablet Oleh Nakes ?</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Jumlah Tablet</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Konsumsi Tablet Tambah Darah</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Diberikan MT Bumil Kek Oleh Nakes ?</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">MT Untuk Bumil KEK</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Konsumsi MT Bumil KEK</th>
+        {{-- Hasil Skrining TBC --}}
+        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">Pasien batuk terus menerus ?</th>
+        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">Pasien demam lebih dari 2 minggu ?</th>
+        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">BB tidak naik atau turun dalam 2 bulan berturut-turut ?</th>
+        <th style="{!! CssExcel::$rowSize250Light !!} {!! CssExcel::$bgGray !!}">Pasien ada kontak erat dengan pasien TBC ?</th>
 
-        {{-- Kelas Ibu Hamil --}}
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Mengikut Kelas Ibu Hamil</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Edukasi yang Diberikan</th>
-        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Rujuk Pustu/Puskesmas/Rumah Sakit</th>
+        {{-- Bayi/Balita mendapatkan --}}
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">ASI Ekslusif ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">MP ASI ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Imunisasi ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Vitamin A ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Obat Cacing ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">MT Pangan Lokal Untuk Pemulihan ?</th>
+
+        {{-- Hasil Penimbangan Pengukuran --}}
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Berat Badan Naik ?</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kesimpulan Berat Badan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kesimpulan Tinggi Badan</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kesimpulan Lingkar Kepala</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kesimpulan Gizi BB</th>
+        <th style="{!! CssExcel::$rowSize200Light !!} {!! CssExcel::$bgGray !!}">Kesimpulan Gizi Lila</th>
+
+        {{-- Edukasi Konseling --}}
+        <th style="{!! CssExcel::$rowSize300Light !!} {!! CssExcel::$bgGray !!}">Edukasi / Konseling ?</th>
+        <th style="{!! CssExcel::$rowSize100Light !!} {!! CssExcel::$bgGray !!}">Ada Gejala Sakit ?</th>
     </tr>
 </thead>
-<tbody>
-    @php
-        $no = 1;
-    @endphp
 
+<tbody>
     @foreach($dataRows as $data)
         <tr>
-            {{-- *** Data --}}
-            <td>{{ $no }}</td>
+            {{-- Data Pasien --}}
+            <td>{{ $loop->index }}</td>
             <td>{{ $data->nik }}</td>
             <td>{{ $data->namapasien }}</td>
+            <td>{{ $data->namaibu }}</td>
+            <td>{{ $data->namaayah }}</td>
             <td>{{ IDateTime::formatDate($data->tgl_lahir_pasien) }}</td>
             <td>{{ IDateTime::dateDiff($data->tgl_lahir_pasien) }} Tahun</td>
             <td>{{ $data->alamat }}</td>
-            <td>{{ $data->nohp }}</td>
-            <td>{{ $data->periksa_hamil_ke }}</td>
-            <td>{{ $data->periksa_minggu_ke }}</td>
 
-            {{-- *** Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
+            {{-- Info Pemeriksaan --}}
+            <td>{{ IDateTime::formatDate($data->tgl_periksa) }}</td>
+
+            {{-- Hasil Penimbangan/Pengukuran/Pemeriksaan --}}
             <td>{{ $data->periksa_bb }}</td>
-            <td>{{ Option::getSesuaiAtauTidak($data->is_sesuai_kurva_bb) }}</td>
             <td>{{ $data->periksa_lila }}</td>
-            <td>{{ $data->periksa_tekanan_darah }}</td>
-            <td>{{ Option::getSesuaiAtauTidak($data->is_sesuai_kurva_tekanan_darah) }}</td>
+            <td>{{ $data->periksa_tinggi_badan }}</td>
+            <td>{{ $data->periksa_lingkar_kepala }}</td>
 
-            {{-- *** Skrining TBC --}}
+            {{-- Hasil Skrining TBC --}}
             <td>{{ Option::getYaAtauTidak($data->is_batuk) }}</td>
             <td>{{ Option::getYaAtauTidak($data->is_demam) }}</td>
             <td>{{ Option::getYaAtauTidak($data->is_bb_tidak_naik_turun) }}</td>
             <td>{{ Option::getYaAtauTidak($data->is_kontak_pasien_tbc) }}</td>
 
-            {{-- Pemberian TTD & MT Bumil KEK --}}
-            <td>{{ Option::getYaAtauTidak($data->is_beri_tablet) }}</td>
-            <td>{{ Number::format($data->jml_tablet) }}</td>
-            <td>{{ Option::getKonsumsiHarian($data->konsumsi_tablet) }}</td>
-            <td>{{ Option::getYaAtauTidak($data->is_beri_mt) }}</td>
-            <td>{{ $data->mt_bumil }}</td>
-            <td>{{ Option::getKonsumsiHarian($data->konsumsi_mt_bumil) }}</td>
+            {{-- Bayi/Balita mendapatkan --}}
+            <td>{{ Option::getYaAtauTidak($data->is_asi_ekslusif) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_mpasi_sesuai) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_imunisasi_lengkap) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_beri_vit_a) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_beri_obat_cacing) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_mt_pangan_lokal_pemulihan) }}</td>
 
-            {{-- Kelas Ibu Hamil --}}
-            <td>{{ Option::getYaAtauTidak($data->is_kelas_bumil) }}</td>
+            {{-- Hasil Penimbangan Pengukuran --}}
+            <td class="fw-bold">{{ Option::getYaAtauTidak($data->kesimpulan_berat_badan_naik) }}</td>
+            <td class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanBB, $data->kesimpulan_berat_badan) }}</td>
+            <td class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanTinggiBadan, $data->kesimpulan_tinggi_badan) }}</td>
+            <td class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanLila, $data->kesimpulan_lingkar_kepala) }}</td>
+            <td class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanGiziBB, $data->kesimpulan_gizi_bb) }}</td>
+            <td class="fw-bold">{{ Option::getOptionName(Option::$optNameKesimpulanGiziLila, $data->kesimpulan_gizi_lila) }}</td>
+
+            {{-- Lainnya --}}
             <td>{{ $data->edukasi }}</td>
-            <td>{{ Option::getYaAtauTidak($data->is_rujuk) }}</td>
+            <td>{{ Option::getYaAtauTidak($data->is_gejala_sakit) }}</td>
         </tr>
-
-        @php
-            $no++;
-        @endphp
     @endforeach
 
     <tr></tr>
@@ -129,7 +140,7 @@
     <thead>
         <tr>
             <th colspan="2" style="{!! $pageResult !!}">Total Kunjungan :</th>
-            <th colspan="2" style="{!! $pageResult !!}">{{ count($dataRows) }} Ibu</th>
+            <th colspan="2" style="{!! $pageResult !!}">{{ count($dataRows) }} Bayi</th>
         </tr>
     </thead>
 </table>

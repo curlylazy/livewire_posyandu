@@ -107,7 +107,7 @@ class SheetLapPemeriksaanBayiView implements FromView, WithTitle, WithColumnForm
                     ],
                 ];
 
-                $sheetCol = ($this->kategori_periksa == "bumil") ? "A5:AA6" : "A5:AC6";
+                $sheetCol = "A5:AE6";
                 $sheet->getStyle($sheetCol)->applyFromArray($borderStyle);
 
             },

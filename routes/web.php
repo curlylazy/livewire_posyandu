@@ -57,6 +57,7 @@ Route::get('/send-mail',function() {
 
 // *** pdf
 Route::get('cetak/pemeriksaan', [PdfController::class, 'cetak_pemeriksaan'])->name('cetak_pemeriksaan');
+Route::get('cetak/pemeriksaan_bayi', [PdfController::class, 'cetak_pemeriksaan_bayi'])->name('cetak_pemeriksaan_bayi');
 
 // *** front
 Route::get('/', FrontDashboard::class)->name('dashboard');
