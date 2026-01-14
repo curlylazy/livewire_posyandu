@@ -42,7 +42,7 @@
     <x-partials.flashmsg />
     <x-slot:bc>
         <li class="breadcrumb-item"><a href="{{ url('/admin') }}" class="text-decoration-none"><span>Home</span></a></li>
-        <li class="breadcrumb-item active"><span>{{ $pageTitle }} testingsd</span></li>
+        <li class="breadcrumb-item active"><span>{{ $pageTitle }} sadasdad</span></li>
     </x-slot>
 
     <div class="card">
