@@ -12,7 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        // $middleware->redirectGuestsTo('/admin/login');
+
+        // *** redirect
         $middleware->redirectGuestsTo(function (Request $request) use ($middleware) {
             if (! $request->expectsJson()) {
                 if($request->is('admin') || $request->is('admin/*'))
@@ -21,6 +22,13 @@ return Application::configure(basePath: dirname(__DIR__))
                     $middleware->redirectGuestsTo('/login');
             }
         });
+
+        // *** role akses
+        $middleware->alias([
+            'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+            'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+            'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

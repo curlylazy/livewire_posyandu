@@ -233,7 +233,7 @@
             </div>
 
             <div class="d-flex mt-3 gap-2">
-                <a href="{{ url("admin/$pageName?kategori_periksa=$kategori_periksa") }}" class="btn btn-secondary" type="button" wire:navigate><i class="fas fa-arrow-left"></i></a>
+                <a href="{{ url("admin/$pageName/bayi") }}" class="btn btn-secondary" type="button" wire:navigate><i class="fas fa-arrow-left"></i></a>
             </div>
 
         </div>

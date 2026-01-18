@@ -18,9 +18,19 @@
             <x-slot:url>{{ url("admin/pasien") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
-            <x-slot:title>Bayi</x-slot>
-            <x-slot:icon>breastfeeding</x-slot>
-            <x-slot:url>{{ url("admin/bayi") }}</x-slot>
+            <x-slot:title>User</x-slot>
+            <x-slot:icon>person</x-slot>
+            <x-slot:url>{{ url("admin/pasien") }}</x-slot>
+        </x-partials.dashboard.quickmenu>
+        <x-partials.dashboard.quickmenu>
+            <x-slot:title>Posyandu</x-slot>
+            <x-slot:icon>family_home</x-slot>
+            <x-slot:url>{{ url("admin/posyandu") }}</x-slot>
+        </x-partials.dashboard.quickmenu>
+        <x-partials.dashboard.quickmenu>
+            <x-slot:title>Pemeriksaan Bayi</x-slot>
+            <x-slot:icon>stethoscope</x-slot>
+            <x-slot:url>{{ url("admin/pemeriksaan/bayi") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
             <x-slot:title>Pemeriksaan Ibu Hamil</x-slot>

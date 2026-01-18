@@ -76,25 +76,24 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::get('/', Dashboard::class)->name('admin_dashboard');
 
     // *** User
-    Route::get('/user', UserList::class)->name('admin_user_list');
-    Route::get('/user/add', UserAE::class)->name('admin_user_add');
-    Route::get('/user/edit/{id}', UserAE::class)->name('admin_user_edit');
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/user', UserList::class)->name('admin_user_list');
+        Route::get('/user/add', UserAE::class)->name('admin_user_add');
+        Route::get('/user/edit/{id}', UserAE::class)->name('admin_user_edit');
+    });
+
+    // *** Posyandu
+    Route::group(['middleware' => ['role:admin']], function () {
+        Route::get('/posyandu', PosyanduList::class)->name('admin_posyandu_list');
+        Route::get('/posyandu/add', PosyanduAE::class)->name('admin_posyandu_add');
+        Route::get('/posyandu/edit/{id}', PosyanduAE::class)->name('admin_posyandu_edit');
+    });
 
     // *** Pasien
     Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
     Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');
     Route::get('/pasien/edit/{id}', PasienAE::class)->name('admin_pasien_edit');
     Route::get('/pasien/detail/{id}', PasienDetail::class)->name('admin_pasien_detail');
-
-    // *** Bayi
-    Route::get('/bayi', BayiList::class)->name('admin_bayi_list');
-    Route::get('/bayi/add', BayiAE::class)->name('admin_bayi_add');
-    Route::get('/bayi/edit/{id}', BayiAE::class)->name('admin_bayi_edit');
-
-    // *** Posyandu
-    Route::get('/posyandu', PosyanduList::class)->name('admin_posyandu_list');
-    Route::get('/posyandu/add', PosyanduAE::class)->name('admin_posyandu_add');
-    Route::get('/posyandu/edit/{id}', PosyanduAE::class)->name('admin_posyandu_edit');
 
     // *** Pemeriksaan Bumil Nifas
     Route::get('/pemeriksaan/bumilnifas/', PemeriksaanBumilNifasList::class)->name('admin_pemeriksaan_bumilnifas_list');
