@@ -71,6 +71,7 @@
             <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=bumil" icon="stethoscope" title="Periksa Ibu Hamil" />
             <x-partials.sidelink href="admin/pemeriksaan/bumilnifas?kategori_periksa=nifas" icon="stethoscope" title="Periksa Nifas" />
             <x-partials.sidelink href="admin/pemeriksaan/bayi" icon="stethoscope" title="Periksa Bayi" />
+            <x-partials.sidelink href="admin/blog" icon="news" title="Blog" />
 
             <li class="nav-title">Laporan</li>
             <x-partials.sidelink href="admin/laporan/riwayat/bumilnifas?kategori_periksa=bumil" icon="medical_information" title="Riwayat Ibu Hamil" />
@@ -105,7 +106,7 @@
                     <span class="icon icon-lg material-symbols-outlined">menu</span>
                 </button>
                 <ul class="header-nav d-none d-lg-flex">
-                    <li class="nav-item"><a class="nav-link" href="#">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ url('admin/') }}">Dashboard</a></li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                             <i class="fas fa-user me-2"></i>

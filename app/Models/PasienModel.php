@@ -59,6 +59,22 @@ class PasienModel extends Model
         // ");
     }
 
+    public function scopeJumlahPerKategori(Builder $query): void
+    {
+        $dateNow = Carbon::today()->toDateString();
+        $query->select(DB::raw("
+            CASE
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, '$dateNow') <= 5 THEN 'Balita'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, '$dateNow') BETWEEN 6 AND 12 THEN 'Anak-anak'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, '$dateNow') BETWEEN 13 AND 17 THEN 'Remaja'
+                WHEN TIMESTAMPDIFF(YEAR, tgl_lahir, '$dateNow') BETWEEN 18 AND 59 THEN 'Dewasa'
+                ELSE 'Lansia'
+            END as kategori,
+            COUNT(*) as total
+        "))
+        ->groupBy('kategori');
+    }
+
     public function scopeSearch(Builder $query, $katakunci): void
     {
         $query->where(function ($query) use ($katakunci) {

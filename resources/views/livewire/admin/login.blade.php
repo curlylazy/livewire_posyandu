@@ -33,10 +33,10 @@
             <div class="container">
                 <div class="row align-items-center justify-content-center">
                     <div class="col-md-7 col-12">
-                        <div class="d-flex">
+                        <div class="d-flex align-items-center mb-3">
                             <img class="me-4" src="{{ asset('logo.png') }}" style="width: 100px; height: 100px; margin-right: 20px; object-fit: contain;"/>
                             <div class="d-flex flex-column">
-                                <h3>Login to <strong>{{ config('app.webname') }}</strong></h3>
+                                <h3>Login to <strong>Posyandu 6 SPM</strong></h3>
                                 <p class="mb-4">{{ config('app.tagline') }}</p>
                             </div>
                         </div>

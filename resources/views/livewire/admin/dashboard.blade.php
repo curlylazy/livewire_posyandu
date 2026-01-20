@@ -20,7 +20,7 @@
         <x-partials.dashboard.quickmenu>
             <x-slot:title>User</x-slot>
             <x-slot:icon>person</x-slot>
-            <x-slot:url>{{ url("admin/pasien") }}</x-slot>
+            <x-slot:url>{{ url("admin/user") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
             <x-slot:title>Posyandu</x-slot>

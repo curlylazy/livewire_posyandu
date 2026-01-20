@@ -50,7 +50,7 @@ class PemeriksaanBumilNifasAE extends Component
             $this->pageTitle = "Pemeriksaan Nifas";
         }
 
-        $this->form->tgl_periksa = date('Y-m-d');
+        $this->form->tgl_periksa = \Carbon\Carbon::now()->format('Y-m');
         $this->form->kategori_periksa = $this->kategori_periksa;
     }
 
@@ -70,7 +70,9 @@ class PemeriksaanBumilNifasAE extends Component
         try
         {
             // *** cek apakah pasien sudah melakukan pemeriksaan, jika tanggalnya tidak sama maka lakukan validasi
-            if($this->form->tgl_periksa != $this->form->tgl_periksa_old)
+            $periodeOld = \Carbon\Carbon::parse($this->form->tgl_periksa_old)->format('Y-m');
+            $periodeNew = \Carbon\Carbon::parse($this->form->tgl_periksa)->format('Y-m');
+            if($periodeOld != $periodeNew)
             {
                 $bulan = IDateTime::getMonth($this->form->tgl_periksa);
                 $tahun = IDateTime::getYear($this->form->tgl_periksa);

@@ -19,9 +19,8 @@ class BlogForm extends Form
 
     public $kodeblog = '';
     public $kodeuser = '';
-    public $namablog = '';
-    public $keterangansingkat = '';
-    public $keterangan = '';
+    public $judul = '';
+    public $isi = '';
     public $seoblog = '';
 
     public $gambarblog = '';
@@ -30,9 +29,8 @@ class BlogForm extends Form
     {
         return [
             'kodeuser' => 'required',
-            'namablog' => 'required',
-            'keterangansingkat' => 'required',
-            'keterangan' => 'required',
+            'judul' => 'required',
+            'isi' => 'required',
             'seoblog' => 'required',
         ];
     }
@@ -45,16 +43,15 @@ class BlogForm extends Form
         $data = BlogModel::find($id);
         $this->kodeblog = $data->kodeblog;
         $this->kodeuser = $data->kodeuser;
-        $this->namablog = $data->namablog;
-        $this->keterangansingkat = $data->keterangansingkat;
-        $this->keterangan = $data->keterangan;
+        $this->judul = $data->judul;
+        $this->isi = $data->isi;
         $this->gambarblog = $data->gambarblog;
         $this->seoblog = $data->seoblog;
     }
 
     public function prepare()
     {
-        $this->seoblog = Str::slug($this->namablog);
+        $this->seoblog = Str::slug($this->judul);
     }
 
     public function aftervalidated()

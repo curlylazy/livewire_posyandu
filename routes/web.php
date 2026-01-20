@@ -89,6 +89,11 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
         Route::get('/posyandu/edit/{id}', PosyanduAE::class)->name('admin_posyandu_edit');
     });
 
+    // *** Blog
+    Route::get('/blog', BlogList::class)->name('admin_blog_list');
+    Route::get('/blog/add', BlogAE::class)->name('admin_blog_add');
+    Route::get('/blog/edit/{id}', BlogAE::class)->name('admin_blog_edit');
+
     // *** Pasien
     Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
     Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');

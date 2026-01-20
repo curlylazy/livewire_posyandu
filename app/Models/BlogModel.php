@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class BlogModel extends Model
@@ -19,16 +20,21 @@ class BlogModel extends Model
 
     protected $guarded = [];
 
-    public function scopeJoinTable(Builder $query): void
+    public function user(): BelongsTo
     {
-        $query->join('tbl_user', 'tbl_user.kodeuser', '=', 'tbl_blog.kodeuser');
+        return $this->belongsTo(UserModel::class, "kodeuser", "kodeuser");
     }
 
     public function scopeSearch(Builder $query, $katakunci): void
     {
         $query->where(function ($query) use ($katakunci) {
             $query
-                ->where('tbl_blog.namabalog', 'like', "%$katakunci%");
+                ->where('judul', 'like', "%$katakunci%")
+                ->orWhere('isi', 'like', "%$katakunci%");
+        })
+
+        ->whereHas('user', function ($q) use ($katakunci) {
+            $q->orWhere('namauser', 'like', '%' . $katakunci . '%');
         });
     }
 
