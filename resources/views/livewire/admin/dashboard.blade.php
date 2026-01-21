@@ -78,12 +78,12 @@
         <x-partials.dashboard.quickmenu>
             <x-slot:title>Pemeriksaan Ibu Hamil</x-slot>
             <x-slot:icon>stethoscope</x-slot>
-            <x-slot:url>{{ url("admin/pemeriksaan/bumil") }}</x-slot>
+            <x-slot:url>{{ url("admin/pemeriksaan/bumilnifas?kategori_periksa=bumil") }}</x-slot>
         </x-partials.dashboard.quickmenu>
         <x-partials.dashboard.quickmenu>
             <x-slot:title>Pemeriksaan Nifas</x-slot>
             <x-slot:icon>stethoscope</x-slot>
-            <x-slot:url>{{ url("admin/pemeriksaan/nifas") }}</x-slot>
+            <x-slot:url>{{ url("admin/pemeriksaan/bumilnifas?kategori_periksa=nifas") }}</x-slot>
         </x-partials.dashboard.quickmenu>
     </div>
 
