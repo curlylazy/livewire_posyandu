@@ -91,7 +91,7 @@ class PemeriksaanForm extends Form
             'kodeuser' => 'required',
             'kodebayi' => 'nullable',
             'kategori_periksa' => 'required',
-            'tgl_periksa' => 'required',
+            'tgl_periksa' => 'required|before_or_equal:today',
             'edukasi' => 'nullable',
         ];
     }

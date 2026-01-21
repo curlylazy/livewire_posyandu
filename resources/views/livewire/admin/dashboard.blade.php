@@ -110,8 +110,8 @@
         </x-partials.dashboard.infomenu>
     </div>
 
-    <div class="row pt-3">
-        <div class="col-12 col-md-8">
+    <div class="row pt-3 mb-4">
+        <div class="col-12 col-md-7">
             <div class="card">
                 <div class="card-body">
                     <div class="h5">Grafik Penduduk per Tahun {{ date('Y') }}</div>
@@ -119,13 +119,44 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-4">
-            <div class="card">
-                <div class="card-body">
-                    <div class="h5">Data Penduduk per Tahun {{ date('Y') }}</div>
-                    <div class="d-flex">
-                        <div class="flex-grow-1">Remaja</div>
-                        <div class="fw-bold">0</div>
+        <div class="col-12 col-md-5">
+            <div class="row gap-2">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="h5">Data Penduduk per Tahun {{ date('Y') }}</div>
+                            @foreach ($dataJumlahPerKategori as $data)
+                                <div class="d-flex border-top pt-2 pb-1">
+                                    <div class="flex-grow-1 fw-normal">{{ $data->kategori }}</div>
+                                    <div class="fw-bold">{{ $data->total }}</div>
+                                </div>
+                            @endforeach
+
+                            <div class="d-flex border-top pt-2">
+                                <div class="flex-grow-1 h6 fw-bold">Total Penduduk</div>
+                                <div class="h6 fw-bold">{{ $dataJumlahPerKategori->sum('total') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="h5">Pemeriksaan Terakhir</div>
+                            @foreach ($dataPeriksa as $data)
+                                <div class="d-flex align-items-center border-top pt-2 pb-1">
+                                    <div class="flex-grow-1">
+                                        <div class="d-flex flex-column">
+                                            <div class="">{{ $data->kategori_periksa }}</div>
+                                            <div class="h6">{{ $data->namapasien }}</div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <a class="btn btn-sm btn-outline-primary" href="{{ $data->url }}"><i class="fas fa-edit"></i> Detail</a>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>

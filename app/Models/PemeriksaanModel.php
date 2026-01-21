@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PemeriksaanModel extends Model
 {
@@ -19,6 +20,16 @@ class PemeriksaanModel extends Model
     public $incrementing = false;
 
     protected $guarded = [];
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(UserModel::class, "kodeuser", "kodeuser");
+    }
+
+    public function pasien(): BelongsTo
+    {
+        return $this->belongsTo(PasienModel::class, "kodepasien", "kodepasien");
+    }
 
     public function scopeJoinTable(Builder $query): void
     {

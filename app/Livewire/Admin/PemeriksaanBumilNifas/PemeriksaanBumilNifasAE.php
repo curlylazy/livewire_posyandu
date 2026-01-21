@@ -50,7 +50,7 @@ class PemeriksaanBumilNifasAE extends Component
             $this->pageTitle = "Pemeriksaan Nifas";
         }
 
-        $this->form->tgl_periksa = \Carbon\Carbon::now()->format('Y-m');
+        $this->form->tgl_periksa = \Carbon\Carbon::now()->format('Y-m-d');
         $this->form->kategori_periksa = $this->kategori_periksa;
     }
 

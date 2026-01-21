@@ -62,8 +62,6 @@ class PemeriksaanBayiAE extends Component
     {
         try
         {
-            $this->redirect("/admin/$this->pageName/$this->subPage", navigate: true);
-
              // *** cek apakah pasien sudah melakukan pemeriksaan, jika tanggalnya tidak sama maka lakukan validasi
             $periodeOld = \Carbon\Carbon::parse($this->form->tgl_periksa_old)->format('Y-m');
             $periodeNew = \Carbon\Carbon::parse($this->form->tgl_periksa)->format('Y-m');
@@ -84,6 +82,8 @@ class PemeriksaanBayiAE extends Component
             }
 
             ($this->isEdit) ? $this->saveEdit() : $this->saveAdd();
+
+            $this->redirect("/admin/$this->pageName/$this->subPage", navigate: true);
 
         } catch (\Exception $e) {
             $this->dispatch('notif', message: "gagal simpan data : ".$e->getMessage(), icon: "error");
