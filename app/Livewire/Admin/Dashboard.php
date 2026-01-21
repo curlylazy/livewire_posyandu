@@ -2,12 +2,6 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\ActivityModel;
-use App\Models\AnggotaModel;
-use App\Models\BayiModel;
-use App\Models\BlogModel;
-use App\Models\GaleriModel;
-use App\Models\KegiatanModel;
 use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
 use Livewire\Component;

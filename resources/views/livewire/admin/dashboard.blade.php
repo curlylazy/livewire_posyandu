@@ -1,6 +1,49 @@
 <div>
 
+    @assets
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    @endassets
 
+    @script
+        <script>
+            document.addEventListener('livewire:navigated', (event) => {
+                // *** load chart
+                @php
+                    $arrLabel = $dataJumlahPerKategori->pluck('kategori');
+                    $arrValue = $dataJumlahPerKategori->pluck('total');
+                @endphp
+
+                const ctx = document.getElementById('myChart');
+                const myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: @json($arrLabel),
+                        datasets: [{
+                            label: "# Jumlah",
+                            data: @json($arrValue),
+                            borderWidth: 1,
+                            borderColor: 'rgb(75, 192, 192)',
+                            tension: 0
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+
+            // *** update chart agar bisa terupdate
+            $wire.on('update-chart', (e) => {
+                myChart.data.labels = e.labels;
+                myChart.data.datasets[0].data = e.data;
+                myChart.update();
+            });
+        </script>
+    @endscript
 
     <x-partials.loader />
 
@@ -67,5 +110,25 @@
         </x-partials.dashboard.infomenu>
     </div>
 
-
+    <div class="row pt-3">
+        <div class="col-12 col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h5">Grafik Penduduk per Tahun {{ date('Y') }}</div>
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="h5">Data Penduduk per Tahun {{ date('Y') }}</div>
+                    <div class="d-flex">
+                        <div class="flex-grow-1">Remaja</div>
+                        <div class="fw-bold">0</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
