@@ -1,33 +1,35 @@
 {
+    "$schema": "https://getcomposer.org/schema.json",
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Posyandu Kesiman - aplikasi pendataan data posyandu untuk input pasien",
+    "keywords": [
+        "posyandu",
+        "lansia"
+    ],
     "license": "MIT",
     "require": {
         "php": "^8.2",
-        "barryvdh/laravel-dompdf": "^3.0",
-        "butschster/meta-tags": "^3.1",
-        "dompdf/dompdf": "^3.0",
+        "barryvdh/laravel-dompdf": "^3.1",
+        "butschster/meta-tags": "^3.2",
         "intervention/image": "^3.11",
-        "laravel-lang/common": "^6.4",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.9",
-        "livewire/livewire": "^3.5",
+        "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "*",
         "maatwebsite/excel": "^3.1",
-        "mailersend/laravel-driver": "^2.7",
-        "mantix/livewire-jodit-text-editor": "^1.4",
-        "simplesoftwareio/simple-qrcode": "~4",
-        "spatie/laravel-pdf": "^1.5",
-        "spatie/laravel-permission": "^6.13"
+        "mantix/livewire-jodit-text-editor": "^1.9",
+        "spatie/laravel-permission": "^6.24"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
-        "laravel/pint": "^1.13",
-        "laravel/sail": "^1.26",
+        "laravel/boost": "^2.1",
+        "laravel/pail": "^1.2.2",
+        "laravel/pint": "^1.24",
+        "laravel/sail": "^1.41",
         "mockery/mockery": "^1.6",
-        "nunomaduro/collision": "^8.0",
-        "phpunit/phpunit": "^11.0"
+        "nunomaduro/collision": "^8.6",
+        "pestphp/pest": "^3.8",
+        "pestphp/pest-plugin-laravel": "^3.2"
     },
     "autoload": {
         "psr-4": {
@@ -42,12 +44,29 @@
         }
     },
     "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan boost:update --ansi"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -56,6 +75,9 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
     },
     "extra": {

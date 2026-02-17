@@ -64,7 +64,7 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('livewire.admin.dashboard')
+        return view('admin.dashboard')
             ->with([
                 "dataJumlahPerKategori" => $this->readJumlahPerKategori(),
                 "dataPeriksa" => $this->readPemeriksaanTerakhir(),

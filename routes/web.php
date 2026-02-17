@@ -69,36 +69,36 @@ Route::get('/contact', Kontak::class)->name('contact');
 Route::get('/video', Video::class)->name('video');
 
 // *** admin
-Route::get('admin/login', Login::class)->name('admin_login');
+Route::livewire('admin/login', 'pages-admin::login')->name('admin_login');
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
 
     Route::get('/', Dashboard::class)->name('admin_dashboard');
 
+    // *** Pasien
+    Route::livewire('/pasien', 'pages-admin::pasien.list')->name('admin_pasien_list');
+    Route::livewire('/pasien/add', 'pages-admin::pasien.ae')->name('admin_pasien_add');
+    Route::livewire('/pasien/edit/{id}', 'pages-admin::pasien.ae')->name('admin_pasien_edit');
+    Route::livewire('/pasien/detail/{id}', 'pages-admin::pasien.detail')->name('admin_pasien_detail');
+
     // *** User
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/user', UserList::class)->name('admin_user_list');
-        Route::get('/user/add', UserAE::class)->name('admin_user_add');
-        Route::get('/user/edit/{id}', UserAE::class)->name('admin_user_edit');
+        Route::livewire('/user', 'pages-admin::user.list')->name('admin_user_list');
+        Route::livewire('/user/add', 'pages-admin::user.list')->name('admin_user_add');
+        Route::livewire('/user/edit/{id}', 'pages-admin::user.list')->name('admin_user_edit');
     });
 
     // *** Posyandu
     Route::group(['middleware' => ['role:admin']], function () {
-        Route::get('/posyandu', PosyanduList::class)->name('admin_posyandu_list');
-        Route::get('/posyandu/add', PosyanduAE::class)->name('admin_posyandu_add');
-        Route::get('/posyandu/edit/{id}', PosyanduAE::class)->name('admin_posyandu_edit');
+        Route::livewire('/posyandu', 'pages-admin::posyandu.list')->name('admin_posyandu_list');
+        Route::livewire('/posyandu/add', 'pages-admin::user.ae')->name('admin_posyandu_add');
+        Route::livewire('/posyandu/edit/{id}', 'pages-admin::user.ae')->name('admin_posyandu_edit');
     });
 
     // *** Blog
-    Route::get('/blog', BlogList::class)->name('admin_blog_list');
-    Route::get('/blog/add', BlogAE::class)->name('admin_blog_add');
-    Route::get('/blog/edit/{id}', BlogAE::class)->name('admin_blog_edit');
-
-    // *** Pasien
-    Route::get('/pasien', PasienList::class)->name('admin_pasien_list');
-    Route::get('/pasien/add', PasienAE::class)->name('admin_pasien_add');
-    Route::get('/pasien/edit/{id}', PasienAE::class)->name('admin_pasien_edit');
-    Route::get('/pasien/detail/{id}', PasienDetail::class)->name('admin_pasien_detail');
+    Route::livewire('/blog', 'pages-admin::blog.list')->name('admin_blog_list');
+    Route::livewire('/blog/add', 'pages-admin::blog.ae')->name('admin_blog_add');
+    Route::livewire('/blog/edit/{id}', 'pages-admin::blog.ae')->name('admin_blog_edit');
 
     // *** Pemeriksaan Bumil Nifas
     Route::get('/pemeriksaan/bumilnifas/', PemeriksaanBumilNifasList::class)->name('admin_pemeriksaan_bumilnifas_list');

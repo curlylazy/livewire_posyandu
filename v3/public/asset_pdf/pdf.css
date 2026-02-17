@@ -1,0 +1,27 @@
+body {
+    font-family: 'OpenSans';
+}
+
+table tr td,
+table tr th {
+    font-family: 'Open Sans', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 11pt;
+}
+
+#watermark {
+    position: fixed;
+
+    /**
+        Set a position in the page for your image
+        This should center it vertically
+    **/
+    bottom:   10cm;
+    left:     7cm;
+
+    /** Change image dimensions**/
+    width:    8cm;
+    height:   8cm;
+
+    /** Your watermark should be behind every content**/
+    z-index:  -1000;
+}
