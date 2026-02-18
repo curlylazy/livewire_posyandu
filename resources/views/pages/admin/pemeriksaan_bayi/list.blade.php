@@ -1,38 +1,86 @@
+<?php
+
+use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\Attributes\Url;
+use App\Models\PemeriksaanModel;
+
+new class extends Component
+{
+    use WithPagination;
+
+    public $pageTitle = "Pemeriksaan Bayi";
+    public $pageName = "pemeriksaan";
+    public $subPage = "bayi";
+    public $dirView = "pemeriksaan_bayi";
+    public $selectedKode = "";
+    public $selectedNama = "";
+
+    #[Url]
+    public $katakunci = "", $bulan = "", $tahun = "";
+
+    public function mount()
+    {
+        $this->bulan = date('m');
+        $this->tahun = date('Y');
+    }
+
+    public function readData()
+    {
+        $data = PemeriksaanModel::search($this->katakunci)
+                ->joinTable()
+                ->searchByKategoriPeriksa($this->subPage)
+                ->searchByMonthYear(month : $this->bulan, year: $this->tahun)
+                ->latest('tbl_pemeriksaan.tgl_periksa')
+                ->paginate(20);
+
+        return $data;
+    }
+
+    public function getSetPeriode($data = "")
+    {
+        if(empty($data)) {
+            $this->dispatch('open-modal', namamodal: "modalYearMonthPicker");
+            return;
+        }
+
+        $this->bulan = json_decode($data, true)['bulan'];
+        $this->tahun = json_decode($data, true)['tahun'];
+        $this->readData();
+    }
+
+    public function selectData($data)
+    {
+        $this->selectedKode = $data['kodepemeriksaan'];
+        $this->selectedNama = $data['namapasien'];
+        $this->dispatch('open-modal', namamodal: "modalPilihData");
+    }
+
+    public function hapus($id)
+    {
+        $data = PemeriksaanModel::find($id);
+        $namadata = $data->kodepemeriksaan;
+        $data->delete();
+
+        session()->flash('success', "berhasil hapus data $namadata");
+        $this->readData();
+    }
+
+    public function render()
+    {
+        return $this->view([
+            "dataRow" => $this->readData(),
+        ])
+        ->layout('layouts.admin')
+        ->title($this->pageTitle." - ".config('app.webname'));
+    }
+};
+
+?>
+
+{{-- *** Views --}}
 <div>
-
-    @script
-        <script>
-            $wire.on('selected-data', (e) => {
-                $wire.selectedNama = e.data.namapasien;
-                $wire.selectedKode = e.data.kodepemeriksaan;
-                $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
-            });
-
-            $wire.on('edit', (e) => {
-                Livewire.navigate(`{{ url("admin/$pageName/bayi/edit") }}/${$wire.selectedKode}`);
-            });
-
-            $wire.on('detail', (e) => {
-                Livewire.navigate(`{{ url("admin/$pageName/bayi/detail") }}/${$wire.selectedKode}`);
-            });
-
-            $wire.on('confirm-delete', (e) => {
-                Swal.fire({
-                    title: 'Hapus Data',
-                    text: `Hapus data ${$wire.selectedNama} dari sistem, lanjutkan ?`,
-                    icon: "question",
-                    showCancelButton: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $wire.hapus($wire.selectedKode);
-                        $wire.dispatch('close-modal', { namamodal: "modalPilihData" });
-                    }
-                });
-            });
-        </script>
-    @endscript
-
-    <livewire:partial.modal-year-month-picker
+    <livewire:components::modal-year-month-picker
         wire:model="bulan"
         wire:model="tahun"
         @selectdateyear="getSetPeriode($event.detail.data)"
@@ -42,7 +90,7 @@
     <x-partials.flashmsg />
     <x-slot:bc>
         <li class="breadcrumb-item"><a href="{{ url('/admin') }}" class="text-decoration-none"><span>Home</span></a></li>
-        <li class="breadcrumb-item active"><span>{{ $pageTitle }} Bayi 101</span></li>
+        <li class="breadcrumb-item active"><span>{{ $pageTitle }} Bayi</span></li>
     </x-slot>
 
     <div class="card">
@@ -144,5 +192,35 @@
             </div>
         </div>
     </div>
-
 </div>
+
+{{-- *** Script --}}
+<script>
+    $wire.on('selected-data', (e) => {
+        $wire.selectedNama = e.data.namapasien;
+        $wire.selectedKode = e.data.kodepemeriksaan;
+        $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
+    });
+
+    $wire.on('edit', (e) => {
+        Livewire.navigate(`/admin/${$wire.pageName}/edit/${$wire.selectedKode}`);
+    });
+
+    $wire.on('detail', (e) => {
+        Livewire.navigate(`/admin/${$wire.pageName}/detail/${$wire.selectedKode}`);
+    });
+
+    $wire.on('confirm-delete', (e) => {
+        Swal.fire({
+            title: 'Hapus Data',
+            text: `Hapus data ${$wire.selectedNama} dari sistem, lanjutkan ?`,
+            icon: "question",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.hapus($wire.selectedKode);
+                $wire.dispatch('close-modal', { namamodal: "modalPilihData" });
+            }
+        });
+    });
+</script>

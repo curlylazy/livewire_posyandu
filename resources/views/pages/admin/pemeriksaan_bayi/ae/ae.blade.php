@@ -1,34 +1,5 @@
 <div>
-
-    @assets
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    @endassets
-
-    @script
-        <script>
-
-            document.addEventListener('livewire:navigated', (event) => {
-                flatpickr(".date", { dateFormat: "Y-m-d", disableMobile: "true" });
-            });
-
-            $wire.on('confirm-save', (e) => {
-                Swal.fire({
-                    title: 'Simpan Data',
-                    text: `Lanjutkan simpan data pemeriksaan ?`,
-                    icon: "question",
-                    showCancelButton: true,
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        $wire.save();
-                    }
-                });
-            });
-
-        </script>
-    @endscript
-
-    <livewire:partial.modal-add-pasien
+    <livewire:components::modal-add-pasien
         :kategori_periksa="$subPage"
         :judulModal="$judulModalPasien"
         :pilihanAdd="$pilihanModalPasien"
@@ -36,7 +7,7 @@
         @saved="modalSelectPasien($event.detail.data)"
     />
 
-    <livewire:partial.modal-pasien
+    <livewire:components::modal-pasien
         :judulModal="$judulModalPasien"
         :kategoriumur="$kategoriumur"
         :kategoriumurArr="$kategoriumurArr"
@@ -452,8 +423,12 @@
                 </div>
 
             </form>
-
         </div>
     </div>
-
 </div>
+
+{{-- *** External Asset --}}
+@assets
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endassets

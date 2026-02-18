@@ -60,13 +60,7 @@ Route::get('cetak/pemeriksaan', [PdfController::class, 'cetak_pemeriksaan'])->na
 Route::get('cetak/pemeriksaan_bayi', [PdfController::class, 'cetak_pemeriksaan_bayi'])->name('cetak_pemeriksaan_bayi');
 
 // *** front
-Route::get('/', FrontDashboard::class)->name('dashboard');
-Route::get('/galery', Galeri::class)->name('galery');
-Route::get('/packages', Package::class)->name('packages');
-Route::get('/activities', ActivitiesList::class)->name('activities');
-Route::get('/activities/{id}', ActivitiesDetail::class)->name('activities_detail');
-Route::get('/contact', Kontak::class)->name('contact');
-Route::get('/video', Video::class)->name('video');
+Route::livewire('/', 'pages-front::dashboard')->name('dashboard');
 
 // *** admin
 Route::livewire('admin/login', 'pages-admin::login')->name('admin_login');
@@ -101,16 +95,16 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::livewire('/blog/edit/{id}', 'pages-admin::blog.ae')->name('admin_blog_edit');
 
     // *** Pemeriksaan Bumil Nifas
-    Route::get('/pemeriksaan/bumilnifas/', PemeriksaanBumilNifasList::class)->name('admin_pemeriksaan_bumilnifas_list');
-    Route::get('/pemeriksaan/bumilnifas/detail/{id}', PemeriksaanBumilNifasDetail::class)->name('admin_pemeriksaan_bumilnifas_detail');
-    Route::get('/pemeriksaan/bumilnifas/add', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_add');
-    Route::get('/pemeriksaan/bumilnifas/edit/{id}', PemeriksaanBumilNifasAE::class)->name('admin_pemeriksaan_bumilnifas_edit');
+    Route::livewire('/pemeriksaan/bumilnifas/', 'pages-admin::pemeriksaan_bumilnifas.list')->name('admin_pemeriksaan_bumilnifas_list');
+    Route::livewire('/pemeriksaan/bumilnifas/detail/{id}', 'pages-admin::pemeriksaan_bumilnifas.detail')->name('admin_pemeriksaan_bumilnifas_detail');
+    Route::livewire('/pemeriksaan/bumilnifas/add', 'pages-admin::pemeriksaan_bumilnifas.ae')->name('admin_pemeriksaan_bumilnifas_add');
+    Route::livewire('/pemeriksaan/bumilnifas/edit/{id}', 'pages-admin::pemeriksaan_bumilnifas.ae')->name('admin_pemeriksaan_bumilnifas_edit');
 
     // *** Pemeriksaan Bayi
-    Route::get('/pemeriksaan/bayi/', PemeriksaanBayiList::class)->name('admin_pemeriksaan_bayi_list');
-    Route::get('/pemeriksaan/bayi/add', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_add');
-    Route::get('/pemeriksaan/bayi/edit/{id}', PemeriksaanBayiAE::class)->name('admin_pemeriksaan_bayi_edit');
-    Route::get('/pemeriksaan/bayi/detail/{id}', PemeriksaanBayiDetail::class)->name('admin_pemeriksaan_bayi_detail');
+    Route::livewire('/pemeriksaan/bayi/', 'pages-admin::pemeriksaan_bayi.list')->name('admin_pemeriksaan_bayi_list');
+    Route::livewire('/pemeriksaan/bayi/add', 'pages-admin::pemeriksaan_bayi.ae')->name('admin_pemeriksaan_bayi_add');
+    Route::livewire('/pemeriksaan/bayi/edit/{id}', 'pages-admin::pemeriksaan_bayi.ae')->name('admin_pemeriksaan_bayi_edit');
+    Route::livewire('/pemeriksaan/bayi/detail/{id}', 'pages-admin::pemeriksaan_bayi.detail')->name('admin_pemeriksaan_bayi_detail');
 
     // *** Laporan & Rekap
     Route::get('/laporan/riwayat/bumilnifas', PemeriksaanRiwayatBumilNifas::class)->name('admin_laporan_riwayat_bumilnifas');
