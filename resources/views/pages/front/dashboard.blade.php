@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Livewire\Front;
-
 use App\Lib\MetaTag;
 use App\Models\PasienModel;
 use App\Models\PemeriksaanModel;
 use Livewire\Component;
 
-class Dashboard extends Component
+new class extends Component
 {
     public $jmlPasien = 0;
     public $jmlPeriksaBulanIni = 0;

@@ -55,7 +55,7 @@ class RekapBayi extends Component
         return view("livewire.admin.laporan.".$this->pageName, [
             "dataRow" => $this->readData(),
         ])
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title($this->pageTitle);
     }
 }

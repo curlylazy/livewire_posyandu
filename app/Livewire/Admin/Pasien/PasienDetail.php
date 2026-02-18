@@ -37,7 +37,7 @@ class PasienDetail extends Component
             ->with([
                 "dataPasien" => $this->readData()
             ])
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

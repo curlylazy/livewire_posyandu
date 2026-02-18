@@ -40,7 +40,7 @@ class GetData extends Component
     public function render()
     {
         return view('livewire.admin.testpage.getdata')
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title($this->pageTitle);
     }
 }

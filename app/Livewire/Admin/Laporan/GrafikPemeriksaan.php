@@ -60,7 +60,7 @@ class GrafikPemeriksaan extends Component
     public function render()
     {
         return view('livewire.admin.laporan.' . $this->pageName)
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title($this->pageTitle);
     }
 }

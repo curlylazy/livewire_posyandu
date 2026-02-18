@@ -192,7 +192,7 @@ class PemeriksaanBayiAE extends Component
     public function render()
     {
         return view('livewire.admin.' . $this->dirView . '.ae')
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

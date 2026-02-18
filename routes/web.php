@@ -67,7 +67,7 @@ Route::livewire('admin/login', 'pages-admin::login')->name('admin_login');
 
 Route::prefix('/admin')->middleware('auth')->group(function () {
 
-    Route::get('/', Dashboard::class)->name('admin_dashboard');
+    Route::livewire('/', Dashboard::class)->name('admin_dashboard');
 
     // *** Pasien
     Route::livewire('/pasien', 'pages-admin::pasien.list')->name('admin_pasien_list');
@@ -78,8 +78,8 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     // *** User
     Route::group(['middleware' => ['role:admin']], function () {
         Route::livewire('/user', 'pages-admin::user.list')->name('admin_user_list');
-        Route::livewire('/user/add', 'pages-admin::user.list')->name('admin_user_add');
-        Route::livewire('/user/edit/{id}', 'pages-admin::user.list')->name('admin_user_edit');
+        Route::livewire('/user/add', 'pages-admin::user.ae')->name('admin_user_add');
+        Route::livewire('/user/edit/{id}', 'pages-admin::user.ae')->name('admin_user_edit');
     });
 
     // *** Posyandu

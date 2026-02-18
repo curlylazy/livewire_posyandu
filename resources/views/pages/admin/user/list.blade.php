@@ -111,7 +111,7 @@ new class extends Component
                         </thead>
                         <tbody>
                             @foreach ($dataRow as $row)
-                                <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                <tr role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                     <td>{{ $row->username }}</td>
                                     <td>{{ $row->namauser }}</td>
                                     <td>{{ $row->posyandu->namaposyandu ?? "(Belum Ditentukan)" }}</td>
@@ -128,7 +128,7 @@ new class extends Component
                 <div class="row g-2">
                     @foreach ($dataRow as $row)
                         <div class="col-12 col-md-4">
-                            <div class="card" role="button" wire:click='selectData({{ $row }})'>
+                            <div class="card" role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                 <div class="card-body px-2 py-2">
                                     <div class="h5 mb-1">{{ $row->username }}</div>
                                     <div>{{ $row->namauser }}</div>
@@ -146,7 +146,7 @@ new class extends Component
                 <x-slot:pageTitle><span wire:text="pageTitle"></span></x-slot>
                 <x-slot:selectedNama><span wire:text="selectedNama"></span></x-slot>
                 <div class="d-grid gap-2" x-data="{ selectedKode: $wire.entangle('selectedKode'), pageName: $wire.entangle('pageName')}">
-                    <a class="btn btn-lg btn-outline-primary" id="edit" role="button" :href="`/admin/${pageName}/edit/${selectedKode}`" wire:navigate><i class="fas fa-edit"></i> Edit</a>
+                    <button type="button" class="btn btn-lg btn-outline-primary" id="edit" role="button" wire:click='$dispatch("edit")' wire:navigate><i class="fas fa-edit"></i> Edit</button>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete")'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>
@@ -161,10 +161,18 @@ new class extends Component
 
 {{-- *** Script --}}
 <script>
+    document.addEventListener('livewire:navigated', () => {
+
+    });
+
     $wire.on('selected-data', (e) => {
         $wire.selectedNama = e.data.namauser;
         $wire.selectedKode = e.data.kodeuser;
         $wire.dispatch('open-modal', { namamodal: "modalPilihData" });
+    });
+
+    $wire.on('edit', (e) => {
+        Livewire.navigate(`/admin/${$wire.pageName}/edit/${$wire.selectedKode}`);
     });
 
     $wire.on('confirm-delete', (e) => {

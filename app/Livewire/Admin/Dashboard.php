@@ -64,12 +64,12 @@ class Dashboard extends Component
 
     public function render()
     {
-        return view('admin.dashboard')
+        return view('pages.admin.dashboard')
             ->with([
                 "dataJumlahPerKategori" => $this->readJumlahPerKategori(),
                 "dataPeriksa" => $this->readPemeriksaanTerakhir(),
             ])
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

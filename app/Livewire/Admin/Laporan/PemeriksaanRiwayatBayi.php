@@ -95,7 +95,7 @@ class PemeriksaanRiwayatBayi extends Component
         return view('livewire.admin.laporan.riwayat_bayi', [
             "dataRow" => $this->readData(),
         ])
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

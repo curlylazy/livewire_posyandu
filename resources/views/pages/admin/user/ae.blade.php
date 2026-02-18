@@ -70,7 +70,7 @@ new class extends Component
         return $this->view([
                 'dataPosyandu' => $this->readDataPosyandu(),
             ])
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title("$this->pageTitle | ".config('app.webname'));
     }
 };

@@ -82,7 +82,7 @@ new class extends Component
 
             <div class="row g-4">
                 @foreach ($dataRow as $row)
-                    <div class="col-md-3 col-12" wire:click='$dispatch("selected-data", { data : {{ $row }} })' role="button">
+                    <div class="col-md-3 col-12" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })' role="button">
                         <div class="position-relative">
                             <img src="{{ ImageUtils::getImageThumb($row->gambargaleri) }}" class="rounded mb-2" style="height: 250px; width: 100%; object-fit: cover;" title="{{ $row->judulgaleri }}"/>
                             <div class="position-absolute bottom-0 start-0 mb-2">

@@ -73,7 +73,7 @@ class UserAE extends Component
             ->with([
                 'dataPosyandu' => $this->readDataPosyandu(),
             ])
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title("$this->pageTitle | ".config('app.webname'));
     }
 }

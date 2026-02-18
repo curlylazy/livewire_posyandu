@@ -65,7 +65,7 @@ class BlogAE extends Component
     public function render()
     {
         return view("livewire.admin.".$this->pageName.".ae")
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

@@ -33,7 +33,9 @@
         <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('favicon-16x16.png') }}">
         <link rel="manifest" href="{{ asset('site.webmanifest') }}">
 
-        @vite('resources/js/app.js')
+        @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        @livewireStyles
 
     </head>
     <body>
@@ -288,11 +290,18 @@
                 const myModal = new coreui.Modal(document.getElementById(`${e.namamodal}`));
                 myModal.show();
             });
-
         });
+
+
+        // *** Navigated
+        document.addEventListener('livewire:navigated', () => {
+        });
+
     </script>
 
     {!! $js ?? '' !!}
+
+    @livewireScripts
 
     {{-- tribute to storyset --}}
     {{-- <a href="https://storyset.com/work">Work illustrations by Storyset</a> --}}

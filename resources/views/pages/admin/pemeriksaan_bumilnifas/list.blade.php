@@ -142,7 +142,7 @@ new class extends Component
                                 </thead>
                                 <tbody>
                                     @foreach ($dataRow as $row)
-                                        <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                        <tr role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                             <td>{{ $row->nik }}</td>
                                             <td>{{ $row->namapasien }}</td>
                                             <td>{{ $row->namabayi }}</td>
@@ -167,7 +167,7 @@ new class extends Component
                                 </thead>
                                 <tbody>
                                     @foreach ($dataRow as $row)
-                                        <tr role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                        <tr role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                             <td>{{ $row->nik }}</td>
                                             <td>{{ $row->namapasien }}</td>
                                             <td>{{ $row->hamil_ke }}</td>
@@ -191,7 +191,7 @@ new class extends Component
                         @if($kategori_periksa == 'nifas')
                             @foreach ($dataRow as $row)
                                 <div class="col-12 col-md-4">
-                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                         <div class="card-body px-2 py-2">
                                             <div class="h5 mb-1">{{ $row->namabayi }}</div>
                                             <div>Ibu {{ $row->namapasien }}</div>
@@ -206,7 +206,7 @@ new class extends Component
                         @else
                             @foreach ($dataRow as $row)
                                 <div class="col-12 col-md-4">
-                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { data : {{ $row }} })'>
+                                    <div class="card" role="button" wire:click='$dispatch("selected-data", { "data" : {{ $row }} })'>
                                         <div class="card-body px-2 py-2">
                                             <div class="h5 mb-1">{{ $row->namapasien }}</div>
                                             <div>{{ $row->nik }}</div>

@@ -81,7 +81,7 @@ class PemeriksaanBayiDetail extends Component
                 "dataRow" => $data,
                 "dataHasilPenimbangan" => $this->readDataHasilPenimbangan($data),
             ])
-            ->layout('components.layouts.admin')
+            ->layout('layouts.admin')
             ->title($this->pageTitle." - ".config('app.webname'));
     }
 }

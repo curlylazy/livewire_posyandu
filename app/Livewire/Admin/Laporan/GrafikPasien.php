@@ -86,7 +86,7 @@ class GrafikPasien extends Component
         return view('livewire.admin.laporan.' . $this->pageName, [
             "dataChart" => $this->readData(),
         ])
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title($this->pageTitle);
     }
 }

@@ -55,7 +55,7 @@ class UserList extends Component
             "dataRow" => $this->readData(),
             "dataPosyandu" => $this->readDataPosyandu(),
         ])
-        ->layout('components.layouts.admin')
+        ->layout('layouts.admin')
         ->title("$this->pageTitle | ".config('app.webname'));
     }
 }
