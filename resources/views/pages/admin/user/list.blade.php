@@ -146,7 +146,7 @@ new class extends Component
                 <x-slot:pageTitle><span wire:text="pageTitle"></span></x-slot>
                 <x-slot:selectedNama><span wire:text="selectedNama"></span></x-slot>
                 <div class="d-grid gap-2" x-data="{ selectedKode: $wire.entangle('selectedKode'), pageName: $wire.entangle('pageName')}">
-                    <button type="button" class="btn btn-lg btn-outline-primary" id="edit" role="button" wire:click='$dispatch("edit")' wire:navigate><i class="fas fa-edit"></i> Edit</button>
+                    <button type="button" class="btn btn-lg btn-outline-primary" data-coreui-dismiss="modal" id="edit" role="button" wire:click='$dispatch("edit")' wire:navigate><i class="fas fa-edit"></i> Edit</button>
                     <button type="button" class="btn btn-lg btn-outline-danger" data-coreui-dismiss="modal" wire:click='$dispatch("confirm-delete")'><i class="fas fa-trash"></i> Hapus</button>
                     <button type="button" class="btn btn-lg btn-outline-secondary" data-coreui-dismiss="modal"><i class="fas fa-close"></i> Batal</button>
                 </div>
@@ -160,11 +160,15 @@ new class extends Component
 </div>
 
 {{-- *** Script --}}
+@script
 <script>
     document.addEventListener('livewire:navigated', () => {
-
+        console.log("navigated");
     });
+</script>
+@endscript
 
+<script>
     $wire.on('selected-data', (e) => {
         $wire.selectedNama = e.data.namauser;
         $wire.selectedKode = e.data.kodeuser;

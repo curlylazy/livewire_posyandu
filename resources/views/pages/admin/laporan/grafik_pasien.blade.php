@@ -13,7 +13,6 @@ use Livewire\WithPagination;
 use Livewire\Attributes\Url;
 use Livewire\Attributes\On;
 use Maatwebsite\Excel\Facades\Excel;
-use stdClass;
 use Carbon\Carbon;
 
 new class extends Component
