@@ -1,21 +1,75 @@
+<?php
+
+use App\Exports\LapPemeriksaanMultiSheetExport;
+use App\Exports\RekapPemeriksaanBumilNifasExport;
+use App\Lib\AkunTansi;
+use App\Lib\Rekap;
+use App\Models\PemeriksaanModel;
+use Illuminate\Support\Str;
+use App\Models\PesanHDModel;
+use Illuminate\Support\Arr;
+use Livewire\Component;
+use Livewire\WithPagination;
+use Livewire\Attributes\Url;
+use Illuminate\Support\Facades\Crypt;
+use Livewire\Attributes\On;
+use Maatwebsite\Excel\Facades\Excel;
+
+new class extends Component
+{
+    use WithPagination;
+
+    public $pageTitle = "Rekap Bumil dan Nifas";
+    public $pageName = "rekap_bumil_nifas";
+
+    #[Url]
+    public $katakunci = "", $tahun = "";
+
+    public function mount()
+    {
+        $this->tahun = (empty($this->tahun)) ? date("Y") : $this->tahun;
+    }
+
+    public function readData()
+    {
+        $rowsData = Rekap::pemeriksaanBumilNifas($this->tahun);
+        return $rowsData;
+    }
+
+    public function onClickExportExcel()
+    {
+        try
+        {
+            $array = [
+                'tahun' => $this->tahun,
+            ];
+
+            $namafile = "Rekap Pemeriksaan $this->pageTitle Tahun $this->tahun.xlsx";
+            return Excel::download(
+                new RekapPemeriksaanBumilNifasExport(json_encode($array)),
+                $namafile,
+            );
+
+        } catch (\Exception $e) {
+            $this->dispatch('notif', message: "gagal cetak laporan excel : ".$e->getMessage(), icon: "error");
+            return;
+        }
+    }
+
+    public function render()
+    {
+        return $this->view([
+            "dataRow" => $this->readData(),
+        ])
+        ->layout('layouts.admin')
+        ->title($this->pageTitle);
+    }
+};
+
+?>
+
+{{-- *** Views --}}
 <div>
-
-    @assets
-        <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    @endassets
-
-    @script
-        <script>
-
-            document.addEventListener('livewire:navigated', (event) => {
-                flatpickr(".date", { dateFormat: "Y-m-d", disableMobile: "true" });
-            });
-
-        </script>
-    @endscript
-
     <x-partials.loader />
     <x-partials.flashmsg />
     <x-slot:bc>
@@ -99,5 +153,18 @@
             </x-partials.viewsmall>
         </div>
     </div>
-
 </div>
+
+{{-- *** External Asset --}}
+@assets
+    <script src="https://cdn.jsdelivr.net/npm/sharer.js@0.5.2/sharer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+@endassets
+
+{{-- *** Script --}}
+@script
+    <script>
+        flatpickr(".date", { dateFormat: "Y-m-d", disableMobile: "true" });
+    </script>
+@endscript

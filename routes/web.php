@@ -107,12 +107,12 @@ Route::prefix('/admin')->middleware('auth')->group(function () {
     Route::livewire('/pemeriksaan/bayi/detail/{id}', 'pages-admin::pemeriksaan_bayi.detail')->name('admin_pemeriksaan_bayi_detail');
 
     // *** Laporan & Rekap
-    Route::livewire('/laporan/riwayat/bumilnifas', PemeriksaanRiwayatBumilNifas::class)->name('admin_laporan_riwayat_bumilnifas');
-    Route::livewire('/laporan/riwayat/bayi', PemeriksaanRiwayatBayi::class)->name('admin_laporan_riwayat_bayi');
-    Route::livewire('/laporan/pemeriksaan/bayi', LapPemeriksaanBayi::class)->name('admin_laporan_pemeriksaan_bayi');
-    Route::livewire('/laporan/pemeriksaan', LapPemeriksaan::class)->name('admin_laporan_pemeriksaan');
-    Route::livewire('/laporan/rekapbumilnifas', RekapBumilNifas::class)->name('admin_laporan_rekapbumilnifas');
-    Route::livewire('/laporan/rekapbayi', RekapBayi::class)->name('admin_laporan_rekapbayi');
-    Route::livewire('/laporan/grafik_pemeriksaan', GrafikPemeriksaan::class)->name('admin_grafik_pemeriksaan');
+    Route::livewire('/laporan/riwayat/bumilnifas', 'pages-admin::laporan.riwayat_bumil_nifas')->name('admin_laporan_riwayat_bumilnifas');
+    Route::livewire('/laporan/riwayat/bayi', 'pages-admin::laporan.riwayat_bayi')->name('admin_laporan_riwayat_bayi');
+    Route::livewire('/laporan/pemeriksaan/bayi', 'pages-admin::laporan.pemeriksaan_bayi')->name('admin_laporan_pemeriksaan_bayi');
+    Route::livewire('/laporan/pemeriksaan', 'pages-admin::laporan.pemeriksaan')->name('admin_laporan_pemeriksaan');
+    Route::livewire('/laporan/rekapbumilnifas', 'pages-admin::laporan.rekap_bumil_nifas')->name('admin_laporan_rekapbumilnifas');
+    Route::livewire('/laporan/rekapbayi', 'pages-admin::laporan.rekap_bayi')->name('admin_laporan_rekapbayi');
+    Route::livewire('/laporan/grafik_pemeriksaan', 'pages-admin::laporan.grafik_pemeriksaan')->name('admin_grafik_pemeriksaan');
     Route::livewire('/laporan/grafik_pasien', 'pages-admin::laporan.grafik_pasien')->name('admin_grafik_pasien');
 });

@@ -24,9 +24,12 @@ new class extends Component
     #[Url]
     public $tahun = "";
 
+    public $dataChart;
+
     public function mount()
     {
         $this->tahun = (empty($this->tahun)) ? date("Y") : $this->tahun;
+        $this->readData();
     }
 
     public function readData()
@@ -75,14 +78,12 @@ new class extends Component
         $res->labels = $labels;
         $res->values = $values;
 
-        return $res;
+        $this->dataChart = $res;
     }
 
     public function render()
     {
-        return $this->view([
-            "dataChart" => $this->readData(),
-        ])
+        return $this->view([])
         ->layout('layouts.admin')
         ->title($this->pageTitle);
     }
@@ -130,10 +131,10 @@ new class extends Component
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: @json($wire.dataChart.labels),
+            labels: $wire.dataChart.labels,
             datasets: [{
                 label: 'Kategori Pasien', // Label untuk dataset pertama
-                data: @json($wire.dataChart.values), // Data untuk dataset pertama
+                data: $wire.dataChart.values, // Data untuk dataset pertama
                 backgroundColor: 'rgba(255, 99, 132, 0.6)', // Warna latar belakang
                 borderColor: 'rgba(255, 99, 132, 1)', // Warna border
                 borderWidth: 1
