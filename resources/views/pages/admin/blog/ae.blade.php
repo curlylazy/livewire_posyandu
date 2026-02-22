@@ -1,13 +1,17 @@
 <?php
 
 use App\Livewire\Forms\BlogForm;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Illuminate\Support\Str;
+use Livewire\WithFileUploads;
 
 new class extends Component
 {
+    use WithFileUploads;
+
     public $pageTitle = "Blog";
-    public $pageName = "Blog";
+    public $pageName = "blog";
     public $isEdit = false;
     public $id = "";
 
@@ -15,6 +19,8 @@ new class extends Component
 
     public function mount($id = null)
     {
+        $this->form->kodeuser = Auth::user()->kodeuser;
+        $this->form->tgl_blog = date('Y-m-d');
         $this->readData($id);
     }
 
@@ -109,23 +115,25 @@ new class extends Component
                         </div>
                     </div>
 
+                    <div class="col-12 col-md-12">
+                        <div class="form-floating">
+                            <input type="text" class="form-control date" id="form.tgl_blog" wire:model='form.tgl_blog' placeholder="">
+                            <label for="form.tgl_blog">Tanggal Blog</label>
+                        </div>
+                    </div>
+
                     <div class="col-12">
                         <livewire:jodit-text-editor wire:model="form.isi" />
                     </div>
 
                     <div class="col-12 col-md-6">
-                        <label for="form.gambarblogFile" class="form-label">Gambar</label>
-                        <input class="form-control" type="file" id="form.gambarblogFile" wire:model='form.gambarblogFile'>
-                        @if ($form->gambarblogFile)
-                            <img src="{{ $form->gambarblogFile->temporaryUrl() }}" style="width: 500px; height: 500px; object-fit: cover;" class="rounded mt-2">
-                        @elseif(!empty($form->gambarblog))
-                            <div class="d-inline-flex flex-column gap-2">
-                                <a href="{{ ImageUtils::getImage($form->gambarblog) }}" target="_blank">
-                                    <img src="{{ ImageUtils::getImageThumb($form->gambarblog) }}" style="width: 500px; height: 500px; object-fit: cover;" class="rounded mt-2">
-                                </a>
-                                <button type="button" class="btn btn-sm btn-danger text-white" wire:click='$dispatch("confirm-delete-gambar")'><i class="fas fa-trash"></i> Hapus Gambar</button>
-                            </div>
-                        @endif
+                        <x-partials.imgupload
+                            label="Gambar"
+                            model="form.gambarblogFile"
+                            dispatchDelete="confirm-delete-gambar"
+                            :temp="$form->gambarblogFile"
+                            :gambar="$form->gambarblog"
+                        />
                     </div>
                 </div>
 
@@ -143,4 +151,23 @@ new class extends Component
     <!-- Include Jodit CSS Styling -->
     <link rel="stylesheet" href="//unpkg.com/jodit@4.1.16/es2021/jodit.min.css">
     <script src="//unpkg.com/jodit@4.1.16/es2021/jodit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 @endassets
+
+<script>
+    flatpickr(".date", { dateFormat: "Y-m-d", disableMobile: "true" });
+
+    $wire.on('confirm-delete-gambar', (e) => {
+        Swal.fire({
+            title: 'Hapus Gambar',
+            text: `Item yang kamu pilih gambarnya akan dihapus, lanjutkan ?`,
+            icon: "question",
+            showCancelButton: true,
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $wire.hapusGambar();
+            }
+        });
+    });
+</script>

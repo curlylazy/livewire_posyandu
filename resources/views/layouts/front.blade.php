@@ -38,6 +38,8 @@
     {!! Meta::toHtml() !!}
 
     @vite('resources/js/app.js')
+
+    @livewireStyles
 </head>
 
 <body class="index-page">
@@ -55,6 +57,7 @@
                 <ul>
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('/berita') }}">Berita</a></li>
+                    <li><a href="{{ url('/posyandu') }}">Posyandu</a></li>
                     <li><a href="{{ url('/galeri') }}">Galeri</a></li>
                     <li><a href="{{ url('/kontak') }}">Kontak</a></li>
                 </ul>
@@ -68,7 +71,7 @@
         {{ $slot }}
     </main>
 
-    <livewire:partial.footer-front />
+    <livewire:components::footer-front />
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
@@ -157,6 +160,8 @@
 
         });
     </script>
+
+    @livewireScripts
 
 </body>
 

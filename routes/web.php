@@ -1,58 +1,20 @@
 <?php
 
 use App\Http\Controllers\PdfController;
-use App\Livewire\Admin\Activity\ActivityAE;
-use App\Livewire\Admin\Activity\ActivityList;
-use App\Livewire\Admin\Bayi\BayiAE;
-use App\Livewire\Admin\Bayi\BayiList;
-use Illuminate\Support\Facades\Route;
-
+use App\Livewire\Admin\Dashboard;
 // *** CONTROLLER PDF
 
 // *** ADMIN
-use App\Livewire\Admin\Dashboard;
-use App\Livewire\Admin\Login;
-use App\Livewire\Admin\Blog\BlogAE;
-use App\Livewire\Admin\Blog\BlogList;
-use App\Livewire\Admin\Galeri\GaleriAE;
-use App\Livewire\Admin\Galeri\GaleriList;
-use App\Livewire\Admin\Laporan\GrafikPasien;
-use App\Livewire\Admin\Laporan\GrafikPemeriksaan;
-use App\Livewire\Admin\Laporan\LapPemeriksaan;
-use App\Livewire\Admin\Laporan\LapPemeriksaanBayi;
-use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBayi;
-use App\Livewire\Admin\Laporan\PemeriksaanRiwayatBumilNifas;
-use App\Livewire\Admin\Laporan\RekapBayi;
-use App\Livewire\Admin\Laporan\RekapBumilNifas;
-use App\Livewire\Admin\Pasien\PasienAE;
-use App\Livewire\Admin\Pasien\PasienDetail;
-use App\Livewire\Admin\Pasien\PasienList;
-use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiAE;
-use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiList;
-use App\Livewire\Admin\PemeriksaanBayi\PemeriksaanBayiDetail;
-use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasList;
-use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasAE;
-use App\Livewire\Admin\PemeriksaanBumilNifas\PemeriksaanBumilNifasDetail;
-use App\Livewire\Admin\Posyandu\PosyanduAE;
-use App\Livewire\Admin\Posyandu\PosyanduList;
-use App\Livewire\Admin\User\UserAE;
-use App\Livewire\Admin\User\UserList;
-
-// *** FRONT
-use App\Livewire\Front\Dashboard as FrontDashboard;
-use App\Livewire\Front\Package;
-use App\Livewire\Front\Activities\ActivitiesList;
-use App\Livewire\Front\Activities\ActivitiesDetail;
-use App\Livewire\Front\Galeri;
-use App\Livewire\Front\Kontak;
-use App\Livewire\Front\Video;
 use App\Mail\SendTestMail;
+// *** FRONT
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 
 // *** mail
-Route::get('/send-mail',function() {
-    Mail::to('saputrastyawan.d@gmail.com')->send(new SendTestMail());
-    return "Mail Sent Successfully!! ".date('d F Y');
+Route::get('/send-mail', function () {
+    Mail::to('saputrastyawan.d@gmail.com')->send(new SendTestMail);
+
+    return 'Mail Sent Successfully!! '.date('d F Y');
 });
 
 // *** pdf
@@ -61,6 +23,10 @@ Route::get('cetak/pemeriksaan_bayi', [PdfController::class, 'cetak_pemeriksaan_b
 
 // *** front
 Route::livewire('/', 'pages-front::dashboard')->name('dashboard');
+Route::livewire('/berita', 'pages-front::berita.list')->name('berita');
+Route::livewire('/berita/{id}', 'pages-front::berita.detail')->name('berita_detail');
+Route::livewire('/posyandu', 'pages-front::posyandu.list')->name('posyandu');
+Route::livewire('/posyandu/{id}', 'pages-front::posyandu.detail')->name('posyandu_detail');
 
 // *** admin
 Route::livewire('admin/login', 'pages-admin::login')->name('admin_login');

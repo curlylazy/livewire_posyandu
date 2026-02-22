@@ -1,38 +1,41 @@
 <?php
 
-use App\Models\UserModel;
 use Illuminate\Support\Facades\Auth;
-use Livewire\Attributes\Title;
 use Livewire\Component;
 
 new class extends Component
 {
-    public $username = "";
-    public $password = "";
+    public $username = '';
+    public $password = '';
     public $remember = false;
 
-    public function mount()
+    public function login(): void
     {
-    }
+        $this->validate([
+            'username' => ['required', 'string'],
+            'password' => ['required', 'string', 'min:6'],
+        ], [
+            'username.required' => 'Username wajib diisi.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
+        ]);
 
-    public function login()
-    {
         try {
-            if (!Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
-                $this->dispatch('notif', message: "username atau password tidak sesuai", icon: "error");
+            if (! Auth::attempt(['username' => $this->username, 'password' => $this->password], $this->remember)) {
+                $this->dispatch('notif', message: 'Username atau password tidak sesuai.', icon: 'error');
+
                 return;
             }
 
             $this->redirect('/admin');
         } catch (\Exception $e) {
-            $this->dispatch('notif', message: "Gagal Login : ".$e->getMessage(), icon: "error");
-            return;
+            $this->dispatch('notif', message: 'Gagal Login: '.$e->getMessage(), icon: 'error');
         }
     }
 
     public function render()
     {
-        return $this->view()->title("Login | ".config('app.webname'));
+        return $this->view()->title('Login | '.config('app.webname'));
     }
 };
 
@@ -68,7 +71,7 @@ new class extends Component
                             <div class="d-flex mb-5 align-items-center">
                                 <label class="control control--checkbox mb-0">
                                     <span class="caption">Remember me</span>
-                                    <input type="checkbox" checked="checked" wire:model='remember'/>
+                                    <input type="checkbox" wire:model='remember'/>
                                     <div class="control__indicator"></div>
                                 </label>
                             </div>

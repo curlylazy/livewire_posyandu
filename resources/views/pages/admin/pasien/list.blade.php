@@ -277,7 +277,7 @@ new class extends Component
     });
 
     $wire.on('edit', (e) => {
-        Livewire.navigate(`/admin/${$wire.pageName}/${$wire.selectedKode}`);
+        Livewire.navigate(`/admin/${$wire.pageName}/edit/${$wire.selectedKode}`);
     });
 
     $wire.on('confirm-delete', () => {

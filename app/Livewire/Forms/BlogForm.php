@@ -6,8 +6,8 @@ use App\Lib\Upload;
 use App\Models\BlogModel;
 use Illuminate\Support\Str;
 use Livewire\Attributes\Validate;
-use Livewire\WithFileUploads;
 use Livewire\Form;
+use Livewire\WithFileUploads;
 
 class BlogForm extends Form
 {
@@ -16,13 +16,12 @@ class BlogForm extends Form
     // *** onUpdate = tidak melakukan validasi otomatis saat ada request masuk, ex upload image
     #[Validate('nullable|image|max:1024', onUpdate: false)] // 1MB Max
     public $gambarblogFile;
-
     public $kodeblog = '';
     public $kodeuser = '';
     public $judul = '';
     public $isi = '';
+    public $tgl_blog = '';
     public $seoblog = '';
-
     public $gambarblog = '';
 
     public function rules()
@@ -31,20 +30,23 @@ class BlogForm extends Form
             'kodeuser' => 'required',
             'judul' => 'required',
             'isi' => 'required',
+            'tgl_blog' => 'required|date',
             'seoblog' => 'required',
         ];
     }
 
     public function setPost($id)
     {
-        if(empty($id))
+        if (empty($id)) {
             return;
+        }
 
         $data = BlogModel::find($id);
         $this->kodeblog = $data->kodeblog;
         $this->kodeuser = $data->kodeuser;
         $this->judul = $data->judul;
         $this->isi = $data->isi;
+        $this->tgl_blog = $data->tgl_blog;
         $this->gambarblog = $data->gambarblog;
         $this->seoblog = $data->seoblog;
     }
@@ -56,13 +58,15 @@ class BlogForm extends Form
 
     public function aftervalidated()
     {
-        if($this->gambarblogFile)
+        if ($this->gambarblogFile) {
             $this->gambarblog = Upload::image($this->gambarblogFile, $this->gambarblog, true);
+        }
     }
 
     private function exceptData()
     {
         $arr = ['gambarblogFile'];
+
         return $arr;
     }
 
@@ -74,6 +78,7 @@ class BlogForm extends Form
 
         $data = BlogModel::create($this->except($this->exceptData()));
         $kodeblog = $data->kodeblog;
+
         return $kodeblog;
     }
 
@@ -83,14 +88,13 @@ class BlogForm extends Form
         $this->validate();
         $this->aftervalidated();
 
-        BlogModel::find($this->kodeblog)->update($this->except($this->exceptData()));
+        BlogModel::findOrFail($this->kodeblog)->update($this->except($this->exceptData()));
     }
 
     public function hapusGambar($kode)
     {
-        $data = BlogModel::find($kode);
+        $data = BlogModel::findOrFail($kode);
         Upload::deleteImage($data->gambarblog);
-        $data->update(['gambarblog' => ""]);
+        $data->update(['gambarblog' => '']);
     }
-
 }

@@ -2,10 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -17,12 +17,11 @@ class BlogModel extends Model
     protected $primaryKey = 'kodeblog';
     protected $keyType = 'string';
     public $incrementing = false;
-
     protected $guarded = [];
 
     public function user(): BelongsTo
     {
-        return $this->belongsTo(UserModel::class, "kodeuser", "kodeuser");
+        return $this->belongsTo(UserModel::class, 'kodeuser', 'kodeuser');
     }
 
     public function scopeSearch(Builder $query, $katakunci): void
@@ -32,10 +31,16 @@ class BlogModel extends Model
                 ->where('judul', 'like', "%$katakunci%")
                 ->orWhere('isi', 'like', "%$katakunci%");
         })
+            ->whereHas('user', function ($q) use ($katakunci) {
+                $q->orWhere('namauser', 'like', '%'.$katakunci.'%');
+            });
+    }
 
-        ->whereHas('user', function ($q) use ($katakunci) {
-            $q->orWhere('namauser', 'like', '%' . $katakunci . '%');
-        });
+    public function scopeJoinTable(Builder $query): void
+    {
+        $query
+            ->select('tbl_blog.*', 'tbl_user.namauser as author')
+            ->leftJoin('tbl_user', 'tbl_user.kodeuser', '=', 'tbl_blog.kodeuser');
     }
 
     public function scopeSearchBySeo(Builder $query, $seo): void
