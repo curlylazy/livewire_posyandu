@@ -9,7 +9,7 @@ use App\Models\PasienModel;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
-use Faker\Factory as Faker;
+// use Faker\Factory as Faker;
 
 class ModalAddBayi extends Component
 {
@@ -20,9 +20,9 @@ class ModalAddBayi extends Component
 
     public function mount()
     {
-        $faker = Faker::create('id_ID');
-        $this->form->namabayi = $faker->name();
-        $this->form->tgl_lahir = $faker->dateTimeBetween('-5 months', '-1 months');
+        // $faker = Faker::create('id_ID');
+        // $this->form->namabayi = $faker->name();
+        // $this->form->tgl_lahir = $faker->dateTimeBetween('-5 months', '-1 months');
     }
 
     public function save()

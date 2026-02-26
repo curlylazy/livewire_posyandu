@@ -179,7 +179,7 @@ new class extends Component
                                     <input type="text" class="form-control" id="namaibu" wire:model='namaibu' placeholder="">
                                     <label for="namaibu">Ibu</label>
                                 </div>
-                                <button type="button" class="input-group-text" wire:click='$dispatch("open-modal", { namamodal : "modalPasien" })'><i class="fas fa-search"></i></button>
+                                <button type="button" class="input-group-text" wire:click='$dispatch("open-modal", { "namamodal" : "modalPasien" })'><i class="fas fa-search"></i></button>
                             </div>
                         </div>
                     </div>

@@ -8,7 +8,7 @@ use App\Models\PasienModel;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Reactive;
 use Livewire\Component;
-use Faker\Factory as Faker;
+// use Faker\Factory as Faker;
 
 new class extends Component
 {
@@ -37,7 +37,7 @@ new class extends Component
             $this->form->kategoripasien = "nifas";
         }
 
-        $faker = Faker::create('id_ID');
+        // $faker = Faker::create('id_ID');
 
         // if($this->pilihanAdd == "bumilnifas" || $this->kategori_periksa == "ibu")
         // {
