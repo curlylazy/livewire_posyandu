@@ -58,7 +58,7 @@
                     <li><a href="{{ url('/') }}">Home</a></li>
                     <li><a href="{{ url('/berita') }}">Berita</a></li>
                     <li><a href="{{ url('/posyandu') }}">Posyandu</a></li>
-                    <li><a href="{{ url('/galeri') }}">Galeri</a></li>
+                    <li><a href="{{ url('/galery') }}">Galeri</a></li>
                     <li><a href="{{ url('/kontak') }}">Kontak</a></li>
                 </ul>
                 <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>

@@ -1,32 +1,49 @@
+<?php
+
+use App\Lib\MetaTag;
+use Livewire\Component;
+
+new class extends Component
+{
+    public $pageTitle = "Galeri";
+
+    public function render()
+    {
+        $mt = new MetaTag;
+        $mt->title = "Berita | ".config('app.webname');
+        $mt->url = url('/berita');
+        $mt->description = "Berita - Coming Soon";
+        $mt->genMetaTag();
+
+        return $this->view()->layout('layouts.front');
+    }
+};
+
+?>
+
 <div>
-
-    <x-partials.loader />
-
-    <div class="page-title dark-background">
-        <div class="container position-relative">
-            <h1>Galery {{ config('app.webname') }}</h1>
-            <p>Unforgettable Moments, One Click at a Time</p>
-            <nav class="breadcrumbs">
-                <ol>
-                    <li><a href="{{ url('/') }}">Home</a></li>
-                    <li class="current">Galery</li>
-                </ol>
-            </nav>
-        </div>
-    </div>
-
-    <section id="starter-section" class="starter-section section">
-        <div class="container mt-2" data-aos="fade-up" wire:ignore.self>
-            <div class="row g-3">
-                @foreach ($dataGaleri as $data)
-                    <div class="col-md-3 col-12">
-                        <a href="{{ ImageUtils::getImage($data->gambargaleri) }}" class="glightbox img-galeri" data-glightbox="title: {{ $data->namagaleri }};">
-                            <img src="{{ ImageUtils::getImageThumb($data->gambargaleri) }}" style="width: 100%; height: 200px; object-fit: cover;" />
-                        </a>
-                    </div>
-                @endforeach
-            </div>
+    {{-- Hero Section --}}
+    <section class="page-title dark-background" style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('{{ asset("static/cover3.jpg") }}') center/cover no-repeat; padding: 80px 0 60px;">
+        <div class="container text-center" wire:ignore>
+            <h1 class="text-white fw-bold display-5" data-aos="fade-up">{{ $pageTitle }}</h1>
+            <p class="text-white-50 mt-2" data-aos="fade-up" data-aos-delay="100">
+                Galeri terkait kegiatan {{ config("app.webname") }}
+            </p>
         </div>
     </section>
 
+    <section id="starter-section" class="contact section light-background">
+        <div class="container aos-init aos-animate" data-aos="fade-up" data-aos-delay="100" wire:ignore.self>
+            <div class="row gy-4">
+                <div class="col-12 text-center">
+                    <img src="{{ asset("coming_soon.jpg") }}" alt="Coming Soon" class="img-fluid mb-4 rounded rounded-3" style="max-width:720px;">
+                    <p class="lead text-muted mx-auto" style="max-width:720px;">
+                        Halaman Berita sedang dalam pengerjaan. Kami sedang menyiapkan artikel, pengumuman, dan laporan kegiatan Posyandu
+                        agar informasinya bermanfaat dan terpercaya. Silakan kembali nanti untuk pembaruan — terima kasih atas kesabaran Anda.
+                    </p>
+                    <a href="{{ url('/') }}" class="btn btn-primary mt-3">Kembali ke Beranda</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </div>

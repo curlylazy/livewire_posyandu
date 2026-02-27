@@ -27,6 +27,8 @@ Route::livewire('/berita', 'pages-front::berita.list')->name('berita');
 Route::livewire('/berita/{id}', 'pages-front::berita.detail')->name('berita_detail');
 Route::livewire('/posyandu', 'pages-front::posyandu.list')->name('posyandu');
 Route::livewire('/posyandu/{id}', 'pages-front::posyandu.detail')->name('posyandu_detail');
+Route::livewire('/kontak', 'pages-front::kontak')->name('kontak');
+Route::livewire('/galery', 'pages-front::galeri')->name('galeri');
 
 // *** admin
 Route::livewire('admin/login', 'pages-admin::login')->name('admin_login');
